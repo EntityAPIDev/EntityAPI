@@ -1,0 +1,6 @@
+name: ${project.name}
+main: net.frostalf.controlledentities.ControlledEntities
+version: ${project.version}
+author: Frostalf
+description: API for accessing NMS Code for Entities
+commands:
