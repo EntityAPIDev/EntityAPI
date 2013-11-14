@@ -17,7 +17,6 @@ public class EntityAPI extends JavaPlugin {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    
-}
+    }
     
 }
