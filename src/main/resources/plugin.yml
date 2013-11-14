@@ -1,0 +1,8 @@
+name: EntityAPI
+authors: [DSH105, Frostalf]
+version: ${project.version}
+main: io.snw.entityapi.EntityAPI
+description: Is awesome
+website: http://ci.drtshock.net
+
+    
