@@ -16,7 +16,7 @@
   
     <build>
         <defaultGoal>clean package install</defaultGoal>
-        <finalName>EntityAPI</finalName>
+        <finalName>EntityAPI-${project.version}</finalName>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
         <resources>
             <resource>
