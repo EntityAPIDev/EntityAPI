@@ -1,4 +1,4 @@
-ControlledEntities
-==================
+EntityAPI
+=========
 
-API to allow making custom Mobs without having to mess with NMS
+Is awesome
