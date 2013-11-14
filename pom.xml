@@ -38,6 +38,13 @@
                 </configuration>
             </plugin>
         </plugins>
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ftp</artifactId>
+        <version>2.5</version>
+      </extension>
+    </extensions>
     </build>
     <dependencies>
         <dependency>
@@ -50,11 +57,26 @@
             <artifactId>craftbukkit</artifactId>
             <version>1.6.4-R2.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.mcstats</groupId>
+            <artifactId>metrics</artifactId>
+            <version>R6</version>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>
             <id>bukkit-repo</id>
             <url>http://repo.bukkit.org/content/groups/public/</url>
         </repository>
+        <repository>
+            <id>Plugin Metrics</id>
+            <url>http://repo.mcstats.org/content/repositories/public</url>
+        </repository>
     </repositories>
+  <!--<distributionManagement>
+    <repository>
+      <id>EntityAPI</id>
+      <url>http://maven3.frostalf.com/</url>
+    </repository>
+  </distributionManagement>-->
 </project>
