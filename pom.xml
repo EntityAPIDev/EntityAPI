@@ -13,10 +13,10 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-  
+
     <build>
         <defaultGoal>clean package install</defaultGoal>
-        <finalName>EntityAPI-${project.version}</finalName>
+        <finalName>EntityAPI</finalName>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
         <resources>
             <resource>
@@ -38,13 +38,13 @@
                 </configuration>
             </plugin>
         </plugins>
-    <extensions>
-      <extension>
-        <groupId>org.apache.maven.wagon</groupId>
-        <artifactId>wagon-ftp</artifactId>
-        <version>2.5</version>
-      </extension>
-    </extensions>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ftp</artifactId>
+                <version>2.5</version>
+            </extension>
+        </extensions>
     </build>
     <dependencies>
         <dependency>
@@ -73,10 +73,10 @@
             <url>http://repo.mcstats.org/content/repositories/public</url>
         </repository>
     </repositories>
-  <!--<distributionManagement>
-    <repository>
-      <id>EntityAPI</id>
-      <url>http://maven3.frostalf.com/</url>
-    </repository>
-  </distributionManagement>-->
+    <distributionManagement>
+        <repository>
+            <id>EntityAPI</id>
+            <url>http://ci.drtshock.net/plugin/repository/everything/</url>
+        </repository>
+    </distributionManagement>
 </project>
