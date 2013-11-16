@@ -73,10 +73,10 @@
             <url>http://repo.mcstats.org/content/repositories/public</url>
         </repository>
     </repositories>
-  <!--<distributionManagement>
+    <distributionManagement>
     <repository>
       <id>EntityAPI</id>
-      <url>http://maven3.frostalf.com/</url>
+      <url>http://ci.drtshock.net/plugin/repository/everything/</url>
     </repository>
-  </distributionManagement>-->
+  </distributionManagement>
 </project>
