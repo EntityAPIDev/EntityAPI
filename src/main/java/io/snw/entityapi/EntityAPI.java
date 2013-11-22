@@ -24,6 +24,7 @@ public abstract class EntityAPI extends PluginBase {
 
     @Override
     public void onEnable() {
+        instance = this;
 
         try {
             Metrics metrics = new Metrics(this);

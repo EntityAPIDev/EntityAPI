@@ -8,10 +8,13 @@
     <packaging>jar</packaging>
 
     <name>EntityAPI</name>
-    <url>http://maven.apache.org</url>
+    <url>http://dev.bukkit.org/bukkit-plugins/entityapi/</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <minecraft.version>1.6.4</minecraft.version>
+        <craftbukkit.version>R2.1</craftbukkit.version>
+        <cb_package>v1_6_R3</cb_package>
     </properties>
 
     <build>
@@ -50,12 +53,12 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.6.4-R2.1-SNAPSHOT</version>
+            <version>${minecraft.version}-${craftbukkit.version}-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>craftbukkit</artifactId>
-            <version>1.6.4-R2.1-SNAPSHOT</version>
+            <version>${minecraft.version}-${craftbukkit.version}-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.mcstats</groupId>
