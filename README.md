@@ -12,4 +12,4 @@ Collaborators
 - DSH105 (Author)
 - Frostalf (Author)
 - TomTheDeveloper (Author)
-- stuntguy3000 (Ticket Manager)
+- stuntguy3000 (Ticket Manager and Contributor)
