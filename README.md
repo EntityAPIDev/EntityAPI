@@ -13,3 +13,4 @@ Collaborators
 - Frostalf (Author)
 - TomTheDeveloper (Author)
 - stuntguy3000 (Ticket Manager and Contributor)
+- drtshock (Contributor <3)
