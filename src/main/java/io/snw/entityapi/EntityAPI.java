@@ -1,7 +1,6 @@
 package io.snw.entityapi;
 
 import org.bukkit.plugin.PluginBase;
-import org.mcstats.Metrics;
 
 import java.io.IOException;
 
