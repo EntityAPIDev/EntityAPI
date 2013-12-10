@@ -12,9 +12,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <minecraft.version>1.6.4</minecraft.version>
-        <craftbukkit.version>R2.1</craftbukkit.version>
-        <cb_package>v1_6_R3</cb_package>
+        <minecraft.version>1.7.2</minecraft.version>
+        <craftbukkit.version>R0.1</craftbukkit.version>
+        <cb_package>v1_7_2R0.1</cb_package>
     </properties>
 
     <build>
