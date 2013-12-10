@@ -1,4 +1,4 @@
 package io.snw.entityapi.utils;
 
-public class EntityUtils {
+public class PlayerUtil {
 }
