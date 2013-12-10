@@ -146,4 +146,13 @@ public class Constants {
             public static final int ENTITY_ENDERCRYSTAL = 200;
         }
     }
+
+    public static class Server {
+
+        public static final String SUPPORTED_VERSION = "v1_7_2R0.1";
+        public static final int SUPPORTED_VESION_NUMERIC = 172;
+
+        public static final String CRAFBUKKIT_ROOT = "org.bukkit.craftbukkit";
+        public static final String MINECRAFT_ROOT = "net.minecraft.server";
+    }
 }

@@ -13,7 +13,7 @@ public class NMSClassTemplate extends ClassTemplate {
     }
 
     protected void setNMSClass(String name){
-        Class clazz = BukkitServer.getNMSClass(name);
+        Class clazz = EntityAPI.SERVER.getNMSClass(name);
         if(clazz == null){
             EntityAPI.LOGGER_REFLECTION.warning("Failed to find a matching class with name: " + name);
         }

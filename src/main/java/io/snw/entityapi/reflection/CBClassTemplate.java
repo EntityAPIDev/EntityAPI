@@ -13,7 +13,7 @@ public class CBClassTemplate extends ClassTemplate<Object> {
     }
 
     protected void setCBClass(String name){
-        Class clazz = BukkitServer.getCBClass(name);
+        Class clazz = EntityAPI.SERVER.getCBClass(name);
         if(clazz == null){
             EntityAPI.LOGGER_REFLECTION.warning("Failed to find a matching class with name: " + name);
         }

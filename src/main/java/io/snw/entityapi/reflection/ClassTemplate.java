@@ -76,7 +76,7 @@ public class ClassTemplate<T> {
     }
 
     public static ClassTemplate<?> create(String className){
-        Class clazz = BukkitServer.getClass(className);
+        Class clazz = EntityAPI.SERVER.getClass(className);
 
         if(clazz == null){
             EntityAPI.LOGGER_REFLECTION.warning("Failed to find a matching class with name: " + className);

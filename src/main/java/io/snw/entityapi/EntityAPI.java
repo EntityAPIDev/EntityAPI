@@ -1,8 +1,12 @@
 package io.snw.entityapi;
 
+import io.snw.entityapi.server.*;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginBase;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class EntityAPI extends PluginBase {
 
@@ -11,6 +15,7 @@ public abstract class EntityAPI extends PluginBase {
 
     private static EntityAPI instance;
 
+    public static Server SERVER;
 
     public static Boolean hasInstance() { // why are we using a primitive wrapper here? /captain doesn't get it ._.
         return instance != null;
@@ -33,6 +38,27 @@ public abstract class EntityAPI extends PluginBase {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        initServer();
     }
 
+    protected void initServer() {
+        List<Server> servers = new ArrayList<Server>();
+        servers.add(new MCPCPlusServer());
+        servers.add(new SpigotServer());
+        servers.add(new CraftBukkitServer());
+        servers.add(new UnknownServer());
+
+        for(Server server : servers) {
+            if(server.init()) {
+                this.SERVER = server;
+                break;
+            }
+        }
+
+        if(SERVER == null) {
+            LOGGER.warning("Failed to identify the server brand! The API will not run correctly -> disabling");
+            Bukkit.getPluginManager().disablePlugin(this);
+        }
+    }
 }
