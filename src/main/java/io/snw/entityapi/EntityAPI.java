@@ -17,7 +17,6 @@ public abstract class EntityAPI extends PluginBase {
     }
 
     public static EntityAPI getInstance() {
-
         if (instance == null) {
             throw new RuntimeException("EntityAPI not Enabled, instance could not be found");
         }
