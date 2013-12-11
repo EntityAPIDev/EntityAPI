@@ -78,7 +78,7 @@ public class Constants {
             public static final String ENTITY_COW = "Cow";
             public static final String ENTITY_CHICKEN = "Chicken";
             public static final String ENTITY_SQUID = "Squid";
-            public static final String ENTITY_WOLF = "Worlf";
+            public static final String ENTITY_WOLF = "Wolf";
             public static final String ENTITY_MUSHROOM_COW = "MushroomCow";
             public static final String ENTITY_SNOWMAN = "SnowMan";
             public static final String ENTITY_OZELOT = "Ozelot";
