@@ -158,10 +158,4 @@ public class Constants {
         public static final String CRAFBUKKIT_ROOT = "org.bukkit.craftbukkit";
         public static final String MINECRAFT_ROOT = "net.minecraft.server";
     }
-
-    public static class Entity {
-
-        public static final String PLAYER_HANDLE = "getHandle";   //those probably won't change, but you never know :p
-        public static final String ENTITY_HANDLE = "getHandle";
-    }
 }

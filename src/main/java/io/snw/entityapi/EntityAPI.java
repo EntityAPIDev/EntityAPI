@@ -1,7 +1,10 @@
 package io.snw.entityapi;
 
 import io.snw.entityapi.entity.EntityManager;
+import io.snw.entityapi.entity.types.EntityCow;
+import io.snw.entityapi.internal.Constants;
 import io.snw.entityapi.server.*;
+import io.snw.entityapi.utils.EntityUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,6 +22,7 @@ public class EntityAPI extends JavaPlugin {  //abstract classes can't be cast to
 
     public static Server SERVER;
 
+    // do we need this?
     public static Boolean hasInstance() { // why are we using a primitive wrapper here? /captain doesn't get it ._.
         return INSTANCE != null;
     }
@@ -36,6 +40,7 @@ public class EntityAPI extends JavaPlugin {  //abstract classes can't be cast to
         }
 
         initServer();
+        registerEntities();
     }
 
     /**
@@ -67,6 +72,10 @@ public class EntityAPI extends JavaPlugin {  //abstract classes can't be cast to
             LOGGER.info("Identified server brand: " + SERVER.getName());
             LOGGER.info("MC Version: " + SERVER.getMCVersion());
         }
+    }
+
+    protected void registerEntities() {
+        EntityUtil.registerEntity(EntityCow.class, Constants.EntityTypes.Names.ENTITY_COW, Constants.EntityTypes.Ids.ENTITY_COW);
     }
 
     public static EntityAPI getInstance() {

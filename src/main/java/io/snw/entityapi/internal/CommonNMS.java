@@ -7,8 +7,8 @@ import org.bukkit.entity.Player;
 
 public class CommonNMS {
 
-    private static final MethodAccessor<Object> ENTITY_GET_HANDLE = new SafeMethod(Entity.class, Constants.Entity.ENTITY_HANDLE);
-    private static final MethodAccessor<Object> PLAYER_GET_HANDLE = new SafeMethod(Player.class, Constants.Entity.PLAYER_HANDLE);
+    private static final MethodAccessor<Object> ENTITY_GET_HANDLE = new SafeMethod(Entity.class, "getHandle");
+    private static final MethodAccessor<Object> PLAYER_GET_HANDLE = new SafeMethod(Player.class, "getHandle");
 
     public static Object getNative(Entity entity) {
         return ENTITY_GET_HANDLE.invoke(entity);

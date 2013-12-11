@@ -20,4 +20,11 @@ public class EntityTypesRef {
 
     public static final MethodAccessor<Void> REGISTER_ENTITY = TEMPLATE.getMethod(Constants.EntityTypes.METHOD_REGISTER_ENTITY, Class.class, String.class, int.class);
 
+    public static void registerEntiy(Class<?> clazz, String name, int id) {
+        NAME_TO_CLASS.get(null).put(name, clazz);
+        CLASS_TO_NAME.get(null).put(clazz, name);
+        ID_TO_CLASS.get(null).put(id, clazz);
+        CLASS_TO_ID.get(null).put(clazz, id);
+        NAME_TO_ID.get(null).put(name, id);
+    }
 }
