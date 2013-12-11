@@ -59,11 +59,10 @@ public class EntityAPI extends JavaPlugin {  //abstract classes can't be cast to
         if(SERVER == null) {
             LOGGER.warning("Failed to identify the server brand! The API will not run correctly -> disabling");
             Bukkit.getPluginManager().disablePlugin(this);
+            return;
         } else {
             if(!SERVER.isCompatible()) {
-                LOGGER.warning("This Server version is not compatible with EntityAPI! -> disabling");
-                System.out.print(SERVER.getVersion());
-                Bukkit.getPluginManager().disablePlugin(this);
+                LOGGER.warning("This Server version may not be compatible with EntityAPI!");
             }
             LOGGER.info("Identified server brand: " + SERVER.getName());
             LOGGER.info("MC Version: " + SERVER.getMCVersion());
