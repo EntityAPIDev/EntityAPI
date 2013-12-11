@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntityAPI extends JavaPlugin {
+public class EntityAPI extends JavaPlugin {  //abstract classes can't be cast to Plugin so yeah :/
 
     public static final ModuleLogger LOGGER = new ModuleLogger("EntityAPI");
     public static final ModuleLogger LOGGER_REFLECTION = LOGGER.getModule("Reflection");
