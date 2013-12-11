@@ -1,4 +1,4 @@
-package io.snw.entityapi.entity;
+package io.snw.entityapi.entity.interfaces;
 
 public abstract interface ControllableEntity {
 

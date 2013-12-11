@@ -8,12 +8,14 @@ public class Constants {
      * edit this class instead of 10 classes :p)
      *
      * Also the names and ids of the entities can be found here (used to register 'em)
+     *
+     * CaptainBern
      */
 
     public static class EntityTypes {
         public static final String CLASS_NAME = "EntityTypes";
 
-        public static final String METHOD_REGISTER_ENTITY = "a";
+        public static final String METHOD_REGISTER_ENTITY = "a"; //takes class, name and id as param
         public static final String METHOD_GET_ID_OF_ENTITY = "a"; //takes an entity as param, returns the id
         public static final String METHOD_GET_CLASS_OF_ID = "a"; //takes id as param, returns the entity class
         public static final String METHOD_GET_NAME_OF_ENTITY = "b"; //takes entity as param, returns the name
@@ -151,6 +153,8 @@ public class Constants {
 
         public static final String SUPPORTED_VERSION = "v1_7_2R0.1";
         public static final int SUPPORTED_VESION_NUMERIC = 172;
+
+        public static final int PROTOCOL_VERSION = 4; //<- not needed now, but it looks coolio.
 
         public static final String CRAFBUKKIT_ROOT = "org.bukkit.craftbukkit";
         public static final String MINECRAFT_ROOT = "net.minecraft.server";
