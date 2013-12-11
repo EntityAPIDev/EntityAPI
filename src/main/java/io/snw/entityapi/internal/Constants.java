@@ -1,13 +1,12 @@
-package io.snw.entityapi.constants;
+package io.snw.entityapi.internal;
 
 public class Constants {
 
     /**
-     * A class which contains several constants. This should contains the name
-     * of every field, method etc we will use with reflection. (when something changes we only have to
-     * edit this class instead of 10 classes :p)
-     *
-     * Also the names and ids of the entities can be found here (used to register 'em)
+     * A class which contains several field names etc.
+     * This class is used to identify the fields in NMS classes
+     * When a field changes we just have to edit this class and not
+     * all classes which access that field/method/class/...
      *
      * CaptainBern
      */
@@ -151,12 +150,18 @@ public class Constants {
 
     public static class Server {
 
-        public static final String SUPPORTED_VERSION = "v1_7_2R0.1";
-        public static final int SUPPORTED_VESION_NUMERIC = 172;
+        public static final String SUPPORTED_VERSION = "v1_7_R1";
+        public static final int SUPPORTED_VERSION_NUMERIC = 171;
 
         public static final int PROTOCOL_VERSION = 4; //<- not needed now, but it looks coolio.
 
         public static final String CRAFBUKKIT_ROOT = "org.bukkit.craftbukkit";
         public static final String MINECRAFT_ROOT = "net.minecraft.server";
+    }
+
+    public static class Entity {
+
+        public static final String PLAYER_HANDLE = "getHandle";   //those probably won't change, but you never know :p
+        public static final String ENTITY_HANDLE = "getHandle";
     }
 }

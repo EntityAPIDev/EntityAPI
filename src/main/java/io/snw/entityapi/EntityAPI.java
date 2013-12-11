@@ -4,13 +4,13 @@ import io.snw.entityapi.entity.EntityManager;
 import io.snw.entityapi.server.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginBase;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class EntityAPI extends PluginBase {
+public class EntityAPI extends JavaPlugin {
 
     public static final ModuleLogger LOGGER = new ModuleLogger("EntityAPI");
     public static final ModuleLogger LOGGER_REFLECTION = LOGGER.getModule("Reflection");
@@ -23,15 +23,9 @@ public abstract class EntityAPI extends PluginBase {
         return INSTANCE != null;
     }
 
-    public static EntityAPI getInstance() {
-        if (INSTANCE == null) {
-            throw new RuntimeException("EntityAPI not Enabled, instance could not be found!");
-        }
-        return INSTANCE;
-    }
-
     @Override
     public void onEnable() {
+
         INSTANCE = this;
 
         try {
@@ -68,12 +62,19 @@ public abstract class EntityAPI extends PluginBase {
         } else {
             if(!SERVER.isCompatible()) {
                 LOGGER.warning("This Server version is not compatible with EntityAPI! -> disabling");
+                System.out.print(SERVER.getVersion());
                 Bukkit.getPluginManager().disablePlugin(this);
             }
-
             LOGGER.info("Identified server brand: " + SERVER.getName());
             LOGGER.info("MC Version: " + SERVER.getMCVersion());
         }
+    }
+
+    public static EntityAPI getInstance() {
+        if (INSTANCE == null) {
+            throw new RuntimeException("EntityAPI not Enabled, instance could not be found!");
+        }
+        return INSTANCE;
     }
 
     /**

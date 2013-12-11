@@ -1,6 +1,6 @@
 package io.snw.entityapi.reflection.refs;
 
-import io.snw.entityapi.constants.Constants;
+import io.snw.entityapi.internal.Constants;
 import io.snw.entityapi.reflection.ClassTemplate;
 import io.snw.entityapi.reflection.FieldAccessor;
 import io.snw.entityapi.reflection.MethodAccessor;

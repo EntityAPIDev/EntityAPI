@@ -14,7 +14,7 @@ public interface Server {
 
     public String getName();
 
-    public String getVersion();
+    public int getVersion();
 
     public String getMCVersion();
 

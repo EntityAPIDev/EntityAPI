@@ -1,7 +1,8 @@
 package io.snw.entityapi.server;
 
 import io.snw.entityapi.EntityAPI;
-import io.snw.entityapi.constants.Constants;
+import io.snw.entityapi.internal.Constants;
+import io.snw.entityapi.utils.StringUtil;
 import org.bukkit.Bukkit;
 
 public class CraftBukkitServer implements Server {
@@ -18,18 +19,21 @@ public class CraftBukkitServer implements Server {
     public boolean init() {
         String serverPath = Bukkit.getServer().getClass().getName();
 
-        if(serverPath.startsWith(Constants.Server.CRAFBUKKIT_ROOT)) {
+        if(!serverPath.startsWith(Constants.Server.CRAFBUKKIT_ROOT)) {
             return false;
         }
 
+        MC_VERSION = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
+
         if(MC_VERSION.isEmpty()) {
-            MC_VERSION = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
+            CRAFTBUKKIT_VERSIONED = Constants.Server.CRAFBUKKIT_ROOT;
+            MINECRAFT_VERSIONED = Constants.Server.MINECRAFT_ROOT;
         } else {
             CRAFTBUKKIT_VERSIONED = Constants.Server.CRAFBUKKIT_ROOT + "." + MC_VERSION;
             MINECRAFT_VERSIONED = Constants.Server.MINECRAFT_ROOT + "." + MC_VERSION;
         }
 
-        MC_VERSION_NUMERIC = Integer.valueOf(MC_VERSION.replaceAll("[^\\\\dxX]+", ""));
+      MC_VERSION_NUMERIC = Integer.valueOf(MC_VERSION.replaceAll("[^0-9]", ""));
 
         return true;
     }
@@ -65,8 +69,8 @@ public class CraftBukkitServer implements Server {
     }
 
     @Override
-    public String getVersion() {
-        return Bukkit.getVersion();
+    public int getVersion() {
+        return MC_VERSION_NUMERIC;
     }
 
     @Override
@@ -76,6 +80,6 @@ public class CraftBukkitServer implements Server {
 
     @Override
     public boolean isCompatible() {
-        return Constants.Server.SUPPORTED_VESION_NUMERIC == MC_VERSION_NUMERIC ? true : false;
+        return (Constants.Server.SUPPORTED_VERSION_NUMERIC == MC_VERSION_NUMERIC) ? true : false;
     }
 }
