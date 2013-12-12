@@ -158,4 +158,10 @@ public class Constants {
         public static final String CRAFBUKKIT_ROOT = "org.bukkit.craftbukkit";
         public static final String MINECRAFT_ROOT = "net.minecraft.server";
     }
+
+    public static class NetworkManager {
+
+        public static final String CHANNEL_FIELD = "k";
+        public static final String ADDRESS_FIELD = "l";
+    }
 }
