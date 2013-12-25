@@ -1,5 +1,6 @@
 package io.snw.entityapi;
 
+import io.snw.entityapi.metrics.Metrics;
 import io.snw.entityapi.entity.EntityManager;
 import io.snw.entityapi.entity.types.EntityCow;
 import io.snw.entityapi.internal.Constants;
