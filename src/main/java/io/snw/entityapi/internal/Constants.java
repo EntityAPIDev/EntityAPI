@@ -87,6 +87,7 @@ public class Constants {
             public static final String ENTITY_ENDERCRYSTAL = "EnderCrystal";
         }
         
+        @Deprecated
         public static class Ids {
             public static final int ITEM = 1;
             public static final int XP_ORB = 2;

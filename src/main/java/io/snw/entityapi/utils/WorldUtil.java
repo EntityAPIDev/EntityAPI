@@ -3,10 +3,7 @@ package io.snw.entityapi.utils;
 import io.snw.entityapi.reflection.MethodAccessor;
 import io.snw.entityapi.reflection.SafeMethod;
 import org.bukkit.World;
-import org.bukkit.entity.Entity;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class WorldUtil {
 
