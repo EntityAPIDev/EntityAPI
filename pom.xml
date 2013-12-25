@@ -12,9 +12,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <minecraft.version>1.6.4</minecraft.version>
-        <craftbukkit.version>R2.1</craftbukkit.version>
-        <cb_package>v1_6_R3</cb_package>
+        <minecraft.version>1.7.2</minecraft.version>
+        <craftbukkit.version>R0.1</craftbukkit.version>
+        <cb_package>v1_7_2R0.1</cb_package>
     </properties>
 
     <build>
@@ -60,20 +60,11 @@
             <artifactId>craftbukkit</artifactId>
             <version>${minecraft.version}-${craftbukkit.version}-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>org.mcstats</groupId>
-            <artifactId>metrics</artifactId>
-            <version>R6</version>
-        </dependency>
     </dependencies>
     <repositories>
         <repository>
             <id>bukkit-repo</id>
             <url>http://repo.bukkit.org/content/groups/public/</url>
-        </repository>
-        <repository>
-            <id>Plugin Metrics</id>
-            <url>http://repo.mcstats.org/content/repositories/public</url>
         </repository>
     </repositories>
     <distributionManagement>
