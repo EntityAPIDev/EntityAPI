@@ -24,6 +24,7 @@ public abstract class EntityAPI extends JavaPlugin {  //abstract classes can't b
     public static Server SERVER;
 
     // do we need this?
+    //To check if another instance is already running. Don't want 2 versions of the API running.
     public static Boolean hasInstance() { // why are we using a primitive wrapper here? /captain doesn't get it ._.
         return INSTANCE != null;
     }
@@ -78,6 +79,12 @@ public abstract class EntityAPI extends JavaPlugin {  //abstract classes can't b
     protected void registerEntities() {
         EntityUtil.registerEntity(EntityCow.class, Constants.EntityTypes.Names.ENTITY_COW, Constants.EntityTypes.Ids.ENTITY_COW);
     }
+    
+    /**
+     * Will Check for instance of this API running. 
+     * If one is found its returned otherwise if not, throws error.
+     * @return
+     */
 
     public static EntityAPI getInstance() {
         if (INSTANCE == null) {

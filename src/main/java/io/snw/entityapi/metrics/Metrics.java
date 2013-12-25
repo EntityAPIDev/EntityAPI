@@ -131,6 +131,20 @@ public class Metrics {
         guid = configuration.getString("guid");
         debug = configuration.getBoolean("debug", false);
     }
+	/**
+	 * Removes a previously added Graph
+	 * 
+	 * @param name of the Graph to remove
+	 */
+	public void removeGraph(final String name) {
+		if (name == null) {
+			throw new IllegalArgumentException("Graph name cannot be null");
+		}
+
+		synchronized (graphs) {
+			graphs.remove(name);
+		}
+	}
 
     /**
      * Construct and create a Graph that can be used to separate specific plotters to their own graphs on the metrics
@@ -739,4 +753,24 @@ public class Metrics {
             return plotter.name.equals(name) && plotter.getValue() == getValue();
         }
     }
+
+	/**
+	 * Attempts to create new Metrics for the plugin specified, and
+	 * starts sending metrics information. If this operation fails,
+	 * null is returned.
+	 * 
+	 * @param plugin to initialize Metrics for
+	 * @return the Metrics instance created, or null if this failed
+	 */
+	public static Metrics initialize(Plugin plugin) {
+		try {
+			final Metrics m = new Metrics(plugin);
+			m.start();
+			return m;
+		} catch (IOException e) {
+			plugin.getLogger().log(Level.SEVERE, "Failed to initialize Metrics");
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
