@@ -12,6 +12,5 @@ Collaborators
 - DSH105 (Author)
 - Frostalf (Author)
 - TomTheDeveloper (Author)
-- stuntguy3000 (Ticket Manager and Contributor)
 - drtshock (Contributor <3)
-- CaptainBern (Master Yi)
+- CaptainBern (Master Yi, All hail the captain.)
