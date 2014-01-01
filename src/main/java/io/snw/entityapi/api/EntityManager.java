@@ -1,12 +1,10 @@
-package io.snw.entityapi.entity;
+package io.snw.entityapi.api;
 
-import io.snw.entityapi.entity.interfaces.ControllableEntity;
-import io.snw.entityapi.entity.interfaces.EntityManagerBase;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 
-public class EntityManager implements EntityManagerBase{
+public class EntityManager implements EntityManagerBase {
 
     @Override
     public ControllableEntity spawnEntity(EntityType type, Location location) {

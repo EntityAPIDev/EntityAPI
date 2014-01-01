@@ -1,8 +1,8 @@
 package io.snw.entityapi;
 
+import io.snw.entityapi.entity.ControllableBatEntity;
 import io.snw.entityapi.metrics.Metrics;
-import io.snw.entityapi.entity.EntityManager;
-import io.snw.entityapi.entity.types.EntityCow;
+import io.snw.entityapi.api.EntityManager;
 import io.snw.entityapi.internal.Constants;
 import io.snw.entityapi.server.*;
 import io.snw.entityapi.utils.EntityUtil;
@@ -77,7 +77,7 @@ public abstract class EntityAPI extends JavaPlugin {  //abstract classes can't b
     }
 
     protected void registerEntities() {
-        EntityUtil.registerEntity(EntityCow.class, Constants.EntityTypes.Names.ENTITY_COW, Constants.EntityTypes.Ids.ENTITY_COW);
+        EntityUtil.registerEntity(ControllableBatEntity.class, Constants.EntityTypes.Names.ENTITY_BAT, Constants.EntityTypes.Ids.ENTITY_BAT);
     }
     
     /**

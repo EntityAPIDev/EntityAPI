@@ -1,4 +1,4 @@
-package io.snw.entityapi.entity.interfaces;
+package io.snw.entityapi.api;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;

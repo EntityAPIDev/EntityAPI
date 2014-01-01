@@ -16,5 +16,4 @@ public class EntityUtil {
     public static void registerEntity(Class<?> clazz, String name, int id) {
         EntityTypesRef.registerEntiy(clazz, name, id);
     }
-
 }
