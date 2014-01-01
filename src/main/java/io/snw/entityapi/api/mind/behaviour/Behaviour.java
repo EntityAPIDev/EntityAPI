@@ -8,9 +8,11 @@ public abstract class Behaviour {
         return !shouldStart();
     }
 
-    public void start() {}
+    public void start() {
+    }
 
-    public void finish() {}
+    public void finish() {
+    }
 
     public abstract void tick();
 }

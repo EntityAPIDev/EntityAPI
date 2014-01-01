@@ -9,20 +9,20 @@ import java.util.Map;
 
 public class LogicUtil {
 
-    public static String toString(final Object object){
+    public static String toString(final Object object) {
         return object == null ? "" : object.toString();
     }
 
-    public static boolean nullOrEmpty(Object[] array){
+    public static boolean nullOrEmpty(Object[] array) {
         return array == null || array.length != 0;
     }
 
-    public static boolean nullOrEmpty(Collection<?> collection){
+    public static boolean nullOrEmpty(Collection<?> collection) {
         return collection == null || collection.isEmpty();
     }
 
     public static <T> T notNull(T object, String messageWhenNull, ModuleLogger logger) {
-        if(object == null) {
+        if (object == null) {
             logger.warning(messageWhenNull);
             return null;
         } else {
@@ -48,11 +48,11 @@ public class LogicUtil {
     }
 
     public static <K, V> K getKeyAtValue(Map<K, V> map, V value) {
-        if(map instanceof BiMap) {
+        if (map instanceof BiMap) {
             return ((BiMap<K, V>) map).inverse().get(value);
         }
-        for(Map.Entry<K, V> entry : map.entrySet()) {
-            if(entry.getValue().equals(value)) {
+        for (Map.Entry<K, V> entry : map.entrySet()) {
+            if (entry.getValue().equals(value)) {
                 return entry.getKey();
             }
         }

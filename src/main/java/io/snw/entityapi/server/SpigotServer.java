@@ -4,13 +4,13 @@ public class SpigotServer extends CraftBukkitServer {
 
     @Override
     public boolean init() {
-        if(!super.init()) {
+        if (!super.init()) {
             return false;
         }
-        try{
+        try {
             Class.forName("org.spigotmc.SpigotConfig");
             return true;
-        }catch(ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             return false;
         }
     }

@@ -7,7 +7,7 @@ public class Constants {
      * This class is used to identify the fields in NMS classes
      * When a field changes we just have to edit this class and not
      * all classes which access that field/method/class/...
-     *
+     * <p/>
      * CaptainBern
      */
 
@@ -21,7 +21,7 @@ public class Constants {
         public static final String METHOD_NAME_OF_ID = "b"; //takes id as param, returns the name
         public static final String METHOD_GET_NAME_MAP = "b"; //returns a set which contains all entity names
 
-        public static final String MAP_NAME_TO_CLASS= "c";
+        public static final String MAP_NAME_TO_CLASS = "c";
         public static final String MAP_CLASS_TO_NAME = "d";
         public static final String MAP_ID_TO_CLASS = "e";
         public static final String MAP_CLASS_TO_ID = "f";
@@ -86,7 +86,7 @@ public class Constants {
             public static final String ENTITY_VILLAGER = "Villager";
             public static final String ENTITY_ENDERCRYSTAL = "EnderCrystal";
         }
-        
+
         @Deprecated
         public static class Ids {
             public static final int ITEM = 1;

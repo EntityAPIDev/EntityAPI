@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
-public class ModuleLogger extends Logger{
+public class ModuleLogger extends Logger {
 
     private final String[] modulePath;
     private final String prefix;

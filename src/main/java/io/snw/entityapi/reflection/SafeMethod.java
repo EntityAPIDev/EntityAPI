@@ -12,13 +12,14 @@ public class SafeMethod<T> implements MethodAccessor<T> {
     private Class[] params;
     private boolean isStatic;
 
-    public SafeMethod(){ }
+    public SafeMethod() {
+    }
 
-    public SafeMethod(Method method){
+    public SafeMethod(Method method) {
         setMethod(method);
     }
 
-    public SafeMethod(Class<?> coreClass, String methodname, Class<?>... params){
+    public SafeMethod(Class<?> coreClass, String methodname, Class<?>... params) {
         try {
             Method method = coreClass.getDeclaredMethod(methodname, params);
             setMethod(method);
@@ -27,11 +28,11 @@ public class SafeMethod<T> implements MethodAccessor<T> {
         }
     }
 
-    protected void setMethod(Method method){
-        if(method == null){
+    protected void setMethod(Method method) {
+        if (method == null) {
             EntityAPI.LOGGER_REFLECTION.warning("Cannot create a SafeMethod with a null method!");
         }
-        if(!method.isAccessible()){
+        if (!method.isAccessible()) {
             method.setAccessible(true);
         }
         this.method = method;
@@ -41,15 +42,15 @@ public class SafeMethod<T> implements MethodAccessor<T> {
 
     @Override
     public T invoke(Object instance, Object... args) {
-        if(this.method != null){
+        if (this.method != null) {
 
             //check if the instance is right
-            if(instance == null && !isStatic){
+            if (instance == null && !isStatic) {
                 throw new UnsupportedOperationException("Non-static methods require a valid instance passed in!");
             }
 
             //check if param lenght is right
-            if(args.length != this.params.length){
+            if (args.length != this.params.length) {
                 throw new UnsupportedOperationException("Not enough arguments!");
             }
 

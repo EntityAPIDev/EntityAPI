@@ -1,9 +1,9 @@
 package io.snw.entityapi;
 
-import io.snw.entityapi.entity.ControllableBatEntity;
-import io.snw.entityapi.metrics.Metrics;
 import io.snw.entityapi.api.EntityManager;
+import io.snw.entityapi.entity.ControllableBatEntity;
 import io.snw.entityapi.internal.Constants;
+import io.snw.entityapi.metrics.Metrics;
 import io.snw.entityapi.server.*;
 import io.snw.entityapi.utils.EntityUtil;
 import org.bukkit.Bukkit;
@@ -56,19 +56,19 @@ public abstract class EntityAPI extends JavaPlugin {  //abstract classes can't b
         servers.add(new CraftBukkitServer());
         servers.add(new UnknownServer());
 
-        for(Server server : servers) {
-            if(server.init()) {   //the first server type that returns true on init is a valid server brand.
+        for (Server server : servers) {
+            if (server.init()) {   //the first server type that returns true on init is a valid server brand.
                 this.SERVER = server;
                 break;
             }
         }
 
-        if(SERVER == null) {
+        if (SERVER == null) {
             LOGGER.warning("Failed to identify the server brand! The API will not run correctly -> disabling");
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         } else {
-            if(!SERVER.isCompatible()) {
+            if (!SERVER.isCompatible()) {
                 LOGGER.warning("This Server version may not be compatible with EntityAPI!");
             }
             LOGGER.info("Identified server brand: " + SERVER.getName());
@@ -79,10 +79,11 @@ public abstract class EntityAPI extends JavaPlugin {  //abstract classes can't b
     protected void registerEntities() {
         EntityUtil.registerEntity(ControllableBatEntity.class, Constants.EntityTypes.Names.ENTITY_BAT, Constants.EntityTypes.Ids.ENTITY_BAT);
     }
-    
+
     /**
-     * Will Check for instance of this API running. 
+     * Will Check for instance of this API running.
      * If one is found its returned otherwise if not, throws error.
+     *
      * @return
      */
 
@@ -100,6 +101,7 @@ public abstract class EntityAPI extends JavaPlugin {  //abstract classes can't b
      * you guys can do whatever you want with it since I don't really know what your original
      * idea was :/
      * (captainbern)
+     *
      * @param plugin
      * @return
      */

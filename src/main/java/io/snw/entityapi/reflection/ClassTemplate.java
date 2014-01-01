@@ -13,13 +13,14 @@ public class ClassTemplate<T> {
     private Class<T> type;
     private List<SafeField<?>> fields;
 
-    public ClassTemplate(){ }
+    public ClassTemplate() {
+    }
 
-    public ClassTemplate(Class<T> clazz){
+    public ClassTemplate(Class<T> clazz) {
         setClass(clazz);
     }
 
-    protected void setClass(Class<T> clazz){
+    protected void setClass(Class<T> clazz) {
         this.type = clazz;
     }
 
@@ -48,13 +49,13 @@ public class ClassTemplate<T> {
         return populateFieldList(fields, clazz.getSuperclass());
     }
 
-    public T newInstance(){
-        if(this.type == null){
+    public T newInstance() {
+        if (this.type == null) {
             throw new IllegalStateException("Class not set.");
         }
 
         try {
-            return  getType().newInstance();
+            return getType().newInstance();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -63,45 +64,45 @@ public class ClassTemplate<T> {
         return null;
     }
 
-    public Class<T> getType(){
+    public Class<T> getType() {
         return this.type;
     }
 
-    public static ClassTemplate<?> create(Class<?> type){
-        if(type == null){
+    public static ClassTemplate<?> create(Class<?> type) {
+        if (type == null) {
             EntityAPI.LOGGER_REFLECTION.warning("Cannot create a ClassTemplate with a null type!");
             return null;
         }
         return new ClassTemplate(type);
     }
 
-    public static ClassTemplate<?> create(String className){
+    public static ClassTemplate<?> create(String className) {
         Class clazz = EntityAPI.SERVER.getClass(className);
 
-        if(clazz == null){
+        if (clazz == null) {
             EntityAPI.LOGGER_REFLECTION.warning("Failed to find a matching class with name: " + className);
             return null;
         }
         return new ClassTemplate<Object>(clazz);
     }
 
-    public boolean isAssignableFrom(Class<?> clazz){
+    public boolean isAssignableFrom(Class<?> clazz) {
         return this.getType().isAssignableFrom(clazz);
     }
 
-    public boolean isInstanceOf(Object object){
+    public boolean isInstanceOf(Object object) {
         return this.getType().isInstance(object);
     }
 
-    public <K> MethodAccessor<K> getMethod(String methodname, Class<?>... params){
+    public <K> MethodAccessor<K> getMethod(String methodname, Class<?>... params) {
         return new SafeMethod<K>(this.getType(), methodname, params);
     }
 
-    public <K> FieldAccessor<K> getField(String fieldName){
+    public <K> FieldAccessor<K> getField(String fieldName) {
         return new SafeField<K>(getType(), fieldName);
     }
 
-    public <K> SafeConstructor<K> getConstructor(Class<?>... params){
+    public <K> SafeConstructor<K> getConstructor(Class<?>... params) {
         return new SafeConstructor<K>(getType(), params);
     }
 

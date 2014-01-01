@@ -6,10 +6,11 @@ public class BasicWrapper {
 
     private Object handle;
 
-    public BasicWrapper() {}
+    public BasicWrapper() {
+    }
 
     protected void setHandle(Object handle) {
-        if(handle == null) {
+        if (handle == null) {
             EntityAPI.LOGGER_REFLECTION.warning("Cannot create a wrapper with a null handle!");
             return;
         }

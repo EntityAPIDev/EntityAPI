@@ -19,6 +19,7 @@ import java.util.Map;
 
 /**
  * Represents the basic controllable entity
+ *
  * @param <T> Bukkit entity that this is based off
  */
 public class ControllableBaseEntity<T extends LivingEntity> implements ControllableEntity {
@@ -44,7 +45,8 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
         return id;
     }
 
-    public void initSounds() {}
+    public void initSounds() {
+    }
 
     @Override
     public boolean canFly() {
@@ -122,7 +124,7 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
     protected void clearNMSGoals(PathfinderGoalSelector[] selectors) {
         // We have our own AI (Mind), so these aren't needed.
         try {
-            String[] fieldNames = new String[] {"b", "c"};
+            String[] fieldNames = new String[]{"b", "c"};
             for (PathfinderGoalSelector selector : selectors) {
                 for (String s : fieldNames) {
                     Field f = PathfinderGoalSelector.class.getDeclaredField(s);
@@ -136,7 +138,8 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
     }
 
     @Override
-    public void onTick() {}
+    public void onTick() {
+    }
 
     @Override
     public boolean onInteract(Player entity, boolean rightClick) {

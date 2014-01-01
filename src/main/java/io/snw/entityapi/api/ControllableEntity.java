@@ -1,7 +1,5 @@
 package io.snw.entityapi.api;
 
-import io.snw.entityapi.api.ControllableEntityType;
-import io.snw.entityapi.api.EntitySound;
 import io.snw.entityapi.api.mind.Mind;
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import org.bukkit.entity.Entity;

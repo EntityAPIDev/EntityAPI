@@ -15,7 +15,7 @@ public class ControllableBatEntity extends EntityBat implements ControllableEnti
         super(world);
         this.controllableEntity = controllableEntity;
         if (this.controllableEntity instanceof ControllableBaseEntity) {
-            ((ControllableBaseEntity) this.controllableEntity).clearNMSGoals(new PathfinderGoalSelector[] {this.goalSelector, this.targetSelector});
+            ((ControllableBaseEntity) this.controllableEntity).clearNMSGoals(new PathfinderGoalSelector[]{this.goalSelector, this.targetSelector});
         }
     }
 
@@ -57,7 +57,7 @@ public class ControllableBatEntity extends EntityBat implements ControllableEnti
 
     @Override
     public void collide(Entity entity) {
-        if (this.controllableEntity  == null) {
+        if (this.controllableEntity == null) {
             super.collide(entity);
             return;
         }
@@ -86,7 +86,7 @@ public class ControllableBatEntity extends EntityBat implements ControllableEnti
 
     @Override
     public void e(float xMotion, float zMotion) {
-        float[] motion = new float[] {xMotion, (float) this.motY, zMotion};
+        float[] motion = new float[]{xMotion, (float) this.motY, zMotion};
         if (this.controllableEntity != null) {
             if (this.controllableEntity.getMind().hasAttribute("RIDE")) {
                 Attribute b = this.controllableEntity.getMind().getAttribute("RIDE");

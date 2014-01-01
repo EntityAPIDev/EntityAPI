@@ -82,15 +82,15 @@ public class StringUtil {
         return join(collection.iterator(), separator);
     }
 
-    public static String join(Object[] array, char seperator){
-        if(array == null){
+    public static String join(Object[] array, char seperator) {
+        if (array == null) {
             return null;
         }
         return join(Arrays.asList(array), seperator);
     }
 
-    public static String join(Object[] array, String seperator){
-        if(array == null){
+    public static String join(Object[] array, String seperator) {
+        if (array == null) {
             return null;
         }
         return join(Arrays.asList(array), seperator);
