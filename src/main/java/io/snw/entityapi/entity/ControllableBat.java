@@ -1,8 +1,7 @@
-package io.snw.entityapi.entity.type;
+package io.snw.entityapi.entity;
 
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
-import io.snw.entityapi.entity.ControllableBaseEntity;
 import net.minecraft.server.v1_7_R1.EntityBat;
 import org.bukkit.entity.Bat;
 

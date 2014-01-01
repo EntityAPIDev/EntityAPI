@@ -1,4 +1,4 @@
-package io.snw.entityapi.entity.type;
+package io.snw.entityapi.entity;
 
 import io.snw.entityapi.api.ControllableEntity;
 import io.snw.entityapi.entity.ControllableEntityHandle;

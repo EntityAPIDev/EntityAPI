@@ -1,7 +1,7 @@
 package io.snw.entityapi;
 
 import io.snw.entityapi.api.EntityManager;
-import io.snw.entityapi.entity.type.ControllableBatEntity;
+import io.snw.entityapi.entity.ControllableBatEntity;
 import io.snw.entityapi.internal.Constants;
 import io.snw.entityapi.metrics.Metrics;
 import io.snw.entityapi.server.*;
