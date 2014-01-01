@@ -1,5 +1,5 @@
 name: EntityAPI
-authors: [DSH105, Frostalf]
+authors: [DSH105, Frostalf, CaptainBern, TomTheDeveloper]
 version: ${project.version}
 main: io.snw.entityapi.EntityAPI
 description: Is awesome
