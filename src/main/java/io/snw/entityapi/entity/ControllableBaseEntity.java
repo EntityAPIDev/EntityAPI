@@ -7,6 +7,8 @@ import io.snw.entityapi.api.mind.Mind;
 import io.snw.entityapi.utils.IDGenerator;
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import net.minecraft.server.v1_7_R1.PathfinderGoalSelector;
+import org.bukkit.Sound;
+import org.bukkit.craftbukkit.v1_7_R1.CraftSound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -14,6 +16,7 @@ import org.bukkit.util.Vector;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -89,16 +92,54 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
     }
 
     public String getSound(EntitySound type) {
+        String s = this.getSound(type, "custom");
+        if (s != null) {
+            return s;
+        }
         return this.getSound(type, "default");
     }
 
     public String getSound(EntitySound type, String key) {
+        String s = this.getSound(type, "custom");
+        if (s != null) {
+            return s;
+        }
         for (Map.Entry<String, String> entry : this.sounds.get(type).entrySet()) {
             if (entry.getKey().equals(key)) {
                 return entry.getValue();
             }
         }
-        return null;
+        // Minecraft will treat this as 'no sound'
+        return "";
+    }
+
+    @Override
+    public void setSound(EntitySound type, Sound toReplace, Sound replaceWith, boolean addOnFail) {
+        boolean removed = false;
+        String newKey = "custom";
+        Iterator<Map.Entry<String, String>> i = this.sounds.get(type).entrySet().iterator();
+        while (i.hasNext()) {
+            Map.Entry<String, String> entry = i.next();
+            if (entry.getValue().equals(CraftSound.getSound(toReplace))) { // This way, we're doing the NMS stuff
+                newKey = entry.getKey();
+                removed = true;
+                i.remove();
+            }
+        }
+
+        if (replaceWith != null) { // Allows sounds to be removed
+            if (removed || addOnFail) { // On fail - offer the option to add the sound anyway. Functions as setSound(type, sound) too
+                this.setSound(type, newKey, CraftSound.getSound(replaceWith));
+            }
+        }
+    }
+
+    @Override
+    public void setSound(EntitySound type, Sound sound) {
+        // Allows sounds to be set without the use of the NMS String
+        // We can also allow people to add/replace/remove sounds
+        // Entities use the "custom" sound if one exists
+        this.setSound(type, "custom", CraftSound.getSound(sound));
     }
 
     public void setSound(EntitySound type, String sound) {

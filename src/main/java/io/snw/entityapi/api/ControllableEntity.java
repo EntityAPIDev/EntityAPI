@@ -2,6 +2,7 @@ package io.snw.entityapi.api;
 
 import io.snw.entityapi.api.mind.Mind;
 import net.minecraft.server.v1_7_R1.EntityLiving;
+import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -15,6 +16,8 @@ import java.util.Map;
  */
 
 public abstract interface ControllableEntity {
+
+    // TODO: JavaDucks. Quack
 
     public abstract long getId();
 
@@ -39,6 +42,10 @@ public abstract interface ControllableEntity {
     public String getSound(EntitySound type);
 
     public String getSound(EntitySound type, String key);
+
+    public void setSound(EntitySound type, Sound toReplace, Sound replaceWith, boolean addOnFail);
+
+    public void setSound(EntitySound type, Sound sound);
 
     public void setSound(EntitySound type, String sound);
 
