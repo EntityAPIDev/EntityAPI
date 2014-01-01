@@ -1,7 +1,7 @@
 package io.snw.entityapi;
 
 import io.snw.entityapi.api.EntityManager;
-import io.snw.entityapi.entity.ControllableBatEntity;
+import io.snw.entityapi.entity.type.ControllableBatEntity;
 import io.snw.entityapi.internal.Constants;
 import io.snw.entityapi.metrics.Metrics;
 import io.snw.entityapi.server.*;
@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class EntityAPI extends JavaPlugin {  //abstract classes can't be cast to Plugin so yeah :/
+public abstract class EntityAPI extends JavaPlugin {
 
     public static final ModuleLogger LOGGER = new ModuleLogger("EntityAPI");
     public static final ModuleLogger LOGGER_REFLECTION = LOGGER.getModule("Reflection");
@@ -23,7 +23,6 @@ public abstract class EntityAPI extends JavaPlugin {  //abstract classes can't b
 
     public static Server SERVER;
 
-    // do we need this?
     //To check if another instance is already running. Don't want 2 versions of the API running.
     public static Boolean hasInstance() { // why are we using a primitive wrapper here? /captain doesn't get it ._.
         return INSTANCE != null;

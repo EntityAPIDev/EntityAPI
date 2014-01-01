@@ -1,0 +1,10 @@
+Here's a small file which contains some stuff we may/could add
+
+1) Custom pathfinders/navigation. So we can create players and make them wander randomly around.
+2) Add different types of ControllableEntityBase's, suggestions: Fightable, Nameable, etc...
+4) Add some easter eggs. We love easter eggs.
+
+@DSH105, Nice work, but where do we set the spawn location? Maybe add it in the constructor.
+
+
+

@@ -16,6 +16,8 @@ public interface Server {
 
     public int getVersion();
 
+    public Object getMinecraftServer();
+
     public String getMCVersion();
 
     public boolean isCompatible();

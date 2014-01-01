@@ -2,6 +2,7 @@ package io.snw.entityapi.server;
 
 import io.snw.entityapi.EntityAPI;
 import io.snw.entityapi.internal.Constants;
+import io.snw.entityapi.reflection.refs.MinecraftServerRef;
 import org.bukkit.Bukkit;
 
 public class CraftBukkitServer implements Server {
@@ -70,6 +71,11 @@ public class CraftBukkitServer implements Server {
     @Override
     public int getVersion() {
         return MC_VERSION_NUMERIC;
+    }
+
+    @Override
+    public Object getMinecraftServer() {
+        return MinecraftServerRef.getServer(Bukkit.getServer());
     }
 
     @Override
