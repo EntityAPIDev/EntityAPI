@@ -51,9 +51,9 @@ public abstract class EntityAPI extends JavaPlugin {
     }
     public static Boolean hasDuplicates(){
         if(plugins.size() > 1){
-            return hasInstance() == true;
+            return hasDuplicates() == true;
             } else {
-            return hasInstance() == false;
+            return hasDuplicates() == false;
             }
     }
 
