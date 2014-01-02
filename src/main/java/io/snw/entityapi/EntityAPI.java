@@ -46,9 +46,12 @@ public abstract class EntityAPI extends JavaPlugin {
         return plugins;
    }
 //To check if another instance is already running. Don't want 2 versions of the API running.
-    public static Boolean hasInstance() { // why are we using a primitive wrapper here? /captain doesn't get it ._.
-            if(plugins.size() > 1){
-                return hasInstance() == true;
+    public static Boolean hasInstance() {
+        return INSTANCE != null;
+    }
+    public static Boolean hasDuplicates(){
+        if(plugins.size() > 1){
+            return hasInstance() == true;
             } else {
             return hasInstance() == false;
             }
@@ -82,7 +85,7 @@ public abstract class EntityAPI extends JavaPlugin {
             ChunkProviderServerHook.hook(world);
         }
         
-        if(hasInstance() == true){
+        if(hasDuplicates() == true){
             int index = 0;
             pm.disablePlugin(plugins.get(index));
             while(plugins.iterator().hasNext() == true){
