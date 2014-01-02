@@ -45,10 +45,12 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
         this.initSounds();
     }
 
+    @Override
     public long getId() {
         return id;
     }
 
+    @Override
     public Mind getMind() {
         return mind;
     }
@@ -80,10 +82,12 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
         this.canFly = flag;
     }
 
+    @Override
     public boolean shouldUpdateAttributes() {
         return tickAttributes;
     }
 
+    @Override
     public void setTickAttributes(boolean flag) {
         this.tickAttributes = flag;
     }
@@ -93,6 +97,7 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
         return (T) this.handle.getBukkitEntity();
     }
 
+    @Override
     public EntityLiving getHandle() {
         return handle;
     }
@@ -102,10 +107,12 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
         return this.entityType;
     }
 
+    @Override
     public Map<String, String> getSounds(EntitySound type) {
         return this.sounds.get(type);
     }
 
+    @Override
     public String getSound(EntitySound type) {
         String s = this.getSound(type, "custom");
         if (s != null) {
@@ -114,6 +121,7 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
         return this.getSound(type, "default");
     }
 
+    @Override
     public String getSound(EntitySound type, String key) {
         String s = this.getSound(type, "custom");
         if (s != null) {
@@ -160,10 +168,12 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
         this.setSound(type, "custom", CraftSound.getSound(sound));
     }
 
+    @Override
     public void setSound(EntitySound type, String sound) {
         this.setSound(type, "default", sound);
     }
 
+    @Override
     public void setSound(EntitySound type, String key, String sound) {
         if (this.sounds.containsKey(type)) {
             Map<String, String> map = this.sounds.get(type);
@@ -176,10 +186,12 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
         }
     }
 
+    @Override
     public void setSound(EntitySound type, HashMap<String, String> soundMap) {
         this.sounds.put(type, soundMap);
     }
 
+    @Override
     public double getSpeed() {
         if (this.handle == null) {
             return GenericAttributes.d.b();
@@ -187,22 +199,27 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
         return this.handle.getAttributeInstance(GenericAttributes.d).getValue();
     }
 
+    @Override
     public void setSpeed(double speed) {
         this.handle.getAttributeInstance(GenericAttributes.d).setValue(speed);
     }
 
+    @Override
     public void setPathfindingRange(double range) {
         this.handle.getAttributeInstance(GenericAttributes.b).setValue(range);
     }
 
+    @Override
     public double getPathfindingRange() {
         return this.handle.getAttributeInstance(GenericAttributes.b).getValue();
     }
 
+    @Override
     public boolean navigateTo(LivingEntity livingEntity) {
         return this.navigateTo(livingEntity, this.getSpeed());
     }
 
+    @Override
     public boolean navigateTo(LivingEntity livingEntity, double speed) {
         if (livingEntity == null) {
             return false;
@@ -215,6 +232,7 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
         return this.navigateTo(path, speed);
     }
 
+    @Override
     public boolean navigateTo(Location to, double speed) {
         if (to == null) {
             return false;
@@ -223,6 +241,7 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
         return this.navigateTo(path, speed);
     }
 
+    @Override
     public boolean navigateTo(PathEntity path, double speed) {
         if (!(this.handle instanceof EntityInsentient) || path == null) {
             return false;
