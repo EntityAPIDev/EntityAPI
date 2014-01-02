@@ -5,10 +5,11 @@ import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import io.snw.entityapi.api.mind.Mind;
 import io.snw.entityapi.utils.IDGenerator;
-import net.minecraft.server.v1_7_R1.EntityLiving;
-import net.minecraft.server.v1_7_R1.PathfinderGoalSelector;
+import net.minecraft.server.v1_7_R1.*;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_7_R1.CraftSound;
+import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -29,7 +30,7 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
 
     protected long id;
     protected Mind mind;
-    protected boolean updateAttributes;
+    protected boolean tickAttributes;
 
     protected boolean canFly;
 
@@ -44,11 +45,31 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
         this.initSounds();
     }
 
+    @Override
     public long getId() {
         return id;
     }
 
-    public void initSounds() {
+    @Override
+    public Mind getMind() {
+        return mind;
+    }
+
+    @Override
+    public String getName() {
+        if (this.handle == null) {
+            return null; // TODO: Give them a default name?
+        }
+        return this.getBukkitEntity().getCustomName();
+    }
+
+    @Override
+    public void setName(String name) {
+        if (this.handle == null) {
+            // TODO: set default name here?
+        }
+        this.getBukkitEntity().setCustomName(name);
+        this.getBukkitEntity().setCustomNameVisible(name == null ? false : true);
     }
 
     @Override
@@ -61,16 +82,14 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
         this.canFly = flag;
     }
 
-    public Mind getMind() {
-        return mind;
-    }
-
+    @Override
     public boolean shouldUpdateAttributes() {
-        return updateAttributes;
+        return tickAttributes;
     }
 
-    public void setUpdateAttributes(boolean flag) {
-        this.updateAttributes = flag;
+    @Override
+    public void setTickAttributes(boolean flag) {
+        this.tickAttributes = flag;
     }
 
     @Override
@@ -78,6 +97,7 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
         return (T) this.handle.getBukkitEntity();
     }
 
+    @Override
     public EntityLiving getHandle() {
         return handle;
     }
@@ -87,10 +107,12 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
         return this.entityType;
     }
 
+    @Override
     public Map<String, String> getSounds(EntitySound type) {
         return this.sounds.get(type);
     }
 
+    @Override
     public String getSound(EntitySound type) {
         String s = this.getSound(type, "custom");
         if (s != null) {
@@ -99,6 +121,7 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
         return this.getSound(type, "default");
     }
 
+    @Override
     public String getSound(EntitySound type, String key) {
         String s = this.getSound(type, "custom");
         if (s != null) {
@@ -115,6 +138,9 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
 
     @Override
     public void setSound(EntitySound type, Sound toReplace, Sound replaceWith, boolean addOnFail) {
+        if (toReplace == null) {
+            throw new IllegalArgumentException("Sound to replace cannot be null");
+        }
         boolean removed = false;
         String newKey = "custom";
         Iterator<Map.Entry<String, String>> i = this.sounds.get(type).entrySet().iterator();
@@ -142,10 +168,12 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
         this.setSound(type, "custom", CraftSound.getSound(sound));
     }
 
+    @Override
     public void setSound(EntitySound type, String sound) {
         this.setSound(type, "default", sound);
     }
 
+    @Override
     public void setSound(EntitySound type, String key, String sound) {
         if (this.sounds.containsKey(type)) {
             Map<String, String> map = this.sounds.get(type);
@@ -158,24 +186,67 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
         }
     }
 
+    @Override
     public void setSound(EntitySound type, HashMap<String, String> soundMap) {
         this.sounds.put(type, soundMap);
     }
 
-    protected void clearNMSGoals(PathfinderGoalSelector[] selectors) {
-        // We have our own AI (Mind), so these aren't needed.
-        try {
-            String[] fieldNames = new String[]{"b", "c"};
-            for (PathfinderGoalSelector selector : selectors) {
-                for (String s : fieldNames) {
-                    Field f = PathfinderGoalSelector.class.getDeclaredField(s);
-                    f.setAccessible(true);
-                    ((List) f.get(selector)).clear();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    @Override
+    public double getSpeed() {
+        if (this.handle == null) {
+            return GenericAttributes.d.b();
         }
+        return this.handle.getAttributeInstance(GenericAttributes.d).getValue();
+    }
+
+    @Override
+    public void setSpeed(double speed) {
+        this.handle.getAttributeInstance(GenericAttributes.d).setValue(speed);
+    }
+
+    @Override
+    public void setPathfindingRange(double range) {
+        this.handle.getAttributeInstance(GenericAttributes.b).setValue(range);
+    }
+
+    @Override
+    public double getPathfindingRange() {
+        return this.handle.getAttributeInstance(GenericAttributes.b).getValue();
+    }
+
+    @Override
+    public boolean navigateTo(LivingEntity livingEntity) {
+        return this.navigateTo(livingEntity, this.getSpeed());
+    }
+
+    @Override
+    public boolean navigateTo(LivingEntity livingEntity, double speed) {
+        if (livingEntity == null) {
+            return false;
+        }
+        EntityLiving target = ((CraftLivingEntity) livingEntity).getHandle();
+        if (target == this.handle) {
+            return true;
+        }
+        PathEntity path = this.handle.world.findPath(this.handle, ((CraftLivingEntity) livingEntity).getHandle(), (float) this.getPathfindingRange(), true, false, false, true);
+        return this.navigateTo(path, speed);
+    }
+
+    @Override
+    public boolean navigateTo(Location to, double speed) {
+        if (to == null) {
+            return false;
+        }
+        PathEntity path = this.handle.world.a(this.handle, MathHelper.floor(to.getX()), MathHelper.f(to.getY()), MathHelper.floor(to.getZ()), (float) this.getPathfindingRange(), true, false, false, true);
+        return this.navigateTo(path, speed);
+    }
+
+    @Override
+    public boolean navigateTo(PathEntity path, double speed) {
+        if (!(this.handle instanceof EntityInsentient) || path == null) {
+            return false;
+        }
+        return ((EntityInsentient) this.handle).getNavigation().a(path, speed);
     }
 
     @Override
@@ -200,5 +271,24 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
     @Override
     public void onDeath() {
 
+    }
+
+    public void initSounds() {
+    }
+
+    protected void clearNMSGoals(PathfinderGoalSelector[] selectors) {
+        // We have our own AI (Mind), so these aren't needed.
+        try {
+            String[] fieldNames = new String[]{"b", "c"};
+            for (PathfinderGoalSelector selector : selectors) {
+                for (String s : fieldNames) {
+                    Field f = PathfinderGoalSelector.class.getDeclaredField(s);
+                    f.setAccessible(true);
+                    ((List) f.get(selector)).clear();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
