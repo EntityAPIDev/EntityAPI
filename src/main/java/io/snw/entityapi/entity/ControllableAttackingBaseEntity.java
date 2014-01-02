@@ -39,19 +39,4 @@ public class ControllableAttackingBaseEntity<T extends LivingEntity> extends Con
             ((EntityInsentient) this.handle).setGoalTarget(((CraftLivingEntity) target).getHandle());
         }
     }
-    
-    @Override
-    public LivingEntity getAttackingEntity() {
-        if(this.handle == null){
-            return null;
-        }
-        if (this.handle instanceof EntityInsentient) {
-            EntityLiving entity = ((EntityInsentient) this.handle).getLastDamager();
-            if(entity != null && entity.getBukkitEntity() instanceof LivingEntity) {
-                return (LivingEntity) entity.getBukkitEntity();
-            }
-        }
-        
-        return null;
-    }
 }
