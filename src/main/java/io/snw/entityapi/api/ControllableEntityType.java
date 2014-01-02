@@ -26,6 +26,7 @@ public enum ControllableEntityType {
         return this.name;
     }
 
+    @Deprecated
     public int getId() {
         return this.id;
     }
