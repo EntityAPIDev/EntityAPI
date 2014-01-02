@@ -1,5 +1,7 @@
 package io.snw.entityapi;
 
+import com.google.common.collect.Lists;
+import com.sun.org.apache.bcel.internal.generic.InstructionConstants;
 import io.snw.entityapi.api.EntityManager;
 import io.snw.entityapi.entity.ControllableBatEntity;
 import io.snw.entityapi.hooks.ChunkProviderServerHook;
@@ -15,7 +17,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import org.bukkit.ChatColor;
+import org.bukkit.command.defaults.PluginsCommand;
+import org.bukkit.plugin.PluginManager;
+
 
 public abstract class EntityAPI extends JavaPlugin {
 
@@ -23,12 +32,35 @@ public abstract class EntityAPI extends JavaPlugin {
     public static final ModuleLogger LOGGER_REFLECTION = LOGGER.getModule("Reflection");
 
     private static EntityAPI INSTANCE;
+    private static Plugin p;
+    private static PluginManager pm;
 
     public static Server SERVER;
+    public static HashMap<Plugin, Integer> counters = new HashMap<>();
+    public static ArrayList<Plugin> plugins = new ArrayList<>();
 
-    //To check if another instance is already running. Don't want 2 versions of the API running.
+ 
+    public static List<Plugin> sameplugin(Plugin newplugin){
+        if(counters.containsKey(newplugin)){
+            counters.put(newplugin, counters.get(newplugin)+1);
+         } else {
+            counters.put(newplugin, 1);
+         }
+        plugins.add(newplugin);
+        return plugins;
+   }
+//To check if another instance is already running. Don't want 2 versions of the API running.
     public static Boolean hasInstance() { // why are we using a primitive wrapper here? /captain doesn't get it ._.
-        return INSTANCE != null;
+            int index = 0;
+            if(plugins.size() > 1){
+                pm.disablePlugin(plugins.get(index));
+                while(plugins.iterator().hasNext() == true){
+                    pm.disablePlugin(plugins.get(index++));
+                }
+                p.getLogger().log(Level.SEVERE, ChatColor.translateAlternateColorCodes('&', "&4Warning! You have two EntityAPI Libraries in Plugins Folder! Please remove one!"));
+                return hasInstance() == true;
+        }
+        return hasInstance() == false;
     }
 
     @Override
@@ -57,6 +89,11 @@ public abstract class EntityAPI extends JavaPlugin {
         /** DEBUG */
         for(World world : Bukkit.getWorlds()) {
             ChunkProviderServerHook.hook(world);
+        }
+        
+        if(hasInstance() == true){
+            pm.disablePlugin(this);
+            pm.disablePlugin(INSTANCE);
         }
     }
 
