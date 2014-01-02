@@ -287,7 +287,7 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
                     ((List) f.get(selector)).clear();
                 }
             }
-        } catch (Exception e) {
+        } catch (IllegalAccessException | IllegalArgumentException | NoSuchFieldException | SecurityException e) {
             e.printStackTrace();
         }
     }
