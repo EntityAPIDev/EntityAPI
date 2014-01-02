@@ -16,11 +16,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import org.bukkit.ChatColor;
-import org.bukkit.command.defaults.PluginsCommand;
 import org.bukkit.plugin.PluginManager;
 
 
