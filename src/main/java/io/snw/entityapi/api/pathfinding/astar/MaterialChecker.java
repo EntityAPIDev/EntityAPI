@@ -57,7 +57,11 @@ public class MaterialChecker {
                 Material.STONE_BUTTON,
                 Material.STONE_PLATE,
                 Material.WOOD_PLATE,
-                Material.YELLOW_FLOWER
+                Material.YELLOW_FLOWER,
+                Material.WOODEN_DOOR,
+                Material.IRON_DOOR,
+                Material.IRON_DOOR_BLOCK,
+                Material.TRAP_DOOR,
         };
 
         transparents.addAll(Arrays.asList(materials));
@@ -113,7 +117,11 @@ public class MaterialChecker {
                 Material.STONE_BUTTON.getId(),
                 Material.STONE_PLATE.getId(),
                 Material.WOOD_PLATE.getId(),
-                Material.YELLOW_FLOWER.getId()
+                Material.YELLOW_FLOWER.getId(),
+                Material.WOODEN_DOOR.getId(),
+                Material.IRON_DOOR.getId(),
+                Material.IRON_DOOR_BLOCK.getId(),
+                Material.TRAP_DOOR.getId()
         };
         
         transparentsID.addAll(Arrays.asList(materialsID));
