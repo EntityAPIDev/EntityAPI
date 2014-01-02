@@ -1,7 +1,5 @@
 package io.snw.entityapi;
 
-import com.google.common.collect.Lists;
-import com.sun.org.apache.bcel.internal.generic.InstructionConstants;
 import io.snw.entityapi.api.EntityManager;
 import io.snw.entityapi.entity.ControllableBatEntity;
 import io.snw.entityapi.hooks.ChunkProviderServerHook;
@@ -51,16 +49,11 @@ public abstract class EntityAPI extends JavaPlugin {
    }
 //To check if another instance is already running. Don't want 2 versions of the API running.
     public static Boolean hasInstance() { // why are we using a primitive wrapper here? /captain doesn't get it ._.
-            int index = 0;
             if(plugins.size() > 1){
-                pm.disablePlugin(plugins.get(index));
-                while(plugins.iterator().hasNext() == true){
-                    pm.disablePlugin(plugins.get(index++));
-                }
-                p.getLogger().log(Level.SEVERE, ChatColor.translateAlternateColorCodes('&', "&4Warning! You have two EntityAPI Libraries in Plugins Folder! Please remove one!"));
                 return hasInstance() == true;
-        }
-        return hasInstance() == false;
+            } else {
+            return hasInstance() == false;
+            }
     }
 
     @Override
@@ -92,8 +85,14 @@ public abstract class EntityAPI extends JavaPlugin {
         }
         
         if(hasInstance() == true){
-            pm.disablePlugin(this);
-            pm.disablePlugin(INSTANCE);
+            int index = 0;
+            pm.disablePlugin(plugins.get(index));
+            while(plugins.iterator().hasNext() == true){
+                pm.disablePlugin(plugins.get(index++));
+            }
+            p.getLogger().log(Level.SEVERE, ChatColor.translateAlternateColorCodes('&', "&4Warning! You have two EntityAPI Libraries in Plugins Folder! Please remove one!"));
+            //pm.disablePlugin(this);
+            //pm.disablePlugin(INSTANCE);
         }
     }
 
