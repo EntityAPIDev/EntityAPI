@@ -6,4 +6,6 @@ public interface FieldAccessor<T> {
 
     T get(Object instance);
 
+    T transfer(Object from, Object to);
+
 }

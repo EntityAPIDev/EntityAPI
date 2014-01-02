@@ -147,6 +147,71 @@ public class Constants {
             public static final int ENTITY_VILLAGER = 120;
             public static final int ENTITY_ENDERCRYSTAL = 200;
         }
+
+        public static class ClassNames {
+            public static final String ITEM = "EntityItem";
+            public static final String XP_ORB = "EntityExperienceOrb";
+            public static final String LEASH = "EntityLeash";
+            public static final String PANTING = "EntityPainting";
+            public static final String ARROW = "EntityArrow";
+            public static final String SNOWBALL = "EntitySnowball";
+            public static final String FIREBALL = "EntityLargeFireball";
+            public static final String SMALL_FIREBALL = "EntitySmallFireball";
+            public static final String THROWN_ENDERPEARL = "EntityEnderPearl";
+            public static final String EYE_OF_ENDER_SIGNAL = "EntityEnderSignal";
+            public static final String THROWN_POTION = "EntityPotion";
+            public static final String THROWN_XP_BOTTLE = "EntityThrownExpBottle";
+            public static final String ITEMFRAME = "EntityItemFrame";
+            public static final String WITHER_SKULL = "EntityWitherSkull";
+            public static final String PRIMED_TNT = "EntityTNTPrimed";
+            public static final String FALLING_SAND = "EntityFallingBlock";
+            public static final String FIREWORKS_ROCKET = "EntityFireworks";
+            public static final String BOAT = "EntityBoat";
+            public static final String MINECART_RIDEABLE = "EntityMinecartRideable";
+            public static final String MINECART_CHEST = "EntityMinecartChest";
+            public static final String MINECART_FURNANCE = "EntityMinecartFurnace";
+            public static final String MINECART_TNT = "EntityMinecartTNT";
+            public static final String MINECART_HOPPER = "EntityMinecartHopper";
+            public static final String MINECART_SPAWNER = "EntityMinecartFurnace";
+            public static final String MINECART_COMMANDBLOCK = "EntityMinecartCommandBlock";
+            public static final String ENTITY_INSENTIENT = "EntityInsentient";
+            public static final String ENTITY_MONSTER = "IMonster";
+            public static final String ENTITY_CREEPER = "EntityCreeper";
+            public static final String ENTITY_SKELETON = "EntitySkeleton";
+            public static final String ENTITY_SPIDER = "EntitySpider";
+            public static final String ENTITY_GIANT = "EntityGiantZombie";
+            public static final String ENTITY_ZOMBIE = "EntityZombie";
+            public static final String ENTITY_SLIME = "EntitySlime";
+            public static final String ENTITY_GHAST = "EntityGhast";
+            public static final String ENTITY_PIG_ZOMBIE = "EntityPigZombie";
+            public static final String ENTITY_ENDERMAN = "EntityEnderman";
+            public static final String ENTTY_CAVE_SPIDER = "EntityCaveSpider";
+            public static final String ENTITY_SILVERFISH = "EntitySilverfish";
+            public static final String ENTITY_BLAZE = "EntityBlaze";
+            public static final String ENTITY_LAVA_SLIME = "EntityMagmaCube";
+            public static final String ENTITY_ENDERDRAGON = "EntityEnderDragon";
+            public static final String ENTITY_WITHER = "EntityWither";
+            public static final String ENTITY_BAT = "EntityBat";
+            public static final String ENTITY_WITCH = "EntityWitch";
+            public static final String ENTITY_PIG = "EntityPig";
+            public static final String ENTITY_SHEEP = "EntitySheep";
+            public static final String ENTITY_COW = "EntityCow";
+            public static final String ENTITY_CHICKEN = "EntityChicken";
+            public static final String ENTITY_SQUID = "EntitySquid";
+            public static final String ENTITY_WOLF = "EntityWolf";
+            public static final String ENTITY_MUSHROOM_COW = "EntityMushroomCow";
+            public static final String ENTITY_SNOWMAN = "EntitySnowman";
+            public static final String ENTITY_OZELOT = "EntityOcelot";
+            public static final String ENTITY_IRON_GOLEM = "EntityGolem";
+            public static final String ENTITY_HORSE = "EntityHorse";
+            public static final String ENTITY_VILLAGER = "EntityVillager";
+            public static final String ENTITY_ENDERCRYSTAL = "EntityEnderCrystal";
+            public static final String ENTITY_EGG = "EntityEgg";
+            public static final String ENITY_FISHING_HOOK = "EntityFishingHook";
+            public static final String ENTITY_LIGHTNING = "EntityLightning";
+            public static final String ENTITY_WEATHER = "EntityWeather";
+            public static final String ENTITY_COMPLEX_PART = "EntityComplexPart";
+        }
     }
 
     public static class Server {

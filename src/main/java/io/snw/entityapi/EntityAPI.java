@@ -2,11 +2,14 @@ package io.snw.entityapi;
 
 import io.snw.entityapi.api.EntityManager;
 import io.snw.entityapi.entity.ControllableBatEntity;
+import io.snw.entityapi.hooks.ChunkProviderServerHook;
 import io.snw.entityapi.internal.Constants;
 import io.snw.entityapi.metrics.Metrics;
 import io.snw.entityapi.server.*;
 import io.snw.entityapi.utils.EntityUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -29,6 +32,14 @@ public abstract class EntityAPI extends JavaPlugin {
     }
 
     @Override
+    public void onDisable() {
+        /** DEBUG */
+        for(World world : Bukkit.getWorlds()) {
+            ChunkProviderServerHook.unhook(world);
+        }
+    }
+
+    @Override
     public void onEnable() {
 
         INSTANCE = this;
@@ -42,6 +53,11 @@ public abstract class EntityAPI extends JavaPlugin {
 
         initServer();
         registerEntities();
+
+        /** DEBUG */
+        for(World world : Bukkit.getWorlds()) {
+            ChunkProviderServerHook.hook(world);
+        }
     }
 
     /**
@@ -91,6 +107,11 @@ public abstract class EntityAPI extends JavaPlugin {
             throw new RuntimeException("EntityAPI not Enabled, instance could not be found!");
         }
         return INSTANCE;
+    }
+
+    public <T extends Event> T callEvent(T event) {
+        Bukkit.getServer().getPluginManager().callEvent(event);
+        return event;
     }
 
     /**

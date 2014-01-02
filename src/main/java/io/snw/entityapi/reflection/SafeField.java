@@ -64,6 +64,16 @@ public class SafeField<T> implements FieldAccessor<T> {
         return null;
     }
 
+    @Override
+    public T transfer(Object from, Object to) {
+        if (this.field == null) {
+            return null;
+        }
+        T old = get(to);
+        set(to, get(from));
+        return old;
+    }
+
     public String getName() {
         return this.field.getName();
     }

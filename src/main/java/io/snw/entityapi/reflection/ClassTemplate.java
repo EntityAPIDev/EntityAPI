@@ -86,6 +86,12 @@ public class ClassTemplate<T> {
         return new ClassTemplate<Object>(clazz);
     }
 
+    public void transfer(Object from, Object to) {
+        for (FieldAccessor<?> field : this.getFields()) {
+            field.transfer(from, to);
+        }
+    }
+
     public boolean isAssignableFrom(Class<?> clazz) {
         return this.getType().isAssignableFrom(clazz);
     }
