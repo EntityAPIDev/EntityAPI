@@ -28,6 +28,10 @@ public class Mind {
         return attributes;
     }
 
+    public BehaviourSelector getBehaviourSelector() {
+        return behaviourSelector;
+    }
+
     public void addAttribute(Attribute attribute) {
         this.clearAttribute(attribute);
         this.attributes.put(attribute.getKey(), attribute);
