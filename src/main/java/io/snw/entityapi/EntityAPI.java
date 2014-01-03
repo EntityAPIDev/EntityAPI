@@ -28,33 +28,25 @@ public abstract class EntityAPI extends JavaPlugin {
     public static final ModuleLogger LOGGER_REFLECTION = LOGGER.getModule("Reflection");
 
     private static EntityAPI INSTANCE;
-    private static Plugin p;
-    private static PluginManager pm;
 
     public static Server SERVER;
     public static HashMap<Plugin, Integer> counters = new HashMap<>();
     public static ArrayList<Plugin> plugins = new ArrayList<>();
 
  
-    public static List<Plugin> sameplugin(Plugin newplugin){
-        if(counters.containsKey(newplugin)){
-            counters.put(newplugin, counters.get(newplugin)+1);
+    public static List<Plugin> compareInstances(JavaPlugin compareTo){ // Where is this used...? -> DSH doesn't get it :\
+        if(counters.containsKey(compareTo)){
+            counters.put(compareTo, counters.get(compareTo)+1);
          } else {
-            counters.put(newplugin, 1);
+            counters.put(compareTo, 1);
          }
-        plugins.add(newplugin);
+        plugins.add(compareTo);
         return plugins;
    }
+
 //To check if another instance is already running. Don't want 2 versions of the API running.
-    public static Boolean hasInstance() {
+    public static boolean hasInstance() {
         return INSTANCE != null;
-    }
-    public static Boolean hasDuplicates(){
-        if(plugins.size() > 1){
-            return hasDuplicates() == true;
-            } else {
-            return hasDuplicates() == false;
-            }
     }
 
     @Override
@@ -67,7 +59,6 @@ public abstract class EntityAPI extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
         INSTANCE = this;
 
         try {
@@ -85,13 +76,14 @@ public abstract class EntityAPI extends JavaPlugin {
             ChunkProviderServerHook.hook(world);
         }
         
-        if(hasDuplicates() == true){
+        if(plugins.size() > 1){ // wat. "plugins" will always be empty, as nothing is ever added to it...
             int index = 0;
+            PluginManager pm = this.getServer().getPluginManager();
             pm.disablePlugin(plugins.get(index));
-            while(plugins.iterator().hasNext() == true){
+            while(plugins.iterator().hasNext()){
                 pm.disablePlugin(plugins.get(index++));
             }
-            p.getLogger().log(Level.SEVERE, ChatColor.translateAlternateColorCodes('&', "&4Warning! You have two EntityAPI Libraries in Plugins Folder! Please remove one!"));
+            this.getLogger().log(Level.SEVERE, "Warning! You have two EntityAPI Libraries in Plugins Folder! Please remove one!");
             //pm.disablePlugin(this);
             //pm.disablePlugin(INSTANCE);
         }
