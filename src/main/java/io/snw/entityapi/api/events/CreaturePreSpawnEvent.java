@@ -15,7 +15,8 @@ public final class CreaturePreSpawnEvent extends Event implements Cancellable {
     public Location spawnLocation = new Location(null, 0, 0, 0);
     private Class<? extends EntityLiving> customEntityClass;
 
-    public CreaturePreSpawnEvent() {}
+    public CreaturePreSpawnEvent() {
+    }
 
     public CreaturePreSpawnEvent(EntityType type, int minSpawnCount, int maxSpawnCount, Location location) {
         this.entityType = type;

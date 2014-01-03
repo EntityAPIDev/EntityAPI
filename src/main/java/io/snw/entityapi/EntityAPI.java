@@ -11,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -18,8 +19,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
-import org.bukkit.ChatColor;
-import org.bukkit.plugin.PluginManager;
 
 
 public abstract class EntityAPI extends JavaPlugin {
@@ -33,29 +32,9 @@ public abstract class EntityAPI extends JavaPlugin {
     public static HashMap<Plugin, Integer> counters = new HashMap<>();
     public static ArrayList<Plugin> plugins = new ArrayList<>();
 
- 
-    public static List<Plugin> compareInstances(JavaPlugin compareTo){ // Where is this used...? -> DSH doesn't get it :\
-        if(counters.containsKey(compareTo)){
-            counters.put(compareTo, counters.get(compareTo)+1);
-         } else {
-            counters.put(compareTo, 1);
-         }
-        plugins.add(compareTo);
-        return plugins;
-   }
-
-//To check if another instance is already running. Don't want 2 versions of the API running.
-    public static boolean hasInstance() {
-        return INSTANCE != null;
-    }
-
-    @Override
-    public void onDisable() {
-        /** DEBUG */
-        for(World world : Bukkit.getWorlds()) {
-            ChunkProviderServerHook.unhook(world);
-        }
-    }
+    // TODO: This really needs to be redone. I can't see this working very well in its current state :\
+    // -> We need to have a talk on what we're doing here so that it can be fixed
+    // - DSH
 
     @Override
     public void onEnable() {
@@ -72,20 +51,28 @@ public abstract class EntityAPI extends JavaPlugin {
         registerEntities();
 
         /** DEBUG */
-        for(World world : Bukkit.getWorlds()) {
+        for (World world : Bukkit.getWorlds()) {
             ChunkProviderServerHook.hook(world);
         }
-        
-        if(plugins.size() > 1){ // wat. "plugins" will always be empty, as nothing is ever added to it...
+
+        if (plugins.size() > 1) { // wat. "plugins" will always be empty, as nothing is ever added to it...
             int index = 0;
             PluginManager pm = this.getServer().getPluginManager();
             pm.disablePlugin(plugins.get(index));
-            while(plugins.iterator().hasNext()){
+            while (plugins.iterator().hasNext()) {
                 pm.disablePlugin(plugins.get(index++));
             }
             this.getLogger().log(Level.SEVERE, "Warning! You have two EntityAPI Libraries in Plugins Folder! Please remove one!");
             //pm.disablePlugin(this);
             //pm.disablePlugin(INSTANCE);
+        }
+    }
+
+    @Override
+    public void onDisable() {
+        /** DEBUG */
+        for (World world : Bukkit.getWorlds()) {
+            ChunkProviderServerHook.unhook(world);
         }
     }
 
@@ -124,13 +111,27 @@ public abstract class EntityAPI extends JavaPlugin {
         EntityUtil.registerEntity(ControllableBatEntity.class, Constants.EntityTypes.Names.ENTITY_BAT, Constants.EntityTypes.Ids.ENTITY_BAT);
     }
 
+    public static List<Plugin> compareInstances(JavaPlugin compareTo) { // Where is this used...? -> DSH doesn't get it :\
+        if (counters.containsKey(compareTo)) {
+            counters.put(compareTo, counters.get(compareTo) + 1);
+        } else {
+            counters.put(compareTo, 1);
+        }
+        plugins.add(compareTo);
+        return plugins;
+    }
+
+    //To check if another instance is already running. Don't want 2 versions of the API running.
+    public static boolean hasInstance() {
+        return INSTANCE != null;
+    }
+
     /**
      * Will Check for instance of this API running.
      * If one is found its returned otherwise if not, throws error.
      *
      * @return
      */
-
     public static EntityAPI getInstance() {
         if (INSTANCE == null) {
             throw new RuntimeException("EntityAPI not Enabled, instance could not be found!");

@@ -97,8 +97,8 @@ public enum NMSEntityType {
     }
 
     public static NMSEntityType getById(int id) {
-        for(NMSEntityType type : values()) {
-            if(type.getEntityId() == id) {
+        for (NMSEntityType type : values()) {
+            if (type.getEntityId() == id) {
                 return type;
             }
         }
@@ -106,8 +106,8 @@ public enum NMSEntityType {
     }
 
     public static NMSEntityType getByClass(Class<?> clazz) {
-        for(NMSEntityType type : values()) {
-            if(type.getMobClass().isAssignableFrom(clazz)) {
+        for (NMSEntityType type : values()) {
+            if (type.getMobClass().isAssignableFrom(clazz)) {
                 return type;
             }
         }
@@ -115,8 +115,8 @@ public enum NMSEntityType {
     }
 
     public static NMSEntityType fromBukkitType(EntityType type) {
-        for(NMSEntityType nmsType : values()) {
-            if(nmsType.asBukkitEntity().equals(type)) {
+        for (NMSEntityType nmsType : values()) {
+            if (nmsType.asBukkitEntity().equals(type)) {
                 return nmsType;
             }
         }

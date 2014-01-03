@@ -71,11 +71,11 @@ public class ChunkProviderServerHook extends ChunkProviderServer {
                 }
 
                 final Class<?> entityClass;
-                if(creaturePreSpawnEvent.getCustomEntityClass() != null)  {
+                if (creaturePreSpawnEvent.getCustomEntityClass() != null) {
                     entityClass = creaturePreSpawnEvent.getCustomEntityClass();
                 } else if (oldEntityType == creaturePreSpawnEvent.entityType) {
                     entityClass = inputMeta.b;
-                } else  {
+                } else {
                     entityClass = NMSEntityType.fromBukkitType(creaturePreSpawnEvent.entityType).getMobClass();
                     // Unknown or unsupported Entity Type - ignore spawning
                     if (entityClass == null) {

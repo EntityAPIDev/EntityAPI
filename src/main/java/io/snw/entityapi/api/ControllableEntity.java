@@ -1,10 +1,10 @@
 package io.snw.entityapi.api;
 
 import io.snw.entityapi.api.mind.Mind;
-import net.minecraft.server.v1_7_R1.*;
+import net.minecraft.server.v1_7_R1.EntityLiving;
+import net.minecraft.server.v1_7_R1.PathEntity;
 import org.bukkit.Location;
 import org.bukkit.Sound;
-import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;

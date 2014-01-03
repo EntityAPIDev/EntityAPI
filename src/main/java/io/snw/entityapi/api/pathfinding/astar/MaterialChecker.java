@@ -6,17 +6,16 @@ import org.bukkit.block.Block;
 
 import java.util.Arrays;
 import java.util.List;
-import org.bukkit.craftbukkit.v1_7_R1.util.Java15Compat;
 
 public class MaterialChecker {
-    
+
     private static List<Material> transparents = Lists.newArrayList();
     private static List<Integer> transparentsID = Lists.newArrayList();
     private static List<Material> liquids = Lists.newArrayList();
     private static List<Integer> liquidsID = Lists.newArrayList();
 
     static {
-        Material[] materials = new Material[] {
+        Material[] materials = new Material[]{
                 Material.AIR,
                 Material.ACTIVATOR_RAIL,
                 Material.BROWN_MUSHROOM,
@@ -66,7 +65,7 @@ public class MaterialChecker {
 
         transparents.addAll(Arrays.asList(materials));
 
-        materials = new Material[] {
+        materials = new Material[]{
                 Material.WATER,
                 Material.STATIONARY_WATER,
                 Material.LAVA,
@@ -123,7 +122,7 @@ public class MaterialChecker {
                 Material.IRON_DOOR_BLOCK.getId(),
                 Material.TRAP_DOOR.getId()
         };
-        
+
         transparentsID.addAll(Arrays.asList(materialsID));
         materialsID = new Integer[]{
                 Material.WATER.getId(),
@@ -132,7 +131,7 @@ public class MaterialChecker {
                 Material.STATIONARY_LAVA.getId(),
                 Material.LADDER.getId()
         };
-        
+
         liquidsID.addAll(Arrays.asList(materialsID));
     }
 
@@ -143,12 +142,12 @@ public class MaterialChecker {
     public static boolean isTransparent(Block block) {
         return isTransparent(block.getType());
     }
-    
+
     @Deprecated
     public static boolean isTransParentID(Material material) {
         return transparentsID.contains(material.getId());
     }
-    
+
     @Deprecated
     public static boolean isTransParentID(Block block) {
         return transparentsID.contains(block.getTypeId());
@@ -161,12 +160,12 @@ public class MaterialChecker {
     public static boolean isLiquid(Block block) {
         return isLiquid(block.getType());
     }
-    
+
     @Deprecated
     public static boolean isLiquidID(Material material) {
         return liquidsID.contains(material.getId());
     }
-    
+
     @Deprecated
     public static boolean isLiquidID(Block block) {
         return liquidsID.contains(block.getTypeId());

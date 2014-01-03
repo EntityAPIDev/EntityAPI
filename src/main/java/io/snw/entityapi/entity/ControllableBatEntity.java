@@ -4,8 +4,6 @@ import io.snw.entityapi.api.ControllableEntity;
 import io.snw.entityapi.api.EntitySound;
 import io.snw.entityapi.api.mind.attribute.Attribute;
 import io.snw.entityapi.api.mind.attribute.RideAttribute;
-import io.snw.entityapi.entity.ControllableBaseEntity;
-import io.snw.entityapi.entity.ControllableEntityHandle;
 import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.entity.Player;
 

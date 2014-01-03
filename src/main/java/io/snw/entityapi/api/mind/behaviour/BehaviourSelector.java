@@ -121,7 +121,7 @@ public class BehaviourSelector implements IBehaviourSelector {
             while (iterator.hasNext()) {
                 BehaviourItem behaviourItem = iterator.next();
                 if (this.activeBehaviours.contains(behaviourItem)) {
-                    if(this.canUse(behaviourItem) && behaviourItem.getBehaviour().shouldContinue()) {
+                    if (this.canUse(behaviourItem) && behaviourItem.getBehaviour().shouldContinue()) {
                         continue;
                     }
                     behaviourItem.getBehaviour().finish();

@@ -1,9 +1,9 @@
 package io.snw.entityapi.api;
 
 import io.snw.entityapi.entity.ControllableBaseEntity;
-import io.snw.entityapi.entity.ControllableEntityHandle;
 import io.snw.entityapi.entity.ControllableBat;
 import io.snw.entityapi.entity.ControllableBatEntity;
+import io.snw.entityapi.entity.ControllableEntityHandle;
 import io.snw.entityapi.internal.Constants;
 
 public enum ControllableEntityType {

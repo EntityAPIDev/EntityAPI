@@ -1,7 +1,6 @@
 package io.snw.entityapi.entity;
 
 import io.snw.entityapi.api.ControllableEntity;
-import io.snw.entityapi.entity.ControllableEntityHandle;
 import io.snw.entityapi.nms.FixedNetworkManager;
 import io.snw.entityapi.nms.NullPlayerConnection;
 import net.minecraft.server.v1_7_R1.*;
