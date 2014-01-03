@@ -110,7 +110,11 @@ public abstract class EntityAPI extends JavaPlugin {
     protected void registerEntities() {
         EntityUtil.registerEntity(ControllableBatEntity.class, Constants.EntityTypes.Names.ENTITY_BAT, Constants.EntityTypes.Ids.ENTITY_BAT);
     }
-
+/**
+ * This method uses the HashMap that was created up top. Places all occurences of EntityAPI into its own ArrayList so we can see if there is indeed more than 1.
+ * @param compareTo
+ * @return plugins
+ */
     public static List<Plugin> compareInstances(JavaPlugin compareTo) { // Where is this used...? -> DSH doesn't get it :\
         if (counters.containsKey(compareTo)) {
             counters.put(compareTo, counters.get(compareTo) + 1);
