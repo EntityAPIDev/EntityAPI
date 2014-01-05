@@ -29,8 +29,9 @@ public abstract class EntityAPI extends JavaPlugin {
     private static EntityAPI INSTANCE;
 
     public static Server SERVER;
-    public static HashMap<Plugin, Integer> counters = new HashMap<>();
-    public static ArrayList<Plugin> plugins = new ArrayList<>();
+    private HashMap<Plugin, Integer> counters = new HashMap<>();
+    private List<Plugin> plugins = new ArrayList<>();
+    private PluginManager pm = this.getServer().getPluginManager();
 
     // TODO: This really needs to be redone. I can't see this working very well in its current state :\
     // -> We need to have a talk on what we're doing here so that it can be fixed
@@ -55,9 +56,8 @@ public abstract class EntityAPI extends JavaPlugin {
             ChunkProviderServerHook.hook(world);
         }
 
-        if (plugins.size() > 1) { // wat. "plugins" will always be empty, as nothing is ever added to it...
+        if (plugins.size() > 1) {
             int index = 0;
-            PluginManager pm = this.getServer().getPluginManager();
             pm.disablePlugin(plugins.get(index));
             while (plugins.iterator().hasNext()) {
                 pm.disablePlugin(plugins.get(index++));
@@ -115,17 +115,20 @@ public abstract class EntityAPI extends JavaPlugin {
  * @param compareTo
  * @return plugins
  */
-    public static List<Plugin> compareInstances(JavaPlugin compareTo) { // Where is this used...? -> DSH doesn't get it :\
-        if (counters.containsKey(compareTo)) {
-            counters.put(compareTo, counters.get(compareTo) + 1);
-        } else {
-            counters.put(compareTo, 1);
+    public List<Plugin> compareInstances() {
+        for (Plugin plugin : pm.getPlugins()){
+            if(counters.containsKey(plugin)){
+                counters.put(plugin, counters.get(plugin) + 1);
+            } else {
+                counters.put(plugin, 1);
+            }
+            plugins.add(plugin);
         }
-        plugins.add(compareTo);
+        
         return plugins;
     }
 
-    //To check if another instance is already running. Don't want 2 versions of the API running.
+    //Boolean for checking instance instead of checking to see if instance is not null.
     public static boolean hasInstance() {
         return INSTANCE != null;
     }
