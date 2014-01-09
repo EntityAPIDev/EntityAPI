@@ -29,7 +29,6 @@ public abstract class EntityAPI extends JavaPlugin {
     private static EntityAPI INSTANCE;
 
     public static Server SERVER;
-    private HashMap<Plugin, Integer> counters = new HashMap<>();
     private List<Plugin> plugins = new ArrayList<>();
     private PluginManager pm = this.getServer().getPluginManager();
 
@@ -55,17 +54,8 @@ public abstract class EntityAPI extends JavaPlugin {
         for (World world : Bukkit.getWorlds()) {
             ChunkProviderServerHook.hook(world);
         }
-
-        if (plugins.size() > 1) {
-            int index = 0;
-            pm.disablePlugin(plugins.get(index));
-            while (plugins.iterator().hasNext()) {
-                pm.disablePlugin(plugins.get(index++));
-            }
-            this.getLogger().log(Level.SEVERE, "Warning! You have two EntityAPI Libraries in Plugins Folder! Please remove one!");
-            //pm.disablePlugin(this);
-            //pm.disablePlugin(INSTANCE);
-        }
+        
+        this.getInstances();
     }
 
     @Override
@@ -111,21 +101,24 @@ public abstract class EntityAPI extends JavaPlugin {
         EntityUtil.registerEntity(ControllableBatEntity.class, Constants.EntityTypes.Names.ENTITY_BAT, Constants.EntityTypes.Ids.ENTITY_BAT);
     }
 /**
- * This method uses the HashMap that was created up top. Places all occurences of EntityAPI into its own ArrayList so we can see if there is indeed more than 1.
- * @param compareTo
- * @return plugins
+ * This method places all instances of Entity API in an Array List. 
+ * If there is more than 1 EntityAPI found, it disables them all.
  */
-    public List<Plugin> compareInstances() {
-        for (Plugin plugin : pm.getPlugins()){
-            if(counters.containsKey(plugin)){
-                counters.put(plugin, counters.get(plugin) + 1);
-            } else {
-                counters.put(plugin, 1);
+    
+    public void getInstances() {
+        for(Plugin plugin : pm.getPlugins()){
+            if(!plugin.getName().equals(this.getName())){
+                continue;
             }
             plugins.add(plugin);
         }
         
-        return plugins;
+        if (plugins.size() > 1) {
+            for(Plugin plugin : plugins){
+                pm.disablePlugin(plugin);
+            }
+            this.getLogger().log(Level.SEVERE, "Warning! You have two EntityAPI Libraries in Plugins Folder! Please remove one!");
+        }
     }
 
     //Boolean for checking instance instead of checking to see if instance is not null.
