@@ -36,6 +36,11 @@ public abstract class EntityAPI extends JavaPlugin {
     // -> We need to have a talk on what we're doing here so that it can be fixed
     // - DSH
 
+    // Frostalf, perhaps we could use this: http://nerdydevel.blogspot.be/2012/07/run-only-single-java-application-instance.html
+    // It creates a temporary file, which is a 'lock', if the file exists, than stop running the plugin ->
+    // there's already a running instance, if not -> continue.
+    // - Master Yi
+
     @Override
     public void onEnable() {
         INSTANCE = this;
