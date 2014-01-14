@@ -1,5 +1,6 @@
 package io.snw.entityapi;
 
+import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntityManager;
 import io.snw.entityapi.entity.ControllableBatEntity;
 import io.snw.entityapi.hooks.ChunkProviderServerHook;
@@ -103,7 +104,9 @@ public abstract class EntityAPI extends JavaPlugin {
     }
 
     protected void registerEntities() {
-        EntityUtil.registerEntity(ControllableBatEntity.class, Constants.EntityTypes.Names.ENTITY_BAT, Constants.EntityTypes.Ids.ENTITY_BAT);
+        for (ControllableEntityType entityType : ControllableEntityType.values()) {
+            EntityUtil.registerEntity(entityType.getHandleClass(), entityType.getName(), entityType.getId());
+        }
     }
 /**
  * This method places all instances of Entity API in an Array List. 
