@@ -7,8 +7,6 @@ import io.snw.entityapi.api.mind.attribute.RideAttribute;
 import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.*;
-import org.bukkit.inventory.ItemStack;
 
 public class ControllableBatEntity extends EntityBat implements ControllableEntityHandle {
 

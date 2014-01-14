@@ -1,7 +1,6 @@
 package io.snw.entityapi.api;
 
 import io.snw.entityapi.api.mind.Mind;
-import io.snw.entityapi.entity.ControllableEntityHandle;
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import net.minecraft.server.v1_7_R1.PathEntity;
 import org.bukkit.Location;

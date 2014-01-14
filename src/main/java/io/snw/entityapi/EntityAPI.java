@@ -2,9 +2,7 @@ package io.snw.entityapi;
 
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntityManager;
-import io.snw.entityapi.entity.ControllableBatEntity;
 import io.snw.entityapi.hooks.ChunkProviderServerHook;
-import io.snw.entityapi.internal.Constants;
 import io.snw.entityapi.metrics.Metrics;
 import io.snw.entityapi.server.*;
 import io.snw.entityapi.utils.EntityUtil;
@@ -17,7 +15,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -60,7 +57,7 @@ public abstract class EntityAPI extends JavaPlugin {
         for (World world : Bukkit.getWorlds()) {
             ChunkProviderServerHook.hook(world);
         }
-        
+
         this.getInstances();
     }
 
@@ -108,21 +105,22 @@ public abstract class EntityAPI extends JavaPlugin {
             EntityUtil.registerEntity(entityType.getHandleClass(), entityType.getName(), entityType.getId());
         }
     }
-/**
- * This method places all instances of Entity API in an Array List. 
- * If there is more than 1 EntityAPI found, it disables them all.
- */
-    
+
+    /**
+     * This method places all instances of Entity API in an Array List.
+     * If there is more than 1 EntityAPI found, it disables them all.
+     */
+
     public void getInstances() {
-        for(Plugin plugin : pm.getPlugins()){
-            if(!plugin.getName().equals(this.getName())){
+        for (Plugin plugin : pm.getPlugins()) {
+            if (!plugin.getName().equals(this.getName())) {
                 continue;
             }
             plugins.add(plugin);
         }
-        
+
         if (plugins.size() > 1) {
-            for(Plugin plugin : plugins){
+            for (Plugin plugin : plugins) {
                 pm.disablePlugin(plugin);
             }
             this.getLogger().log(Level.SEVERE, "Warning! You have two EntityAPI Libraries in Plugins Folder! Please remove one!");

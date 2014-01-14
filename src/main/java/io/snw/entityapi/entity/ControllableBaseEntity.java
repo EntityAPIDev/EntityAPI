@@ -6,15 +6,14 @@ import io.snw.entityapi.api.EntitySound;
 import io.snw.entityapi.api.mind.Mind;
 import io.snw.entityapi.utils.IDGenerator;
 import net.minecraft.server.v1_7_R1.*;
-import org.bukkit.*;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_7_R1.CraftSound;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.*;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 import java.lang.reflect.Field;
