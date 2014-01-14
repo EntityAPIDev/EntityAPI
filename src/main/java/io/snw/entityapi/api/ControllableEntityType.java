@@ -1,14 +1,14 @@
 package io.snw.entityapi.api;
 
-import io.snw.entityapi.entity.ControllableBaseEntity;
-import io.snw.entityapi.entity.ControllableBat;
-import io.snw.entityapi.entity.ControllableBatEntity;
-import io.snw.entityapi.entity.ControllableEntityHandle;
+import io.snw.entityapi.entity.*;
 import io.snw.entityapi.internal.Constants;
 
 public enum ControllableEntityType {
 
-    BAT(Constants.EntityTypes.Names.ENTITY_BAT, Constants.EntityTypes.Ids.ENTITY_BAT, ControllableBat.class, ControllableBatEntity.class);
+    BAT(Constants.EntityTypes.Names.ENTITY_BAT, Constants.EntityTypes.Ids.ENTITY_BAT, ControllableBat.class, ControllableBatEntity.class),
+    BLAZE(Constants.EntityTypes.Names.ENTITY_BLAZE, Constants.EntityTypes.Ids.ENTITY_BLAZE, ControllableBlaze.class, ControllableBlazeEntity.class),
+    CAVE_SPIDER(Constants.EntityTypes.Names.ENTTY_CAVE_SPIDER, Constants.EntityTypes.Ids.ENTTY_CAVE_SPIDER, ControllableCaveSpider.class, ControllableCaveSpiderEntity.class),
+    SPIDER(Constants.EntityTypes.Names.ENTITY_SPIDER, Constants.EntityTypes.Ids.ENTITY_SPIDER, ControllableSpider.class, ControllableSpiderEntity.class);
 
     private final String name;
     private final int id;

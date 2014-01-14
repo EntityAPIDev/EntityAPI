@@ -1,9 +1,11 @@
 package io.snw.entityapi.api;
 
 import io.snw.entityapi.api.mind.Mind;
+import io.snw.entityapi.entity.ControllableEntityHandle;
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import net.minecraft.server.v1_7_R1.PathEntity;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -37,9 +39,13 @@ public abstract interface ControllableEntity extends Nameable {
 
     public String getSound(EntitySound type, String key);
 
+    public String getCustomSound(EntitySound type, String key);
+
     public void setSound(EntitySound type, Sound toReplace, Sound replaceWith, boolean addOnFail);
 
     public void setSound(EntitySound type, Sound sound);
+
+    public void setSound(EntitySound type, Sound sound, String key);
 
     public void setSound(EntitySound type, String sound);
 
@@ -50,6 +56,10 @@ public abstract interface ControllableEntity extends Nameable {
     public boolean canFly();
 
     public void setCanFly(boolean flag);
+
+    public Material getLoot();
+
+    public void setLoot(Material material);
 
     public boolean shouldUpdateAttributes();
 

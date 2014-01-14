@@ -23,4 +23,9 @@ public class ControllablePlayerEntity extends EntityPlayer implements Controllab
     public ControllableEntity getControllableEntity() {
         return null;
     }
+
+    @Override
+    public org.bukkit.Material getBukkitLoot() {
+        return null;
+    }
 }

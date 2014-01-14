@@ -4,7 +4,8 @@ public enum EntitySound {
 
     IDLE,
     HURT,
-    DEATH
+    DEATH,
+    STEP
     // TODO: We're not done here yet...
     ;
 }

@@ -6,13 +6,15 @@ import io.snw.entityapi.api.EntitySound;
 import io.snw.entityapi.api.mind.Mind;
 import io.snw.entityapi.utils.IDGenerator;
 import net.minecraft.server.v1_7_R1.*;
-import org.bukkit.Location;
-import org.bukkit.Sound;
+import org.bukkit.*;
+import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_7_R1.CraftSound;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.*;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 import java.lang.reflect.Field;
@@ -33,6 +35,7 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
     protected boolean tickAttributes;
 
     protected boolean canFly;
+    protected org.bukkit.Material loot;
 
     protected EntityLiving handle;
     protected ControllableEntityType entityType;
@@ -43,6 +46,9 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
         this.mind = new Mind(this);
         this.entityType = entityType;
         this.initSounds();
+        if (this.handle instanceof ControllableEntityHandle) {
+            this.loot = ((ControllableEntityHandle) this.handle).getBukkitLoot();
+        }
     }
 
     @Override
@@ -83,6 +89,16 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
     }
 
     @Override
+    public Material getLoot() {
+        return loot;
+    }
+
+    @Override
+    public void setLoot(Material material) {
+        this.loot = material;
+    }
+
+    @Override
     public boolean shouldUpdateAttributes() {
         return tickAttributes;
     }
@@ -114,18 +130,18 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
 
     @Override
     public String getSound(EntitySound type) {
-        String s = this.getSound(type, "custom");
-        if (s != null) {
-            return s;
+        String custom = this.getCustomSound(type, "");
+        if (custom != null && !custom.equals("")) {
+            return custom;
         }
         return this.getSound(type, "default");
     }
 
     @Override
     public String getSound(EntitySound type, String key) {
-        String s = this.getSound(type, "custom");
-        if (s != null) {
-            return s;
+        String custom = this.getCustomSound(type, key);
+        if (custom != null && !custom.equals("")) {
+            return custom;
         }
         for (Map.Entry<String, String> entry : this.sounds.get(type).entrySet()) {
             if (entry.getKey().equals(key)) {
@@ -133,6 +149,21 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
             }
         }
         // Minecraft will treat this as 'no sound'
+        return "";
+    }
+
+    @Override
+    public String getCustomSound(EntitySound type, String key) {
+        if (!key.equals("")) {
+            String customWithKey = this.getSound(type, "custom." + key);
+            if (customWithKey != null) {
+                return customWithKey;
+            }
+        }
+        String custom = this.getSound(type, "custom");
+        if (custom != null) {
+            return custom;
+        }
         return "";
     }
 
@@ -164,8 +195,13 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
     public void setSound(EntitySound type, Sound sound) {
         // Allows sounds to be set without the use of the NMS String
         // We can also allow people to add/replace/remove sounds
-        // Entities use the "custom" sound if one exists
+        // Entities automatically use the "custom" sound if one exists
         this.setSound(type, "custom", CraftSound.getSound(sound));
+    }
+
+    @Override
+    public void setSound(EntitySound type, Sound sound, String key) {
+        this.setSound(type, "custom." + key, CraftSound.getSound(sound));
     }
 
     @Override
