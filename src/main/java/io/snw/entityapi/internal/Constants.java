@@ -64,7 +64,7 @@ public class Constants {
             public static final String ENTITY_GHAST = "Ghast";
             public static final String ENTITY_PIG_ZOMBIE = "PigZombie";
             public static final String ENTITY_ENDERMAN = "Enderman";
-            public static final String ENTTY_CAVE_SPIDER = "CaveSpider";
+            public static final String ENTITY_CAVE_SPIDER = "CaveSpider";
             public static final String ENTITY_SILVERFISH = "Silverfish";
             public static final String ENTITY_BLAZE = "Blaze";
             public static final String ENTITY_LAVA_SLIME = "LavaSlime";
@@ -125,7 +125,7 @@ public class Constants {
             public static final int ENTITY_GHAST = 56;
             public static final int ENTITY_PIG_ZOMBIE = 57;
             public static final int ENTITY_ENDERMAN = 58;
-            public static final int ENTTY_CAVE_SPIDER = 59;
+            public static final int ENTITY_CAVE_SPIDER = 59;
             public static final int ENTITY_SILVERFISH = 60;
             public static final int ENTITY_BLAZE = 61;
             public static final int ENTITY_LAVA_SLIME = 62;

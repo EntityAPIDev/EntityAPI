@@ -40,7 +40,7 @@ public enum NMSEntityType {
     GHAST(Constants.EntityTypes.Ids.ENTITY_GHAST, NMSClassTemplate.create(Constants.EntityTypes.ClassNames.ENTITY_GHAST), EntityType.GHAST),
     PIG_ZOMBIE(Constants.EntityTypes.Ids.ENTITY_PIG_ZOMBIE, NMSClassTemplate.create(Constants.EntityTypes.ClassNames.ENTITY_PIG_ZOMBIE), EntityType.PIG_ZOMBIE),
     ENDERMAN(Constants.EntityTypes.Ids.ENTITY_ENDERMAN, NMSClassTemplate.create(Constants.EntityTypes.ClassNames.ENTITY_ENDERMAN), EntityType.ENDERMAN),
-    CAVE_SPIDER(Constants.EntityTypes.Ids.ENTTY_CAVE_SPIDER, NMSClassTemplate.create(Constants.EntityTypes.ClassNames.ENTTY_CAVE_SPIDER), EntityType.CAVE_SPIDER),
+    CAVE_SPIDER(Constants.EntityTypes.Ids.ENTITY_CAVE_SPIDER, NMSClassTemplate.create(Constants.EntityTypes.ClassNames.ENTTY_CAVE_SPIDER), EntityType.CAVE_SPIDER),
     SILVERFISH(Constants.EntityTypes.Ids.ENTITY_SILVERFISH, NMSClassTemplate.create(Constants.EntityTypes.ClassNames.ENTITY_SILVERFISH), EntityType.SILVERFISH),
     BLAZE(Constants.EntityTypes.Ids.ENTITY_BLAZE, NMSClassTemplate.create(Constants.EntityTypes.ClassNames.ENTITY_BLAZE), EntityType.BLAZE),
     MAGMA_CUBE(Constants.EntityTypes.Ids.ENTITY_LAVA_SLIME, NMSClassTemplate.create(Constants.EntityTypes.ClassNames.ENTITY_LAVA_SLIME), EntityType.MAGMA_CUBE),
