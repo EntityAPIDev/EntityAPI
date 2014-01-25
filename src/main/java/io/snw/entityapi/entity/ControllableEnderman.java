@@ -6,7 +6,7 @@ import org.bukkit.entity.Enderman;
 
 public class ControllableEnderman extends ControllableAttackingBaseEntity<Enderman> {
 
-    public ControllableEnderman(ControllableBatEntity entityHandle) {
+    public ControllableEnderman(ControllableEndermanEntity entityHandle) {
         super(ControllableEntityType.ENDERMAN);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
