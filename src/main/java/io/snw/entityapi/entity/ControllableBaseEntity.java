@@ -108,7 +108,7 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
     }
 
     @Override
-    public LivingEntity getBukkitEntity() {
+    public T getBukkitEntity() {
         return (T) this.handle.getBukkitEntity();
     }
 
