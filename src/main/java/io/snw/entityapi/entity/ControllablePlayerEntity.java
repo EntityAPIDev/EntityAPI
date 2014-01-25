@@ -1,6 +1,7 @@
 package io.snw.entityapi.entity;
 
 import io.snw.entityapi.api.ControllableEntity;
+import io.snw.entityapi.api.ControllableEntityHandle;
 import io.snw.entityapi.nms.FixedNetworkManager;
 import io.snw.entityapi.nms.NullPlayerConnection;
 import net.minecraft.server.v1_7_R1.*;
@@ -25,7 +26,7 @@ public class ControllablePlayerEntity extends EntityPlayer implements Controllab
     }
 
     @Override
-    public org.bukkit.Material getBukkitLoot() {
+    public org.bukkit.Material getDefaultMaterialLoot() {
         return null;
     }
 }

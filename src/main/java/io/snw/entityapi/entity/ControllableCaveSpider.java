@@ -9,7 +9,7 @@ public class ControllableCaveSpider extends ControllableAttackingBaseEntity<Spid
     public ControllableCaveSpider(ControllableCaveSpiderEntity entityHandle) {
         super(ControllableEntityType.CAVE_SPIDER);
         this.handle = entityHandle;
-        this.loot = entityHandle.getBukkitLoot();
+        this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
     public void initSounds() {

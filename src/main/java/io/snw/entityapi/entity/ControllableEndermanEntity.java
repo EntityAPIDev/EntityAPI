@@ -9,11 +9,11 @@ import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 
-public class ControllableBatEntity extends EntityBat implements ControllableEntityHandle {
+public class ControllableEndermanEntity extends EntityEnderman implements ControllableEntityHandle {
 
     private final ControllableEntity controllableEntity;
 
-    public ControllableBatEntity(World world, ControllableEntity controllableEntity) {
+    public ControllableEndermanEntity(World world, ControllableEntity controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
         if (this.controllableEntity instanceof ControllableBaseEntity) {
@@ -128,16 +128,16 @@ public class ControllableBatEntity extends EntityBat implements ControllableEnti
 
     @Override
     protected String t() {
-        return this.controllableEntity == null ? "mob.bat.idle" : this.controllableEntity.getSound(EntitySound.IDLE);
+        return this.controllableEntity == null ? "mob.enderman." + (this.cb() ? "scream" : "idle") : this.controllableEntity.getSound(EntitySound.IDLE, this.cb() ? "scream" : "idle");
     }
 
     @Override
     protected String aT() {
-        return this.controllableEntity == null ? "mob.bat.hit" : this.controllableEntity.getSound(EntitySound.HURT);
+        return this.controllableEntity == null ? "mob.enderman.hit" : this.controllableEntity.getSound(EntitySound.HURT);
     }
 
     @Override
     protected String aU() {
-        return this.controllableEntity == null ? "mob.bat.death" : this.controllableEntity.getSound(EntitySound.DEATH);
+        return this.controllableEntity == null ? "mob.enderman.death" : this.controllableEntity.getSound(EntitySound.DEATH);
     }
 }

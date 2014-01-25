@@ -1,6 +1,7 @@
 package io.snw.entityapi.entity;
 
 import io.snw.entityapi.api.ControllableEntity;
+import io.snw.entityapi.api.ControllableEntityHandle;
 import io.snw.entityapi.api.EntitySound;
 import io.snw.entityapi.api.mind.attribute.Attribute;
 import io.snw.entityapi.api.mind.attribute.RideAttribute;
@@ -115,7 +116,7 @@ public class ControllableCaveSpiderEntity extends EntityCaveSpider implements Co
     }
 
     @Override
-    public org.bukkit.Material getBukkitLoot() {
+    public org.bukkit.Material getDefaultMaterialLoot() {
         return CraftMagicNumbers.getMaterial(this.getLoot());
     }
 

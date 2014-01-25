@@ -1,4 +1,4 @@
-package io.snw.entityapi.entity;
+package io.snw.entityapi.api;
 
 import io.snw.entityapi.api.ControllableEntity;
 import org.bukkit.Material;
@@ -11,5 +11,5 @@ public interface ControllableEntityHandle {
 
     public ControllableEntity getControllableEntity();
 
-    public Material getBukkitLoot();
+    public Material getDefaultMaterialLoot();
 }

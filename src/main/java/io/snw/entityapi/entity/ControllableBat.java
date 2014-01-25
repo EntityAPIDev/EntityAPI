@@ -10,7 +10,7 @@ public class ControllableBat extends ControllableBaseEntity<Bat> {
     public ControllableBat(ControllableBatEntity entityHandle) {
         super(ControllableEntityType.BAT);
         this.handle = entityHandle;
-        this.loot = entityHandle.getBukkitLoot();
+        this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
     public void setHanging(boolean flag) {

@@ -1,6 +1,7 @@
 package io.snw.entityapi.entity;
 
 import io.snw.entityapi.api.ControllableEntity;
+import io.snw.entityapi.api.ControllableEntityHandle;
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import io.snw.entityapi.api.mind.Mind;
@@ -46,7 +47,7 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
         this.entityType = entityType;
         this.initSounds();
         if (this.handle instanceof ControllableEntityHandle) {
-            this.loot = ((ControllableEntityHandle) this.handle).getBukkitLoot();
+            this.loot = ((ControllableEntityHandle) this.handle).getDefaultMaterialLoot();
         }
     }
 
