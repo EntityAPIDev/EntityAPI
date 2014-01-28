@@ -1,19 +1,19 @@
 package io.snw.entityapi.entity;
 
 import io.snw.entityapi.api.ControllableEntity;
+import io.snw.entityapi.api.ControllableEntityHandle;
 import io.snw.entityapi.api.EntitySound;
 import io.snw.entityapi.api.mind.attribute.Attribute;
 import io.snw.entityapi.api.mind.attribute.RideAttribute;
-import io.snw.entityapi.api.ControllableEntityHandle;
 import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 
-public class ControllableCowEntity extends EntityCow implements ControllableEntityHandle {
+public class ControllableMushroomCowEntity extends EntityMushroomCow implements ControllableEntityHandle {
 
     private final ControllableEntity controllableEntity;
 
-    public ControllableCowEntity(World world, ControllableEntity controllableEntity) {
+    public ControllableMushroomCowEntity(World world, ControllableEntity controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
         if (this.controllableEntity instanceof ControllableBaseEntity) {

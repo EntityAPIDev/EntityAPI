@@ -5,7 +5,14 @@ public enum EntitySound {
     IDLE,
     HURT,
     DEATH,
-    STEP
+    STEP,
+    ATTACK,
+    JUMP,
+    BREATHE,
+    LAY_EGG,
+    STARE,
+    TELEPORT,
+    THROW,
     // TODO: We're not done here yet...
     ;
 }

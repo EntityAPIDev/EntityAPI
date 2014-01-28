@@ -6,7 +6,7 @@ import org.bukkit.entity.Ghast;
 
 public class ControllableGhast extends ControllableAttackingBaseEntity<Ghast> {
 
-    public ControllableGhast(ControllableBatEntity entityHandle) {
+    public ControllableGhast(ControllableGhastEntity entityHandle) {
         super(ControllableEntityType.GHAST);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();

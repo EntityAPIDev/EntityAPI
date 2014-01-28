@@ -17,5 +17,7 @@ public class ControllableEnderman extends ControllableAttackingBaseEntity<Enderm
         this.setSound(EntitySound.IDLE, "scream", "mob.enderman.scream");
         this.setSound(EntitySound.HURT, "mob.enderman.hit");
         this.setSound(EntitySound.DEATH, "mob.enderman.death");
+        this.setSound(EntitySound.STARE, "mob.enderman.stare");
+        this.setSound(EntitySound.TELEPORT, "mob.enderman.portal");
     }
 }

@@ -140,4 +140,18 @@ public class ControllableEndermanEntity extends EntityEnderman implements Contro
     protected String aU() {
         return this.controllableEntity == null ? "mob.enderman.death" : this.controllableEntity.getSound(EntitySound.DEATH);
     }
+
+    @Override
+    public void makeSound(String s, float f, float f1) {
+        if (s.equals("mob.enderman.stare")) {
+            if (this.controllableEntity != null) {
+                s = this.controllableEntity.getSound(EntitySound.STARE);
+            }
+        } else if (s.equals("mob.enderman.portal")) {
+            if (this.controllableEntity != null) {
+                s = this.controllableEntity.getSound(EntitySound.TELEPORT);
+            }
+        }
+        super.makeSound(s, f, f1);
+    }
 }

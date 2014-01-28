@@ -135,7 +135,18 @@ public class ControllableChickenEntity extends EntityChicken implements Controll
         return this.controllableEntity == null ? "mob.chicken.hurt" : this.controllableEntity.getSound(EntitySound.DEATH);
     }
 
+    @Override
     protected void a(int i, int j, int k, Block block) {
         this.makeSound(this.controllableEntity == null ? "mob.chicken.step" : this.controllableEntity.getSound(EntitySound.STEP), 0.15F, 1.0F);
+    }
+
+    @Override
+    public void makeSound(String s, float f, float f1) {
+        if (s.equals("mob.chicken.plop")) {
+            if (this.controllableEntity != null) {
+                s = this.controllableEntity.getSound(EntitySound.LAY_EGG);
+            }
+        }
+        super.makeSound(s, f, f1);
     }
 }

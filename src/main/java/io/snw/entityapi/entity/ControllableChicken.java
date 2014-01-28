@@ -17,5 +17,6 @@ public class ControllableChicken extends ControllableBaseEntity<Chicken> {
         this.setSound(EntitySound.HURT, "mob.chicken.hurt");
         this.setSound(EntitySound.DEATH, "mob.chicken.hurt");
         this.setSound(EntitySound.STEP, "mob.chicken.step");
+        this.setSound(EntitySound.LAY_EGG, "mob.chicken.plop");
     }
 }

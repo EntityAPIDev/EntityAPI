@@ -1,19 +1,19 @@
 package io.snw.entityapi.entity;
 
 import io.snw.entityapi.api.ControllableEntity;
+import io.snw.entityapi.api.ControllableEntityHandle;
 import io.snw.entityapi.api.EntitySound;
 import io.snw.entityapi.api.mind.attribute.Attribute;
 import io.snw.entityapi.api.mind.attribute.RideAttribute;
-import io.snw.entityapi.api.ControllableEntityHandle;
 import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 
-public class ControllableCowEntity extends EntityCow implements ControllableEntityHandle {
+public class ControllableGiantZombieEntity extends EntityGiantZombie implements ControllableEntityHandle {
 
     private final ControllableEntity controllableEntity;
 
-    public ControllableCowEntity(World world, ControllableEntity controllableEntity) {
+    public ControllableGiantZombieEntity(World world, ControllableEntity controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
         if (this.controllableEntity instanceof ControllableBaseEntity) {
@@ -23,6 +23,12 @@ public class ControllableCowEntity extends EntityCow implements ControllableEnti
 
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
+    }
+
+    // All ControllableEntities should use new AI
+    @Override
+    protected boolean bk() {
+        return true;
     }
 
     // EntityInsentient - Most importantly stops NMS goal selectors from ticking
@@ -122,21 +128,21 @@ public class ControllableCowEntity extends EntityCow implements ControllableEnti
 
     @Override
     protected String t() {
-        return this.controllableEntity == null ? "mob.cow.say" : this.controllableEntity.getSound(EntitySound.IDLE);
+        return this.controllableEntity == null ? "mob.zombie.say" : this.controllableEntity.getSound(EntitySound.IDLE);
     }
 
     @Override
     protected String aT() {
-        return this.controllableEntity == null ? "mob.cow.hurt" : this.controllableEntity.getSound(EntitySound.HURT);
+        return this.controllableEntity == null ? "mob.zombie.hurt" : this.controllableEntity.getSound(EntitySound.HURT);
     }
 
     @Override
     protected String aU() {
-        return this.controllableEntity == null ? "mob.cow.hurt" : this.controllableEntity.getSound(EntitySound.DEATH);
+        return this.controllableEntity == null ? "mob.zombie.death" : this.controllableEntity.getSound(EntitySound.DEATH);
     }
 
     @Override
     protected void a(int i, int j, int k, Block block) {
-        this.makeSound(this.controllableEntity == null ? "mob.cow.step" : this.controllableEntity.getSound(EntitySound.STEP), 0.15F, 1.0F);
+        this.makeSound(this.controllableEntity == null ? "mob.zombie.step" : this.controllableEntity.getSound(EntitySound.STEP), 0.15F, 1.0F);
     }
 }

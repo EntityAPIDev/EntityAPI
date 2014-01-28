@@ -1,19 +1,19 @@
 package io.snw.entityapi.entity;
 
 import io.snw.entityapi.api.ControllableEntity;
+import io.snw.entityapi.api.ControllableEntityHandle;
 import io.snw.entityapi.api.EntitySound;
 import io.snw.entityapi.api.mind.attribute.Attribute;
 import io.snw.entityapi.api.mind.attribute.RideAttribute;
-import io.snw.entityapi.api.ControllableEntityHandle;
 import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 
-public class ControllableCowEntity extends EntityCow implements ControllableEntityHandle {
+public class ControllableMagmaCubeEntity extends EntityMagmaCube implements ControllableEntityHandle {
 
     private final ControllableEntity controllableEntity;
 
-    public ControllableCowEntity(World world, ControllableEntity controllableEntity) {
+    public ControllableMagmaCubeEntity(World world, ControllableEntity controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
         if (this.controllableEntity instanceof ControllableBaseEntity) {
@@ -121,22 +121,27 @@ public class ControllableCowEntity extends EntityCow implements ControllableEnti
     }
 
     @Override
-    protected String t() {
-        return this.controllableEntity == null ? "mob.cow.say" : this.controllableEntity.getSound(EntitySound.IDLE);
+    protected String bT() {
+        return this.controllableEntity == null ? "mob.magmacube." + (this.getSize() > 1 ? "big" : "small") : this.controllableEntity.getSound(EntitySound.IDLE, (this.getSize() > 1 ? "big" : "small"));
     }
 
     @Override
     protected String aT() {
-        return this.controllableEntity == null ? "mob.cow.hurt" : this.controllableEntity.getSound(EntitySound.HURT);
+        return this.controllableEntity == null ? "mob.slime." + (this.getSize() > 1 ? "big" : "small") : this.controllableEntity.getSound(EntitySound.HURT, (this.getSize() > 1 ? "big" : "small"));
     }
 
     @Override
     protected String aU() {
-        return this.controllableEntity == null ? "mob.cow.hurt" : this.controllableEntity.getSound(EntitySound.DEATH);
+        return this.controllableEntity == null ? "mob.slime." + (this.getSize() > 1 ? "big" : "small") : this.controllableEntity.getSound(EntitySound.DEATH, (this.getSize() > 1 ? "big" : "small"));
     }
 
     @Override
-    protected void a(int i, int j, int k, Block block) {
-        this.makeSound(this.controllableEntity == null ? "mob.cow.step" : this.controllableEntity.getSound(EntitySound.STEP), 0.15F, 1.0F);
+    public void makeSound(String s, float f, float f1) {
+        if (s.equals("mob.attack")) {
+            if (this.controllableEntity != null) {
+                s = this.controllableEntity.getSound(EntitySound.ATTACK);
+            }
+        }
+        super.makeSound(s, f, f1);
     }
 }

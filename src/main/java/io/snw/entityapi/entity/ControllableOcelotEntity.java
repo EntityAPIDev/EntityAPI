@@ -1,19 +1,19 @@
 package io.snw.entityapi.entity;
 
 import io.snw.entityapi.api.ControllableEntity;
+import io.snw.entityapi.api.ControllableEntityHandle;
 import io.snw.entityapi.api.EntitySound;
 import io.snw.entityapi.api.mind.attribute.Attribute;
 import io.snw.entityapi.api.mind.attribute.RideAttribute;
-import io.snw.entityapi.api.ControllableEntityHandle;
 import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 
-public class ControllableCowEntity extends EntityCow implements ControllableEntityHandle {
+public class ControllableOcelotEntity extends EntityOcelot implements ControllableEntityHandle {
 
     private final ControllableEntity controllableEntity;
 
-    public ControllableCowEntity(World world, ControllableEntity controllableEntity) {
+    public ControllableOcelotEntity(World world, ControllableEntity controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
         if (this.controllableEntity instanceof ControllableBaseEntity) {
@@ -122,21 +122,20 @@ public class ControllableCowEntity extends EntityCow implements ControllableEnti
 
     @Override
     protected String t() {
-        return this.controllableEntity == null ? "mob.cow.say" : this.controllableEntity.getSound(EntitySound.IDLE);
+        return this.isTamed() ? (this.cc() ? this.getSoundFor(EntitySound.IDLE, "mob.cat.purr", "purr") : (this.random.nextInt(4) == 0 ? this.getSoundFor(EntitySound.IDLE, "mob.cat.purreow", "purreow") : this.getSoundFor(EntitySound.IDLE, "mob.cat.meow", "meow"))) : "";
     }
 
     @Override
     protected String aT() {
-        return this.controllableEntity == null ? "mob.cow.hurt" : this.controllableEntity.getSound(EntitySound.HURT);
+        return this.controllableEntity == null ? "mob.cat.hitt" : this.controllableEntity.getSound(EntitySound.HURT);
     }
 
     @Override
     protected String aU() {
-        return this.controllableEntity == null ? "mob.cow.hurt" : this.controllableEntity.getSound(EntitySound.DEATH);
+        return this.controllableEntity == null ? "mob.cat.hitt" : this.controllableEntity.getSound(EntitySound.DEATH);
     }
 
-    @Override
-    protected void a(int i, int j, int k, Block block) {
-        this.makeSound(this.controllableEntity == null ? "mob.cow.step" : this.controllableEntity.getSound(EntitySound.STEP), 0.15F, 1.0F);
+    private String getSoundFor(EntitySound soundType, String def, String key) {
+        return this.controllableEntity == null ? def : this.controllableEntity.getSound(soundType, key);
     }
 }
