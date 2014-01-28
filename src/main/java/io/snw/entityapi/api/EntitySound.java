@@ -13,6 +13,7 @@ public enum EntitySound {
     STARE,
     TELEPORT,
     THROW,
+    ANGRY,
     // TODO: We're not done here yet...
     ;
 }
