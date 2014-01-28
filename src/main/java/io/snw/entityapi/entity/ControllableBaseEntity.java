@@ -4,9 +4,11 @@ import io.snw.entityapi.api.ControllableEntity;
 import io.snw.entityapi.api.ControllableEntityHandle;
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
+import io.snw.entityapi.api.events.*;
 import io.snw.entityapi.api.mind.Mind;
 import io.snw.entityapi.utils.IDGenerator;
 import net.minecraft.server.v1_7_R1.*;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -287,26 +289,35 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
 
     @Override
     public void onTick() {
+        ControllableEntityTickEvent tickEvent = new ControllableEntityTickEvent(this);
+        Bukkit.getServer().getPluginManager().callEvent(tickEvent);
     }
 
     @Override
     public boolean onInteract(Player entity, boolean rightClick) {
-        return false;
+        ControllableEntityInteractEvent interactEvent = new ControllableEntityInteractEvent(this, entity, rightClick ? Action.RIGHT_CLICK : Action.LEFT_CLICK);
+        Bukkit.getServer().getPluginManager().callEvent(interactEvent);
+        return !interactEvent.isCancelled();
     }
 
     @Override
     public Vector onPush(float x, float y, float z) {
-        return null;
+        ControllableEntityPushEvent pushEvent = new ControllableEntityPushEvent(this, new Vector(x, y, z));
+        Bukkit.getServer().getPluginManager().callEvent(pushEvent);
+        return pushEvent.getPushVelocity();
     }
 
     @Override
     public boolean onCollide(Entity entity) {
-        return false;
+        ControllableEntityCollideEvent collideEvent = new ControllableEntityCollideEvent(this, entity);
+        Bukkit.getServer().getPluginManager().callEvent(collideEvent);
+        return !collideEvent.isCancelled();
     }
 
     @Override
     public void onDeath() {
-
+        ControllableEntityDeathEvent deathEvent = new ControllableEntityDeathEvent(this);
+        Bukkit.getServer().getPluginManager().callEvent(deathEvent);
     }
 
     public void initSounds() {
