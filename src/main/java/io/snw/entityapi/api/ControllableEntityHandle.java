@@ -1,6 +1,5 @@
 package io.snw.entityapi.api;
 
-import io.snw.entityapi.api.ControllableEntity;
 import org.bukkit.Material;
 
 /**

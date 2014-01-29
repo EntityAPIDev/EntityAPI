@@ -16,7 +16,6 @@ public class ControllablePlayerEntity extends EntityPlayer implements Controllab
         playerConnection = new NullPlayerConnection(server, manager, this);
         manager.a(playerConnection);
 
-        playerinteractmanager.setGameMode(EnumGamemode.SURVIVAL);
         noDamageTicks = 1;
     }
 
