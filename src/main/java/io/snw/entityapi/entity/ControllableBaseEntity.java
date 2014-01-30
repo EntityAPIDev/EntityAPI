@@ -64,6 +64,31 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
     }
 
     @Override
+    public T getBukkitEntity() {
+        return (T) this.handle.getBukkitEntity();
+    }
+
+    @Override
+    public EntityLiving getHandle() {
+        return handle;
+    }
+
+    @Override
+    public ControllableEntityType getEntityType() {
+        return this.entityType;
+    }
+
+    @Override
+    public float getHeight() {
+        return this.handle.height;
+    }
+
+    @Override
+    public float getWidth() {
+        return this.handle.width;
+    }
+
+    @Override
     public String getName() {
         if (this.handle == null) {
             return null; // TODO: Give them a default name?
@@ -78,51 +103,6 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
         }
         this.getBukkitEntity().setCustomName(name);
         this.getBukkitEntity().setCustomNameVisible(name == null ? false : true);
-    }
-
-    @Override
-    public boolean canFly() {
-        return this.canFly;
-    }
-
-    @Override
-    public void setCanFly(boolean flag) {
-        this.canFly = flag;
-    }
-
-    @Override
-    public Material getLoot() {
-        return loot;
-    }
-
-    @Override
-    public void setLoot(Material material) {
-        this.loot = material;
-    }
-
-    @Override
-    public boolean shouldUpdateAttributes() {
-        return tickAttributes;
-    }
-
-    @Override
-    public void setTickAttributes(boolean flag) {
-        this.tickAttributes = flag;
-    }
-
-    @Override
-    public T getBukkitEntity() {
-        return (T) this.handle.getBukkitEntity();
-    }
-
-    @Override
-    public EntityLiving getHandle() {
-        return handle;
-    }
-
-    @Override
-    public ControllableEntityType getEntityType() {
-        return this.entityType;
     }
 
     @Override
@@ -227,6 +207,36 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
     @Override
     public void setSound(EntitySound type, HashMap<String, String> soundMap) {
         this.sounds.put(type, soundMap);
+    }
+
+    @Override
+    public boolean canFly() {
+        return this.canFly;
+    }
+
+    @Override
+    public void setCanFly(boolean flag) {
+        this.canFly = flag;
+    }
+
+    @Override
+    public Material getLoot() {
+        return loot;
+    }
+
+    @Override
+    public void setLoot(Material material) {
+        this.loot = material;
+    }
+
+    @Override
+    public boolean shouldUpdateAttributes() {
+        return tickAttributes;
+    }
+
+    @Override
+    public void setTickAttributes(boolean flag) {
+        this.tickAttributes = flag;
     }
 
     @Override

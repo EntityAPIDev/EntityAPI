@@ -32,6 +32,14 @@ public abstract interface ControllableEntity extends Nameable {
 
     public abstract ControllableEntityType getEntityType();
 
+    public float getHeight();
+
+    public float getWidth();
+
+    public String getName();
+
+    public void setName(String name);
+
     public Map<String, String> getSounds(EntitySound type);
 
     public String getSound(EntitySound type);
