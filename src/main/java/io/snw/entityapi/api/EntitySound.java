@@ -14,9 +14,12 @@ public enum EntitySound {
     TELEPORT,
     THROW,
     ANGRY,
-    // TODO: We're not done here yet...
+    SHAKE,
+    YES,
+    NO;
+
+
     // TODO: Added some sounds :p (maybe we can use that)
-    ;
 
    /** AmbientCave("ambient.cave.cave"),
     AmbientWeatherRain("ambient.weather.rain"),
