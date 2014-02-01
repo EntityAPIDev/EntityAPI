@@ -1,5 +1,6 @@
 package io.snw.entityapi.entity;
 
+import io.snw.entityapi.EntityManager;
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import net.minecraft.server.v1_7_R1.EntityBat;
@@ -7,8 +8,14 @@ import org.bukkit.entity.Bat;
 
 public class ControllableBat extends ControllableBaseEntity<Bat> {
 
-    public ControllableBat(ControllableBatEntity entityHandle) {
-        super(ControllableEntityType.BAT);
+    //TODO; Every entity class should look like this. (constructor)
+
+    public ControllableBat(int id, EntityManager manager) {
+        super(id, ControllableEntityType.BAT, manager);
+    }
+
+    public ControllableBat(int id, ControllableBatEntity entityHandle, EntityManager manager) {
+        this(id, manager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
     }

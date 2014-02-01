@@ -1,4 +1,4 @@
-package io.snw.entityapi.nms;
+package io.snw.entityapi.nms.network;
 
 import io.snw.entityapi.internal.Constants;
 import io.snw.entityapi.reflection.FieldAccessor;

@@ -2,12 +2,15 @@ package io.snw.entityapi.entity;
 
 import io.snw.entityapi.api.ControllableEntity;
 import io.snw.entityapi.api.ControllableEntityHandle;
-import io.snw.entityapi.nms.FixedNetworkManager;
-import io.snw.entityapi.nms.NullPlayerConnection;
+import io.snw.entityapi.nms.PlayerNavigation;
+import io.snw.entityapi.nms.network.FixedNetworkManager;
+import io.snw.entityapi.nms.network.NullPlayerConnection;
 import net.minecraft.server.v1_7_R1.*;
 import net.minecraft.util.com.mojang.authlib.GameProfile;
 
 public class ControllablePlayerEntity extends EntityPlayer implements ControllableEntityHandle {
+
+    private Navigation navigation;
 
     public ControllablePlayerEntity(MinecraftServer minecraftserver, WorldServer worldserver, GameProfile gameprofile, PlayerInteractManager playerinteractmanager) {
         super(minecraftserver, worldserver, gameprofile, playerinteractmanager);
@@ -17,6 +20,8 @@ public class ControllablePlayerEntity extends EntityPlayer implements Controllab
         manager.a(playerConnection);
 
         noDamageTicks = 1;
+
+        this.navigation = new PlayerNavigation(this);
     }
 
     @Override
@@ -27,5 +32,9 @@ public class ControllablePlayerEntity extends EntityPlayer implements Controllab
     @Override
     public org.bukkit.Material getDefaultMaterialLoot() {
         return null;
+    }
+
+    public Navigation getNavigation() {
+        return this.navigation;
     }
 }

@@ -1,5 +1,6 @@
 package io.snw.entityapi.api;
 
+import io.snw.entityapi.EntityManager;
 import io.snw.entityapi.api.mind.Mind;
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import net.minecraft.server.v1_7_R1.PathEntity;
@@ -22,7 +23,9 @@ public abstract interface ControllableEntity extends Nameable {
 
     // TODO: JavaDucks. Quack
 
-    public abstract long getId();
+    public EntityManager getEntityManager();
+
+    public abstract int getId();
 
     public Mind getMind();
 

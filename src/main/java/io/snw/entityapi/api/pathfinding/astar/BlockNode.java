@@ -16,9 +16,14 @@ public class BlockNode {
     public static double COST_DIAGONAL = 1.6d;
     public static double COST_DIAGONAL_UP = 1.8d;
 
+    private double h_score;
+    private double g_score;
+
     public BlockNode(Pathfinder pathfinder, Location location) {
         this.pathfinder = pathfinder;
         this.location = location;
+        this.h_score = -1;
+        this.g_score = -1;
     }
 
     public int getX() {
@@ -49,5 +54,25 @@ public class BlockNode {
     @Override
     public int hashCode() {
         return toString().hashCode();
+    }
+
+    public double getHScore() {
+        return this.h_score;
+    }
+
+    public double getGScore() {
+        return this.g_score;
+    }
+
+    public double getFScore() {
+        return this.h_score + this.g_score;
+    }
+
+    public void calculateHScore() {
+
+    }
+
+    public void calculateGScore() {
+
     }
 }

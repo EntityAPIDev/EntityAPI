@@ -1,5 +1,7 @@
 package io.snw.entityapi.entity;
 
+import io.snw.entityapi.EntityAPI;
+import io.snw.entityapi.EntityManager;
 import io.snw.entityapi.api.ControllableEntity;
 import io.snw.entityapi.api.ControllableEntityHandle;
 import io.snw.entityapi.api.ControllableEntityType;
@@ -32,7 +34,9 @@ import java.util.Map;
  */
 public class ControllableBaseEntity<T extends LivingEntity> implements ControllableEntity {
 
-    protected long id;
+    protected final EntityManager manager;
+
+    private final int id;
     protected Mind mind;
     protected boolean tickAttributes;
 
@@ -43,8 +47,9 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
     protected ControllableEntityType entityType;
     protected HashMap<EntitySound, Map<String, String>> sounds = new HashMap<>();
 
-    public ControllableBaseEntity(ControllableEntityType entityType) {
-        this.id = IDGenerator.getNextId();
+    public ControllableBaseEntity(int id, ControllableEntityType entityType, EntityManager manager) {
+        this.manager = manager;
+        this.id = id;
         this.mind = new Mind(this);
         this.entityType = entityType;
         this.initSounds();
@@ -54,7 +59,12 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
     }
 
     @Override
-    public long getId() {
+    public EntityManager getEntityManager() {
+        return this.manager;
+    }
+
+    @Override
+    public int getId() {
         return id;
     }
 

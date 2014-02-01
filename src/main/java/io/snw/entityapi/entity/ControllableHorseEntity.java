@@ -7,10 +7,8 @@ import io.snw.entityapi.api.mind.attribute.Attribute;
 import io.snw.entityapi.api.mind.attribute.RideAttribute;
 import io.snw.entityapi.reflection.SafeField;
 import net.minecraft.server.v1_7_R1.*;
-import org.bukkit.craftbukkit.v1_7_R1.event.CraftEventFactory;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageEvent;
 
 public class ControllableHorseEntity extends EntityHorse implements ControllableEntityHandle {
 
