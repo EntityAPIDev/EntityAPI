@@ -1,19 +1,20 @@
 package io.snw.entityapi.entity;
 
 import io.snw.entityapi.api.ControllableEntity;
-import io.snw.entityapi.api.ControllableEntityHandle;
 import io.snw.entityapi.api.EntitySound;
 import io.snw.entityapi.api.mind.attribute.Attribute;
 import io.snw.entityapi.api.mind.attribute.RideAttribute;
+import io.snw.entityapi.api.ControllableEntityHandle;
 import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.ExplosionPrimeEvent;
 
-public class ControllableBatEntity extends EntityBat implements ControllableEntityHandle {
+public class ControllableCreeperEntity extends EntityCreeper implements ControllableEntityHandle {
 
     private final ControllableEntity controllableEntity;
 
-    public ControllableBatEntity(World world, ControllableEntity controllableEntity) {
+    public ControllableCreeperEntity(World world, ControllableEntity controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
         if (this.controllableEntity instanceof ControllableBaseEntity) {
@@ -23,12 +24,6 @@ public class ControllableBatEntity extends EntityBat implements ControllableEnti
 
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
-    }
-
-    // All ControllableEntities should use new AI
-    @Override
-    protected boolean bk() {
-        return true;
     }
 
     // EntityInsentient - Most importantly stops NMS goal selectors from ticking
@@ -128,16 +123,28 @@ public class ControllableBatEntity extends EntityBat implements ControllableEnti
 
     @Override
     protected String t() {
-        return this.controllableEntity == null ? "mob.bat.idle" : this.controllableEntity.getSound(EntitySound.IDLE);
-    }
-
-    @Override
-    protected String aT() {
-        return this.controllableEntity == null ? "mob.bat.hit" : this.controllableEntity.getSound(EntitySound.HURT);
+        return this.controllableEntity == null ? "mob.creeper.say" : this.controllableEntity.getSound(EntitySound.IDLE);
     }
 
     @Override
     protected String aU() {
-        return this.controllableEntity == null ? "mob.bat.death" : this.controllableEntity.getSound(EntitySound.DEATH);
+        return this.controllableEntity == null ? "mob.creeper.death" : this.controllableEntity.getSound(EntitySound.DEATH);
+    }
+
+    protected void explode(int modifier) {
+        if (!this.world.isStatic) {
+            boolean flag = this.world.getGameRules().getBoolean("mobGriefing");
+
+            float radius = this.isPowered() ? 6.0F : 3.0F;
+
+            ExplosionPrimeEvent event = new ExplosionPrimeEvent(this.getBukkitEntity(), radius, false);
+            this.world.getServer().getPluginManager().callEvent(event);
+            if (!event.isCancelled()) {
+                this.world.createExplosion(this, this.locX, this.locY, this.locZ, event.getRadius() * modifier, event.getFire(), flag);
+                this.die();
+            } else {
+                //this.fuseTicks = 0;
+            }
+        }
     }
 }

@@ -1,9 +1,8 @@
 package io.snw.entityapi;
 
+import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntityManager;
-import io.snw.entityapi.entity.ControllableBatEntity;
 import io.snw.entityapi.hooks.ChunkProviderServerHook;
-import io.snw.entityapi.internal.Constants;
 import io.snw.entityapi.metrics.Metrics;
 import io.snw.entityapi.server.*;
 import io.snw.entityapi.utils.EntityUtil;
@@ -35,6 +34,11 @@ public abstract class EntityAPI extends JavaPlugin {
     // -> We need to have a talk on what we're doing here so that it can be fixed
     // - DSH
 
+    // Frostalf, perhaps we could use this: http://nerdydevel.blogspot.be/2012/07/run-only-single-java-application-instance.html
+    // It creates a temporary file, which is a 'lock', if the file exists, than stop running the plugin ->
+    // there's already a running instance, if not -> continue.
+    // - Master Yi
+
     @Override
     public void onEnable() {
         INSTANCE = this;
@@ -53,7 +57,7 @@ public abstract class EntityAPI extends JavaPlugin {
         for (World world : Bukkit.getWorlds()) {
             ChunkProviderServerHook.hook(world);
         }
-        
+
         this.getInstances();
     }
 
@@ -97,23 +101,26 @@ public abstract class EntityAPI extends JavaPlugin {
     }
 
     protected void registerEntities() {
-        EntityUtil.registerEntity(ControllableBatEntity.class, Constants.EntityTypes.Names.ENTITY_BAT, Constants.EntityTypes.Ids.ENTITY_BAT);
+        for (ControllableEntityType entityType : ControllableEntityType.values()) {
+            EntityUtil.registerEntity(entityType.getHandleClass(), entityType.getName(), entityType.getId());
+        }
     }
-/**
- * This method places all instances of Entity API in an Array List. 
- * If there is more than 1 EntityAPI found, it disables them all.
- */
-    
+
+    /**
+     * This method places all instances of Entity API in an Array List.
+     * If there is more than 1 EntityAPI found, it disables them all.
+     */
+
     public void getInstances() {
-        for(Plugin plugin : pm.getPlugins()){
-            if(!plugin.getName().equals(this.getName())){
+        for (Plugin plugin : pm.getPlugins()) {
+            if (!plugin.getName().equals(this.getName())) {
                 continue;
             }
             plugins.add(plugin);
         }
-        
+
         if (plugins.size() > 1) {
-            for(Plugin plugin : plugins){
+            for (Plugin plugin : plugins) {
                 pm.disablePlugin(plugin);
             }
             this.getLogger().log(Level.SEVERE, "Warning! You have two EntityAPI Libraries in Plugins Folder! Please remove one!");

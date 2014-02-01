@@ -1,6 +1,7 @@
 package io.snw.entityapi.entity;
 
 import io.snw.entityapi.api.ControllableEntity;
+import io.snw.entityapi.api.ControllableEntityHandle;
 import io.snw.entityapi.nms.FixedNetworkManager;
 import io.snw.entityapi.nms.NullPlayerConnection;
 import net.minecraft.server.v1_7_R1.*;
@@ -15,12 +16,16 @@ public class ControllablePlayerEntity extends EntityPlayer implements Controllab
         playerConnection = new NullPlayerConnection(server, manager, this);
         manager.a(playerConnection);
 
-        playerinteractmanager.setGameMode(EnumGamemode.SURVIVAL);
         noDamageTicks = 1;
     }
 
     @Override
     public ControllableEntity getControllableEntity() {
+        return null;
+    }
+
+    @Override
+    public org.bukkit.Material getDefaultMaterialLoot() {
         return null;
     }
 }

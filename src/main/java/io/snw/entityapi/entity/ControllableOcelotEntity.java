@@ -9,11 +9,11 @@ import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 
-public class ControllableBatEntity extends EntityBat implements ControllableEntityHandle {
+public class ControllableOcelotEntity extends EntityOcelot implements ControllableEntityHandle {
 
     private final ControllableEntity controllableEntity;
 
-    public ControllableBatEntity(World world, ControllableEntity controllableEntity) {
+    public ControllableOcelotEntity(World world, ControllableEntity controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
         if (this.controllableEntity instanceof ControllableBaseEntity) {
@@ -23,12 +23,6 @@ public class ControllableBatEntity extends EntityBat implements ControllableEnti
 
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
-    }
-
-    // All ControllableEntities should use new AI
-    @Override
-    protected boolean bk() {
-        return true;
     }
 
     // EntityInsentient - Most importantly stops NMS goal selectors from ticking
@@ -128,16 +122,20 @@ public class ControllableBatEntity extends EntityBat implements ControllableEnti
 
     @Override
     protected String t() {
-        return this.controllableEntity == null ? "mob.bat.idle" : this.controllableEntity.getSound(EntitySound.IDLE);
+        return this.isTamed() ? (this.cc() ? this.getSoundFor(EntitySound.IDLE, "mob.cat.purr", "purr") : (this.random.nextInt(4) == 0 ? this.getSoundFor(EntitySound.IDLE, "mob.cat.purreow", "purreow") : this.getSoundFor(EntitySound.IDLE, "mob.cat.meow", "meow"))) : "";
     }
 
     @Override
     protected String aT() {
-        return this.controllableEntity == null ? "mob.bat.hit" : this.controllableEntity.getSound(EntitySound.HURT);
+        return this.controllableEntity == null ? "mob.cat.hitt" : this.controllableEntity.getSound(EntitySound.HURT);
     }
 
     @Override
     protected String aU() {
-        return this.controllableEntity == null ? "mob.bat.death" : this.controllableEntity.getSound(EntitySound.DEATH);
+        return this.controllableEntity == null ? "mob.cat.hitt" : this.controllableEntity.getSound(EntitySound.DEATH);
+    }
+
+    private String getSoundFor(EntitySound soundType, String def, String key) {
+        return this.controllableEntity == null ? def : this.controllableEntity.getSound(soundType, key);
     }
 }

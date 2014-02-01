@@ -1,12 +1,16 @@
 package io.snw.entityapi.entity;
 
 import io.snw.entityapi.api.ControllableEntity;
+import io.snw.entityapi.api.ControllableEntityHandle;
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
+import io.snw.entityapi.api.events.*;
 import io.snw.entityapi.api.mind.Mind;
 import io.snw.entityapi.utils.IDGenerator;
 import net.minecraft.server.v1_7_R1.*;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_7_R1.CraftSound;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
@@ -33,6 +37,7 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
     protected boolean tickAttributes;
 
     protected boolean canFly;
+    protected org.bukkit.Material loot;
 
     protected EntityLiving handle;
     protected ControllableEntityType entityType;
@@ -43,6 +48,9 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
         this.mind = new Mind(this);
         this.entityType = entityType;
         this.initSounds();
+        if (this.handle instanceof ControllableEntityHandle) {
+            this.loot = ((ControllableEntityHandle) this.handle).getDefaultMaterialLoot();
+        }
     }
 
     @Override
@@ -53,6 +61,31 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
     @Override
     public Mind getMind() {
         return mind;
+    }
+
+    @Override
+    public T getBukkitEntity() {
+        return (T) this.handle.getBukkitEntity();
+    }
+
+    @Override
+    public EntityLiving getHandle() {
+        return handle;
+    }
+
+    @Override
+    public ControllableEntityType getEntityType() {
+        return this.entityType;
+    }
+
+    @Override
+    public float getHeight() {
+        return this.handle.height;
+    }
+
+    @Override
+    public float getWidth() {
+        return this.handle.width;
     }
 
     @Override
@@ -73,59 +106,24 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
     }
 
     @Override
-    public boolean canFly() {
-        return this.canFly;
-    }
-
-    @Override
-    public void setCanFly(boolean flag) {
-        this.canFly = flag;
-    }
-
-    @Override
-    public boolean shouldUpdateAttributes() {
-        return tickAttributes;
-    }
-
-    @Override
-    public void setTickAttributes(boolean flag) {
-        this.tickAttributes = flag;
-    }
-
-    @Override
-    public LivingEntity getBukkitEntity() {
-        return (T) this.handle.getBukkitEntity();
-    }
-
-    @Override
-    public EntityLiving getHandle() {
-        return handle;
-    }
-
-    @Override
-    public ControllableEntityType getEntityType() {
-        return this.entityType;
-    }
-
-    @Override
     public Map<String, String> getSounds(EntitySound type) {
         return this.sounds.get(type);
     }
 
     @Override
     public String getSound(EntitySound type) {
-        String s = this.getSound(type, "custom");
-        if (s != null) {
-            return s;
+        String custom = this.getCustomSound(type, "");
+        if (custom != null && !custom.equals("")) {
+            return custom;
         }
         return this.getSound(type, "default");
     }
 
     @Override
     public String getSound(EntitySound type, String key) {
-        String s = this.getSound(type, "custom");
-        if (s != null) {
-            return s;
+        String custom = this.getCustomSound(type, key);
+        if (custom != null && !custom.equals("")) {
+            return custom;
         }
         for (Map.Entry<String, String> entry : this.sounds.get(type).entrySet()) {
             if (entry.getKey().equals(key)) {
@@ -133,6 +131,21 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
             }
         }
         // Minecraft will treat this as 'no sound'
+        return "";
+    }
+
+    @Override
+    public String getCustomSound(EntitySound type, String key) {
+        if (!key.equals("")) {
+            String customWithKey = this.getSound(type, "custom." + key);
+            if (customWithKey != null) {
+                return customWithKey;
+            }
+        }
+        String custom = this.getSound(type, "custom");
+        if (custom != null) {
+            return custom;
+        }
         return "";
     }
 
@@ -164,8 +177,13 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
     public void setSound(EntitySound type, Sound sound) {
         // Allows sounds to be set without the use of the NMS String
         // We can also allow people to add/replace/remove sounds
-        // Entities use the "custom" sound if one exists
+        // Entities automatically use the "custom" sound if one exists
         this.setSound(type, "custom", CraftSound.getSound(sound));
+    }
+
+    @Override
+    public void setSound(EntitySound type, Sound sound, String key) {
+        this.setSound(type, "custom." + key, CraftSound.getSound(sound));
     }
 
     @Override
@@ -189,6 +207,36 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
     @Override
     public void setSound(EntitySound type, HashMap<String, String> soundMap) {
         this.sounds.put(type, soundMap);
+    }
+
+    @Override
+    public boolean canFly() {
+        return this.canFly;
+    }
+
+    @Override
+    public void setCanFly(boolean flag) {
+        this.canFly = flag;
+    }
+
+    @Override
+    public Material getLoot() {
+        return loot;
+    }
+
+    @Override
+    public void setLoot(Material material) {
+        this.loot = material;
+    }
+
+    @Override
+    public boolean shouldUpdateAttributes() {
+        return tickAttributes;
+    }
+
+    @Override
+    public void setTickAttributes(boolean flag) {
+        this.tickAttributes = flag;
     }
 
     @Override
@@ -251,26 +299,35 @@ public class ControllableBaseEntity<T extends LivingEntity> implements Controlla
 
     @Override
     public void onTick() {
+        ControllableEntityTickEvent tickEvent = new ControllableEntityTickEvent(this);
+        Bukkit.getServer().getPluginManager().callEvent(tickEvent);
     }
 
     @Override
     public boolean onInteract(Player entity, boolean rightClick) {
-        return false;
+        ControllableEntityInteractEvent interactEvent = new ControllableEntityInteractEvent(this, entity, rightClick ? Action.RIGHT_CLICK : Action.LEFT_CLICK);
+        Bukkit.getServer().getPluginManager().callEvent(interactEvent);
+        return !interactEvent.isCancelled();
     }
 
     @Override
     public Vector onPush(float x, float y, float z) {
-        return null;
+        ControllableEntityPushEvent pushEvent = new ControllableEntityPushEvent(this, new Vector(x, y, z));
+        Bukkit.getServer().getPluginManager().callEvent(pushEvent);
+        return pushEvent.getPushVelocity();
     }
 
     @Override
     public boolean onCollide(Entity entity) {
-        return false;
+        ControllableEntityCollideEvent collideEvent = new ControllableEntityCollideEvent(this, entity);
+        Bukkit.getServer().getPluginManager().callEvent(collideEvent);
+        return !collideEvent.isCancelled();
     }
 
     @Override
     public void onDeath() {
-
+        ControllableEntityDeathEvent deathEvent = new ControllableEntityDeathEvent(this);
+        Bukkit.getServer().getPluginManager().callEvent(deathEvent);
     }
 
     public void initSounds() {

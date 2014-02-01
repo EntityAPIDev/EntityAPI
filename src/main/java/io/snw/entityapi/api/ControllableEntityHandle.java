@@ -1,6 +1,6 @@
-package io.snw.entityapi.entity;
+package io.snw.entityapi.api;
 
-import io.snw.entityapi.api.ControllableEntity;
+import org.bukkit.Material;
 
 /**
  * Represents the NMS entity
@@ -9,4 +9,6 @@ import io.snw.entityapi.api.ControllableEntity;
 public interface ControllableEntityHandle {
 
     public ControllableEntity getControllableEntity();
+
+    public Material getDefaultMaterialLoot();
 }

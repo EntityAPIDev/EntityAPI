@@ -6,5 +6,11 @@ Here's a small file which contains some stuff we may/could add
 
 @DSH105, Nice work, but where do we set the spawn location? Maybe add it in the constructor.
 
+---
 
+1) Done ;D. Custom goals yet to be coded
+2) Yup. Tick that off...
+3) ;o
+4) Location and rotation can be set in the spawn method (nms.Entity.setPositionRotation)
 
+- DSH

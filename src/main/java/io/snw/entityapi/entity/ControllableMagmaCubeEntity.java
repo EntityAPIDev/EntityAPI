@@ -9,11 +9,11 @@ import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 
-public class ControllableBatEntity extends EntityBat implements ControllableEntityHandle {
+public class ControllableMagmaCubeEntity extends EntityMagmaCube implements ControllableEntityHandle {
 
     private final ControllableEntity controllableEntity;
 
-    public ControllableBatEntity(World world, ControllableEntity controllableEntity) {
+    public ControllableMagmaCubeEntity(World world, ControllableEntity controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
         if (this.controllableEntity instanceof ControllableBaseEntity) {
@@ -23,12 +23,6 @@ public class ControllableBatEntity extends EntityBat implements ControllableEnti
 
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
-    }
-
-    // All ControllableEntities should use new AI
-    @Override
-    protected boolean bk() {
-        return true;
     }
 
     // EntityInsentient - Most importantly stops NMS goal selectors from ticking
@@ -127,17 +121,27 @@ public class ControllableBatEntity extends EntityBat implements ControllableEnti
     }
 
     @Override
-    protected String t() {
-        return this.controllableEntity == null ? "mob.bat.idle" : this.controllableEntity.getSound(EntitySound.IDLE);
+    protected String bT() {
+        return this.controllableEntity == null ? "mob.magmacube." + (this.getSize() > 1 ? "big" : "small") : this.controllableEntity.getSound(EntitySound.IDLE, (this.getSize() > 1 ? "big" : "small"));
     }
 
     @Override
     protected String aT() {
-        return this.controllableEntity == null ? "mob.bat.hit" : this.controllableEntity.getSound(EntitySound.HURT);
+        return this.controllableEntity == null ? "mob.slime." + (this.getSize() > 1 ? "big" : "small") : this.controllableEntity.getSound(EntitySound.HURT, (this.getSize() > 1 ? "big" : "small"));
     }
 
     @Override
     protected String aU() {
-        return this.controllableEntity == null ? "mob.bat.death" : this.controllableEntity.getSound(EntitySound.DEATH);
+        return this.controllableEntity == null ? "mob.slime." + (this.getSize() > 1 ? "big" : "small") : this.controllableEntity.getSound(EntitySound.DEATH, (this.getSize() > 1 ? "big" : "small"));
+    }
+
+    @Override
+    public void makeSound(String s, float f, float f1) {
+        if (s.equals("mob.attack")) {
+            if (this.controllableEntity != null) {
+                s = this.controllableEntity.getSound(EntitySound.ATTACK);
+            }
+        }
+        super.makeSound(s, f, f1);
     }
 }
