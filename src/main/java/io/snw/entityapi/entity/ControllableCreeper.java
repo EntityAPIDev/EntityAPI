@@ -13,7 +13,7 @@ public class ControllableCreeper extends ControllableBaseEntity<Creeper> {
         super(id, ControllableEntityType.CREEPER, manager);
     }
 
-    public ControllableCreeper(int id, ControllableBatEntity entityHandle, EntityManager manager) {
+    public ControllableCreeper(int id, ControllableCreeperEntity entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
