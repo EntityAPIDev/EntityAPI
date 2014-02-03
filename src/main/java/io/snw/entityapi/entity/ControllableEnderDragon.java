@@ -1,5 +1,6 @@
 package io.snw.entityapi.entity;
 
+import io.snw.entityapi.EntityManager;
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import org.bukkit.Sound;
@@ -7,9 +8,13 @@ import org.bukkit.entity.EnderDragon;
 
 //TODO: finish this
 public class ControllableEnderDragon extends ControllableBaseEntity<EnderDragon> {
+    
+    public ControllableEnderDragon(int id, EntityManager manager) {
+        super(id, ControllableEntityType.ENDERDRAGON, manager);
+    }    
 
-    public ControllableEnderDragon(ControllableEnderDragonEntity entityHandle) {
-        super(ControllableEntityType.ENDERDRAGON);
+    public ControllableEnderDragon(int id, ControllableEnderDragonEntity entityHandle, EntityManager manager) {
+        this(id, manager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
