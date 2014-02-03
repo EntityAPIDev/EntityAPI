@@ -21,6 +21,7 @@ public class ControllableGiantZombieEntity extends EntityGiantZombie implements 
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }

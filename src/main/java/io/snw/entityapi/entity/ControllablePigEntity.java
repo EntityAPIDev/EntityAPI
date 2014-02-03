@@ -21,6 +21,7 @@ public class ControllablePigEntity extends EntityPig implements ControllableEnti
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }

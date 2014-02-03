@@ -12,6 +12,7 @@ public class ControllableHorse extends ControllableBaseEntity<Horse> {
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
+    @Override
     public void initSounds() {
         for (String key : new String[] {"idle", "hit", "death"}) {
             this.setSound(EntitySound.IDLE, "zombie", "mob.horse.zombie." + key);

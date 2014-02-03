@@ -12,6 +12,7 @@ public class ControllablePigZombie extends ControllableAttackingBaseEntity<PigZo
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
+    @Override
     public void initSounds() {
         this.setSound(EntitySound.IDLE, "mob.zombiepig.zpig");
         this.setSound(EntitySound.HURT, "mob.zombiepig.zpighurt");

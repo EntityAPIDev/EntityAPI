@@ -4,6 +4,7 @@ import io.snw.entityapi.EntityAPI;
 
 public class UnknownServer extends CraftBukkitServer { //we do not know this server brand so let's guess it's some random bukkit server.
 
+    @Override
     public boolean init() {
         if (!super.init()) {
             return false;

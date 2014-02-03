@@ -12,6 +12,7 @@ public class ControllableMushroomCow extends ControllableBaseEntity<MushroomCow>
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
+    @Override
     public void initSounds() {
         this.setSound(EntitySound.IDLE, "mob.cow.say");
         this.setSound(EntitySound.HURT, "mob.cow.hurt");

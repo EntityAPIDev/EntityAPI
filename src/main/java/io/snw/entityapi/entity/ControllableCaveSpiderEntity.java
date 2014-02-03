@@ -21,6 +21,7 @@ public class ControllableCaveSpiderEntity extends EntityCaveSpider implements Co
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }

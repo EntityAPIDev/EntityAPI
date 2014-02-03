@@ -39,8 +39,10 @@ public abstract interface ControllableEntity extends Nameable {
 
     public float getWidth();
 
+    @Override
     public String getName();
 
+    @Override
     public void setName(String name);
 
     public Map<String, String> getSounds(EntitySound type);

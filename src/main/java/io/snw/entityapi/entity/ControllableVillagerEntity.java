@@ -23,6 +23,7 @@ public class ControllableVillagerEntity extends EntityVillager implements Contro
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }

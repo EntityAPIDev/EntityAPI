@@ -12,6 +12,7 @@ public class ControllableGhast extends ControllableAttackingBaseEntity<Ghast> {
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
+    @Override
     public void initSounds() {
         this.setSound(EntitySound.IDLE, "mob.ghast.moan");
         this.setSound(EntitySound.HURT, "mob.ghast.scream");

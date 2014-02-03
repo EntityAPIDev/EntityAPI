@@ -12,6 +12,7 @@ public class ControllableWitch extends ControllableBaseEntity<Witch> {
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
+    @Override
     public void initSounds() {
         this.setSound(EntitySound.IDLE, "mob.witch.idle");
         this.setSound(EntitySound.HURT, "mob.witch.hurt");

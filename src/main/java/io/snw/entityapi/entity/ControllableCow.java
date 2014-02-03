@@ -9,7 +9,7 @@ import org.bukkit.entity.Cow;
 public class ControllableCow extends ControllableBaseEntity<Cow> {
 
     public ControllableCow(int id, EntityManager manager) {
-        super(id, ControllableEntityType.CHICKEN, manager);
+        super(id, ControllableEntityType.COW, manager);
     }
 
     public ControllableCow(int id, ControllableBatEntity entityHandle, EntityManager manager) {
@@ -18,12 +18,12 @@ public class ControllableCow extends ControllableBaseEntity<Cow> {
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
-    public void setHanging(boolean flag) {
-        ((EntityCow) this.handle).a(flag);
+    public int getAge() {
+        return ((EntityCow) this.handle).getAge();
     }
-
-    public boolean isHanging() {
-        return ((EntityCow) this.handle).bk();
+    
+    public boolean isBaby() {
+        return ((EntityCow) this.handle).isBaby();
     }
 
     @Override

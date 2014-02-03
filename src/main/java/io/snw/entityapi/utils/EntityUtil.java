@@ -9,12 +9,14 @@ public class EntityUtil {
 
     /**
      * Pure NMS-Methods
+     * @param entityLiving
+     * @return Navigation
      */
     public static Navigation getNavigation(EntityLiving entityLiving) {
         if(entityLiving instanceof EntityInsentient) {
             return ((EntityInsentient) entityLiving).getNavigation();
         } else if(entityLiving instanceof ControllablePlayerEntity) {
-            ((ControllablePlayerEntity) entityLiving).getNavigation();
+            return ((ControllablePlayerEntity) entityLiving).getNavigation();
         }
         return null;
     }

@@ -12,6 +12,7 @@ public class ControllableSlime extends ControllableAttackingBaseEntity<Slime> {
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
+    @Override
     public void initSounds() {
         for (EntitySound type : new EntitySound[] {EntitySound.IDLE, EntitySound.HURT, EntitySound.DEATH}) {
             this.setSound(type, "mob.slime.big", "big");

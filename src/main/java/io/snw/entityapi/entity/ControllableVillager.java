@@ -12,6 +12,7 @@ public class ControllableVillager extends ControllableBaseEntity<Villager> {
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
+    @Override
     public void initSounds() {
         this.setSound(EntitySound.IDLE, "haggle", "mob.villager.haggle");
         this.setSound(EntitySound.IDLE, "idle", "mob.villager.idle");

@@ -12,6 +12,7 @@ public class ControllableEnderman extends ControllableAttackingBaseEntity<Enderm
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
+    @Override
     public void initSounds() {
         this.setSound(EntitySound.IDLE, "idle", "mob.enderman.idle");
         this.setSound(EntitySound.IDLE, "scream", "mob.enderman.scream");

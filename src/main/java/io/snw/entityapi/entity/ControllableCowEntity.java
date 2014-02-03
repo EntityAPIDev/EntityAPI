@@ -21,6 +21,7 @@ public class ControllableCowEntity extends EntityCow implements ControllableEnti
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }

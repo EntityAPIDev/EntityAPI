@@ -21,6 +21,7 @@ public class ControllableSpiderEntity extends EntitySpider implements Controllab
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }
@@ -141,6 +142,7 @@ public class ControllableSpiderEntity extends EntitySpider implements Controllab
         return this.controllableEntity == null ? "mob.spider.death" : this.controllableEntity.getSound(EntitySound.DEATH);
     }
 
+    @Override
     protected void a(int i, int j, int k, Block block) {
         this.makeSound(this.controllableEntity == null ? "mob.spider.step" : this.controllableEntity.getSound(EntitySound.STEP), 0.15F, 1.0F);
     }

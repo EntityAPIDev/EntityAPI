@@ -12,6 +12,7 @@ public class ControllableSpider extends ControllableAttackingBaseEntity<Spider> 
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
+    @Override
     public void initSounds() {
         this.setSound(EntitySound.IDLE, "mob.spider.say");
         this.setSound(EntitySound.HURT, "mob.spider.say");

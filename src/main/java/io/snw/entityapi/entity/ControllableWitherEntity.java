@@ -21,6 +21,7 @@ public class ControllableWitherEntity extends EntityWither implements Controllab
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }

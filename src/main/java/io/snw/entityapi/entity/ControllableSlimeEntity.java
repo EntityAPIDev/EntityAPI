@@ -21,6 +21,7 @@ public class ControllableSlimeEntity extends EntitySlime implements Controllable
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }

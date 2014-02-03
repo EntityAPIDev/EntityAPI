@@ -12,6 +12,7 @@ public class ControllableWolf extends ControllableBaseEntity<Wolf> {
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
+    @Override
     public void initSounds() {
         this.setSound(EntitySound.IDLE, "growl", "mob.wolf.growl");
         this.setSound(EntitySound.IDLE, "whine", "mob.wolf.whine");

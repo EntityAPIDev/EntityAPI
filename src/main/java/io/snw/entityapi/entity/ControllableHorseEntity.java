@@ -22,6 +22,7 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }
@@ -191,6 +192,7 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
     }
 
     // Taken from EntityHorse and modified to suit custom sounds
+    @Override
     public void a(InventorySubcontainer inventorysubcontainer) {
         int i = this.cj();
         boolean flag = this.cs();

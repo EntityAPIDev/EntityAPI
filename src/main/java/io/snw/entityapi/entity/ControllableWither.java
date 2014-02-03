@@ -12,6 +12,7 @@ public class ControllableWither extends ControllableBaseEntity<Wither> {
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
+    @Override
     public void initSounds() {
         this.setSound(EntitySound.IDLE, "mob.wither.idle");
         this.setSound(EntitySound.HURT, "mob.wither.hurt");

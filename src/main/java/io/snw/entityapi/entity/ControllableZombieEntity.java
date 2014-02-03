@@ -21,6 +21,7 @@ public class ControllableZombieEntity extends EntityZombie implements Controllab
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }

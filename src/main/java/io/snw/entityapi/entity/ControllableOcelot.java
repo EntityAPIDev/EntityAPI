@@ -12,6 +12,7 @@ public class ControllableOcelot extends ControllableBaseEntity<Ocelot> {
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
+    @Override
     public void initSounds() {
         this.setSound(EntitySound.IDLE, "mob.cat.purr", "purr");
         this.setSound(EntitySound.IDLE, "mob.cat.purreow", "purreow");

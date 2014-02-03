@@ -22,6 +22,7 @@ public class ControllableCreeperEntity extends EntityCreeper implements Controll
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }

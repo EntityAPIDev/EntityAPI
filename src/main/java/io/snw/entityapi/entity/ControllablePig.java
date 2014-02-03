@@ -12,6 +12,7 @@ public class ControllablePig extends ControllableBaseEntity<Pig> {
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
+    @Override
     public void initSounds() {
         this.setSound(EntitySound.IDLE, "mob.pig.say");
         this.setSound(EntitySound.HURT, "mob.pig.say");

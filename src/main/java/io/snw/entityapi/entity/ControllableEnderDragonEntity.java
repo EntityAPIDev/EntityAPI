@@ -21,6 +21,7 @@ public class ControllableEnderDragonEntity extends EntityEnderDragon implements 
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }
