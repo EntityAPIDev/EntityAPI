@@ -1,4 +1,4 @@
-package io.snw.entityapi.nms;
+package io.snw.entityapi.nms.network;
 
 import net.minecraft.server.v1_7_R1.*;
 

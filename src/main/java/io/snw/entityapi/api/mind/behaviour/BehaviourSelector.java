@@ -158,7 +158,7 @@ public class BehaviourSelector implements IBehaviourSelector {
             BehaviourItem behaviourItem1 = iterator.next();
             if (behaviourItem1 != behaviourItem) {
                 if (behaviourItem.getPriority() > behaviourItem1.getPriority()) {
-                    if (!this.areCompatibile(behaviourItem, behaviourItem1) && this.activeBehaviours.contains(behaviourItem1)) {
+                    if (!this.areCompatible(behaviourItem, behaviourItem1) && this.activeBehaviours.contains(behaviourItem1)) {
                         return false;
                     }
                     //goal.i() -> isContinuous
@@ -170,7 +170,7 @@ public class BehaviourSelector implements IBehaviourSelector {
         return true;
     }
 
-    private boolean areCompatibile(BehaviourItem behaviourItem, BehaviourItem behaviourItem1) {
+    private boolean areCompatible(BehaviourItem behaviourItem, BehaviourItem behaviourItem1) {
         return behaviourItem.getBehaviour().getType().isCompatibleWith(behaviourItem1.getBehaviour().getType());
     }
 }

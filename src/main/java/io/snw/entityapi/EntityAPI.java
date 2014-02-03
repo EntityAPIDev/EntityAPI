@@ -1,14 +1,14 @@
 package io.snw.entityapi;
 
-import io.snw.entityapi.api.ControllableEntityType;
-import io.snw.entityapi.api.EntityManager;
-import io.snw.entityapi.hooks.ChunkProviderServerHook;
+import com.google.common.collect.Maps;
+import io.snw.entityapi.exceptions.EntityAPINotEnabledException;
 import io.snw.entityapi.metrics.Metrics;
 import io.snw.entityapi.server.*;
-import io.snw.entityapi.utils.EntityUtil;
 import org.bukkit.Bukkit;
-import org.bukkit.World;
 import org.bukkit.event.Event;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,10 +16,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 
 
-public abstract class EntityAPI extends JavaPlugin {
+public abstract class EntityAPI extends JavaPlugin implements Listener {
 
     public static final ModuleLogger LOGGER = new ModuleLogger("EntityAPI");
     public static final ModuleLogger LOGGER_REFLECTION = LOGGER.getModule("Reflection");
@@ -29,6 +30,11 @@ public abstract class EntityAPI extends JavaPlugin {
     public static Server SERVER;
     private List<Plugin> plugins = new ArrayList<>();
     private PluginManager pm = this.getServer().getPluginManager();
+
+    /**
+     * Api stuff
+     */
+    public final Map<String, EntityManager> MANAGERS = Maps.newHashMap();
 
     // TODO: This really needs to be redone. I can't see this working very well in its current state :\
     // -> We need to have a talk on what we're doing here so that it can be fixed
@@ -51,22 +57,15 @@ public abstract class EntityAPI extends JavaPlugin {
         }
 
         initServer();
-        registerEntities();
 
-        /** DEBUG */
-        for (World world : Bukkit.getWorlds()) {
-            ChunkProviderServerHook.hook(world);
-        }
+        Bukkit.getServer().getPluginManager().registerEvents(this, this);
 
         this.getInstances();
     }
 
     @Override
     public void onDisable() {
-        /** DEBUG */
-        for (World world : Bukkit.getWorlds()) {
-            ChunkProviderServerHook.unhook(world);
-        }
+
     }
 
     /**
@@ -100,12 +99,6 @@ public abstract class EntityAPI extends JavaPlugin {
         }
     }
 
-    protected void registerEntities() {
-        for (ControllableEntityType entityType : ControllableEntityType.values()) {
-            EntityUtil.registerEntity(entityType.getHandleClass(), entityType.getName(), entityType.getId());
-        }
-    }
-
     /**
      * This method places all instances of Entity API in an Array List.
      * If there is more than 1 EntityAPI found, it disables them all.
@@ -132,15 +125,9 @@ public abstract class EntityAPI extends JavaPlugin {
         return INSTANCE != null;
     }
 
-    /**
-     * Will Check for instance of this API running.
-     * If one is found its returned otherwise if not, throws error.
-     *
-     * @return
-     */
     public static EntityAPI getInstance() {
         if (INSTANCE == null) {
-            throw new RuntimeException("EntityAPI not Enabled, instance could not be found!");
+            throw new EntityAPINotEnabledException();
         }
         return INSTANCE;
     }
@@ -151,17 +138,58 @@ public abstract class EntityAPI extends JavaPlugin {
     }
 
     /**
-     * Will return a unique entity manager for each plugin using this.
-     * (to have some cross plugin working version stuff)
-     * I'm not really experienced with this and the EntityManager is just an idea
-     * you guys can do whatever you want with it since I don't really know what your original
-     * idea was :/
-     * (captainbern)
-     *
-     * @param plugin
-     * @return
+     * API STUFF
      */
-    public EntityManager getEntityManager(Plugin plugin) {
-        return null;
+    private void addManager(String name, EntityManager entityManager) {
+        getInstance();
+        MANAGERS.put(name, entityManager);
+    }
+
+    public static EntityManager createManager(Plugin owningPlugin) {
+        getInstance();
+
+        return createEntityManager(owningPlugin, false);
+    }
+
+    public static EntityManager createEntityManager(Plugin owningPlugin, boolean keepInMemory) {
+        getInstance();
+
+        EntityManager manager = new EntityManager(owningPlugin, keepInMemory);
+        registerManager(owningPlugin.getName(), manager);
+
+        return manager;
+    }
+
+    public static void registerManager(String name, EntityManager manager) {
+        if(!hasInstance())
+            return;
+
+        getInstance().addManager(name, manager);
+    }
+
+    public static boolean hasEntityManager(Plugin plugin) {
+        return hasEntityManager(plugin.getName());
+    }
+
+    public static boolean hasEntityManager(String pluginName) {
+        return getInstance().MANAGERS.containsKey(pluginName);
+    }
+
+    public static EntityManager getManagerFor(Plugin plugin) {
+        return getManagerFor(plugin.getName());
+    }
+
+    public static EntityManager getManagerFor(String pluginName) {
+        getInstance();
+
+        if(!hasEntityManager(pluginName))
+            return null;
+
+        return getInstance().MANAGERS.get(pluginName);
+    }
+
+    @EventHandler
+    public void onDisable(PluginDisableEvent event) {
+        // TODO: take care of plugin stuff entity
     }
 }

@@ -13,6 +13,12 @@ public class ControllableBatEntity extends EntityBat implements ControllableEnti
 
     private final ControllableEntity controllableEntity;
 
+    //TODO: Every entity class should look like this. (constructor)
+
+    public ControllableBatEntity(World world) {
+        this(world, null);
+    }
+
     public ControllableBatEntity(World world, ControllableEntity controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;

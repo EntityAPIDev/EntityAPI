@@ -2,7 +2,6 @@ package io.snw.entityapi.entity;
 
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
-import org.bukkit.entity.Cow;
 import org.bukkit.entity.MushroomCow;
 
 public class ControllableMushroomCow extends ControllableBaseEntity<MushroomCow> {
