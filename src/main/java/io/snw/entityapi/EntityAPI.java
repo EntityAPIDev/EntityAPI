@@ -1,10 +1,10 @@
 package io.snw.entityapi;
 
 import com.google.common.collect.Maps;
-import io.snw.entityapi.error.ReportServiceProvider;
 import io.snw.entityapi.exceptions.EntityAPINotEnabledException;
 import io.snw.entityapi.metrics.Metrics;
 import io.snw.entityapi.server.*;
+import io.snw.entityapi.utils.PastebinReporter;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -35,7 +35,7 @@ public abstract class EntityAPI extends JavaPlugin implements Listener {
     private static final String UPDATE_ID = "";    // TODO: insert the project id here
     private static final String PASTEBIN_REPORT_KEY = "8759cf9327f8593508789ecaa36cf27b";
 
-    private static ReportServiceProvider REPORTER;
+    private static final PastebinReporter REPORTER = new PastebinReporter(PASTEBIN_REPORT_KEY);
 
     /**
      * Api stuff
@@ -54,7 +54,6 @@ public abstract class EntityAPI extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         INSTANCE = this;
-        REPORTER = new ReportServiceProvider(ReportServiceProvider.PASTEBIN, PASTEBIN_REPORT_KEY);
 
         try {
             Metrics metrics = new Metrics(this);
@@ -139,7 +138,7 @@ public abstract class EntityAPI extends JavaPlugin implements Listener {
         return INSTANCE;
     }
 
-    public static ReportServiceProvider getReporter() {
+    public static PastebinReporter getReporter() {
         return REPORTER;
     }
 
