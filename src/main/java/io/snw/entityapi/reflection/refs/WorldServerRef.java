@@ -30,19 +30,4 @@ public class WorldServerRef {
     public static boolean isSafeEnabled(Object worldServer) {
         return SAVING_SWITCH.get(worldServer);
     }
-
-    public static final FieldAccessor<Object> chunkProviderServer = new SafeDirectField<Object>() {
-        private final FieldAccessor field1 = CLASS_TEMPLATE.getField("chunkProviderServer");
-        private final FieldAccessor field2 = WORLD_CLASS_TEMPLATE.getField("chunkProvider");
-
-        @Override
-        public Object get(Object instance) {
-            return field1.get(instance);
-        }
-
-        @Override
-        public boolean set(Object instance, Object value) {
-            return field1.set(instance, value) && field2.set(instance, value);
-        }
-    };
 }

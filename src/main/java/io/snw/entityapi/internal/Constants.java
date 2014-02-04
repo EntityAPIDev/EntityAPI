@@ -219,8 +219,6 @@ public class Constants {
         public static final String SUPPORTED_VERSION = "v1_7_R1";
         public static final int SUPPORTED_VERSION_NUMERIC = 171;
 
-        public static final int PROTOCOL_VERSION = 4; //<- not needed now, but it looks coolio.
-
         public static final String CRAFBUKKIT_ROOT = "org.bukkit.craftbukkit";
         public static final String MINECRAFT_ROOT = "net.minecraft.server";
     }
