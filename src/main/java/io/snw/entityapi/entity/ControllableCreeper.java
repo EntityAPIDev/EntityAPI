@@ -19,8 +19,10 @@ public class ControllableCreeper extends ControllableBaseEntity<Creeper> {
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
-    public boolean isPowered() {
-        return ((EntityCreeper) this.handle).isPowered();
+    public void explode(int modifier) {
+        if (this.handle != null) {
+            ((ControllableCreeperEntity) this.handle).explode(modifier);
+        }
     }
 
     @Override

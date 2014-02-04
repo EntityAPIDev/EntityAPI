@@ -18,14 +18,6 @@ public class ControllableCow extends ControllableBaseEntity<Cow> {
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
-    public int getAge() {
-        return ((EntityCow) this.handle).getAge();
-    }
-    
-    public boolean isBaby() {
-        return ((EntityCow) this.handle).isBaby();
-    }
-
     @Override
     public void initSounds() {
         this.setSound(EntitySound.IDLE, "mob.cow.say");

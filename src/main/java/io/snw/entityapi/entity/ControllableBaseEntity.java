@@ -1,6 +1,5 @@
 package io.snw.entityapi.entity;
 
-import io.snw.entityapi.EntityAPI;
 import io.snw.entityapi.EntityManager;
 import io.snw.entityapi.api.ControllableEntity;
 import io.snw.entityapi.api.ControllableEntityHandle;
@@ -8,7 +7,6 @@ import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import io.snw.entityapi.api.events.*;
 import io.snw.entityapi.api.mind.Mind;
-import io.snw.entityapi.utils.IDGenerator;
 import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

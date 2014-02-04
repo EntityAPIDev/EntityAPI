@@ -18,14 +18,6 @@ public class ControllableChicken extends ControllableBaseEntity<Chicken> {
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
-    public void setHanging(boolean flag) {
-        ((EntityChicken) this.handle).a(flag);
-    }
-
-    public boolean isHanging() {
-        return ((EntityChicken) this.handle).bk();
-    }
-
     @Override
     public void initSounds() {
         this.setSound(EntitySound.IDLE, "mob.chicken.idle");
