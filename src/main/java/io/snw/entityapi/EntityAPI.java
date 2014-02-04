@@ -87,7 +87,7 @@ public abstract class EntityAPI extends JavaPlugin implements Listener {
 
         for (Server server : servers) {
             if (server.init()) {   //the first server type that returns true on init is a valid server brand.
-                this.SERVER = server;
+                SERVER = server;
                 break;
             }
         }

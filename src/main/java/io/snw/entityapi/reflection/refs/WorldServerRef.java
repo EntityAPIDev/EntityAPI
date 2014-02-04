@@ -3,7 +3,6 @@ package io.snw.entityapi.reflection.refs;
 import io.snw.entityapi.reflection.ClassTemplate;
 import io.snw.entityapi.reflection.FieldAccessor;
 import io.snw.entityapi.reflection.NMSClassTemplate;
-import io.snw.entityapi.reflection.SafeDirectField;
 
 public class WorldServerRef {
 
@@ -21,13 +20,5 @@ public class WorldServerRef {
 
     public static Object getPlayerChunkMap(Object worldServer) {
         return PLAYER_CHUNK_MAP.get(worldServer);
-    }
-
-    public static Object getChunkProviderServer(Object worldServer) {
-        return CHUNK_PROVIDER_SERVER.get(worldServer);
-    }
-
-    public static boolean isSafeEnabled(Object worldServer) {
-        return SAVING_SWITCH.get(worldServer);
     }
 }
