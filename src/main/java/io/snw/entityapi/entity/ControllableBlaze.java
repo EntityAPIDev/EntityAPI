@@ -3,8 +3,6 @@ package io.snw.entityapi.entity;
 import io.snw.entityapi.EntityManager;
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
-import net.minecraft.server.v1_7_R1.EntityBlaze;
-import org.bukkit.Material;
 import org.bukkit.entity.Blaze;
 
 public class ControllableBlaze extends ControllableAttackingBaseEntity<Blaze> {

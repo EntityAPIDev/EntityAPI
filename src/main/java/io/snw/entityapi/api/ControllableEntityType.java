@@ -72,23 +72,23 @@ public enum ControllableEntityType {
     }
 
     public static ControllableEntityType getByControllableClass(Class<? extends ControllableEntity> clazz) {
-        for(ControllableEntityType type : values()) {
-            if(type.getHandleClass().equals(clazz))
+        for (ControllableEntityType type : values()) {
+            if (type.getHandleClass().equals(clazz))
                 return type;
         }
         return null;
     }
 
     public static ControllableEntityType getByEntityClass(Class<? extends EntityLiving> clazz) {
-        for(ControllableEntityType type : values()) {
-            if(type.getControllableClass().equals(clazz) || type.getControllableClass().getSuperclass().equals(clazz) || type.getControllableClass().isAssignableFrom(clazz))
+        for (ControllableEntityType type : values()) {
+            if (type.getControllableClass().equals(clazz) || type.getControllableClass().getSuperclass().equals(clazz) || type.getControllableClass().isAssignableFrom(clazz))
                 return type;
         }
         return null;
     }
 
     @Override
-    public String toString()  {
+    public String toString() {
         return this.name;
     }
 }

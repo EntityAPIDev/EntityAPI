@@ -1,10 +1,10 @@
 package io.snw.entityapi.entity;
 
 import io.snw.entityapi.api.ControllableEntity;
+import io.snw.entityapi.api.ControllableEntityHandle;
 import io.snw.entityapi.api.EntitySound;
 import io.snw.entityapi.api.mind.attribute.Attribute;
 import io.snw.entityapi.api.mind.attribute.RideAttribute;
-import io.snw.entityapi.api.ControllableEntityHandle;
 import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;

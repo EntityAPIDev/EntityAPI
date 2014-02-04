@@ -6,6 +6,6 @@ import org.bukkit.entity.Player;
 public class PlayerUtil {
 
     public static Object getHandle(Player player) {
-        return EntityUtil.getNavigation((EntityLiving)player);
+        return EntityUtil.getNavigation((EntityLiving) player);
     }
 }

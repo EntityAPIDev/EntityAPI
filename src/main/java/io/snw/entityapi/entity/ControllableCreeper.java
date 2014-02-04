@@ -3,8 +3,6 @@ package io.snw.entityapi.entity;
 import io.snw.entityapi.EntityManager;
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
-import net.minecraft.server.v1_7_R1.EntityCreeper;
-import net.minecraft.server.v1_7_R1.NBTTagCompound;
 import org.bukkit.entity.Creeper;
 
 public class ControllableCreeper extends ControllableBaseEntity<Creeper> {

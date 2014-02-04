@@ -37,12 +37,12 @@ public class ControllableEnderDragonEntity extends EntityEnderDragon implements 
         org.bukkit.Material lootMaterial = this.controllableEntity.getLoot();
         return this.controllableEntity == null ? super.getLoot() : lootMaterial == null ? super.getLoot() : CraftMagicNumbers.getItem(lootMaterial);
     }
-    
+
     @Override
     protected String t() {
         return this.controllableEntity == null ? "mob.enderdragon.growl" : this.controllableEntity.getSound(EntitySound.IDLE);
     }
-    
+
     @Override
     protected String aT() {
         return this.controllableEntity == null ? "mob.enderdragon.hit" : this.controllableEntity.getSound(EntitySound.HIT);

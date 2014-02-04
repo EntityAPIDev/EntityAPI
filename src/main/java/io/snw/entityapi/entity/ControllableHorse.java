@@ -19,7 +19,7 @@ public class ControllableHorse extends ControllableBaseEntity<Horse> {
 
     @Override
     public void initSounds() {
-        for (String key : new String[] {"idle", "hit", "death"}) {
+        for (String key : new String[]{"idle", "hit", "death"}) {
             this.setSound(EntitySound.IDLE, "zombie", "mob.horse.zombie." + key);
             this.setSound(EntitySound.IDLE, "skeleton", "mob.horse.skeleton." + key);
             this.setSound(EntitySound.IDLE, "normal", "mob.horse." + key);

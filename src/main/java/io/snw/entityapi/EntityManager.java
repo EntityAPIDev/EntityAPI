@@ -3,7 +3,6 @@ package io.snw.entityapi;
 import com.google.common.collect.Maps;
 import io.snw.entityapi.api.ControllableEntity;
 import io.snw.entityapi.api.ControllableEntityType;
-import io.snw.entityapi.entity.ControllableBaseEntity;
 import io.snw.entityapi.exceptions.NameRequiredException;
 import io.snw.entityapi.reflection.SafeConstructor;
 import org.bukkit.Location;
@@ -42,7 +41,7 @@ public class EntityManager {
 
     protected Integer getNextID(int index) {
         Set<Integer> ids = this.entities.keySet();
-        while(ids.contains(index)) {
+        while (ids.contains(index)) {
             index++;
         }
         return index;
@@ -53,13 +52,13 @@ public class EntityManager {
     }
 
     public ControllableEntity spawnEntity(ControllableEntityType entityType, Location location, boolean prepare) {
-        if(entityType.isNameRequired())
+        if (entityType.isNameRequired())
             throw new NameRequiredException();
 
         Integer id = getNextID();
         ControllableEntity entity = createEntity(entityType, id);
 
-        if(entity == null)
+        if (entity == null)
             return null;
 
         // TODO: take care of actual spawning

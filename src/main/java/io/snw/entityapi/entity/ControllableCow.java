@@ -3,7 +3,6 @@ package io.snw.entityapi.entity;
 import io.snw.entityapi.EntityManager;
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
-import net.minecraft.server.v1_7_R1.EntityCow;
 import org.bukkit.entity.Cow;
 
 public class ControllableCow extends ControllableBaseEntity<Cow> {

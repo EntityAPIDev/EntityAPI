@@ -19,7 +19,7 @@ public class ControllableSlime extends ControllableAttackingBaseEntity<Slime> {
 
     @Override
     public void initSounds() {
-        for (EntitySound type : new EntitySound[] {EntitySound.IDLE, EntitySound.HURT, EntitySound.DEATH}) {
+        for (EntitySound type : new EntitySound[]{EntitySound.IDLE, EntitySound.HURT, EntitySound.DEATH}) {
             this.setSound(type, "mob.slime.big", "big");
             this.setSound(type, "mob.slime.small", "small");
         }
