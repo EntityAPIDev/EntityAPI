@@ -12,7 +12,7 @@ public class ControllableChicken extends ControllableBaseEntity<Chicken> {
         super(id, ControllableEntityType.CHICKEN, manager);
     }
 
-    public ControllableChicken(int id, ControllableBatEntity entityHandle, EntityManager manager) {
+    public ControllableChicken(int id, ControllableChickenEntity entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();

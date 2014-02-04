@@ -21,9 +21,9 @@ public class ControllableEnderDragon extends ControllableBaseEntity<EnderDragon>
     
     @Override
     public void initSounds() {
-        this.setSound(EntitySound.GROWL, Sound.ENDERDRAGON_GROWL);
-        this.setSound(EntitySound.HIT, Sound.ENDERDRAGON_HIT);
-        this.setSound(EntitySound.DEATH, Sound.ENDERDRAGON_DEATH);
-        this.setSound(EntitySound.WINGS, Sound.ENDERDRAGON_WINGS);
+        this.setSound(EntitySound.IDLE, "mob.enderdragon.growl");
+        this.setSound(EntitySound.HIT, "mob.enderdragon.hit");
+        this.setSound(EntitySound.DEATH, "mob.enderdragon.end");
+        this.setSound(EntitySound.WINGS, "mob.enderdragon.wings");
     }
 }

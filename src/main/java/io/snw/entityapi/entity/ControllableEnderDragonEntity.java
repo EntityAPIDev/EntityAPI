@@ -40,11 +40,25 @@ public class ControllableEnderDragonEntity extends EntityEnderDragon implements 
     
     @Override
     protected String t() {
-        return this.controllableEntity == null ? "mob.enderdragon.growl" : this.controllableEntity.getSound(EntitySound.GROWL);
+        return this.controllableEntity == null ? "mob.enderdragon.growl" : this.controllableEntity.getSound(EntitySound.IDLE);
     }
     
     @Override
     protected String aT() {
         return this.controllableEntity == null ? "mob.enderdragon.hit" : this.controllableEntity.getSound(EntitySound.HIT);
+    }
+
+    @Override
+    public void makeSound(String s, float f, float f1) {
+        if (s.equals("mob.enderdragon.wings")) {
+            if (this.controllableEntity != null) {
+                s = this.controllableEntity.getSound(EntitySound.WINGS);
+            }
+        } else if (s.equals("mob.enderdragon.end")) {
+            if (this.controllableEntity != null) {
+                s = this.controllableEntity.getSound(EntitySound.DEATH);
+            }
+        }
+        super.makeSound(s, f, f1);
     }
 }

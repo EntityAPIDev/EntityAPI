@@ -1,13 +1,18 @@
 package io.snw.entityapi.entity;
 
+import io.snw.entityapi.EntityManager;
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import org.bukkit.entity.Ghast;
 
 public class ControllableGhast extends ControllableAttackingBaseEntity<Ghast> {
 
-    public ControllableGhast(ControllableGhastEntity entityHandle) {
-        super(ControllableEntityType.GHAST);
+    public ControllableGhast(int id, EntityManager manager) {
+        super(id, ControllableEntityType.GHAST, manager);
+    }
+
+    public ControllableGhast(int id, ControllableGhastEntity entityHandle, EntityManager manager) {
+        this(id, manager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
     }

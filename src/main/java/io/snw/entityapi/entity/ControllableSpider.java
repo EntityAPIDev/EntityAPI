@@ -1,13 +1,18 @@
 package io.snw.entityapi.entity;
 
+import io.snw.entityapi.EntityManager;
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import org.bukkit.entity.Spider;
 
 public class ControllableSpider extends ControllableAttackingBaseEntity<Spider> {
 
-    public ControllableSpider(ControllableCaveSpiderEntity entityHandle) {
-        super(ControllableEntityType.SPIDER);
+    public ControllableSpider(int id, EntityManager manager) {
+        super(id, ControllableEntityType.SPIDER, manager);
+    }
+
+    public ControllableSpider(int id, ControllableSpiderEntity entityHandle, EntityManager manager) {
+        this(id, manager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
