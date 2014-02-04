@@ -1,13 +1,18 @@
 package io.snw.entityapi.entity;
 
+import io.snw.entityapi.EntityManager;
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import org.bukkit.entity.PigZombie;
 
 public class ControllablePigZombie extends ControllableAttackingBaseEntity<PigZombie> {
 
-    public ControllablePigZombie(ControllablePigZombieEntity entityHandle) {
-        super(ControllableEntityType.PIG_ZOMBIE);
+    public ControllablePigZombie(int id, EntityManager entityManager) {
+        super(id, ControllableEntityType.PIG_ZOMBIE, entityManager);
+    }
+
+    public ControllablePigZombie(int id, ControllablePigZombieEntity entityHandle, EntityManager entityManager) {
+        super(id, ControllableEntityType.PIG_ZOMBIE, entityManager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
     }

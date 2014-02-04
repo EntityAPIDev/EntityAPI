@@ -1,6 +1,7 @@
 package io.snw.entityapi;
 
 import com.google.common.collect.Maps;
+import io.snw.entityapi.error.ReportServiceProvider;
 import io.snw.entityapi.exceptions.EntityAPINotEnabledException;
 import io.snw.entityapi.metrics.Metrics;
 import io.snw.entityapi.server.*;
@@ -31,6 +32,11 @@ public abstract class EntityAPI extends JavaPlugin implements Listener {
     private List<Plugin> plugins = new ArrayList<>();
     private PluginManager pm = this.getServer().getPluginManager();
 
+    private static final String UPDATE_ID = "";    // TODO: insert the project id here
+    private static final String PASTEBIN_REPORT_KEY = "8759cf9327f8593508789ecaa36cf27b";
+
+    private static ReportServiceProvider REPORTER;
+
     /**
      * Api stuff
      */
@@ -48,6 +54,7 @@ public abstract class EntityAPI extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         INSTANCE = this;
+        REPORTER = new ReportServiceProvider(ReportServiceProvider.PASTEBIN, PASTEBIN_REPORT_KEY);
 
         try {
             Metrics metrics = new Metrics(this);
@@ -130,6 +137,10 @@ public abstract class EntityAPI extends JavaPlugin implements Listener {
             throw new EntityAPINotEnabledException();
         }
         return INSTANCE;
+    }
+
+    public static ReportServiceProvider getReporter() {
+        return REPORTER;
     }
 
     public <T extends Event> T callEvent(T event) {

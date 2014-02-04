@@ -1,5 +1,6 @@
 package io.snw.entityapi.entity;
 
+import io.snw.entityapi.EntityManager;
 import io.snw.entityapi.api.Attacking;
 import io.snw.entityapi.api.ControllableEntityType;
 import net.minecraft.server.v1_7_R1.EntityInsentient;
@@ -9,8 +10,8 @@ import org.bukkit.entity.LivingEntity;
 
 public class ControllableAttackingBaseEntity<T extends LivingEntity> extends ControllableBaseEntity<T> implements Attacking {
 
-    public ControllableAttackingBaseEntity(ControllableEntityType entityType) {
-        super(entityType);
+    public ControllableAttackingBaseEntity(int id, ControllableEntityType entityType, EntityManager entityManager) {
+        super(id, entityType, entityManager);
     }
 
     @Override

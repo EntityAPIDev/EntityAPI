@@ -1,13 +1,18 @@
 package io.snw.entityapi.entity;
 
+import io.snw.entityapi.EntityManager;
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import org.bukkit.entity.MagmaCube;
 
 public class ControllableMagmaCube extends ControllableAttackingBaseEntity<MagmaCube> {
 
-    public ControllableMagmaCube(ControllableMagmaCubeEntity entityHandle) {
-        super(ControllableEntityType.LAVA_SLIME);
+    public ControllableMagmaCube(int id, EntityManager entityManager) {
+        super(id, ControllableEntityType.LAVA_SLIME, entityManager);
+    }
+
+    public ControllableMagmaCube(int id, ControllableMagmaCubeEntity entityHandle, EntityManager entityManager) {
+        super(id, ControllableEntityType.LAVA_SLIME, entityManager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
     }

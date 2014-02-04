@@ -1,13 +1,18 @@
 package io.snw.entityapi.entity;
 
+import io.snw.entityapi.EntityManager;
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import org.bukkit.entity.IronGolem;
 
 public class ControllableIronGolem extends ControllableAttackingBaseEntity<IronGolem> {
 
-    public ControllableIronGolem(ControllableIronGolemEntity entityHandle) {
-        super(ControllableEntityType.IRON_GOLEM);
+    public ControllableIronGolem(int id, EntityManager entityManager) {
+        super(id, ControllableEntityType.IRON_GOLEM, entityManager);
+    }
+
+    public ControllableIronGolem(int id, ControllableIronGolemEntity entityHandle, EntityManager entityManager) {
+        super(id, ControllableEntityType.IRON_GOLEM, entityManager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
     }

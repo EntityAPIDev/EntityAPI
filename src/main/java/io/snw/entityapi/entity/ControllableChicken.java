@@ -1,13 +1,18 @@
 package io.snw.entityapi.entity;
 
+import io.snw.entityapi.EntityManager;
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import org.bukkit.entity.Chicken;
 
 public class ControllableChicken extends ControllableBaseEntity<Chicken> {
 
-    public ControllableChicken(ControllableChickenEntity entityHandle) {
-        super(ControllableEntityType.CHICKEN);
+    public ControllableChicken(int id, EntityManager entityManager) {
+        super(id, ControllableEntityType.CHICKEN, entityManager);
+    }
+
+    public ControllableChicken(int id, ControllableChickenEntity entityHandle, EntityManager entityManager) {
+        super(id, ControllableEntityType.CHICKEN, entityManager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
     }

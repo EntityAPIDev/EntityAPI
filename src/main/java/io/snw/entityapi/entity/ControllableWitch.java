@@ -1,13 +1,18 @@
 package io.snw.entityapi.entity;
 
+import io.snw.entityapi.EntityManager;
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import org.bukkit.entity.Witch;
 
 public class ControllableWitch extends ControllableBaseEntity<Witch> {
 
-    public ControllableWitch(ControllableWitchEntity entityHandle) {
-        super(ControllableEntityType.WITCH);
+    public ControllableWitch(int id, EntityManager entityManager) {
+        super(id, ControllableEntityType.WITCH, entityManager);
+    }
+
+    public ControllableWitch(int id, ControllableWitchEntity entityHandle, EntityManager entityManager) {
+        super(id, ControllableEntityType.WITCH, entityManager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
     }

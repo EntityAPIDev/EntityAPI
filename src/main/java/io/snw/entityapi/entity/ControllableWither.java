@@ -1,13 +1,18 @@
 package io.snw.entityapi.entity;
 
+import io.snw.entityapi.EntityManager;
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import org.bukkit.entity.Wither;
 
 public class ControllableWither extends ControllableBaseEntity<Wither> {
 
-    public ControllableWither(ControllableWitherEntity entityHandle) {
-        super(ControllableEntityType.WITHER);
+    public ControllableWither(int id, EntityManager entityManager) {
+        super(id, ControllableEntityType.WITHER, entityManager);
+    }
+
+    public ControllableWither(int id, ControllableWitherEntity entityHandle, EntityManager entityManager) {
+        super(id, ControllableEntityType.WITHER, entityManager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
     }

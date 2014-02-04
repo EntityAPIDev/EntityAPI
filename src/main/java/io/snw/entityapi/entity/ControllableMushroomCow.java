@@ -1,13 +1,18 @@
 package io.snw.entityapi.entity;
 
+import io.snw.entityapi.EntityManager;
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import org.bukkit.entity.MushroomCow;
 
 public class ControllableMushroomCow extends ControllableBaseEntity<MushroomCow> {
 
-    public ControllableMushroomCow(ControllableMushroomCowEntity entityHandle) {
-        super(ControllableEntityType.MUSHROOMCOW);
+    public ControllableMushroomCow(int id, EntityManager entityManager) {
+        super(id, ControllableEntityType.MUSHROOMCOW, entityManager);
+    }
+
+    public ControllableMushroomCow(int id, ControllableMushroomCowEntity entityHandle, EntityManager entityManager) {
+        super(id, ControllableEntityType.MUSHROOMCOW, entityManager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
     }

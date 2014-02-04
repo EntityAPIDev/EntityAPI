@@ -1,13 +1,18 @@
 package io.snw.entityapi.entity;
 
+import io.snw.entityapi.EntityManager;
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import org.bukkit.entity.Villager;
 
 public class ControllableVillager extends ControllableBaseEntity<Villager> {
 
-    public ControllableVillager(ControllableVillagerEntity entityHandle) {
-        super(ControllableEntityType.VILLAGER);
+    public ControllableVillager(int id, EntityManager entityManager) {
+        super(id, ControllableEntityType.VILLAGER, entityManager);
+    }
+
+    public ControllableVillager(int id, ControllableVillagerEntity entityHandle, EntityManager entityManager) {
+        super(id, ControllableEntityType.VILLAGER, entityManager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
     }

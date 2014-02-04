@@ -1,13 +1,18 @@
 package io.snw.entityapi.entity;
 
+import io.snw.entityapi.EntityManager;
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import org.bukkit.entity.Enderman;
 
 public class ControllableEnderman extends ControllableAttackingBaseEntity<Enderman> {
 
-    public ControllableEnderman(ControllableEndermanEntity entityHandle) {
-        super(ControllableEntityType.ENDERMAN);
+    public ControllableEnderman(int id, EntityManager entityManager) {
+        super(id, ControllableEntityType.ENDERMAN, entityManager);
+    }
+
+    public ControllableEnderman(int id, ControllableEndermanEntity entityHandle, EntityManager entityManager) {
+        super(id, ControllableEntityType.ENDERMAN, entityManager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
