@@ -1,6 +1,12 @@
 package io.snw.entityapi.reflection;
 
+import java.lang.reflect.Field;
+
 public interface FieldAccessor<T> {
+
+    public ClassTemplate getType();
+
+    public Field getField();
 
     boolean set(Object instance, T value);
 
@@ -8,4 +14,9 @@ public interface FieldAccessor<T> {
 
     T transfer(Object from, Object to);
 
+    boolean isPublic();
+
+    boolean isReadOnly();
+
+    void setReadOnly(Object target, boolean value);
 }

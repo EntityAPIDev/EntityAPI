@@ -10,11 +10,11 @@ public class SafeField<T> implements FieldAccessor<T> {
     private Field field;
     private boolean isStatic;
 
-    public SafeField(Field field) {
+    public SafeField(Field field){
         setField(field);
     }
 
-    public SafeField(Class<?> coreClass, String fieldName) {
+    public SafeField(Class<?> coreClass, String fieldName){
         try {
             Field field = coreClass.getDeclaredField(fieldName);
             setField(field);
@@ -23,11 +23,11 @@ public class SafeField<T> implements FieldAccessor<T> {
         }
     }
 
-    protected void setField(Field field) {
-        if (!field.isAccessible()) {
-            try {
+    protected void setField(Field field){
+        if(!field.isAccessible()){
+            try{
                 field.setAccessible(true);
-            } catch (Exception e) {
+            }catch(Exception e){
                 e.printStackTrace();
                 field = null;
             }
@@ -37,8 +37,18 @@ public class SafeField<T> implements FieldAccessor<T> {
     }
 
     @Override
+    public ClassTemplate getType() {
+        return ClassTemplate.create(this.field.getType());
+    }
+
+    @Override
+    public Field getField() {
+        return this.field;
+    }
+
+    @Override
     public boolean set(Object instance, T value) {
-        if (!isStatic && instance == null) {
+        if(!isStatic && instance == null){
             throw new UnsupportedOperationException("Non-static fields require a valid instance passed in!");
         }
 
@@ -53,7 +63,7 @@ public class SafeField<T> implements FieldAccessor<T> {
 
     @Override
     public T get(Object instance) {
-        if (!isStatic && instance == null) {
+        if(!isStatic && instance == null){
             throw new UnsupportedOperationException("Non-static fields require a valid instance passed in!");
         }
         try {
@@ -74,23 +84,22 @@ public class SafeField<T> implements FieldAccessor<T> {
         return old;
     }
 
-    public String getName() {
+    public String getName(){
         return this.field.getName();
     }
 
-    @Override
-    public String toString() {
+    public String toString(){
         StringBuilder string = new StringBuilder(75);
         int mod = this.field.getModifiers();
-        if (Modifier.isPublic(mod)) {
+        if(Modifier.isPublic(mod)){
             string.append("public ");
-        } else if (Modifier.isPrivate(mod)) {
+        }else if(Modifier.isPrivate(mod)){
             string.append("private ");
-        } else if (Modifier.isProtected(mod)) {
+        }else if(Modifier.isProtected(mod)){
             string.append("protected ");
         }
 
-        if (Modifier.isStatic(mod)) {
+        if(Modifier.isStatic(mod)){
             string.append("static ");
         }
 
@@ -99,15 +108,33 @@ public class SafeField<T> implements FieldAccessor<T> {
         return string.toString();
     }
 
+    @Override
+    public boolean isPublic() {
+        return Modifier.isPublic(field.getModifiers());
+    }
+
+    @Override
+    public boolean isReadOnly() {
+        return Modifier.isFinal(field.getModifiers());
+    }
+
+    @Override
+    public void setReadOnly(Object target, boolean value) {
+        if(value)
+            set(target, "modifiers", field.getModifiers() | Modifier.FINAL);
+        else
+            set(target, "modifiers", field.getModifiers() & ~Modifier.FINAL);
+    }
+
     public static <T> T get(Class<?> clazz, String fieldname) {
         return new SafeField<T>(clazz, fieldname).get(null);
     }
 
-    public static <T> T get(Object instance, String fieldName) {
+    public static <T> T get(Object instance, String fieldName){
         return new SafeField<T>(instance.getClass(), fieldName).get(instance);
     }
 
-    public static <T> void set(Object instance, String fieldName, T value) {
+    public static <T> void set(Object instance, String fieldName, T value){
         new SafeField<T>(instance.getClass(), fieldName).set(instance, value);
     }
 
