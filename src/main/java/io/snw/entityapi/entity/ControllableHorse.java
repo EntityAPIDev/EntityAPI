@@ -7,18 +7,19 @@ import org.bukkit.entity.Horse;
 
 public class ControllableHorse extends ControllableBaseEntity<Horse> {
 
-    public ControllableHorse(int id, EntityManager entityManager) {
-        super(id, ControllableEntityType.HORSE, entityManager);
+    public ControllableHorse(int id, EntityManager manager) {
+        super(id, ControllableEntityType.HORSE, manager);
     }
 
-    public ControllableHorse(int id, ControllableHorseEntity entityHandle, EntityManager entityManager) {
-        super(id, ControllableEntityType.HORSE, entityManager);
+    public ControllableHorse(int id, ControllableHorseEntity entityHandle, EntityManager manager) {
+        this(id, manager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
+    @Override
     public void initSounds() {
-        for (String key : new String[] {"idle", "hit", "death"}) {
+        for (String key : new String[]{"idle", "hit", "death"}) {
             this.setSound(EntitySound.IDLE, "zombie", "mob.horse.zombie." + key);
             this.setSound(EntitySound.IDLE, "skeleton", "mob.horse.skeleton." + key);
             this.setSound(EntitySound.IDLE, "normal", "mob.horse." + key);

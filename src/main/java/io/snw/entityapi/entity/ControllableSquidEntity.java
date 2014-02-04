@@ -20,6 +20,7 @@ public class ControllableSquidEntity extends EntitySquid implements Controllable
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }

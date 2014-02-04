@@ -21,6 +21,7 @@ public class ControllableOcelotEntity extends EntityOcelot implements Controllab
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }

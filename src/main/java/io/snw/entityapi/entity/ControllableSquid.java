@@ -6,12 +6,12 @@ import org.bukkit.entity.Squid;
 
 public class ControllableSquid extends ControllableBaseEntity<Squid> {
 
-    public ControllableSquid(int id, EntityManager entityManager) {
-        super(id, ControllableEntityType.SQUID, entityManager);
+    public ControllableSquid(int id, EntityManager manager) {
+        super(id, ControllableEntityType.SQUID, manager);
     }
 
-    public ControllableSquid(int id, ControllableSquidEntity entityHandle, EntityManager entityManager) {
-        super(id, ControllableEntityType.SQUID, entityManager);
+    public ControllableSquid(int id, ControllableSquidEntity entityHandle, EntityManager manager) {
+        this(id, manager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
     }

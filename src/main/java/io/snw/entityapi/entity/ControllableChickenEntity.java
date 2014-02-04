@@ -21,6 +21,7 @@ public class ControllableChickenEntity extends EntityChicken implements Controll
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }

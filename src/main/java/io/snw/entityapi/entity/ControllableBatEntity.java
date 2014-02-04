@@ -21,6 +21,7 @@ public class ControllableBatEntity extends EntityBat implements ControllableEnti
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }

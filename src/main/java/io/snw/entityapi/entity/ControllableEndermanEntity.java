@@ -21,6 +21,7 @@ public class ControllableEndermanEntity extends EntityEnderman implements Contro
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }

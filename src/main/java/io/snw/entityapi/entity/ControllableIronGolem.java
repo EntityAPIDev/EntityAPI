@@ -7,12 +7,13 @@ import org.bukkit.entity.IronGolem;
 
 public class ControllableIronGolem extends ControllableAttackingBaseEntity<IronGolem> {
 
-    public ControllableIronGolem(int id, EntityManager entityManager) {
-        super(id, ControllableEntityType.IRON_GOLEM, entityManager);
+
+    public ControllableIronGolem(int id, EntityManager manager) {
+        super(id, ControllableEntityType.IRON_GOLEM, manager);
     }
 
-    public ControllableIronGolem(int id, ControllableIronGolemEntity entityHandle, EntityManager entityManager) {
-        super(id, ControllableEntityType.IRON_GOLEM, entityManager);
+    public ControllableIronGolem(int id, ControllableIronGolemEntity entityHandle, EntityManager manager) {
+        this(id, manager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
     }

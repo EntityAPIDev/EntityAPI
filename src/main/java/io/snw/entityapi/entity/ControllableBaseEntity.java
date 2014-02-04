@@ -30,7 +30,7 @@ import java.util.Map;
  *
  * @param <T> Bukkit entity that this is based off
  */
-public class ControllableBaseEntity<T extends LivingEntity> implements ControllableEntity {
+public abstract class ControllableBaseEntity<T extends LivingEntity> implements ControllableEntity {
 
     protected final EntityManager manager;
 

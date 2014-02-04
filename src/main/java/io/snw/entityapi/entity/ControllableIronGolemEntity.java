@@ -21,6 +21,7 @@ public class ControllableIronGolemEntity extends EntityIronGolem implements Cont
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }

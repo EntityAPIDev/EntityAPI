@@ -21,6 +21,7 @@ public class ControllableWolfEntity extends EntityWolf implements ControllableEn
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }

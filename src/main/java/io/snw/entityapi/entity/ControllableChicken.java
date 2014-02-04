@@ -7,16 +7,17 @@ import org.bukkit.entity.Chicken;
 
 public class ControllableChicken extends ControllableBaseEntity<Chicken> {
 
-    public ControllableChicken(int id, EntityManager entityManager) {
-        super(id, ControllableEntityType.CHICKEN, entityManager);
+    public ControllableChicken(int id, EntityManager manager) {
+        super(id, ControllableEntityType.CHICKEN, manager);
     }
 
-    public ControllableChicken(int id, ControllableChickenEntity entityHandle, EntityManager entityManager) {
-        super(id, ControllableEntityType.CHICKEN, entityManager);
+    public ControllableChicken(int id, ControllableChickenEntity entityHandle, EntityManager manager) {
+        this(id, manager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
+    @Override
     public void initSounds() {
         this.setSound(EntitySound.IDLE, "mob.chicken.idle");
         this.setSound(EntitySound.HURT, "mob.chicken.hurt");

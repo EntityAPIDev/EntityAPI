@@ -9,6 +9,8 @@ public enum EntitySound {
     ATTACK,
     JUMP,
     BREATHE,
+    HIT,
+    WINGS,
     LAY_EGG,
     STARE,
     TELEPORT,

@@ -7,12 +7,12 @@ import org.bukkit.entity.Creeper;
 
 public class ControllableCreeper extends ControllableBaseEntity<Creeper> {
 
-    public ControllableCreeper(int id, EntityManager entityManager) {
-        super(id, ControllableEntityType.CREEPER, entityManager);
+    public ControllableCreeper(int id, EntityManager manager) {
+        super(id, ControllableEntityType.CREEPER, manager);
     }
 
-    public ControllableCreeper(int id, ControllableCreeperEntity entityHandle, EntityManager entityManager) {
-        super(id, ControllableEntityType.CREEPER, entityManager);
+    public ControllableCreeper(int id, ControllableCreeperEntity entityHandle, EntityManager manager) {
+        this(id, manager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
@@ -23,6 +23,7 @@ public class ControllableCreeper extends ControllableBaseEntity<Creeper> {
         }
     }
 
+    @Override
     public void initSounds() {
         this.setSound(EntitySound.IDLE, "mob.creeper.say");
         this.setSound(EntitySound.DEATH, "mob.creeper.death");

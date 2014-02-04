@@ -7,16 +7,17 @@ import org.bukkit.entity.PigZombie;
 
 public class ControllablePigZombie extends ControllableAttackingBaseEntity<PigZombie> {
 
-    public ControllablePigZombie(int id, EntityManager entityManager) {
-        super(id, ControllableEntityType.PIG_ZOMBIE, entityManager);
+    public ControllablePigZombie(int id, EntityManager manager) {
+        super(id, ControllableEntityType.PIG_ZOMBIE, manager);
     }
 
-    public ControllablePigZombie(int id, ControllablePigZombieEntity entityHandle, EntityManager entityManager) {
-        super(id, ControllableEntityType.PIG_ZOMBIE, entityManager);
+    public ControllablePigZombie(int id, ControllablePigZombieEntity entityHandle, EntityManager manager) {
+        this(id, manager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
+    @Override
     public void initSounds() {
         this.setSound(EntitySound.IDLE, "mob.zombiepig.zpig");
         this.setSound(EntitySound.HURT, "mob.zombiepig.zpighurt");

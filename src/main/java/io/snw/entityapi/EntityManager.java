@@ -41,7 +41,7 @@ public class EntityManager {
 
     protected Integer getNextID(int index) {
         Set<Integer> ids = this.entities.keySet();
-        while(ids.contains(index)) {
+        while (ids.contains(index)) {
             index++;
         }
         return index;
@@ -51,14 +51,14 @@ public class EntityManager {
         return spawnEntity(entityType, location, true);
     }
 
-    public ControllableEntity spawnEntity(ControllableEntityType entityType, Location location, boolean preparé) {
-        if(entityType.isNameRequired())
+    public ControllableEntity spawnEntity(ControllableEntityType entityType, Location location, boolean prepare) {
+        if (entityType.isNameRequired())
             throw new NameRequiredException();
 
         Integer id = getNextID();
         ControllableEntity entity = createEntity(entityType, id);
 
-        if(entity == null)
+        if (entity == null)
             return null;
 
         // TODO: take care of actual spawning
@@ -67,7 +67,7 @@ public class EntityManager {
     }
 
     protected ControllableEntity createEntity(ControllableEntityType entityType, int id) {
-        SafeConstructor<? extends ControllableEntity> constructor = new SafeConstructor<>(entityType.getHandleClass());
+        SafeConstructor<? extends ControllableEntity> constructor = new SafeConstructor<>(entityType.getControllableClass());
         ControllableEntity entity = constructor.newInstance(id, this);
         this.entities.put(id, entity);
         return entity;

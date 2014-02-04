@@ -28,6 +28,7 @@ public class ControllableBat extends ControllableBaseEntity<Bat> {
         return ((EntityBat) this.handle).bN();
     }
 
+    @Override
     public void initSounds() {
         this.setSound(EntitySound.IDLE, "mob.bat.idle");
         this.setSound(EntitySound.HURT, "mob.bat.hurt");

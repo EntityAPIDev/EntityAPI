@@ -21,6 +21,7 @@ public class ControllableWitchEntity extends EntityWitch implements Controllable
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }

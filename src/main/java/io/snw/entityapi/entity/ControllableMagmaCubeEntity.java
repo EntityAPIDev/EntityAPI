@@ -21,6 +21,7 @@ public class ControllableMagmaCubeEntity extends EntityMagmaCube implements Cont
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }

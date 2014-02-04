@@ -7,12 +7,12 @@ import org.bukkit.entity.Zombie;
 
 public class ControllableZombie extends ControllableAttackingBaseEntity<Zombie> {
 
-    public ControllableZombie(int id, EntityManager entityManager) {
-        super(id, ControllableEntityType.ZOMBIE, entityManager);
+    public ControllableZombie(int id, EntityManager manager) {
+        super(id, ControllableEntityType.ZOMBIE, manager);
     }
 
-    public ControllableZombie(int id, ControllableZombieEntity entityHandle, EntityManager entityManager) {
-        super(id, ControllableEntityType.ZOMBIE, entityManager);
+    public ControllableZombie(int id, ControllableZombieEntity entityHandle, EntityManager manager) {
+        this(id, manager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
     }

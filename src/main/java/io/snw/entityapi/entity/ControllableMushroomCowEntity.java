@@ -21,6 +21,7 @@ public class ControllableMushroomCowEntity extends EntityMushroomCow implements 
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }

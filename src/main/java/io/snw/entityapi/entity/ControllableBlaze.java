@@ -3,28 +3,18 @@ package io.snw.entityapi.entity;
 import io.snw.entityapi.EntityManager;
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
-import net.minecraft.server.v1_7_R1.EntityBlaze;
-import org.bukkit.Material;
 import org.bukkit.entity.Blaze;
 
 public class ControllableBlaze extends ControllableAttackingBaseEntity<Blaze> {
 
-    public ControllableBlaze(int id, EntityManager entityManager) {
-        super(id, ControllableEntityType.BLAZE, entityManager);
+    public ControllableBlaze(int id, EntityManager manager) {
+        super(id, ControllableEntityType.BLAZE, manager);
     }
 
-    public ControllableBlaze(int id, ControllableBlazeEntity entityHandle, EntityManager entityManager) {
-        super(id, ControllableEntityType.BLAZE, entityManager);
+    public ControllableBlaze(int id, ControllableBlazeEntity entityHandle, EntityManager manager) {
+        this(id, manager);
         this.handle = entityHandle;
-        this.loot = Material.BLAZE_ROD;
-    }
-
-    public void setOnFire(boolean flag) {
-        ((EntityBlaze) this.handle).a(flag);
-    }
-
-    public boolean isHanging() {
-        return ((EntityBlaze) this.handle).bX();
+        this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
     @Override

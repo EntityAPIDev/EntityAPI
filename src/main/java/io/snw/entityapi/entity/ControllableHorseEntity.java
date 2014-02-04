@@ -22,6 +22,7 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }
@@ -178,7 +179,7 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
                     if (l == 0 && this.random.nextInt(10) == 0) {
                         this.makeSound(this.getSoundFor(EntitySound.BREATHE, "mob.horse.breathe"), stepsound.getVolume1() * 0.6F, stepsound.getVolume2());
                     }
-                //} else if (this.bP <= 5) {
+                    //} else if (this.bP <= 5) {
                 } else if (bP <= 5) {
                     this.makeSound(this.getSoundFor(EntitySound.STEP, "mob.horse.wood", "wood"), stepsound.getVolume1() * 0.15F, stepsound.getVolume2());
                 }
@@ -191,6 +192,7 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
     }
 
     // Taken from EntityHorse and modified to suit custom sounds
+    @Override
     public void a(InventorySubcontainer inventorysubcontainer) {
         int i = this.cj();
         boolean flag = this.cs();

@@ -7,16 +7,17 @@ import org.bukkit.entity.Enderman;
 
 public class ControllableEnderman extends ControllableAttackingBaseEntity<Enderman> {
 
-    public ControllableEnderman(int id, EntityManager entityManager) {
-        super(id, ControllableEntityType.ENDERMAN, entityManager);
+    public ControllableEnderman(int id, EntityManager manager) {
+        super(id, ControllableEntityType.ENDERMAN, manager);
     }
 
-    public ControllableEnderman(int id, ControllableEndermanEntity entityHandle, EntityManager entityManager) {
-        super(id, ControllableEntityType.ENDERMAN, entityManager);
+    public ControllableEnderman(int id, ControllableEndermanEntity entityHandle, EntityManager manager) {
+        this(id, manager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
     }
 
+    @Override
     public void initSounds() {
         this.setSound(EntitySound.IDLE, "idle", "mob.enderman.idle");
         this.setSound(EntitySound.IDLE, "scream", "mob.enderman.scream");

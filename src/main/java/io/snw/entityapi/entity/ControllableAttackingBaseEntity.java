@@ -10,8 +10,8 @@ import org.bukkit.entity.LivingEntity;
 
 public class ControllableAttackingBaseEntity<T extends LivingEntity> extends ControllableBaseEntity<T> implements Attacking {
 
-    public ControllableAttackingBaseEntity(int id, ControllableEntityType entityType, EntityManager entityManager) {
-        super(id, entityType, entityManager);
+    public ControllableAttackingBaseEntity(int id, ControllableEntityType entityType, EntityManager manager) {
+        super(id, entityType, manager);
     }
 
     @Override

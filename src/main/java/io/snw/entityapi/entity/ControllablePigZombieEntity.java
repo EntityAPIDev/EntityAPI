@@ -21,6 +21,7 @@ public class ControllablePigZombieEntity extends EntityPigZombie implements Cont
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }

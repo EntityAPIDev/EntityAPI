@@ -7,12 +7,12 @@ import org.bukkit.entity.Giant;
 
 public class ControllableGiantZombie extends ControllableAttackingBaseEntity<Giant> {
 
-    public ControllableGiantZombie(int id, EntityManager entityManager) {
-        super(id, ControllableEntityType.GIANT, entityManager);
+    public ControllableGiantZombie(int id, EntityManager manager) {
+        super(id, ControllableEntityType.GIANT, manager);
     }
 
-    public ControllableGiantZombie(int id, ControllableGiantZombieEntity entityHandle, EntityManager entityManager) {
-        super(id, ControllableEntityType.GIANT, entityManager);
+    public ControllableGiantZombie(int id, ControllableGiantZombieEntity entityHandle, EntityManager manager) {
+        this(id, manager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
     }

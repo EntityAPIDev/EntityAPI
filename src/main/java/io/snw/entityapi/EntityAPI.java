@@ -172,7 +172,7 @@ public abstract class EntityAPI extends JavaPlugin implements Listener {
     }
 
     public static void registerManager(String name, EntityManager manager) {
-        if(!hasInstance())
+        if (!hasInstance())
             return;
 
         getInstance().addManager(name, manager);
@@ -193,7 +193,7 @@ public abstract class EntityAPI extends JavaPlugin implements Listener {
     public static EntityManager getManagerFor(String pluginName) {
         getInstance();
 
-        if(!hasEntityManager(pluginName))
+        if (!hasEntityManager(pluginName))
             return null;
 
         return getInstance().MANAGERS.get(pluginName);

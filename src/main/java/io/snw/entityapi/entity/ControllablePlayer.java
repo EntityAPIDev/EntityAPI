@@ -6,11 +6,13 @@ import org.bukkit.entity.Player;
 
 public class ControllablePlayer extends ControllableAttackingBaseEntity<Player> {
 
-    public ControllablePlayer(int id, EntityManager entityManager) {
-        super(id, ControllableEntityType.HUMAN, entityManager);
+    public ControllablePlayer(int id, EntityManager manager) {
+        super(id, ControllableEntityType.HUMAN, manager);
     }
 
-    public ControllablePlayer(int id, ControllablePlayerEntity entityType, EntityManager entityManager) {
-        super(id, ControllableEntityType.HUMAN, entityManager);
+    public ControllablePlayer(int id, ControllablePlayerEntity entityHandle, EntityManager manager) {
+        this(id, manager);
+        this.handle = entityHandle;
+        this.loot = entityHandle.getDefaultMaterialLoot();
     }
 }

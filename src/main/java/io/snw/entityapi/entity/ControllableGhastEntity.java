@@ -21,6 +21,7 @@ public class ControllableGhastEntity extends EntityGhast implements Controllable
         }
     }
 
+    @Override
     public ControllableEntity getControllableEntity() {
         return this.controllableEntity;
     }
