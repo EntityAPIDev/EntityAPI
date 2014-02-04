@@ -39,14 +39,14 @@ public enum ControllableEntityType {
 
     private final String name;
     private final int id;
-    private final Class<? extends ControllableBaseEntity> entityClass;
+    private final Class<? extends ControllableEntity> controllableClass;
     private final Class<? extends ControllableEntityHandle> handleClass;
     private final boolean isNameRequired;
 
-    ControllableEntityType(String name, int id, Class<? extends ControllableBaseEntity> entityClass, Class<? extends ControllableEntityHandle> handleClass, boolean isNameRequired) {
+    ControllableEntityType(String name, int id, Class<? extends ControllableEntity> controllableClass, Class<? extends ControllableEntityHandle> handleClass, boolean isNameRequired) {
         this.name = name;
         this.id = id;
-        this.entityClass = entityClass;
+        this.controllableClass = controllableClass;
         this.handleClass = handleClass;
         this.isNameRequired = isNameRequired;
     }
@@ -63,8 +63,8 @@ public enum ControllableEntityType {
         return this.isNameRequired;
     }
 
-    public Class<? extends ControllableBaseEntity> getEntityClass() {
-        return this.entityClass;
+    public Class<? extends ControllableEntity> getControllableClass() {
+        return this.controllableClass;
     }
 
     public Class<? extends ControllableEntityHandle> getHandleClass() {
@@ -81,7 +81,7 @@ public enum ControllableEntityType {
 
     public static ControllableEntityType getByEntityClass(Class<? extends EntityLiving> clazz) {
         for(ControllableEntityType type : values()) {
-            if(type.getEntityClass().equals(clazz) || type.getEntityClass().getSuperclass().equals(clazz) || type.getEntityClass().isAssignableFrom(clazz))
+            if(type.getControllableClass().equals(clazz) || type.getControllableClass().getSuperclass().equals(clazz) || type.getControllableClass().isAssignableFrom(clazz))
                 return type;
         }
         return null;
