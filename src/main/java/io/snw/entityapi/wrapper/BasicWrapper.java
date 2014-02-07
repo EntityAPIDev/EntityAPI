@@ -1,6 +1,6 @@
 package io.snw.entityapi.wrapper;
 
-import io.snw.entityapi.EntityAPI;
+import io.snw.entityapi.EntityAPICore;
 
 public class BasicWrapper {
 
@@ -11,7 +11,7 @@ public class BasicWrapper {
 
     protected void setHandle(Object handle) {
         if (handle == null) {
-            EntityAPI.LOGGER_REFLECTION.warning("Cannot create a wrapper with a null handle!");
+            EntityAPICore.LOGGER_REFLECTION.warning("Cannot create a wrapper with a null handle!");
             return;
         }
         this.handle = handle;
