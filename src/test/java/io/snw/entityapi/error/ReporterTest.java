@@ -12,6 +12,6 @@ public class ReporterTest {
 
     @org.junit.Test
     public void testReport() throws Exception {
-        System.out.println(REPORTER.post(new PastebinReporter.Report("## TEST ##").appendLine("1. Line 1"), PastebinReporter.ReportFormat.YAML, PastebinReporter.ExpireDate.TEN_MINUTES));
+        //System.out.println(REPORTER.post("TestReport", new PastebinReporter.Paste().appendLine("1. Line 1"), PastebinReporter.ReportFormat.YAML, PastebinReporter.ExpireDate.TEN_MINUTES));
     }
 }
