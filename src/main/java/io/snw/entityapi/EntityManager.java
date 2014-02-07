@@ -2,9 +2,12 @@ package io.snw.entityapi;
 
 import com.google.common.collect.Maps;
 import io.snw.entityapi.api.ControllableEntity;
+import io.snw.entityapi.api.ControllableEntityHandle;
 import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.exceptions.NameRequiredException;
 import io.snw.entityapi.reflection.SafeConstructor;
+import io.snw.entityapi.utils.WorldUtil;
+import net.minecraft.server.v1_7_R1.World;
 import org.bukkit.Location;
 import org.bukkit.plugin.Plugin;
 
@@ -61,15 +64,41 @@ public class EntityManager {
         if (entity == null)
             return null;
 
-        // TODO: take care of actual spawning
+        SafeConstructor<ControllableEntityHandle> entityConstructor = new SafeConstructor<ControllableEntityHandle>(entityType.getHandleClass(), World.class, ControllableEntity.class);
+        ControllableEntityHandle handle = (ControllableEntityHandle) entityConstructor.newInstance(WorldUtil.toNMSWorld(location.getWorld()), entity);
+
+        /**
+         * TODO: do the spawning
+         */
 
         return entity;
     }
 
     protected ControllableEntity createEntity(ControllableEntityType entityType, int id) {
-        SafeConstructor<? extends ControllableEntity> constructor = new SafeConstructor<>(entityType.getControllableClass());
-        ControllableEntity entity = constructor.newInstance(id, this);
-        this.entities.put(id, entity);
-        return entity;
+        try {
+
+            SafeConstructor<? extends ControllableEntity> constructor = new SafeConstructor<>(entityType.getControllableClass());
+            ControllableEntity entity = constructor.newInstance(id, this);
+            this.entities.put(id, entity);
+            return entity;
+
+        } catch (Throwable throwable) {
+            EntityAPI.LOGGER.warning("Failed to create an Entity handle for type: " + entityType.getName());
+            throwable.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder(128);
+        builder.append("EntityManager{plugin=" + this.owningPlugin.getName() + ",")
+                .append("entities-spawned=" + this.entities.size() + "}");
+        return builder.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return this.toString().hashCode();
     }
 }
