@@ -6,6 +6,7 @@ import io.snw.entityapi.api.EntitySound;
 import io.snw.entityapi.api.mind.attribute.Attribute;
 import io.snw.entityapi.api.mind.attribute.RideAttribute;
 import io.snw.entityapi.reflection.SafeField;
+import io.snw.entityapi.reflection.refs.PathfinderGoalSelectorRef;
 import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
@@ -17,9 +18,7 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
     public ControllableHorseEntity(World world, ControllableEntity controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
-        if (this.controllableEntity instanceof ControllableBaseEntity) {
-            ((ControllableBaseEntity) this.controllableEntity).clearNMSGoals(new PathfinderGoalSelector[]{this.goalSelector, this.targetSelector});
-        }
+        new PathfinderGoalSelectorRef(this).clearGoals();
     }
 
     @Override

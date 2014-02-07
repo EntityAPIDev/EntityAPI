@@ -228,4 +228,15 @@ public class Constants {
         public static final String CHANNEL_FIELD = "k";
         public static final String ADDRESS_FIELD = "l";
     }
+
+    public static class PathfinderGoalSelector {
+
+        public static final String CLASS_NAME = "PathfinderGoalSelector";
+
+        public static final String METHOD_ADD_GOAL = "a"; //takes int and nms.PathfinderGoal as params
+
+        public static final String LIST_GOALS = "b";
+        public static final String LIST_ACTIVE_GOALS = "c";
+
+    }
 }
