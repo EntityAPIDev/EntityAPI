@@ -1,6 +1,6 @@
 package io.snw.entityapi.reflection;
 
-import io.snw.entityapi.EntityAPI;
+import io.snw.entityapi.EntityAPICore;
 
 import java.lang.reflect.Constructor;
 
@@ -18,7 +18,7 @@ public class SafeConstructor<T> {
             Constructor constructor = coreClass.getConstructor(params);
             setConstructor(constructor);
         } catch (NoSuchMethodException e) {
-            EntityAPI.LOGGER_REFLECTION.warning("No such constructor!");
+            EntityAPICore.LOGGER_REFLECTION.warning("No such constructor!");
         }
     }
 

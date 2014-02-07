@@ -6,7 +6,6 @@ import io.snw.entityapi.api.EntitySound;
 import io.snw.entityapi.reflection.refs.PathfinderGoalSelectorRef;
 import net.minecraft.server.v1_7_R1.EntityEnderDragon;
 import net.minecraft.server.v1_7_R1.Item;
-import net.minecraft.server.v1_7_R1.PathfinderGoalSelector;
 import net.minecraft.server.v1_7_R1.World;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 

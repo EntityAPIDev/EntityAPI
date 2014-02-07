@@ -363,8 +363,8 @@ public class PastebinReporter {
         String report_url = "";
 
         try {
-            URL urls = new URL(this.POST_URL);
-            HttpURLConnection conn = (HttpURLConnection) urls.openConnection();
+            URL url = new URL(this.POST_URL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setConnectTimeout(5000);
             conn.setReadTimeout(5000);
             conn.setRequestMethod("POST");

@@ -1,11 +1,14 @@
 package io.snw.entityapi.utils;
 
-import net.minecraft.server.v1_7_R1.EntityLiving;
+import io.snw.entityapi.reflection.MethodAccessor;
+import io.snw.entityapi.reflection.SafeMethod;
 import org.bukkit.entity.Player;
 
 public class PlayerUtil {
 
+    private static final MethodAccessor<Object> GET_HANDLE = new SafeMethod<>(Player.class, "getHandle");
+
     public static Object getHandle(Player player) {
-        return EntityUtil.getNavigation((EntityLiving) player);
+        return GET_HANDLE.invoke(player);
     }
 }

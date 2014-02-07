@@ -8,22 +8,50 @@ import io.snw.entityapi.exceptions.NameRequiredException;
 import io.snw.entityapi.reflection.SafeConstructor;
 import io.snw.entityapi.utils.WorldUtil;
 import net.minecraft.server.v1_7_R1.World;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.plugin.Plugin;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class EntityManager {
 
     private final Plugin owningPlugin;
     private boolean keepEntitiesInMemory;
 
-    private final Map<Integer, ControllableEntity> entities = Maps.newConcurrentMap();
+    private final Map<Integer, ControllableEntity> ENTITIES = Maps.newConcurrentMap();
 
-    public EntityManager(Plugin plugin, boolean keepEntitiesInMemory) {
+    private final ChunkManager CHUNK_MANAGER;
+    private final int taskId;
+
+    public EntityManager(Plugin plugin, final boolean keepEntitiesInMemory) {
         this.owningPlugin = plugin;
         this.keepEntitiesInMemory = keepEntitiesInMemory;
+
+        this.CHUNK_MANAGER = new ChunkManager(this);
+
+        Bukkit.getPluginManager().registerEvents(this.CHUNK_MANAGER, EntityAPICore.getCore());
+
+        this.taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+            @Override
+            public void run() {
+                Iterator<Map.Entry<Integer, ControllableEntity>> iterator = ENTITIES.entrySet().iterator();
+
+                while (iterator.hasNext()) {
+                    Map.Entry<Integer, ControllableEntity> entry = iterator.next();
+
+                    if (entry.getValue().getHandle() == null) {
+                        if (!keepEntitiesInMemory)
+                            iterator.remove();
+                    } else {
+                        entry.getValue().getHandle().C();
+                        if(!entry.getValue().getHandle().isAlive()) {
+                           //TODO despawn if shitty
+                        }
+                    }
+                }
+            }
+        }, 1L, 1L);
     }
 
     public Plugin getOwningPlugin() {
@@ -43,7 +71,7 @@ public class EntityManager {
     }
 
     protected Integer getNextID(int index) {
-        Set<Integer> ids = this.entities.keySet();
+        Set<Integer> ids = this.ENTITIES.keySet();
         while (ids.contains(index)) {
             index++;
         }
@@ -65,7 +93,7 @@ public class EntityManager {
             return null;
 
         SafeConstructor<ControllableEntityHandle> entityConstructor = new SafeConstructor<ControllableEntityHandle>(entityType.getHandleClass(), World.class, ControllableEntity.class);
-        ControllableEntityHandle handle = (ControllableEntityHandle) entityConstructor.newInstance(WorldUtil.toNMSWorld(location.getWorld()), entity);
+        ControllableEntityHandle handle = entityConstructor.newInstance(WorldUtil.toNMSWorld(location.getWorld()), entity);
 
         /**
          * TODO: do the spawning
@@ -79,21 +107,25 @@ public class EntityManager {
 
             SafeConstructor<? extends ControllableEntity> constructor = new SafeConstructor<>(entityType.getControllableClass());
             ControllableEntity entity = constructor.newInstance(id, this);
-            this.entities.put(id, entity);
+            this.ENTITIES.put(id, entity);
             return entity;
 
         } catch (Throwable throwable) {
-            EntityAPI.LOGGER.warning("Failed to create an Entity handle for type: " + entityType.getName());
+            EntityAPICore.LOGGER.warning("Failed to create an Entity handle for type: " + entityType.getName());
             throwable.printStackTrace();
             return null;
         }
+    }
+
+    public Collection<ControllableEntity> getEntities() {
+        return Collections.unmodifiableCollection(this.ENTITIES.values());
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder(128);
         builder.append("EntityManager{plugin=" + this.owningPlugin.getName() + ",")
-                .append("entities-spawned=" + this.entities.size() + "}");
+                .append("entities-spawned=" + this.ENTITIES.size() + "}");
         return builder.toString();
     }
 

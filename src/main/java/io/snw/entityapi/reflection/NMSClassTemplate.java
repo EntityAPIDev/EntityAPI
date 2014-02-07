@@ -1,6 +1,6 @@
 package io.snw.entityapi.reflection;
 
-import io.snw.entityapi.EntityAPI;
+import io.snw.entityapi.EntityAPICore;
 
 public class NMSClassTemplate extends ClassTemplate {
 
@@ -13,9 +13,9 @@ public class NMSClassTemplate extends ClassTemplate {
     }
 
     protected void setNMSClass(String name) {
-        Class clazz = EntityAPI.SERVER.getNMSClass(name);
+        Class clazz = EntityAPICore.SERVER.getNMSClass(name);
         if (clazz == null) {
-            EntityAPI.LOGGER_REFLECTION.warning("Failed to find a matching class with name: " + name);
+            EntityAPICore.LOGGER_REFLECTION.warning("Failed to find a matching class with name: " + name);
         }
         setClass(clazz);
     }

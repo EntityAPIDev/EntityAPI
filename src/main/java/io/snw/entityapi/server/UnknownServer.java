@@ -1,6 +1,6 @@
 package io.snw.entityapi.server;
 
-import io.snw.entityapi.EntityAPI;
+import io.snw.entityapi.EntityAPICore;
 
 public class UnknownServer extends CraftBukkitServer { //we do not know this server brand so let's guess it's some random bukkit server.
 
@@ -9,7 +9,7 @@ public class UnknownServer extends CraftBukkitServer { //we do not know this ser
         if (!super.init()) {
             return false;
         }
-        EntityAPI.LOGGER.warning("Could not identify this server brand! The API may not work correctly now!");
+        EntityAPICore.LOGGER.warning("Could not identify this server brand! The API may not work correctly now!");
         return true;
     }
 

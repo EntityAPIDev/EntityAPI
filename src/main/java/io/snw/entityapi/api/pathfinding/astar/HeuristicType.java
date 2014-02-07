@@ -1,7 +1,24 @@
 package io.snw.entityapi.api.pathfinding.astar;
 
+import io.snw.entityapi.utils.WorldUtil;
+import org.bukkit.Location;
+
 public enum HeuristicType {
 
-    EUCLIDEAN,  // calculates the euclidean distance between 2 points, just looks for closest point.
-    MANHATTAN;  // calculates manhattan distance between 2 points. This means it will not go diagonal etc.
+    EUCLIDEAN {
+        @Override
+        public double calculate(Location from, Location to, boolean checkY) {
+             return WorldUtil.getEuclideanDistance(from, to, checkY);
+        }
+    },
+    MANHATTAN {
+        @Override
+        public double calculate(Location from, Location to, boolean checkY) {
+            return WorldUtil.getManhattanDistance(from, to, checkY);
+        }
+    };
+
+    public double calculate(Location from, Location to, boolean checkY) {
+        throw new RuntimeException("Not (properly?) implemented!");
+    }
 }
