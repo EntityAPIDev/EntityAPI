@@ -46,7 +46,7 @@ public class EntityManager {
                     } else {
                         entry.getValue().getHandle().C();
                         if(!entry.getValue().getHandle().isAlive()) {
-                           //TODO despawn if shitty
+                            //TODO despawn if shitty
                         }
                     }
                 }

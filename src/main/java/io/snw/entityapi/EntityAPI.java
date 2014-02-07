@@ -1,7 +1,6 @@
 package io.snw.entityapi;
 
 import com.google.common.collect.Maps;
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.server.PluginDisableEvent;
@@ -19,8 +18,6 @@ public class EntityAPI implements Listener {
             throw new RuntimeException("EntityAPI is already initialized!");
         }
         ENTITY_API_INSTANCE = this;
-
-        Bukkit.getPluginManager().registerEvents(this, core);
     }
 
     public final Map<String, EntityManager> MANAGERS = Maps.newHashMap();

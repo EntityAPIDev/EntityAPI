@@ -8,9 +8,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Class which will eventually take over some of the stuff in EntityAPI.
- */
 public class EntityAPICore extends JavaPlugin {
 
     /**
@@ -23,6 +20,8 @@ public class EntityAPICore extends JavaPlugin {
      * The Server brand
      */
     public static Server SERVER;
+
+    private static final String VERSION = "${project.version}";
 
     /**
      * Several Loggers
@@ -48,10 +47,6 @@ public class EntityAPICore extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        new EntityAPICore();
-    }
-
-    public EntityAPICore() {
         if(CORE_INSTANCE != null || ENTITY_API_INSTANCE != null) {
             throw new RuntimeException("Only one instance of the core can run!");
         }
@@ -59,8 +54,11 @@ public class EntityAPICore extends JavaPlugin {
         CORE_INSTANCE = this;
 
         ENTITY_API_INSTANCE = new EntityAPI(CORE_INSTANCE);
+        Bukkit.getPluginManager().registerEvents(ENTITY_API_INSTANCE, this);
 
         initServer();
+
+        //TODO configuration, Metrics, etc
     }
 
     /**
@@ -103,5 +101,9 @@ public class EntityAPICore extends JavaPlugin {
 
     public static EntityAPI getEntityAPI() {
         return ENTITY_API_INSTANCE;
+    }
+
+    public static String getVersion() {
+        return VERSION;
     }
 }
