@@ -1,14 +1,12 @@
 package io.snw.entityapi;
 
 import com.google.common.collect.Maps;
-import java.io.File;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.plugin.Plugin;
 
 import java.util.Map;
-import java.util.logging.Level;
 
 
 public class EntityAPI implements Listener {
