@@ -1,6 +1,7 @@
 package io.snw.entityapi.server;
 
 import io.snw.entityapi.EntityAPI;
+import io.snw.entityapi.EntityAPICore;
 import io.snw.entityapi.internal.Constants;
 import io.snw.entityapi.reflection.refs.MinecraftServerRef;
 import org.bukkit.Bukkit;
@@ -48,7 +49,7 @@ public class CraftBukkitServer implements Server {
         try {
             return Class.forName(name);
         } catch (Exception e) {
-            EntityAPI.LOGGER_REFLECTION.warning("Failed to find matching class for: " + name);
+            EntityAPICore.LOGGER_REFLECTION.warning("Failed to find matching class for: " + name);
             return null;
         }
     }

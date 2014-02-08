@@ -1,6 +1,6 @@
 package io.snw.entityapi.reflection;
 
-import io.snw.entityapi.EntityAPI;
+import io.snw.entityapi.EntityAPICore;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -24,13 +24,13 @@ public class SafeMethod<T> implements MethodAccessor<T> {
             Method method = coreClass.getDeclaredMethod(methodname, params);
             setMethod(method);
         } catch (NoSuchMethodException e) {
-            EntityAPI.LOGGER_REFLECTION.warning("Failed to find a matching method with name: " + methodname);
+            EntityAPICore.LOGGER_REFLECTION.warning("Failed to find a matching method with name: " + methodname);
         }
     }
 
     protected void setMethod(Method method) {
         if (method == null) {
-            EntityAPI.LOGGER_REFLECTION.warning("Cannot create a SafeMethod with a null method!");
+            EntityAPICore.LOGGER_REFLECTION.warning("Cannot create a SafeMethod with a null method!");
         }
         if (!method.isAccessible()) {
             method.setAccessible(true);

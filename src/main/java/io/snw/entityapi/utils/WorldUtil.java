@@ -11,6 +11,10 @@ public class WorldUtil {
         return CraftWorldRef.toNMSWorld(world);
     }
 
+    public static Object toNMSWorld(World world) {
+        return CraftWorldRef.toNMSWorld(world);
+    }
+
     /**
      * Returns the distance between 2 given locations without going diagonal.
      * @param b1 The first point

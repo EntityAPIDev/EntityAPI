@@ -3,9 +3,9 @@ package io.snw.entityapi.entity;
 import io.snw.entityapi.api.ControllableEntity;
 import io.snw.entityapi.api.ControllableEntityHandle;
 import io.snw.entityapi.api.EntitySound;
+import io.snw.entityapi.reflection.refs.PathfinderGoalSelectorRef;
 import net.minecraft.server.v1_7_R1.EntityEnderDragon;
 import net.minecraft.server.v1_7_R1.Item;
-import net.minecraft.server.v1_7_R1.PathfinderGoalSelector;
 import net.minecraft.server.v1_7_R1.World;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 
@@ -17,9 +17,7 @@ public class ControllableEnderDragonEntity extends EntityEnderDragon implements 
     public ControllableEnderDragonEntity(World world, ControllableEntity controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
-        if (this.controllableEntity instanceof ControllableBaseEntity) {
-            ((ControllableBaseEntity) this.controllableEntity).clearNMSGoals(new PathfinderGoalSelector[]{this.goalSelector, this.targetSelector});
-        }
+        new PathfinderGoalSelectorRef(this).clearGoals();
     }
 
     @Override

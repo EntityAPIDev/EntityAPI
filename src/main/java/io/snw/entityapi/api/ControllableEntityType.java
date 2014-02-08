@@ -40,10 +40,13 @@ public enum ControllableEntityType {
     private final String name;
     private final int id;
     private final Class<? extends ControllableEntity> controllableClass;
-    private final Class<? extends ControllableEntityHandle> handleClass;
+    private final Class handleClass;
     private final boolean isNameRequired;
 
-    ControllableEntityType(String name, int id, Class<? extends ControllableEntity> controllableClass, Class<? extends ControllableEntityHandle> handleClass, boolean isNameRequired) {
+    ControllableEntityType(String name, int id, Class<? extends ControllableEntity> controllableClass, Class handleClass, boolean isNameRequired) {
+        if(!ControllableEntityHandle.class.isAssignableFrom(handleClass))
+            throw new RuntimeException("Handle class needs to implement ControllableEntityHandle!");
+
         this.name = name;
         this.id = id;
         this.controllableClass = controllableClass;
@@ -67,7 +70,7 @@ public enum ControllableEntityType {
         return this.controllableClass;
     }
 
-    public Class<? extends ControllableEntityHandle> getHandleClass() {
+    public Class getHandleClass() {
         return this.handleClass;
     }
 

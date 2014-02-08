@@ -1,6 +1,6 @@
 package io.snw.entityapi.reflection;
 
-import io.snw.entityapi.EntityAPI;
+import io.snw.entityapi.EntityAPICore;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -69,17 +69,17 @@ public class ClassTemplate<T> {
 
     public static ClassTemplate<?> create(Class<?> type) {
         if (type == null) {
-            EntityAPI.LOGGER_REFLECTION.warning("Cannot create a ClassTemplate with a null type!");
+            EntityAPICore.LOGGER_REFLECTION.warning("Cannot create a ClassTemplate with a null type!");
             return null;
         }
         return new ClassTemplate(type);
     }
 
     public static ClassTemplate<?> create(String className) {
-        Class clazz = EntityAPI.SERVER.getClass(className);
+        Class clazz = EntityAPICore.SERVER.getClass(className);
 
         if (clazz == null) {
-            EntityAPI.LOGGER_REFLECTION.warning("Failed to find a matching class with name: " + className);
+            EntityAPICore.LOGGER_REFLECTION.warning("Failed to find a matching class with name: " + className);
             return null;
         }
         return new ClassTemplate<Object>(clazz);

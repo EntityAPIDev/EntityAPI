@@ -1,15 +1,17 @@
 package io.snw.entityapi.utils;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PastebinReporter {
 
+    /**
+     * A list of all possible syntax' supported by Pastebin.
+     */
     public static class ReportFormat {
         public static final ReportFormat FOUR_CS = new ReportFormat("4cs");
         public static final ReportFormat SIX_FIVE_ZERO_TWO_ACME_Cross_Assembler = new ReportFormat("6502acme");
@@ -244,7 +246,7 @@ public class PastebinReporter {
     }
 
     /**
-     * Expire date
+     * The possible expiration dates supported by Pastebin.
      */
     public static enum ExpireDate {
         NEVER("N"),
@@ -268,48 +270,101 @@ public class PastebinReporter {
     }
 
     /**
-     * Report
+     * The Paste, this will be the file submitted to pastebin.
      */
-    public static class Report {
-        private final Report INSTANCE;
+    public static class Paste {
+        private final Paste INSTANCE;
 
         private String HEADER;
         private char NEW_LINE = '\n';
-        private String TEXT = "";
+        private List<String> TEXT = new ArrayList<String>();
 
-        public Report() {
+        public Paste() {
             INSTANCE = this;
         }
 
-        public Report(String header) {
+        public Paste(String header) {
             this();
             this.HEADER = header;
         }
 
-        public Report appendLine(String string) {
-            this.TEXT = this.TEXT + string + this.NEW_LINE;
+        public Paste(File file) {
+            this(file, false);
+        }
+
+        public Paste(final File file, boolean async) {
+            this();
+            try {
+                if(async) {
+                    Runnable runnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            scanFile(file);
+                        }
+                    };
+
+                    new Thread(runnable).start();
+                } else {
+                    scanFile(file);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        private void scanFile(File file) {
+            try {
+                String line;
+                BufferedReader reader = new BufferedReader(new FileReader(file));
+                while((line = reader.readLine()) != null) {
+                    TEXT.add(line);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        public Paste appendLine(String string) {
+            this.TEXT.add(string);
+            return this.INSTANCE;
+        }
+
+        public Paste appendLine(int index, String string) {
+            this.TEXT.add(index, string);
             return this.INSTANCE;
         }
 
         @Override
         public String toString() {
-            return HEADER + NEW_LINE + TEXT;
+            StringBuilder builder = new StringBuilder();
+            if(HEADER != null) {
+                builder.append(HEADER);
+            }
+            for(String line : TEXT) {
+                builder.append(line + NEW_LINE);
+            }
+            return builder.toString();
         }
     }
 
-    private final String URL = "http://pastebin.com/api/api_post.php";
+    private final String POST_URL = "http://pastebin.com/api/api_post.php";
+
     private String API_KEY;
 
     public PastebinReporter(String apiKey) {
         this.API_KEY = apiKey;
     }
 
-    public String post(Report report, ReportFormat format, ExpireDate expireDate) {
+    public String post(String name, Paste paste,  ReportFormat format, ExpireDate expireDate) {
+        if(name == null)
+            name = "";
+
         String report_url = "";
 
         try {
-            URL urls = new URL(this.URL);
-            HttpURLConnection conn = (HttpURLConnection) urls.openConnection();
+            URL url = new URL(this.POST_URL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setConnectTimeout(5000);
             conn.setReadTimeout(5000);
             conn.setRequestMethod("POST");
@@ -320,9 +375,9 @@ public class PastebinReporter {
 
             byte[] data = ("api_option=paste" +
                     "&api_dev_key=" + URLEncoder.encode(this.API_KEY, "utf-8") +
-                    "&api_paste_code=" + URLEncoder.encode(report.toString(), "utf-8") +
+                    "&api_paste_code=" + URLEncoder.encode(paste.toString(), "utf-8") +
                     "&api_paste_private=" + URLEncoder.encode("1", "utf-8") + // 1 = unlisted, 0 = public, 2 = private (need to be logged in for that)
-                    "&api_paste_name=" + URLEncoder.encode("", "utf-8") +
+                    "&api_paste_name=" + URLEncoder.encode(name, "utf-8") +
                     "&api_paste_expire_date=" + URLEncoder.encode(expireDate.toString(), "utf-8") +
                     "&api_paste_format=" + URLEncoder.encode(format.toString(), "utf-8") +
                     "&api_user_key=" + URLEncoder.encode("", "utf-8")).getBytes();
@@ -345,7 +400,7 @@ public class PastebinReporter {
                 String result = response.toString().trim();
 
                 if (!result.contains("http://")) {
-                    report_url = "Failed to post!";
+                    report_url = "Failed to post! (returned result: " + result;
                 } else {
                     report_url = result.trim();
                 }

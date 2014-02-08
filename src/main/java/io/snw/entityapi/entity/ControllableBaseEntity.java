@@ -19,10 +19,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -339,21 +337,5 @@ public abstract class ControllableBaseEntity<T extends LivingEntity> implements 
     }
 
     public void initSounds() {
-    }
-
-    protected void clearNMSGoals(PathfinderGoalSelector[] selectors) {
-        // We have our own AI (Mind), so these aren't needed.
-        try {
-            String[] fieldNames = new String[]{"b", "c"};
-            for (PathfinderGoalSelector selector : selectors) {
-                for (String s : fieldNames) {
-                    Field f = PathfinderGoalSelector.class.getDeclaredField(s);
-                    f.setAccessible(true);
-                    ((List) f.get(selector)).clear();
-                }
-            }
-        } catch (IllegalAccessException | IllegalArgumentException | NoSuchFieldException | SecurityException e) {
-            e.printStackTrace();
-        }
     }
 }
