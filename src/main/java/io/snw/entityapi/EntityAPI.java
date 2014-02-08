@@ -5,6 +5,7 @@ import io.snw.entityapi.exceptions.EntityAPINotEnabledException;
 import io.snw.entityapi.metrics.Metrics;
 import io.snw.entityapi.server.*;
 import io.snw.entityapi.utils.PastebinReporter;
+import java.io.File;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -29,7 +30,7 @@ public abstract class EntityAPI extends JavaPlugin implements Listener {
     private static EntityAPI INSTANCE;
 
     public static Server SERVER;
-    private List<Plugin> plugins = new ArrayList<>();
+    private List<String> plugins = new ArrayList<>();
     private PluginManager pm = this.getServer().getPluginManager();
 
     private static final String UPDATE_ID = "";    // TODO: insert the project id here
@@ -66,7 +67,7 @@ public abstract class EntityAPI extends JavaPlugin implements Listener {
 
         Bukkit.getServer().getPluginManager().registerEvents(this, this);
 
-        this.getInstances();
+        this.getPlugins();
     }
 
     @Override
@@ -106,22 +107,22 @@ public abstract class EntityAPI extends JavaPlugin implements Listener {
     }
 
     /**
-     * This method places all instances of Entity API in an Array List.
-     * If there is more than 1 EntityAPI found, it disables them all.
+     * This method gets all file names with EntityAPI in its name in plugins Folder.
+     * If there is more than 1 EntityAPI found then we set EntityAPI to disable.
      */
 
-    public void getInstances() {
-        for (Plugin plugin : pm.getPlugins()) {
-            if (!plugin.getName().equals(this.getName())) {
+    public void getPlugins() {
+        File dir = new File(this.getDataFolder().getParent());
+        for (File pluginFiles : dir.listFiles()) {
+            if (dir.isDirectory()) {
                 continue;
             }
-            plugins.add(plugin);
-        }
-
-        if (plugins.size() > 1) {
-            for (Plugin plugin : plugins) {
-                pm.disablePlugin(plugin);
+            if (pluginFiles.getName().toLowerCase().contains("entityapi")) {
+                plugins.add(pluginFiles.getName());
             }
+        }
+        if (plugins.size() > 1) {
+            pm.disablePlugin(this);
             this.getLogger().log(Level.SEVERE, "Warning! You have two EntityAPI Libraries in Plugins Folder! Please remove one!");
         }
     }
