@@ -2,11 +2,14 @@ package io.snw.entityapi;
 
 import io.snw.entityapi.server.*;
 import io.snw.entityapi.utils.PastebinReporter;
+import java.io.File;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import org.bukkit.plugin.PluginManager;
 
 public class EntityAPICore extends JavaPlugin {
 
@@ -40,6 +43,11 @@ public class EntityAPICore extends JavaPlugin {
      */
     private static final PastebinReporter REPORTER = new PastebinReporter(PASTEBIN_REPORT_KEY);
 
+    /**
+     * Plugin files list for checking more than 1 Lib
+     */
+    private final List<String> plugins = new ArrayList<>();
+    
     @Override
     public void onDisable() {
         //TODO: nullify everything
@@ -51,6 +59,7 @@ public class EntityAPICore extends JavaPlugin {
             throw new RuntimeException("Only one instance of the core can run!");
         }
 
+        this.getPlugins();
         CORE_INSTANCE = this;
 
         ENTITY_API_INSTANCE = new EntityAPI(CORE_INSTANCE);
@@ -106,4 +115,22 @@ public class EntityAPICore extends JavaPlugin {
     public static String getVersion() {
         return VERSION;
     }
+    
+    
+    public void getPlugins() {
+        PluginManager pm = this.getServer().getPluginManager();
+        File dir = new File(this.getDataFolder().getParent());
+        for (File pluginFiles : dir.listFiles()) {
+            if (dir.isDirectory()) {
+                continue;
+            }
+            if (pluginFiles.getName().toLowerCase().contains("entityapi")) {
+                plugins.add(pluginFiles.getName());
+            }
+        }
+        if (plugins.size() > 1) {
+            pm.disablePlugin(this);
+            this.getLogger().log(Level.SEVERE, "Warning! You have two EntityAPI Libraries in Plugins Folder! Please remove one!");
+        }
+    }    
 }
