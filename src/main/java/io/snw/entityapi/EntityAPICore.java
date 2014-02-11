@@ -1,19 +1,23 @@
 package io.snw.entityapi;
 
+import com.google.common.collect.Maps;
 import io.snw.entityapi.server.*;
 import io.snw.entityapi.utils.PastebinReporter;
 import org.bukkit.Bukkit;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.server.PluginDisableEvent;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class EntityAPICore extends JavaPlugin {
 
     /**
      * EntityAPI instance
      */
-    private static EntityAPI ENTITY_API_INSTANCE;
     private static EntityAPICore CORE_INSTANCE;
 
     /**
@@ -28,6 +32,7 @@ public class EntityAPICore extends JavaPlugin {
      */
     public static final ModuleLogger LOGGER = new ModuleLogger("EntityAPI");
     public static final ModuleLogger LOGGER_REFLECTION = LOGGER.getModule("Reflection");
+    public static final ModuleLogger LOGGER_DATA_STORE = LOGGER_REFLECTION.getModule("Persistence");
 
     /**
      * Projects id and Pastebin API-KEY
@@ -47,14 +52,11 @@ public class EntityAPICore extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        if(CORE_INSTANCE != null || ENTITY_API_INSTANCE != null) {
+        if(CORE_INSTANCE != null) {
             throw new RuntimeException("Only one instance of the core can run!");
         }
 
         CORE_INSTANCE = this;
-
-        ENTITY_API_INSTANCE = new EntityAPI(CORE_INSTANCE);
-        Bukkit.getPluginManager().registerEvents(ENTITY_API_INSTANCE, this);
 
         initServer();
 
@@ -99,11 +101,63 @@ public class EntityAPICore extends JavaPlugin {
         return CORE_INSTANCE;
     }
 
-    public static EntityAPI getEntityAPI() {
-        return ENTITY_API_INSTANCE;
-    }
-
     public static String getVersion() {
         return VERSION;
+    }
+
+    /**
+     * Api methods
+     */
+    public final Map<String, EntityManager> MANAGERS = Maps.newHashMap();
+
+    private void addManager(String name, EntityManager entityManager) {
+        EntityAPICore.getCore();
+        MANAGERS.put(name, entityManager);
+    }
+
+    public static EntityManager createManager(Plugin owningPlugin) {
+        EntityAPICore.getCore();
+        return createEntityManager(owningPlugin, false);
+    }
+
+    public static EntityManager createEntityManager(Plugin owningPlugin, boolean keepInMemory) {
+        EntityAPICore.getCore();
+
+        EntityManager manager = new EntityManager(owningPlugin, keepInMemory);
+        registerManager(owningPlugin.getName(), manager);
+
+        return manager;
+    }
+
+    public static void registerManager(String name, EntityManager manager) {
+        EntityAPICore.getCore();
+
+        getCore().addManager(name, manager);
+    }
+
+    public static boolean hasEntityManager(Plugin plugin) {
+        return hasEntityManager(plugin.getName());
+    }
+
+    public static boolean hasEntityManager(String pluginName) {
+        return getCore().MANAGERS.containsKey(pluginName);
+    }
+
+    public static EntityManager getManagerFor(Plugin plugin) {
+        return getManagerFor(plugin.getName());
+    }
+
+    public static EntityManager getManagerFor(String pluginName) {
+        EntityAPICore.getCore();
+
+        if (!hasEntityManager(pluginName))
+            return null;
+
+        return getCore().MANAGERS.get(pluginName);
+    }
+
+    @EventHandler
+    public void onDisable(PluginDisableEvent event) {
+        // TODO: take care of plugin stuff entity
     }
 }

@@ -1,77 +1,35 @@
 package io.snw.entityapi;
 
-import com.google.common.collect.Maps;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.plugin.Plugin;
 
-import java.util.Map;
 
-
-public class EntityAPI implements Listener {
-
-    private static EntityAPI ENTITY_API_INSTANCE;
-
-    public EntityAPI(EntityAPICore core) {
-        if(ENTITY_API_INSTANCE != null) {
-            throw new RuntimeException("EntityAPI is already initialized!");
-        }
-        ENTITY_API_INSTANCE = this;
-    }
-
-    public final Map<String, EntityManager> MANAGERS = Maps.newHashMap();
-    /**
-     * API STUFF
-     */
-    private void addManager(String name, EntityManager entityManager) {
-        EntityAPICore.getCore();
-        MANAGERS.put(name, entityManager);
-    }
+public class EntityAPI {
 
     public static EntityManager createManager(Plugin owningPlugin) {
-        EntityAPICore.getCore();
-        return createEntityManager(owningPlugin, false);
+        return EntityAPICore.createManager(owningPlugin);
     }
 
     public static EntityManager createEntityManager(Plugin owningPlugin, boolean keepInMemory) {
-        EntityAPICore.getCore();
-
-        EntityManager manager = new EntityManager(owningPlugin, keepInMemory);
-        registerManager(owningPlugin.getName(), manager);
-
-        return manager;
+        return EntityAPICore.createEntityManager(owningPlugin, keepInMemory);
     }
 
     public static void registerManager(String name, EntityManager manager) {
-        EntityAPICore.getCore();
-
-        ENTITY_API_INSTANCE.addManager(name, manager);
+        EntityAPICore.registerManager(name, manager);
     }
 
     public static boolean hasEntityManager(Plugin plugin) {
-        return hasEntityManager(plugin.getName());
+        return EntityAPICore.hasEntityManager(plugin);
     }
 
     public static boolean hasEntityManager(String pluginName) {
-        return ENTITY_API_INSTANCE.MANAGERS.containsKey(pluginName);
+        return EntityAPICore.hasEntityManager(pluginName);
     }
 
     public static EntityManager getManagerFor(Plugin plugin) {
-        return getManagerFor(plugin.getName());
+        return EntityAPICore.getManagerFor(plugin);
     }
 
     public static EntityManager getManagerFor(String pluginName) {
-        EntityAPICore.getCore();
-
-        if (!hasEntityManager(pluginName))
-            return null;
-
-        return ENTITY_API_INSTANCE.MANAGERS.get(pluginName);
-    }
-
-    @EventHandler
-    public void onDisable(PluginDisableEvent event) {
-        // TODO: take care of plugin stuff entity
+        return EntityAPICore.getManagerFor(pluginName);
     }
 }
