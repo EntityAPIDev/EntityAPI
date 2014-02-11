@@ -11,6 +11,5 @@ Collaborators
 =============
 - DSH105 (Author)
 - Frostalf (Author)
-- TomTheDeveloper (Author)
+- CaptainBern (Author, Master Yi, All hail the captain.)
 - drtshock (Contributor <3)
-- CaptainBern (Master Yi, All hail the captain.)

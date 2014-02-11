@@ -1,6 +1,8 @@
-package io.snw.entityapi.api.mind.behaviour;
+package io.snw.entityapi.api.mind;
 
 import io.snw.entityapi.api.ControllableEntity;
+import io.snw.entityapi.api.mind.behaviour.Behaviour;
+import io.snw.entityapi.api.mind.behaviour.BehaviourItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -113,8 +115,7 @@ public class BehaviourSelector implements IBehaviourSelector {
         return null;
     }
 
-    @Override
-    public void updateBehaviours() {
+    protected void updateBehaviours() {
         if (this.delay++ % 3 == 0) {
             Iterator<BehaviourItem> iterator = this.behaviours.iterator();
 
@@ -170,7 +171,7 @@ public class BehaviourSelector implements IBehaviourSelector {
         return true;
     }
 
-    private boolean areCompatible(BehaviourItem behaviourItem, BehaviourItem behaviourItem1) {
+    protected boolean areCompatible(BehaviourItem behaviourItem, BehaviourItem behaviourItem1) {
         return behaviourItem.getBehaviour().getType().isCompatibleWith(behaviourItem1.getBehaviour().getType());
     }
 }

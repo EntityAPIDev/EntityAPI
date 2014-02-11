@@ -2,7 +2,6 @@ package io.snw.entityapi.api.mind;
 
 import io.snw.entityapi.api.ControllableEntity;
 import io.snw.entityapi.api.mind.attribute.Attribute;
-import io.snw.entityapi.api.mind.behaviour.BehaviourSelector;
 
 import java.util.HashMap;
 import java.util.Iterator;
