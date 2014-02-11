@@ -49,9 +49,6 @@ public abstract class ControllableBaseEntity<T extends LivingEntity> implements 
         this.mind = new Mind(this);
         this.entityType = entityType;
         this.initSounds();
-        if (this.handle instanceof ControllableEntityHandle) {
-            this.loot = ((ControllableEntityHandle) this.handle).getDefaultMaterialLoot();
-        }
     }
 
     @Override
@@ -97,18 +94,19 @@ public abstract class ControllableBaseEntity<T extends LivingEntity> implements 
     @Override
     public String getName() {
         if (this.handle == null) {
-            return null; // TODO: Give them a default name?
+            return null;
         }
         return this.getBukkitEntity().getCustomName();
     }
 
     @Override
-    public void setName(String name) {
+    public boolean setName(String name) {
         if (this.handle == null) {
-            // TODO: set default name here?
+            return false;
         }
         this.getBukkitEntity().setCustomName(name);
         this.getBukkitEntity().setCustomNameVisible(name == null ? false : true);
+        return true;
     }
 
     @Override

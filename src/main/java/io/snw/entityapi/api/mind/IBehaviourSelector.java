@@ -1,4 +1,6 @@
-package io.snw.entityapi.api.mind.behaviour;
+package io.snw.entityapi.api.mind;
+
+import io.snw.entityapi.api.mind.behaviour.Behaviour;
 
 public interface IBehaviourSelector {
 
@@ -15,6 +17,4 @@ public interface IBehaviourSelector {
     public abstract void clearBehaviours(String key);
 
     public abstract Behaviour getBehaviour(String key);
-
-    public abstract void updateBehaviours();
 }
