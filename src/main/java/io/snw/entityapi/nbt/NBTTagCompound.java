@@ -34,6 +34,10 @@ public class NBTTagCompound extends NBTBase {
         this.VALUES.put(key, value);
     }
 
+    public NBTBase get(String key) {
+        return this.VALUES.get(key);
+    }
+
     public boolean hasKey(String key) {
         return this.VALUES.containsKey(key);
     }

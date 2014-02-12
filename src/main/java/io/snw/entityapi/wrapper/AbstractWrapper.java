@@ -2,11 +2,11 @@ package io.snw.entityapi.wrapper;
 
 import io.snw.entityapi.EntityAPICore;
 
-public class BasicWrapper {
+public abstract class AbstractWrapper {
 
     private Object handle;
 
-    public BasicWrapper() {
+    public AbstractWrapper() {
     }
 
     protected void setHandle(Object handle) {
