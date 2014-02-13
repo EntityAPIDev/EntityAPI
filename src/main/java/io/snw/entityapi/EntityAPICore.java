@@ -157,7 +157,7 @@ public class EntityAPICore extends JavaPlugin {
     }
 
     @EventHandler
-    public void onDisable(PluginDisableEvent event) {
+    protected void onDisable(PluginDisableEvent event) {
         // TODO: take care of plugin stuff entity
     }
 }
