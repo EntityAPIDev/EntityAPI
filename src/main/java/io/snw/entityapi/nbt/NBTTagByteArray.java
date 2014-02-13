@@ -8,7 +8,7 @@ import java.io.DataOutput;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class NBTTagByteArray extends NBTBase {
+public class NBTTagByteArray extends NBTReturnable<byte[]> {
 
     private byte[] data;
 
@@ -23,6 +23,7 @@ public class NBTTagByteArray extends NBTBase {
         return 7;
     }
 
+    @Override
     public byte[] getValue() {
         return this.data;
     }

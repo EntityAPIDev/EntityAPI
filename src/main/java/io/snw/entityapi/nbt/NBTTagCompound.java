@@ -38,6 +38,154 @@ public class NBTTagCompound extends NBTBase {
         return this.VALUES.get(key);
     }
 
+    public void setByte(String key, byte b) {
+        this.set(key, new NBTTagByte(b));
+    }
+
+    public void setByteArray(String key, byte[] b) {
+        this.set(key, new NBTTagByteArray(b));
+    }
+
+    public void setDouble(String key, double d) {
+        this.set(key, new NBTTagDouble(d));
+    }
+
+    public void setFloat(String key, float f) {
+        this.set(key, new NBTTagFloat(f));
+    }
+
+    public void setInt(String key, int i) {
+        this.set(key, new NBTTagInt(i));
+    }
+
+    public void setIntArray(String key, int[] i) {
+        this.set(key, new NBTTagIntArray(i));
+    }
+
+    public void setLong(String key, long l) {
+        this.set(key, new NBTTagLong(l));
+    }
+
+    public void setShort(String key, short s) {
+        this.set(key, new NBTTagShort(s));
+    }
+
+    public void setString(String key, String s) {
+        this.set(key, new NBTTagString(s));
+    }
+
+    public void setBoolean(String key, boolean flag) {
+        this.setByte(key, (byte) (flag ? 1 : 0));
+    }
+
+    public void setNBTTagCompound(String key, NBTTagCompound nbtTagCompound) {
+        this.set(key, nbtTagCompound);
+    }
+
+    public byte getByte(String key) {
+        try {
+            if(hasKey(key))
+                return ((NBTNumber<Byte>) get(key)).getValue();
+            return 0;
+        } catch (ClassCastException e) {
+            return 0;
+        }
+    }
+
+    public byte[] getByteArray(String key) {
+        try {
+            if(hasKey(key))
+                return ((NBTReturnable<byte[]>) get(key)).getValue();
+            return new byte[]{};
+        } catch (ClassCastException e) {
+            return new byte[]{};
+        }
+    }
+
+    public double getDouble(String key) {
+        try {
+            if(hasKey(key))
+                return ((NBTNumber<Double>) get(key)).getValue();
+            return 0;
+        } catch (ClassCastException e) {
+            return 0;
+        }
+    }
+
+    public float getFloat(String key) {
+        try {
+            if(hasKey(key))
+                return ((NBTNumber<Float>) get(key)).getValue();
+            return 0;
+        } catch (ClassCastException e) {
+            return 0;
+        }
+    }
+
+    public int getInt(String key) {
+        try {
+            if(hasKey(key))
+                return ((NBTNumber<Integer>) get(key)).getValue();
+            return 0;
+        } catch (ClassCastException e) {
+            return 0;
+        }
+    }
+
+    public int[] getIntArray(String key) {
+        try {
+            if(hasKey(key))
+                return ((NBTReturnable<int[]>) get(key)).getValue();
+            return new int[]{};
+        } catch (ClassCastException e) {
+            return new int[]{};
+        }
+    }
+
+    public long getLong(String key) {
+        try {
+            if(hasKey(key))
+                return ((NBTNumber<Long>) get(key)).getValue();
+            return 0;
+        } catch (ClassCastException e) {
+            return 0;
+        }
+    }
+
+    public short getShort(String key) {
+        try {
+            if(hasKey(key))
+                return ((NBTNumber<Short>) get(key)).getValue();
+            return 0;
+        } catch (ClassCastException e) {
+            return 0;
+        }
+    }
+
+    public String getString(String key) {
+        try {
+            if(hasKey(key))
+                return ((NBTReturnable<String>) get(key)).getValue();
+            return "";
+        } catch (ClassCastException e) {
+            return "";
+        }
+    }
+
+    public boolean getBoolean(String key) {
+        return this.getByte(key) != 0;
+    }
+
+    public NBTTagCompound getNBTTagCompound(String key) {
+        try {
+            if(hasKey(key))
+                return (NBTTagCompound) this.get(key);
+            return new NBTTagCompound();
+        } catch (ClassCastException e) {
+            return new NBTTagCompound();
+        }
+    }
+
     public boolean hasKey(String key) {
         return this.VALUES.containsKey(key);
     }
@@ -146,15 +294,15 @@ public class NBTTagCompound extends NBTBase {
 
     @Override
     public String toString() {
-        String string = "{";
+        String String = "{";
 
         String values;
 
-        for (Iterator iterator = this.VALUES.keySet().iterator(); iterator.hasNext(); string = string + values + ':' + this.VALUES.get(values) + ',') {
+        for (Iterator iterator = this.VALUES.keySet().iterator(); iterator.hasNext(); String = String + values + ':' + this.VALUES.get(values) + ',') {
             values = (String) iterator.next();
         }
 
-        return string + "}";
+        return String + "}";
     }
 
     public boolean isEmpty() {

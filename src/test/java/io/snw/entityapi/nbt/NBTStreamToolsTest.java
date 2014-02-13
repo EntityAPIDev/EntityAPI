@@ -13,7 +13,7 @@ public class NBTStreamToolsTest {
     @Test
     public void testWrite() throws Exception {
         NBTTagCompound compound = new NBTTagCompound();
-        compound.set("name", new NBTTagString("testString"));
+        compound.setString("name", "test1");
 
         file.delete();
 
@@ -27,5 +27,7 @@ public class NBTStreamToolsTest {
         for(String key : compound.getKeys()) {
             System.out.println("Key: " + key + "\nValue: " + compound.get(key).toString());
         }
+
+        System.out.println(compound.getString("name"));
     }
 }

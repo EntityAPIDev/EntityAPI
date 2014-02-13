@@ -8,7 +8,7 @@ import java.io.DataOutput;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class NBTTagIntArray extends NBTBase {
+public class NBTTagIntArray extends NBTReturnable<int[]> {
 
     private int[] data;
 
@@ -23,6 +23,7 @@ public class NBTTagIntArray extends NBTBase {
         return 11;
     }
 
+    @Override
     public int[] getValue() {
         return this.data;
     }
