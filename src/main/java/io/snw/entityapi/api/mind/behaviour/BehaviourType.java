@@ -8,7 +8,7 @@ public enum BehaviourType {
     THREE,
     FOUR,
     FIVE,
-    SIZE,
+    SIX,
     SEVEN;
 
     // NMS Goals have stored integers to check compatibility -> goal.j()
