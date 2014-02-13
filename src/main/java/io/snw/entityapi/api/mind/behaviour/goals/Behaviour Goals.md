@@ -26,6 +26,8 @@ Behaviour Goals to Implement
     * (0 - 7), as per below
 * TODO -> More behaviours that are only implemented once
 
+**The Goals:**
+
 * ArrowAttack (3) -> Change to RangedAttack (similar to MeleeAttack)
 * AvoidPlayer (1) -> Change to AvoidEntity class type
 * Beg (2) -> Change to beg for specific item (NMS only activates for wolfs and bones)
