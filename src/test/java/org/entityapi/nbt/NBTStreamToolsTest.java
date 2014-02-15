@@ -1,4 +1,4 @@
-package io.snw.entityapi.nbt;
+package org.entityapi.nbt;
 
 import org.junit.Test;
 import org.entityapi.nbt.NBTStreamTools;
