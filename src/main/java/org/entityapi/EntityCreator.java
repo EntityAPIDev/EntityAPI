@@ -1,18 +1,15 @@
 package org.entityapi;
 
-import com.google.common.collect.Lists;
+import org.bukkit.Location;
 import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.ControllableEntityHandle;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.mind.Mind;
 import org.entityapi.api.mind.behaviour.Behaviour;
+import org.entityapi.exceptions.ControllableEntitySpawnException;
 import org.entityapi.reflection.SafeConstructor;
-import org.entityapi.utils.WorldUtil;
-import net.minecraft.server.v1_7_R1.World;
-import org.bukkit.Location;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EntityCreator {
 
@@ -26,10 +23,10 @@ public class EntityCreator {
     private ControllableEntity ENTITY;
     private boolean PREPARE;
     private Mind MIND;
-    private List<Behaviour> BEHAVIOURS;
+    private HashMap<Behaviour, Integer> BEHAVIOURS;
 
     {
-        this.BEHAVIOURS = Lists.newArrayList();
+        this.BEHAVIOURS = new HashMap<>();
         this.PREPARE = false;
     }
 
@@ -63,8 +60,17 @@ public class EntityCreator {
         return this.INSTANCE;
     }
 
-    public EntityCreator withBehaviours(Behaviour... behaviour) {
-        this.BEHAVIOURS = Arrays.asList(behaviour);
+    public EntityCreator withBehaviours(Behaviour... behaviours) {
+        for (Behaviour behaviour1 : behaviours) {
+            this.BEHAVIOURS.put(behaviour1, 1);
+        }
+        return this.INSTANCE;
+    }
+
+    public EntityCreator withBehaviours(HashMap<Behaviour, Integer> prioritisedBehaviours) {
+        for (Map.Entry<Behaviour, Integer> entry : prioritisedBehaviours.entrySet()) {
+            this.BEHAVIOURS.put(entry.getKey(), entry.getValue());
+        }
         return this.INSTANCE;
     }
 
@@ -73,13 +79,36 @@ public class EntityCreator {
         return this.INSTANCE;
     }
 
-    public <T extends ControllableEntity> T  create() {
+    public <T extends ControllableEntity> T create() {
+        if (this.TYPE == null) {
+            throw new NullPointerException("ControllableEntity Type cannot be null.");
+        }
+        if (this.LOCATION == null) {
+            throw new NullPointerException("Location cannot be null.");
+        }
         SafeConstructor<? extends ControllableEntity> constructor = new SafeConstructor<>(this.TYPE.getControllableClass());
-        ControllableEntity entity = constructor.newInstance(this.ID, this);
-
-        SafeConstructor<ControllableEntityHandle> entityConstructor = new SafeConstructor<ControllableEntityHandle>(this.TYPE.getHandleClass(), World.class, ControllableEntity.class);
-        ControllableEntityHandle handle = entityConstructor.newInstance(WorldUtil.toNMSWorld(this.LOCATION.getWorld()), entity);
-
+        ControllableEntity entity = constructor.newInstance(this.ID, this.ENTITYMANAGER);
+        if (entity != null) {
+            if (entity.spawnEntity(this.LOCATION)) {
+                if (this.PREPARE || this.MIND == null) {
+                    this.MIND = new Mind();
+                }
+                this.MIND.setControllableEntity(entity);
+                if (this.PREPARE) {
+                    entity.setDefaultBehaviours();
+                } else {
+                    for (Map.Entry<Behaviour, Integer> entry : this.BEHAVIOURS.entrySet()) {
+                        entity.getMind().getBehaviourSelector().addBehaviour(entry.getKey(), entry.getValue());
+                    }
+                }
+                if (this.NAME != null) {
+                    entity.setName(this.NAME);
+                }
+                return (T) entity;
+            } else {
+                throw new ControllableEntitySpawnException();
+            }
+        }
         return null;
     }
 }

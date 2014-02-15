@@ -14,9 +14,11 @@ public class Mind {
 
     protected BehaviourSelector behaviourSelector;
 
-    public Mind(ControllableEntity controllableEntity) {
+    public Mind() {}
+
+    public void setControllableEntity(ControllableEntity controllableEntity) {
         this.controllableEntity = controllableEntity;
-        this.behaviourSelector = new BehaviourSelector(this.controllableEntity);
+        this.behaviourSelector = controllableEntity == null ? null : new BehaviourSelector(this.controllableEntity);
     }
 
     public ControllableEntity getControllableEntity() {
@@ -64,7 +66,9 @@ public class Mind {
     }
 
     public void tick() {
-        this.behaviourSelector.updateBehaviours();
+        if (this.behaviourSelector != null) {
+            this.behaviourSelector.updateBehaviours();
+        }
         for (Attribute b : this.attributes.values()) {
             b.tick();
         }

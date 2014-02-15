@@ -39,6 +39,10 @@ public abstract interface ControllableEntity<T extends LivingEntity> extends Nam
 
     public float getWidth();
 
+    public boolean spawnEntity(Location spawnLocation);
+
+    public boolean hasSpawned();
+
     @Override
     public String getName();
 
@@ -102,4 +106,6 @@ public abstract interface ControllableEntity<T extends LivingEntity> extends Nam
     public boolean onCollide(Entity entity);
 
     public void onDeath();
+
+    public void setDefaultBehaviours();
 }

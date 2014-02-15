@@ -1,15 +1,18 @@
 package org.entityapi.entity;
 
+import net.minecraft.server.v1_7_R1.World;
+import org.bukkit.*;
+import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_7_R1.CraftWorld;
+import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.entityapi.EntityAPICore;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntity;
+import org.entityapi.api.ControllableEntityHandle;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.events.*;
 import org.entityapi.api.mind.Mind;
 import net.minecraft.server.v1_7_R1.*;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_7_R1.CraftSound;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.Entity;
@@ -17,6 +20,9 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 import org.entityapi.api.EntitySound;
+import org.entityapi.api.mind.behaviour.Behaviour;
+import org.entityapi.reflection.SafeConstructor;
+import org.entityapi.utils.WorldUtil;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -31,7 +37,8 @@ public abstract class ControllableBaseEntity<T extends LivingEntity> implements 
 
     protected final EntityManager manager;
 
-    private final int id;
+    private boolean hasSpawned;
+    private final int ID;
     protected Mind mind;
     protected boolean tickAttributes;
 
@@ -44,8 +51,9 @@ public abstract class ControllableBaseEntity<T extends LivingEntity> implements 
 
     public ControllableBaseEntity(int id, ControllableEntityType entityType, EntityManager manager) {
         this.manager = manager;
-        this.id = id;
-        this.mind = new Mind(this);
+        this.ID = id;
+        this.mind = new Mind();
+        this.mind.setControllableEntity(this);
         this.entityType = entityType;
         this.initSounds();
     }
@@ -57,7 +65,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity> implements 
 
     @Override
     public int getId() {
-        return id;
+        return ID;
     }
 
     @Override
@@ -88,6 +96,37 @@ public abstract class ControllableBaseEntity<T extends LivingEntity> implements 
     @Override
     public float getWidth() {
         return this.handle.width;
+    }
+
+    @Override
+    public boolean spawnEntity(Location spawnLocation) {
+        ControllableEntityPreSpawnEvent spawnEvent = new ControllableEntityPreSpawnEvent(this, spawnLocation);
+        EntityAPICore.getCore().getServer().getPluginManager().callEvent(spawnEvent);
+        if (spawnEvent.isCancelled()) {
+            return false;
+        }
+        Location l = spawnEvent.getSpawnLocation();
+        net.minecraft.server.v1_7_R1.World mcWorld = ((CraftWorld) l.getWorld()).getHandle();
+
+        SafeConstructor<ControllableEntityHandle> entityConstructor = new SafeConstructor<>(this.getEntityType().getHandleClass(), World.class, ControllableEntity.class);
+        ControllableEntityHandle controllableEntityHandle = entityConstructor.newInstance(WorldUtil.toNMSWorld(l.getWorld()), this);
+        if (handle instanceof EntityLiving) {
+            EntityLiving handle = (EntityLiving) controllableEntityHandle;
+            handle.setPositionRotation(l.getX(), l.getY(), l.getZ(), l.getYaw(), l.getPitch());
+            if (!l.getChunk().isLoaded()) {
+                l.getChunk().load();
+            }
+            if (mcWorld.addEntity(handle, CreatureSpawnEvent.SpawnReason.CUSTOM)) {
+                this.hasSpawned = true;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasSpawned() {
+        return this.hasSpawned;
     }
 
     @Override
@@ -359,8 +398,14 @@ public abstract class ControllableBaseEntity<T extends LivingEntity> implements 
     public void onDeath() {
         ControllableEntityDeathEvent deathEvent = new ControllableEntityDeathEvent(this);
         Bukkit.getServer().getPluginManager().callEvent(deathEvent);
+        this.getMind().setControllableEntity(null);
     }
 
     public void initSounds() {
+    }
+
+    @Override
+    public void setDefaultBehaviours() {
+        //TODO
     }
 }
