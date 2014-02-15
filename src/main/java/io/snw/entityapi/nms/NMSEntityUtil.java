@@ -1,11 +1,11 @@
-package io.snw.entityapi.utils;
+package io.snw.entityapi.nms;
 
 import io.snw.entityapi.entity.ControllablePlayerEntity;
 import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
 
-public class EntityUtil {
+public class NMSEntityUtil {
 
     public static Navigation getNavigation(LivingEntity livingEntity) {
         if (livingEntity instanceof CraftLivingEntity) {

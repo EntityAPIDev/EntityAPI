@@ -3,7 +3,7 @@ package io.snw.entityapi.api.mind.behaviour.goals;
 import io.snw.entityapi.api.ControllableEntity;
 import io.snw.entityapi.api.mind.behaviour.Behaviour;
 import io.snw.entityapi.api.mind.behaviour.BehaviourType;
-import io.snw.entityapi.utils.EntityUtil;
+import io.snw.entityapi.nms.NMSEntityUtil;
 import net.minecraft.server.v1_7_R1.*;
 import net.minecraft.util.org.apache.commons.lang3.StringUtils;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
@@ -58,7 +58,7 @@ public abstract class BehaviourTarget extends Behaviour {
                 return false;
             } else {
                 if (this.checkSenses) {
-                    if (EntityUtil.getEntitySenses(this.handle).canSee(entityliving)) {
+                    if (NMSEntityUtil.getEntitySenses(this.handle).canSee(entityliving)) {
                         this.targetNotVisibleTicks = 0;
                     } else if (++this.targetNotVisibleTicks > 60) {
                         return false;
@@ -104,9 +104,9 @@ public abstract class BehaviourTarget extends Behaviour {
                 return false;
             }
 
-            if (!EntityUtil.isInGuardedAreaOf(this.handle, MathHelper.floor(entityliving.locX), MathHelper.floor(entityliving.locY), MathHelper.floor(entityliving.locZ))) {
+            if (!NMSEntityUtil.isInGuardedAreaOf(this.handle, MathHelper.floor(entityliving.locX), MathHelper.floor(entityliving.locY), MathHelper.floor(entityliving.locZ))) {
                 return false;
-            } else if (this.checkSenses && !EntityUtil.getEntitySenses(this.handle).canSee(entityliving)) {
+            } else if (this.checkSenses && !NMSEntityUtil.getEntitySenses(this.handle).canSee(entityliving)) {
                 return false;
             } else {
                 if (this.useMelee) {
@@ -130,7 +130,7 @@ public abstract class BehaviourTarget extends Behaviour {
 
     private boolean attack(EntityLiving entityliving) {
         this.ticksAfterLastAttack = 10 + this.handle.aI().nextInt(5);
-        PathEntity pathentity = EntityUtil.getNavigation(this.handle).a(entityliving);
+        PathEntity pathentity = NMSEntityUtil.getNavigation(this.handle).a(entityliving);
 
         if (pathentity == null) {
             return false;

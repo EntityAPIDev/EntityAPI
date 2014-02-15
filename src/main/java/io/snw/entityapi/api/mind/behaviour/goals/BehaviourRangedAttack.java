@@ -4,7 +4,7 @@ import io.snw.entityapi.api.ControllableEntity;
 import io.snw.entityapi.api.ProjectileType;
 import io.snw.entityapi.api.mind.behaviour.Behaviour;
 import io.snw.entityapi.api.mind.behaviour.BehaviourType;
-import io.snw.entityapi.utils.EntityUtil;
+import io.snw.entityapi.nms.NMSEntityUtil;
 import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
@@ -71,7 +71,7 @@ public class BehaviourRangedAttack extends Behaviour {
 
     @Override
     public boolean shouldContinue() {
-        return this.shouldStart() || !EntityUtil.getNavigation(this.controllableEntity.getBukkitEntity()).g();
+        return this.shouldStart() || !NMSEntityUtil.getNavigation(this.controllableEntity.getBukkitEntity()).g();
     }
 
     @Override
@@ -84,7 +84,7 @@ public class BehaviourRangedAttack extends Behaviour {
     @Override
     public void tick() {
         double distanceToTarget = this.controllableEntity.getHandle().e(this.target.locX, this.target.boundingBox.b, this.target.locZ);
-        boolean canSee = EntityUtil.getEntitySenses(this.controllableEntity.getHandle()).canSee(this.target);
+        boolean canSee = NMSEntityUtil.getEntitySenses(this.controllableEntity.getHandle()).canSee(this.target);
 
         if (canSee) {
             ++this.inRangeTicks;
@@ -93,12 +93,12 @@ public class BehaviourRangedAttack extends Behaviour {
         }
 
         if (distanceToTarget <= (double) this.rangeSquared && this.inRangeTicks >= 20) {
-            EntityUtil.getNavigation(this.controllableEntity.getHandle()).h();
+            NMSEntityUtil.getNavigation(this.controllableEntity.getHandle()).h();
         } else {
             this.controllableEntity.navigateTo((LivingEntity) this.target.getBukkitEntity());
         }
 
-        EntityUtil.getControllerLook(this.controllableEntity.getHandle()).a(this.target, 30.0F, 30.0F);
+        NMSEntityUtil.getControllerLook(this.controllableEntity.getHandle()).a(this.target, 30.0F, 30.0F);
         float strength;
 
         if (--this.shootCooldown == 0) {

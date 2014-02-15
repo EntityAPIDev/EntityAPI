@@ -4,7 +4,7 @@ import io.snw.entityapi.api.ControllableEntity;
 import io.snw.entityapi.api.mind.behaviour.Behaviour;
 import io.snw.entityapi.api.mind.behaviour.BehaviourType;
 import io.snw.entityapi.entity.selector.*;
-import io.snw.entityapi.utils.EntityUtil;
+import io.snw.entityapi.nms.NMSEntityUtil;
 import net.minecraft.server.v1_7_R1.*;
 
 import java.util.List;
@@ -72,19 +72,19 @@ public class BehaviourAvoidEntity extends Behaviour {
         } else if (this.entityToAvoid.e(vec3d.c, vec3d.d, vec3d.e) < this.entityToAvoid.e(this.handle)) {
             return false;
         } else {
-            this.path = EntityUtil.getNavigation(this.handle).a(vec3d.c, vec3d.d, vec3d.e);
+            this.path = NMSEntityUtil.getNavigation(this.handle).a(vec3d.c, vec3d.d, vec3d.e);
             return this.path == null ? false : this.path.b(vec3d);
         }
     }
 
     @Override
     public boolean shouldContinue() {
-        return !EntityUtil.getNavigation(this.handle).g();
+        return !NMSEntityUtil.getNavigation(this.handle).g();
     }
 
     @Override
     public void start() {
-        EntityUtil.getNavigation(this.handle).a(this.path, this.speedWhenFar);
+        NMSEntityUtil.getNavigation(this.handle).a(this.path, this.speedWhenFar);
     }
 
     @Override
@@ -95,9 +95,9 @@ public class BehaviourAvoidEntity extends Behaviour {
     @Override
     public void tick() {
         if (this.handle.e(this.entityToAvoid) < 49.0D) {
-            EntityUtil.getNavigation(this.handle).a(this.speedWhenNear);
+            NMSEntityUtil.getNavigation(this.handle).a(this.speedWhenNear);
         } else {
-            EntityUtil.getNavigation(this.handle).a(this.speedWhenFar);
+            NMSEntityUtil.getNavigation(this.handle).a(this.speedWhenFar);
         }
     }
 
