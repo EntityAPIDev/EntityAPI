@@ -5,7 +5,7 @@ import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import org.bukkit.entity.Slime;
 
-public class ControllableSlime extends ControllableAttackingBaseEntity<Slime> {
+public class ControllableSlime extends ControllableBaseEntity<Slime> {
 
     public ControllableSlime(int id, EntityManager manager) {
         super(id, ControllableEntityType.SLIME, manager);

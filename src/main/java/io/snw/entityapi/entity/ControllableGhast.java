@@ -5,7 +5,7 @@ import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import org.bukkit.entity.Ghast;
 
-public class ControllableGhast extends ControllableAttackingBaseEntity<Ghast> {
+public class ControllableGhast extends ControllableBaseEntity<Ghast> {
 
     public ControllableGhast(int id, EntityManager manager) {
         super(id, ControllableEntityType.GHAST, manager);

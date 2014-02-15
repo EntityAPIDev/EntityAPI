@@ -5,7 +5,7 @@ import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import org.bukkit.entity.Spider;
 
-public class ControllableSpider extends ControllableAttackingBaseEntity<Spider> {
+public class ControllableSpider extends ControllableBaseEntity<Spider> {
 
     public ControllableSpider(int id, EntityManager manager) {
         super(id, ControllableEntityType.SPIDER, manager);

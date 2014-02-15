@@ -5,7 +5,7 @@ import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import org.bukkit.entity.Enderman;
 
-public class ControllableEnderman extends ControllableAttackingBaseEntity<Enderman> {
+public class ControllableEnderman extends ControllableBaseEntity<Enderman> {
 
     public ControllableEnderman(int id, EntityManager manager) {
         super(id, ControllableEntityType.ENDERMAN, manager);

@@ -5,7 +5,7 @@ import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import org.bukkit.entity.MagmaCube;
 
-public class ControllableMagmaCube extends ControllableAttackingBaseEntity<MagmaCube> {
+public class ControllableMagmaCube extends ControllableBaseEntity<MagmaCube> {
 
     public ControllableMagmaCube(int id, EntityManager manager) {
         super(id, ControllableEntityType.LAVA_SLIME, manager);

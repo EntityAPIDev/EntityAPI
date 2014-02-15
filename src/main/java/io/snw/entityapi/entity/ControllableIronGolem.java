@@ -5,7 +5,7 @@ import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import org.bukkit.entity.IronGolem;
 
-public class ControllableIronGolem extends ControllableAttackingBaseEntity<IronGolem> {
+public class ControllableIronGolem extends ControllableBaseEntity<IronGolem> {
 
 
     public ControllableIronGolem(int id, EntityManager manager) {

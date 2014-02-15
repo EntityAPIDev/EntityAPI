@@ -1,10 +1,7 @@
 package io.snw.entityapi.entity;
 
 import io.snw.entityapi.EntityManager;
-import io.snw.entityapi.api.ControllableEntity;
-import io.snw.entityapi.api.ControllableEntityHandle;
-import io.snw.entityapi.api.ControllableEntityType;
-import io.snw.entityapi.api.EntitySound;
+import io.snw.entityapi.api.*;
 import io.snw.entityapi.api.events.*;
 import io.snw.entityapi.api.mind.Mind;
 import net.minecraft.server.v1_7_R1.*;
@@ -28,7 +25,7 @@ import java.util.Map;
  *
  * @param <T> Bukkit entity that this is based off
  */
-public abstract class ControllableBaseEntity<T extends LivingEntity> implements ControllableEntity {
+public abstract class ControllableBaseEntity<T extends LivingEntity> implements ControllableEntity<T> {
 
     protected final EntityManager manager;
 
@@ -299,6 +296,33 @@ public abstract class ControllableBaseEntity<T extends LivingEntity> implements 
             return false;
         }
         return ((EntityInsentient) this.handle).getNavigation().a(path, speed);
+    }
+
+    @Override
+    public LivingEntity getTarget() {
+        if (this.handle == null) {
+            return null;
+        }
+
+        if (this.handle instanceof EntityInsentient) {
+            EntityLiving targetHandle = ((EntityInsentient) this.handle).getGoalTarget();
+            if (targetHandle != null && targetHandle.getBukkitEntity() instanceof LivingEntity) {
+                return (LivingEntity) targetHandle.getBukkitEntity();
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public void setTarget(LivingEntity target) {
+        if (this.handle == null) {
+            return;
+        }
+
+        if (this.handle instanceof EntityInsentient) {
+            ((EntityInsentient) this.handle).setGoalTarget(((CraftLivingEntity) target).getHandle());
+        }
     }
 
     @Override

@@ -5,7 +5,7 @@ import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import org.bukkit.entity.Giant;
 
-public class ControllableGiantZombie extends ControllableAttackingBaseEntity<Giant> {
+public class ControllableGiantZombie extends ControllableBaseEntity<Giant> {
 
     public ControllableGiantZombie(int id, EntityManager manager) {
         super(id, ControllableEntityType.GIANT, manager);

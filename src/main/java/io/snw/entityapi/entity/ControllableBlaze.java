@@ -5,7 +5,7 @@ import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import org.bukkit.entity.Blaze;
 
-public class ControllableBlaze extends ControllableAttackingBaseEntity<Blaze> {
+public class ControllableBlaze extends ControllableBaseEntity<Blaze> {
 
     public ControllableBlaze(int id, EntityManager manager) {
         super(id, ControllableEntityType.BLAZE, manager);

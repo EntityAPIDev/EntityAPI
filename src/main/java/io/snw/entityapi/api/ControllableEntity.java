@@ -19,7 +19,7 @@ import java.util.Map;
  * Represents our controllable entity
  */
 
-public abstract interface ControllableEntity extends Nameable {
+public abstract interface ControllableEntity<T extends LivingEntity> extends Nameable, Attacking {
 
     // TODO: JavaDucks. Quack
 
@@ -29,7 +29,7 @@ public abstract interface ControllableEntity extends Nameable {
 
     public Mind getMind();
 
-    public abstract LivingEntity getBukkitEntity();
+    public abstract T getBukkitEntity();
 
     public abstract EntityLiving getHandle();
 

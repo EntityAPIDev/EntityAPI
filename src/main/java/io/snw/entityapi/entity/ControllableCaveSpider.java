@@ -5,7 +5,7 @@ import io.snw.entityapi.api.ControllableEntityType;
 import io.snw.entityapi.api.EntitySound;
 import org.bukkit.entity.CaveSpider;
 
-public class ControllableCaveSpider extends ControllableAttackingBaseEntity<CaveSpider> {
+public class ControllableCaveSpider extends ControllableBaseEntity<CaveSpider> {
 
     public ControllableCaveSpider(int id, EntityManager manager) {
         super(id, ControllableEntityType.CAVE_SPIDER, manager);
