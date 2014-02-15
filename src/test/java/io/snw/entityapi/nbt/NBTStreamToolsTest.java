@@ -1,33 +1,41 @@
 package io.snw.entityapi.nbt;
 
 import org.junit.Test;
+import org.entityapi.nbt.NBTStreamTools;
+import org.entityapi.nbt.NBTTagCompound;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
+import static junit.framework.Assert.assertEquals;
+
 public class NBTStreamToolsTest {
 
-    private final File file = new File("./test.data");
+    private final File DATA_FILE = new File("./data.nbt");
+
+    private final String UNIQUE_KEY = "949ede53-1e61-4b9c-bdf7-0863866dd55d";
 
     @Test
     public void testWrite() throws Exception {
+        if(!DATA_FILE.exists()) {
+            DATA_FILE.createNewFile();
+        } else {
+            DATA_FILE.delete();
+        }
+
         NBTTagCompound compound = new NBTTagCompound();
-        compound.setString("name", "test1");
+        compound.setString("key", UNIQUE_KEY);
 
-        file.delete();
-
-        NBTStreamTools.write(compound, new FileOutputStream(file));
+        NBTStreamTools.write(compound, new FileOutputStream(DATA_FILE));
     }
 
     @Test
     public void testRead() throws Exception {
-        NBTTagCompound compound = NBTStreamTools.read(new FileInputStream(file));
+        NBTTagCompound compound = NBTStreamTools.read(new FileInputStream(DATA_FILE));
 
-        for(String key : compound.getKeys()) {
-            System.out.println("Key: " + key + "\nValue: " + compound.get(key).toString());
-        }
+        assertEquals("Saved UUID didn't match the retrieved UUID!\nGiven Key: " + UNIQUE_KEY + "\nRetrieved Key: " + compound.getString("key"), UNIQUE_KEY, compound.getString("key"));
 
-        System.out.println(compound.getString("name"));
+        System.out.print("Test passed!");
     }
 }
