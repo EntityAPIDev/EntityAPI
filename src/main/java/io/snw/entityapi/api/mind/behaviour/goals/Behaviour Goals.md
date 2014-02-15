@@ -31,7 +31,7 @@ Behaviour Goals to Implement
 * ArrowAttack (3) -> Change to RangedAttack (similar to MeleeAttack)
 * AvoidPlayer (1) -> Change to AvoidEntity class type
 * Beg (2) -> Change to beg for specific item (NMS only activates for wolfs and bones)
-* BreakDoor (extends DoorInteract)
+* BreakDoor **(extends DoorInteract)**
 * Breed (3) -> Add breeding event (this is a must!)
 * DefendVillage (1)
 * DoorInteract (0)
@@ -46,7 +46,7 @@ Behaviour Goals to Implement
 * JumpOnBlock (5) -> Change to SitOnBlock to match “Sit” goal
 * LeapAtTarget (5)
 * LookAtPlayer (2) -> Change to LookAtNearestEntity, as this is what this class actually does
-* *LookAtExact **(extends LookAtNearestEntity)** -> Same functionality as LookAtNearestEntity, but it looks at a specific entity instance*
+* *LookAtExact*** *(extends LookAtNearestEntity)* ***-> Same functionality as LookAtNearestEntity, but it looks at a specific entity instance*
 * LookAtTradingPlayer **(extends LookAtPlayer)**
 * MakeLove (3) -> how cute
 * MeleeAttack (3)
