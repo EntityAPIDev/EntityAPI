@@ -8,6 +8,8 @@ public abstract class Behaviour {
 
     public abstract BehaviourType getType();
 
+    public abstract String getDefaultKey();
+
     public abstract boolean shouldStart(); //a
 
     public boolean shouldContinue() { //b
@@ -23,8 +25,6 @@ public abstract class Behaviour {
     public boolean isContinuous() {
         return true;
     }
-
-    public abstract String getDefaultKey();
 
     public abstract void tick(); //e
 

@@ -260,7 +260,8 @@ public abstract class ControllableBaseEntity<T extends LivingEntity> implements 
 
     @Override
     public double getPathfindingRange() {
-        return this.handle.getAttributeInstance(GenericAttributes.b).getValue();
+        AttributeInstance attribute = this.handle.getAttributeInstance(GenericAttributes.b);
+        return attribute == null ? 16.0D : attribute.getValue();
     }
 
     @Override

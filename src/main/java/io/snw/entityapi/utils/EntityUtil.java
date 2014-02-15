@@ -78,4 +78,38 @@ public class EntityUtil {
         }
         return null;
     }
+
+    public static boolean hasGuardedArea(EntityLiving entityLiving) {
+        if (entityLiving instanceof EntityCreature) {
+            return ((EntityCreature) entityLiving).bW();
+        } else return false;
+    }
+
+    public static boolean isInGuardedAreaOf(EntityLiving entityLiving) {
+        if (entityLiving instanceof EntityCreature) {
+            return ((EntityCreature) entityLiving).bS();
+        } else return false;
+    }
+
+    public static boolean isInGuardedAreaOf(EntityLiving entityLiving, int x, int y, int z) {
+        if (entityLiving instanceof EntityCreature) {
+            return ((EntityCreature) entityLiving).b(x, y, z);
+        } else return false;
+    }
+
+    public static float getRangeOfGuardedAreaFor(EntityLiving entityLiving) {
+        if (entityLiving instanceof EntityCreature) {
+            return ((EntityCreature) entityLiving).bU();
+        } else return 1.0F;
+    }
+
+    public static ChunkCoordinates getChunkCoordinates(EntityLiving inEntity) {
+        if (inEntity instanceof EntityCreature) {
+            return ((EntityCreature) inEntity).bT();
+        } else if (inEntity instanceof EntityPlayer) {
+            return ((EntityPlayer) inEntity).getChunkCoordinates();
+        } else {
+            return new ChunkCoordinates(MathHelper.floor(inEntity.locX), MathHelper.floor(inEntity.locY), MathHelper.floor(inEntity.locZ));
+        }
+    }
 }
