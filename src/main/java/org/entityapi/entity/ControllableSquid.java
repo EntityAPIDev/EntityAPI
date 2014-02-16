@@ -4,7 +4,7 @@ import org.bukkit.entity.Squid;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 
-public class ControllableSquid extends ControllableBaseEntity<Squid> {
+public class ControllableSquid extends ControllableBaseEntity<Squid, ControllableSquidEntity> {
 
     public ControllableSquid(int id, EntityManager manager) {
         super(id, ControllableEntityType.SQUID, manager);

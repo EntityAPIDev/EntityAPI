@@ -5,7 +5,7 @@ import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
 
-public class ControllableBlaze extends ControllableBaseEntity<Blaze> {
+public class ControllableBlaze extends ControllableBaseEntity<Blaze, ControllableBlazeEntity> {
 
     public ControllableBlaze(int id, EntityManager manager) {
         super(id, ControllableEntityType.BLAZE, manager);

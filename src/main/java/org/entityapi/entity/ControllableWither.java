@@ -5,7 +5,7 @@ import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
 
-public class ControllableWither extends ControllableBaseEntity<Wither> {
+public class ControllableWither extends ControllableBaseEntity<Wither, ControllableWitherEntity> {
 
     public ControllableWither(int id, EntityManager manager) {
         super(id, ControllableEntityType.WITHER, manager);

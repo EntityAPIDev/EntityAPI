@@ -5,7 +5,7 @@ import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
 
-public class ControllableOcelot extends ControllableBaseEntity<Ocelot> {
+public class ControllableOcelot extends ControllableBaseEntity<Ocelot, ControllableOcelotEntity> {
 
     public ControllableOcelot(int id, EntityManager manager) {
         super(id, ControllableEntityType.OZELOT, manager);

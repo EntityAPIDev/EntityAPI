@@ -5,7 +5,7 @@ import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
 
-public class ControllableEnderman extends ControllableBaseEntity<Enderman> {
+public class ControllableEnderman extends ControllableBaseEntity<Enderman, ControllableEndermanEntity> {
 
     public ControllableEnderman(int id, EntityManager manager) {
         super(id, ControllableEntityType.ENDERMAN, manager);

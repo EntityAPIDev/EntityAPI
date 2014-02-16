@@ -33,7 +33,7 @@ import java.util.Map;
  *
  * @param <T> Bukkit entity that this is based off
  */
-public abstract class ControllableBaseEntity<T extends LivingEntity> implements ControllableEntity<T> {
+public abstract class ControllableBaseEntity<T extends LivingEntity, S extends EntityLiving> implements ControllableEntity<T, S> {
 
     protected final EntityManager manager;
 
@@ -45,7 +45,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity> implements 
     protected boolean canFly;
     protected org.bukkit.Material loot;
 
-    protected EntityLiving handle;
+    protected S handle;
     protected ControllableEntityType entityType;
     protected HashMap<EntitySound, Map<String, String>> sounds = new HashMap<>();
 
@@ -79,7 +79,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity> implements 
     }
 
     @Override
-    public EntityLiving getHandle() {
+    public S getHandle() {
         return handle;
     }
 

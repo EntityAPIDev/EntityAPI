@@ -5,7 +5,7 @@ import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
 
-public class ControllableVillager extends ControllableBaseEntity<Villager> {
+public class ControllableVillager extends ControllableBaseEntity<Villager, ControllableVillagerEntity> {
 
     public ControllableVillager(int id, EntityManager manager) {
         super(id, ControllableEntityType.VILLAGER, manager);

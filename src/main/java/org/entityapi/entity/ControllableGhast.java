@@ -5,7 +5,7 @@ import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
 
-public class ControllableGhast extends ControllableBaseEntity<Ghast> {
+public class ControllableGhast extends ControllableBaseEntity<Ghast, ControllableGhastEntity> {
 
     public ControllableGhast(int id, EntityManager manager) {
         super(id, ControllableEntityType.GHAST, manager);

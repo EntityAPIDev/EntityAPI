@@ -6,7 +6,7 @@ import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
 
 //TODO: finish this
-public class ControllableEnderDragon extends ControllableBaseEntity<EnderDragon> {
+public class ControllableEnderDragon extends ControllableBaseEntity<EnderDragon, ControllableEnderDragonEntity> {
 
     public ControllableEnderDragon(int id, EntityManager manager) {
         super(id, ControllableEntityType.ENDERDRAGON, manager);

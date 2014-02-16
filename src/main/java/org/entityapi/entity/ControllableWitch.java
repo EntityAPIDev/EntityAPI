@@ -5,7 +5,7 @@ import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
 
-public class ControllableWitch extends ControllableBaseEntity<Witch> {
+public class ControllableWitch extends ControllableBaseEntity<Witch, ControllableWitchEntity> {
 
     public ControllableWitch(int id, EntityManager manager) {
         super(id, ControllableEntityType.WITCH, manager);

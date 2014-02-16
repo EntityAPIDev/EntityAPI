@@ -4,7 +4,7 @@ import org.bukkit.entity.Player;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 
-public class ControllablePlayer extends ControllableBaseEntity<Player> {
+public class ControllablePlayer extends ControllableBaseEntity<Player, ControllablePlayerEntity> {
 
     public ControllablePlayer(int id, EntityManager manager) {
         super(id, ControllableEntityType.HUMAN, manager);

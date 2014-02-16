@@ -5,7 +5,7 @@ import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
 
-public class ControllableIronGolem extends ControllableBaseEntity<IronGolem> {
+public class ControllableIronGolem extends ControllableBaseEntity<IronGolem, ControllableIronGolemEntity> {
 
 
     public ControllableIronGolem(int id, EntityManager manager) {

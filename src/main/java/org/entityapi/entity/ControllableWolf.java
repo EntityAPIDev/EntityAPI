@@ -5,7 +5,7 @@ import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
 
-public class ControllableWolf extends ControllableBaseEntity<Wolf> {
+public class ControllableWolf extends ControllableBaseEntity<Wolf, ControllableWolfEntity> {
 
     public ControllableWolf(int id, EntityManager entityManager) {
         super(id, ControllableEntityType.WOLF, entityManager);

@@ -5,7 +5,7 @@ import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
 
-public class ControllableGiantZombie extends ControllableBaseEntity<Giant> {
+public class ControllableGiantZombie extends ControllableBaseEntity<Giant, ControllableGiantZombieEntity> {
 
     public ControllableGiantZombie(int id, EntityManager manager) {
         super(id, ControllableEntityType.GIANT, manager);

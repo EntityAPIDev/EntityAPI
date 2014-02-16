@@ -5,7 +5,7 @@ import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
 
-public class ControllablePig extends ControllableBaseEntity<Pig> {
+public class ControllablePig extends ControllableBaseEntity<Pig, ControllablePigEntity> {
 
     public ControllablePig(int id, EntityManager manager) {
         super(id, ControllableEntityType.PIG, manager);

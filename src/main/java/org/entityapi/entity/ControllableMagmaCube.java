@@ -5,7 +5,7 @@ import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
 
-public class ControllableMagmaCube extends ControllableBaseEntity<MagmaCube> {
+public class ControllableMagmaCube extends ControllableBaseEntity<MagmaCube, ControllableMagmaCubeEntity> {
 
     public ControllableMagmaCube(int id, EntityManager manager) {
         super(id, ControllableEntityType.LAVA_SLIME, manager);

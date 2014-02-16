@@ -5,7 +5,7 @@ import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
 
-public class ControllableCreeper extends ControllableBaseEntity<Creeper> {
+public class ControllableCreeper extends ControllableBaseEntity<Creeper, ControllableCreeperEntity> {
 
     public ControllableCreeper(int id, EntityManager manager) {
         super(id, ControllableEntityType.CREEPER, manager);

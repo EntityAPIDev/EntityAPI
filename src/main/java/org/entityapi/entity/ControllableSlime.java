@@ -5,7 +5,7 @@ import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
 
-public class ControllableSlime extends ControllableBaseEntity<Slime> {
+public class ControllableSlime extends ControllableBaseEntity<Slime, ControllableSlimeEntity> {
 
     public ControllableSlime(int id, EntityManager manager) {
         super(id, ControllableEntityType.SLIME, manager);

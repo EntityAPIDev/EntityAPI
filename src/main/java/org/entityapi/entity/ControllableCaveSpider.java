@@ -5,7 +5,7 @@ import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
 
-public class ControllableCaveSpider extends ControllableBaseEntity<CaveSpider> {
+public class ControllableCaveSpider extends ControllableBaseEntity<CaveSpider, ControllableCaveSpiderEntity> {
 
     public ControllableCaveSpider(int id, EntityManager manager) {
         super(id, ControllableEntityType.CAVE_SPIDER, manager);
