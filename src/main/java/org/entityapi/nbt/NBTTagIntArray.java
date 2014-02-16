@@ -12,7 +12,8 @@ public class NBTTagIntArray extends NBTReturnable<int[]> {
 
     private int[] data;
 
-    public NBTTagIntArray() {}
+    public NBTTagIntArray() {
+    }
 
     public NBTTagIntArray(int[] i) {
         this.data = i;

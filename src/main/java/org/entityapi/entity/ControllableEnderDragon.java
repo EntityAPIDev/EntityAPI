@@ -1,9 +1,9 @@
 package org.entityapi.entity;
 
+import org.bukkit.entity.EnderDragon;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
-import org.bukkit.entity.EnderDragon;
 
 //TODO: finish this
 public class ControllableEnderDragon extends ControllableBaseEntity<EnderDragon> {

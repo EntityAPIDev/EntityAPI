@@ -1,9 +1,9 @@
 package org.entityapi.entity;
 
+import org.bukkit.entity.MushroomCow;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
-import org.bukkit.entity.MushroomCow;
 
 public class ControllableMushroomCow extends ControllableBaseEntity<MushroomCow> {
 

@@ -11,7 +11,8 @@ public class NBTTagLong extends NBTNumber<Long> {
 
     private long data;
 
-    public NBTTagLong() {}
+    public NBTTagLong() {
+    }
 
     public NBTTagLong(long l) {
         this.data = l;

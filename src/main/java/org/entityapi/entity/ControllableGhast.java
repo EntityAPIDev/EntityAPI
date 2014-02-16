@@ -1,9 +1,9 @@
 package org.entityapi.entity;
 
+import org.bukkit.entity.Ghast;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
-import org.bukkit.entity.Ghast;
 
 public class ControllableGhast extends ControllableBaseEntity<Ghast> {
 

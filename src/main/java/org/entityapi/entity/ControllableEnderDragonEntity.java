@@ -1,13 +1,13 @@
 package org.entityapi.entity;
 
-import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.ControllableEntityHandle;
-import org.entityapi.api.EntitySound;
-import org.entityapi.reflection.refs.PathfinderGoalSelectorRef;
 import net.minecraft.server.v1_7_R1.EntityEnderDragon;
 import net.minecraft.server.v1_7_R1.Item;
 import net.minecraft.server.v1_7_R1.World;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
+import org.entityapi.api.ControllableEntity;
+import org.entityapi.api.ControllableEntityHandle;
+import org.entityapi.api.EntitySound;
+import org.entityapi.reflection.refs.PathfinderGoalSelectorRef;
 
 //TODO: finish this
 public class ControllableEnderDragonEntity extends EntityEnderDragon implements ControllableEntityHandle {

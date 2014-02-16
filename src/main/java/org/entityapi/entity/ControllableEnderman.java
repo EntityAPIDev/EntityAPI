@@ -1,9 +1,9 @@
 package org.entityapi.entity;
 
+import org.bukkit.entity.Enderman;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
-import org.bukkit.entity.Enderman;
 
 public class ControllableEnderman extends ControllableBaseEntity<Enderman> {
 

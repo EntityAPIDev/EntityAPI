@@ -4,13 +4,17 @@ import org.entityapi.nbt.exception.NBTException;
 
 import java.io.DataInput;
 import java.io.DataOutput;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 public class NBTTagCompound extends NBTBase {
 
     public Map<String, NBTBase> VALUES = new HashMap<>();
 
-    public NBTTagCompound() {}
+    public NBTTagCompound() {
+    }
 
     @Override
     public byte getTypeId() {
@@ -84,7 +88,7 @@ public class NBTTagCompound extends NBTBase {
 
     public byte getByte(String key) {
         try {
-            if(hasKey(key))
+            if (hasKey(key))
                 return ((NBTNumber<Byte>) get(key)).getValue();
             return 0;
         } catch (ClassCastException e) {
@@ -94,7 +98,7 @@ public class NBTTagCompound extends NBTBase {
 
     public byte[] getByteArray(String key) {
         try {
-            if(hasKey(key))
+            if (hasKey(key))
                 return ((NBTReturnable<byte[]>) get(key)).getValue();
             return new byte[]{};
         } catch (ClassCastException e) {
@@ -104,7 +108,7 @@ public class NBTTagCompound extends NBTBase {
 
     public double getDouble(String key) {
         try {
-            if(hasKey(key))
+            if (hasKey(key))
                 return ((NBTNumber<Double>) get(key)).getValue();
             return 0;
         } catch (ClassCastException e) {
@@ -114,7 +118,7 @@ public class NBTTagCompound extends NBTBase {
 
     public float getFloat(String key) {
         try {
-            if(hasKey(key))
+            if (hasKey(key))
                 return ((NBTNumber<Float>) get(key)).getValue();
             return 0;
         } catch (ClassCastException e) {
@@ -124,7 +128,7 @@ public class NBTTagCompound extends NBTBase {
 
     public int getInt(String key) {
         try {
-            if(hasKey(key))
+            if (hasKey(key))
                 return ((NBTNumber<Integer>) get(key)).getValue();
             return 0;
         } catch (ClassCastException e) {
@@ -134,7 +138,7 @@ public class NBTTagCompound extends NBTBase {
 
     public int[] getIntArray(String key) {
         try {
-            if(hasKey(key))
+            if (hasKey(key))
                 return ((NBTReturnable<int[]>) get(key)).getValue();
             return new int[]{};
         } catch (ClassCastException e) {
@@ -144,7 +148,7 @@ public class NBTTagCompound extends NBTBase {
 
     public long getLong(String key) {
         try {
-            if(hasKey(key))
+            if (hasKey(key))
                 return ((NBTNumber<Long>) get(key)).getValue();
             return 0;
         } catch (ClassCastException e) {
@@ -154,7 +158,7 @@ public class NBTTagCompound extends NBTBase {
 
     public short getShort(String key) {
         try {
-            if(hasKey(key))
+            if (hasKey(key))
                 return ((NBTNumber<Short>) get(key)).getValue();
             return 0;
         } catch (ClassCastException e) {
@@ -164,7 +168,7 @@ public class NBTTagCompound extends NBTBase {
 
     public String getString(String key) {
         try {
-            if(hasKey(key))
+            if (hasKey(key))
                 return ((NBTReturnable<String>) get(key)).getValue();
             return "";
         } catch (ClassCastException e) {
@@ -178,7 +182,7 @@ public class NBTTagCompound extends NBTBase {
 
     public NBTTagCompound getNBTTagCompound(String key) {
         try {
-            if(hasKey(key))
+            if (hasKey(key))
                 return (NBTTagCompound) this.get(key);
             return new NBTTagCompound();
         } catch (ClassCastException e) {

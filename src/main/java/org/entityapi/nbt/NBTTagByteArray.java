@@ -12,7 +12,8 @@ public class NBTTagByteArray extends NBTReturnable<byte[]> {
 
     private byte[] data;
 
-    public NBTTagByteArray() {}
+    public NBTTagByteArray() {
+    }
 
     public NBTTagByteArray(byte[] b) {
         this.data = b;

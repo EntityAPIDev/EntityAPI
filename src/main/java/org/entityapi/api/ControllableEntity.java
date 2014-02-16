@@ -1,7 +1,5 @@
 package org.entityapi.api;
 
-import org.entityapi.EntityManager;
-import org.entityapi.api.mind.Mind;
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import net.minecraft.server.v1_7_R1.PathEntity;
 import org.bukkit.Location;
@@ -11,6 +9,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
+import org.entityapi.EntityManager;
+import org.entityapi.api.mind.Mind;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,9 +1,9 @@
 package org.entityapi.server;
 
+import org.bukkit.Bukkit;
 import org.entityapi.EntityAPICore;
 import org.entityapi.internal.Constants;
 import org.entityapi.reflection.refs.MinecraftServerRef;
-import org.bukkit.Bukkit;
 
 public class CraftBukkitServer implements Server {
 

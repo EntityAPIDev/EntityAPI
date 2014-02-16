@@ -1,9 +1,9 @@
 package org.entityapi.entity.selector;
 
-import org.entityapi.api.mind.behaviour.goals.BehaviourMoveTowardsNearestAttackableTarget;
 import net.minecraft.server.v1_7_R1.Entity;
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import net.minecraft.server.v1_7_R1.IEntitySelector;
+import org.entityapi.api.mind.behaviour.goals.BehaviourMoveTowardsNearestAttackableTarget;
 
 public class EntitySelectorNearestAttackableTarget implements IEntitySelector {
 

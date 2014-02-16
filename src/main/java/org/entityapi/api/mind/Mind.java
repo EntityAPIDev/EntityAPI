@@ -14,7 +14,8 @@ public class Mind {
 
     protected BehaviourSelector behaviourSelector;
 
-    public Mind() {}
+    public Mind() {
+    }
 
     public void setControllableEntity(ControllableEntity controllableEntity) {
         this.controllableEntity = controllableEntity;

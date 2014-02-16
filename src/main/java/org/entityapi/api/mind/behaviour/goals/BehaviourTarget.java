@@ -1,12 +1,12 @@
 package org.entityapi.api.mind.behaviour.goals;
 
+import net.minecraft.server.v1_7_R1.*;
+import net.minecraft.util.org.apache.commons.lang3.StringUtils;
+import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.mind.behaviour.Behaviour;
 import org.entityapi.api.mind.behaviour.BehaviourType;
 import org.entityapi.nms.NMSEntityUtil;
-import net.minecraft.server.v1_7_R1.*;
-import net.minecraft.util.org.apache.commons.lang3.StringUtils;
-import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 
 /**
  * Base target Behaviour

@@ -1,7 +1,7 @@
 package org.entityapi.api.events;
 
-import org.entityapi.api.ControllableEntity;
 import org.bukkit.event.HandlerList;
+import org.entityapi.api.ControllableEntity;
 
 /**
  * Called when a ControllableEntity dies

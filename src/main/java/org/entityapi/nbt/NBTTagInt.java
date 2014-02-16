@@ -11,7 +11,8 @@ public class NBTTagInt extends NBTNumber<Integer> {
 
     private int data;
 
-    public NBTTagInt() {}
+    public NBTTagInt() {
+    }
 
     public NBTTagInt(int i) {
         this.data = i;

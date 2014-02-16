@@ -1,8 +1,6 @@
 package org.entityapi.nbt;
 
 import org.junit.Test;
-import org.entityapi.nbt.NBTStreamTools;
-import org.entityapi.nbt.NBTTagCompound;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,7 +16,7 @@ public class NBTStreamToolsTest {
 
     @Test
     public void testWrite() throws Exception {
-        if(!DATA_FILE.exists()) {
+        if (!DATA_FILE.exists()) {
             DATA_FILE.createNewFile();
         } else {
             DATA_FILE.delete();

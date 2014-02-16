@@ -1,8 +1,8 @@
 package org.entityapi.api.events;
 
-import org.entityapi.api.ControllableEntity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.Event;
+import org.entityapi.api.ControllableEntity;
 
 public abstract class ControllableEntityEvent extends Event {
 

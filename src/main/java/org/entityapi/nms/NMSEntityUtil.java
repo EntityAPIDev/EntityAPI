@@ -1,9 +1,9 @@
 package org.entityapi.nms;
 
-import org.entityapi.entity.ControllablePlayerEntity;
 import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
+import org.entityapi.entity.ControllablePlayerEntity;
 
 public class NMSEntityUtil {
 

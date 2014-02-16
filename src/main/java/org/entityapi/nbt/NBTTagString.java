@@ -17,7 +17,7 @@ public class NBTTagString extends NBTReturnable<String> {
 
     public NBTTagString(String name) {
         this.data = name;
-        if(name == null)
+        if (name == null)
             throw new IllegalArgumentException("Empty string not allowed!");
     }
 

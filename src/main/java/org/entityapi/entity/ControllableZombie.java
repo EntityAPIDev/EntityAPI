@@ -1,9 +1,9 @@
 package org.entityapi.entity;
 
+import org.bukkit.entity.Zombie;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
-import org.bukkit.entity.Zombie;
 
 public class ControllableZombie extends ControllableBaseEntity<Zombie> {
 

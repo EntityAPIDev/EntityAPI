@@ -1,9 +1,9 @@
 package org.entityapi.entity;
 
+import org.bukkit.entity.Spider;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
-import org.bukkit.entity.Spider;
 
 public class ControllableSpider extends ControllableBaseEntity<Spider> {
 

@@ -1,10 +1,10 @@
 package org.entityapi.entity;
 
+import net.minecraft.server.v1_7_R1.EntityBat;
+import org.bukkit.entity.Bat;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
-import net.minecraft.server.v1_7_R1.EntityBat;
-import org.bukkit.entity.Bat;
 
 public class ControllableBat extends ControllableBaseEntity<Bat> {
 

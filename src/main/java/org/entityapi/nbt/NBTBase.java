@@ -5,9 +5,10 @@ import java.io.DataOutput;
 
 public abstract class NBTBase implements Cloneable {
 
-    public static final String[] TAG_NAME_LOOKUP = new String[] { "END", "BYTE", "SHORT", "INT", "LONG", "FLOAT", "DOUBLE", "BYTE[]", "STRING", "LIST", "COMPOUND", "INT[]"};
+    public static final String[] TAG_NAME_LOOKUP = new String[]{"END", "BYTE", "SHORT", "INT", "LONG", "FLOAT", "DOUBLE", "BYTE[]", "STRING", "LIST", "COMPOUND", "INT[]"};
 
-    protected NBTBase() {}
+    protected NBTBase() {
+    }
 
     public abstract byte getTypeId();
 

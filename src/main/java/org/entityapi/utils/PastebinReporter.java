@@ -295,7 +295,7 @@ public class PastebinReporter {
         public Paste(final File file, boolean async) {
             this();
             try {
-                if(async) {
+                if (async) {
                     Runnable runnable = new Runnable() {
                         @Override
                         public void run() {
@@ -317,7 +317,7 @@ public class PastebinReporter {
             try {
                 String line;
                 BufferedReader reader = new BufferedReader(new FileReader(file));
-                while((line = reader.readLine()) != null) {
+                while ((line = reader.readLine()) != null) {
                     TEXT.add(line);
                 }
             } catch (Exception e) {
@@ -338,10 +338,10 @@ public class PastebinReporter {
         @Override
         public String toString() {
             StringBuilder builder = new StringBuilder();
-            if(HEADER != null) {
+            if (HEADER != null) {
                 builder.append(HEADER);
             }
-            for(String line : TEXT) {
+            for (String line : TEXT) {
                 builder.append(line + NEW_LINE);
             }
             return builder.toString();
@@ -356,8 +356,8 @@ public class PastebinReporter {
         this.API_KEY = apiKey;
     }
 
-    public String post(String name, Paste paste,  ReportFormat format, ExpireDate expireDate) {
-        if(name == null)
+    public String post(String name, Paste paste, ReportFormat format, ExpireDate expireDate) {
+        if (name == null)
             name = "";
 
         String report_url = "";

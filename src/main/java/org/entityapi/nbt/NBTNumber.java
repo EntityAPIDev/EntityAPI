@@ -2,8 +2,9 @@ package org.entityapi.nbt;
 
 public abstract class NBTNumber<T extends Number> extends NBTBase {
 
-    protected NBTNumber() {}
+    protected NBTNumber() {
+    }
 
-   public abstract T getValue();
+    public abstract T getValue();
 
 }

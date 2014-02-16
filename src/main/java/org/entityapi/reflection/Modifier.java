@@ -31,11 +31,11 @@ public class Modifier<T> {
 
         int index = 0;
 
-        for(SafeField field : this.targetTemplate.getFields()) {
-            if(type != null && type.getClass().isAssignableFrom(field.getType().getType())) {
+        for (SafeField field : this.targetTemplate.getFields()) {
+            if (type != null && type.getClass().isAssignableFrom(field.getType().getType())) {
                 layer.add(field);
 
-                if(indexer.containsKey(field))
+                if (indexer.containsKey(field))
                     indexer.put(field, index);
             }
             index++;
