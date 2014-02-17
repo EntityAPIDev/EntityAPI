@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.ChunkLoadEvent;
+import org.bukkit.event.world.ChunkUnloadEvent;
 import org.entityapi.api.ControllableEntity;
 
 import java.util.Queue;
@@ -20,6 +21,11 @@ public class ChunkManager implements Listener {
     @EventHandler
     private void onLoad(ChunkLoadEvent event) {
         //Handle npc stuff
+    }
+
+    @EventHandler
+    public void onUnload(ChunkUnloadEvent event) {
+
     }
 
     public void queueSpawn(ControllableEntity entity) {

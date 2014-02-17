@@ -85,6 +85,6 @@ public class CraftBukkitServer implements Server {
 
     @Override
     public boolean isCompatible() {
-        return (Constants.Server.SUPPORTED_VERSION_NUMERIC == MC_VERSION_NUMERIC) ? true : false;
+        return (Constants.Server.SUPPORTED_VERSION_NUMERIC == MC_VERSION_NUMERIC);
     }
 }
