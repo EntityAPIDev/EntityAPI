@@ -8,6 +8,7 @@ import org.bukkit.plugin.Plugin;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.ControllableEntityHandle;
 import org.entityapi.api.ControllableEntityType;
+import org.entityapi.api.DespawnReason;
 import org.entityapi.exceptions.NameRequiredException;
 import org.entityapi.reflection.SafeConstructor;
 import org.entityapi.utils.WorldUtil;
@@ -46,7 +47,7 @@ public class EntityManager {
                     } else {
                         entry.getValue().getHandle().C();
                         if (!entry.getValue().getHandle().isAlive()) {
-                            //TODO despawn if shitty
+                             //TODO: despawn
                         }
                     }
                 }
@@ -83,33 +84,22 @@ public class EntityManager {
     }
 
     public ControllableEntity spawnEntity(ControllableEntityType entityType, Location location, boolean prepare) {
-        if (entityType.isNameRequired())
-            throw new NameRequiredException();
-
-        Integer id = getNextID();
-        ControllableEntity entity = createEntity(entityType, id);
-
-        if (entity == null)
-            return null;
-
-        SafeConstructor<ControllableEntityHandle> entityConstructor = new SafeConstructor<ControllableEntityHandle>(entityType.getHandleClass(), World.class, ControllableEntity.class);
-        ControllableEntityHandle handle = entityConstructor.newInstance(WorldUtil.toNMSWorld(location.getWorld()), entity);
-
-        /**
-         * TODO: do the spawning
-         */
-
-        return entity;
-    }
-
-    protected ControllableEntity createEntity(ControllableEntityType entityType, int id) {
         try {
+            if (entityType.isNameRequired())
+                throw new NameRequiredException();
 
-            SafeConstructor<? extends ControllableEntity> constructor = new SafeConstructor<>(entityType.getControllableClass());
-            ControllableEntity entity = constructor.newInstance(id, this);
-            this.ENTITIES.put(id, entity);
-            return entity;
+            Integer id = getNextID();
 
+            EntityCreator context = new EntityCreator(this);
+
+            context.withID(id)
+                    .withType(entityType)
+                    .atLocation(location);
+
+            if(prepare)
+                context.withDefaults();
+
+            return context.create();
         } catch (Throwable throwable) {
             EntityAPICore.LOGGER.warning("Failed to create an Entity handle for type: " + entityType.getName());
             throwable.printStackTrace();
@@ -119,6 +109,14 @@ public class EntityManager {
 
     public Collection<ControllableEntity> getEntities() {
         return Collections.unmodifiableCollection(this.ENTITIES.values());
+    }
+
+    public void despawnAll() {
+
+    }
+
+    public void despawnAll(DespawnReason despawnReason) {
+
     }
 
     @Override
@@ -131,6 +129,6 @@ public class EntityManager {
 
     @Override
     public int hashCode() {
-        return this.toString().hashCode();
+        return super.hashCode() ^ this.toString().hashCode();
     }
 }
