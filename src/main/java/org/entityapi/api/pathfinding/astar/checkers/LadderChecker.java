@@ -11,11 +11,11 @@ public class LadderChecker extends BlockChecker {
 
     @Override
     public boolean canPass(Block block) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean check(Block block) {
-        return false;
+        return true;
     }
 }

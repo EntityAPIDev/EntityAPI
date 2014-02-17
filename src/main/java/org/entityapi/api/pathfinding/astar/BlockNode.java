@@ -5,6 +5,7 @@ package org.entityapi.api.pathfinding.astar;
 
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 
 public class BlockNode {
 
@@ -68,8 +69,8 @@ public class BlockNode {
         return this.h_score + this.g_score;
     }
 
-    public void calculateHScore() {
-
+    public void calculateHScore(Block end) {
+        this.h_score = this.pathfinder.getHeuristicType().calculate(getLocation(), end.getLocation(), true);
     }
 
     public void calculateGScore() {
