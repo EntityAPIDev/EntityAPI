@@ -15,10 +15,12 @@ public class NBTTagEnd extends NBTBase {
     }
 
     @Override
-    void write(DataOutput dataoutput) {}
+    void write(DataOutput dataoutput) {
+    }
 
     @Override
-    void load(DataInput datainput, int depth) {}
+    void load(DataInput datainput, int depth) {
+    }
 
     @Override
     public NBTBase clone() {

@@ -1,11 +1,11 @@
 package org.entityapi.entity;
 
+import org.bukkit.entity.Zombie;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
-import org.bukkit.entity.Zombie;
 
-public class ControllableZombie extends ControllableBaseEntity<Zombie> {
+public class ControllableZombie extends ControllableBaseEntity<Zombie, ControllableZombieEntity> {
 
     public ControllableZombie(int id, EntityManager manager) {
         super(id, ControllableEntityType.ZOMBIE, manager);

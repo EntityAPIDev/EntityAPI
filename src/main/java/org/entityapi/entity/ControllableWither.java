@@ -1,11 +1,11 @@
 package org.entityapi.entity;
 
+import org.bukkit.entity.Wither;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
-import org.bukkit.entity.Wither;
 
-public class ControllableWither extends ControllableBaseEntity<Wither> {
+public class ControllableWither extends ControllableBaseEntity<Wither, ControllableWitherEntity> {
 
     public ControllableWither(int id, EntityManager manager) {
         super(id, ControllableEntityType.WITHER, manager);

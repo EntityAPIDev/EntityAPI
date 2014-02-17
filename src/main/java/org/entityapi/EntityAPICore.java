@@ -1,13 +1,13 @@
 package org.entityapi;
 
 import com.google.common.collect.Maps;
-import org.entityapi.utils.PastebinReporter;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.entityapi.server.*;
+import org.entityapi.utils.PastebinReporter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +52,7 @@ public class EntityAPICore extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        if(CORE_INSTANCE != null) {
+        if (CORE_INSTANCE != null) {
             throw new RuntimeException("Only one instance of the core can run!");
         }
 
@@ -95,7 +95,7 @@ public class EntityAPICore extends JavaPlugin {
     }
 
     public static EntityAPICore getCore() {
-        if(CORE_INSTANCE == null) {
+        if (CORE_INSTANCE == null) {
             throw new RuntimeException("The EntityAPICore might have not been initialized properly!");
         }
         return CORE_INSTANCE;

@@ -1,8 +1,8 @@
 package org.entityapi.api;
 
-import org.entityapi.internal.Constants;
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import org.entityapi.entity.*;
+import org.entityapi.internal.Constants;
 
 public enum ControllableEntityType {
 
@@ -44,7 +44,7 @@ public enum ControllableEntityType {
     private final boolean isNameRequired;
 
     ControllableEntityType(String name, int id, Class<? extends ControllableEntity> controllableClass, Class handleClass, boolean isNameRequired) {
-        if(!ControllableEntityHandle.class.isAssignableFrom(handleClass))
+        if (!ControllableEntityHandle.class.isAssignableFrom(handleClass))
             throw new RuntimeException("Handle class needs to implement ControllableEntityHandle!");
 
         this.name = name;

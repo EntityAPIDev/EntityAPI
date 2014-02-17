@@ -1,11 +1,11 @@
 package org.entityapi.entity;
 
+import org.bukkit.entity.Blaze;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
-import org.bukkit.entity.Blaze;
 
-public class ControllableBlaze extends ControllableBaseEntity<Blaze> {
+public class ControllableBlaze extends ControllableBaseEntity<Blaze, ControllableBlazeEntity> {
 
     public ControllableBlaze(int id, EntityManager manager) {
         super(id, ControllableEntityType.BLAZE, manager);

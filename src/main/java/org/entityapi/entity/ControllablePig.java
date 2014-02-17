@@ -1,11 +1,11 @@
 package org.entityapi.entity;
 
+import org.bukkit.entity.Pig;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
-import org.bukkit.entity.Pig;
 
-public class ControllablePig extends ControllableBaseEntity<Pig> {
+public class ControllablePig extends ControllableBaseEntity<Pig, ControllablePigEntity> {
 
     public ControllablePig(int id, EntityManager manager) {
         super(id, ControllableEntityType.PIG, manager);

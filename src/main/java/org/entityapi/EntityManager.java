@@ -1,16 +1,16 @@
 package org.entityapi;
 
 import com.google.common.collect.Maps;
+import net.minecraft.server.v1_7_R1.World;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.plugin.Plugin;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.ControllableEntityHandle;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.exceptions.NameRequiredException;
 import org.entityapi.reflection.SafeConstructor;
 import org.entityapi.utils.WorldUtil;
-import net.minecraft.server.v1_7_R1.World;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.plugin.Plugin;
 
 import java.util.*;
 
@@ -45,7 +45,7 @@ public class EntityManager {
                             iterator.remove();
                     } else {
                         entry.getValue().getHandle().C();
-                        if(!entry.getValue().getHandle().isAlive()) {
+                        if (!entry.getValue().getHandle().isAlive()) {
                             //TODO despawn if shitty
                         }
                     }

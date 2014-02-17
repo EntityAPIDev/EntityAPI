@@ -1,13 +1,14 @@
 package org.entityapi.api.mind.behaviour.goals;
 
+import net.minecraft.server.v1_7_R1.EntityLiving;
+import net.minecraft.server.v1_7_R1.MathHelper;
+import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
+import org.bukkit.entity.LivingEntity;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.ProjectileType;
 import org.entityapi.api.mind.behaviour.Behaviour;
 import org.entityapi.api.mind.behaviour.BehaviourType;
 import org.entityapi.nms.NMSEntityUtil;
-import net.minecraft.server.v1_7_R1.*;
-import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
-import org.bukkit.entity.LivingEntity;
 
 /**
  * Using this causes the entity to attack targets from a certain range

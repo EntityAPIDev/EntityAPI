@@ -1,11 +1,11 @@
 package org.entityapi.entity;
 
+import org.bukkit.entity.CaveSpider;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
-import org.bukkit.entity.CaveSpider;
 
-public class ControllableCaveSpider extends ControllableBaseEntity<CaveSpider> {
+public class ControllableCaveSpider extends ControllableBaseEntity<CaveSpider, ControllableCaveSpiderEntity> {
 
     public ControllableCaveSpider(int id, EntityManager manager) {
         super(id, ControllableEntityType.CAVE_SPIDER, manager);

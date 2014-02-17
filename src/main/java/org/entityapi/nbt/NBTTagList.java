@@ -16,7 +16,8 @@ public class NBTTagList extends NBTBase {
     private List list = new ArrayList();
     private byte type = 0;
 
-    public NBTTagList() {}
+    public NBTTagList() {
+    }
 
     @Override
     public byte getTypeId() {

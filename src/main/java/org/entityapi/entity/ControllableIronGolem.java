@@ -1,11 +1,11 @@
 package org.entityapi.entity;
 
+import org.bukkit.entity.IronGolem;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
-import org.bukkit.entity.IronGolem;
 
-public class ControllableIronGolem extends ControllableBaseEntity<IronGolem> {
+public class ControllableIronGolem extends ControllableBaseEntity<IronGolem, ControllableIronGolemEntity> {
 
 
     public ControllableIronGolem(int id, EntityManager manager) {

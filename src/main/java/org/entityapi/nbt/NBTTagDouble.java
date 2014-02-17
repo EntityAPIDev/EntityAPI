@@ -11,7 +11,8 @@ public class NBTTagDouble extends NBTNumber<Double> {
 
     private double data;
 
-    public NBTTagDouble() {}
+    public NBTTagDouble() {
+    }
 
     public NBTTagDouble(double d) {
         this.data = d;

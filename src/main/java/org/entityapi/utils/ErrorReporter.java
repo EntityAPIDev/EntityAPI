@@ -1,7 +1,7 @@
 package org.entityapi.utils;
 
-import org.entityapi.EntityAPICore;
 import org.bukkit.Bukkit;
+import org.entityapi.EntityAPICore;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,7 +10,8 @@ public class ErrorReporter {
 
     private static final String DATE = new SimpleDateFormat("yyyy-MM-dd kk:mm Z").format(new Date());
 
-    private ErrorReporter() {}
+    private ErrorReporter() {
+    }
 
     public static PastebinReporter.Paste generatePaste(Exception exception) {
         PastebinReporter.Paste paste = new PastebinReporter.Paste("-----[EntityAPI - ErrorReport - " + DATE + "]-----");
@@ -46,7 +47,7 @@ public class ErrorReporter {
         String NEW_LINE = System.getProperty("line.separator");
         result.append(NEW_LINE);
 
-        for (StackTraceElement element : e.getStackTrace()){
+        for (StackTraceElement element : e.getStackTrace()) {
             result.append(element);
             result.append(NEW_LINE);
         }

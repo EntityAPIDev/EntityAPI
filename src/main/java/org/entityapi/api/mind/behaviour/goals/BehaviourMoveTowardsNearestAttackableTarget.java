@@ -1,12 +1,12 @@
 package org.entityapi.api.mind.behaviour.goals;
 
-import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.mind.behaviour.BehaviourType;
-import org.entityapi.entity.selector.EntitySelectorNearestAttackableTarget;
 import net.minecraft.server.v1_7_R1.DistanceComparator;
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import net.minecraft.server.v1_7_R1.IEntitySelector;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
+import org.entityapi.api.ControllableEntity;
+import org.entityapi.api.mind.behaviour.BehaviourType;
+import org.entityapi.entity.selector.EntitySelectorNearestAttackableTarget;
 
 import java.util.Collections;
 import java.util.List;

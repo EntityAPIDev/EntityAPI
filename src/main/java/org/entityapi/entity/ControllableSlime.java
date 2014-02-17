@@ -1,11 +1,11 @@
 package org.entityapi.entity;
 
+import org.bukkit.entity.Slime;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
-import org.bukkit.entity.Slime;
 
-public class ControllableSlime extends ControllableBaseEntity<Slime> {
+public class ControllableSlime extends ControllableBaseEntity<Slime, ControllableSlimeEntity> {
 
     public ControllableSlime(int id, EntityManager manager) {
         super(id, ControllableEntityType.SLIME, manager);

@@ -1,13 +1,13 @@
 package org.entityapi.entity;
 
+import net.minecraft.server.v1_7_R1.*;
+import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
+import org.bukkit.entity.Player;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.ControllableEntityHandle;
 import org.entityapi.api.mind.attribute.Attribute;
 import org.entityapi.api.mind.attribute.RideAttribute;
 import org.entityapi.reflection.refs.PathfinderGoalSelectorRef;
-import net.minecraft.server.v1_7_R1.*;
-import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
-import org.bukkit.entity.Player;
 
 public class ControllableSquidEntity extends EntitySquid implements ControllableEntityHandle {
 

@@ -11,7 +11,8 @@ public class NBTTagFloat extends NBTNumber<Float> {
 
     private float data;
 
-    public NBTTagFloat() {}
+    public NBTTagFloat() {
+    }
 
     public NBTTagFloat(float f) {
         this.data = f;

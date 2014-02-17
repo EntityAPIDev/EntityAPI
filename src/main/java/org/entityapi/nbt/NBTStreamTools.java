@@ -12,6 +12,7 @@ public class NBTStreamTools {
 
     /**
      * Reads an NBTTagCompound out of a given InputStream
+     *
      * @param inputStream
      * @return
      */

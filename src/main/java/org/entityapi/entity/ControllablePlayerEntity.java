@@ -1,12 +1,12 @@
 package org.entityapi.entity;
 
+import net.minecraft.server.v1_7_R1.*;
+import net.minecraft.util.com.mojang.authlib.GameProfile;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.ControllableEntityHandle;
 import org.entityapi.nms.PlayerNavigation;
 import org.entityapi.nms.network.FixedNetworkManager;
 import org.entityapi.nms.network.NullPlayerConnection;
-import net.minecraft.server.v1_7_R1.*;
-import net.minecraft.util.com.mojang.authlib.GameProfile;
 
 public class ControllablePlayerEntity extends EntityPlayer implements ControllableEntityHandle {
 

@@ -1,11 +1,11 @@
 package org.entityapi.entity;
 
+import org.bukkit.entity.Ocelot;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
-import org.bukkit.entity.Ocelot;
 
-public class ControllableOcelot extends ControllableBaseEntity<Ocelot> {
+public class ControllableOcelot extends ControllableBaseEntity<Ocelot, ControllableOcelotEntity> {
 
     public ControllableOcelot(int id, EntityManager manager) {
         super(id, ControllableEntityType.OZELOT, manager);

@@ -1,11 +1,11 @@
 package org.entityapi.entity;
 
+import org.bukkit.entity.Horse;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
-import org.bukkit.entity.Horse;
 
-public class ControllableHorse extends ControllableBaseEntity<Horse> {
+public class ControllableHorse extends ControllableBaseEntity<Horse, ControllableHorseEntity> {
 
     public ControllableHorse(int id, EntityManager manager) {
         super(id, ControllableEntityType.HORSE, manager);

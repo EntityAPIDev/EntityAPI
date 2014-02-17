@@ -1,14 +1,14 @@
 package org.entityapi.api.pathfinding.astar;
 
-import org.entityapi.utils.WorldUtil;
 import org.bukkit.Location;
+import org.entityapi.utils.WorldUtil;
 
 public enum HeuristicType {
 
     EUCLIDEAN {
         @Override
         public double calculate(Location from, Location to, boolean checkY) {
-             return WorldUtil.getEuclideanDistance(from, to, checkY);
+            return WorldUtil.getEuclideanDistance(from, to, checkY);
         }
     },
     MANHATTAN {

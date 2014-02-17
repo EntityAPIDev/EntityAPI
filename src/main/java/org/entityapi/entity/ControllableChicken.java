@@ -1,11 +1,11 @@
 package org.entityapi.entity;
 
+import org.bukkit.entity.Chicken;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
-import org.bukkit.entity.Chicken;
 
-public class ControllableChicken extends ControllableBaseEntity<Chicken> {
+public class ControllableChicken extends ControllableBaseEntity<Chicken, ControllableChickenEntity> {
 
     public ControllableChicken(int id, EntityManager manager) {
         super(id, ControllableEntityType.CHICKEN, manager);

@@ -1,11 +1,11 @@
 package org.entityapi.api.mind.behaviour.goals;
 
+import net.minecraft.server.v1_7_R1.*;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.mind.behaviour.Behaviour;
 import org.entityapi.api.mind.behaviour.BehaviourType;
-import org.entityapi.entity.selector.*;
-import org.entityapi.nms.*;
-import net.minecraft.server.v1_7_R1.*;
+import org.entityapi.entity.selector.EntitySelectorViewable;
+import org.entityapi.nms.NMSEntityUtil;
 
 import java.util.List;
 
@@ -15,7 +15,8 @@ import java.util.List;
 
 public class BehaviourAvoidEntity extends Behaviour {
 
-    private EntitySelectorViewable selector = new EntitySelectorViewable(this);;
+    private EntitySelectorViewable selector = new EntitySelectorViewable(this);
+    ;
     private ControllableEntity controllableEntity;
     private EntityLiving handle;
     private Class<?> classToAvoid;

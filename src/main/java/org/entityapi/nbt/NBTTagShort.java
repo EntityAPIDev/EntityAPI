@@ -11,7 +11,8 @@ public class NBTTagShort extends NBTNumber<Short> {
 
     private short data;
 
-    public NBTTagShort() {}
+    public NBTTagShort() {
+    }
 
     public NBTTagShort(short s) {
         this.data = s;

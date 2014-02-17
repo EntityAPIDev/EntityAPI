@@ -1,11 +1,11 @@
 package org.entityapi.entity;
 
+import org.bukkit.entity.Villager;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
-import org.bukkit.entity.Villager;
 
-public class ControllableVillager extends ControllableBaseEntity<Villager> {
+public class ControllableVillager extends ControllableBaseEntity<Villager, ControllableVillagerEntity> {
 
     public ControllableVillager(int id, EntityManager manager) {
         super(id, ControllableEntityType.VILLAGER, manager);

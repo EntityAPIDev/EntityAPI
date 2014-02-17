@@ -1,26 +1,26 @@
 package org.entityapi.entity;
 
-import net.minecraft.server.v1_7_R1.World;
-import org.bukkit.*;
+import net.minecraft.server.v1_7_R1.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.craftbukkit.v1_7_R1.CraftSound;
 import org.bukkit.craftbukkit.v1_7_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.util.Vector;
 import org.entityapi.EntityAPICore;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.ControllableEntityHandle;
 import org.entityapi.api.ControllableEntityType;
+import org.entityapi.api.EntitySound;
 import org.entityapi.api.events.*;
 import org.entityapi.api.mind.Mind;
-import net.minecraft.server.v1_7_R1.*;
-import org.bukkit.craftbukkit.v1_7_R1.CraftSound;
-import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.util.Vector;
-import org.entityapi.api.EntitySound;
-import org.entityapi.api.mind.behaviour.Behaviour;
 import org.entityapi.reflection.SafeConstructor;
 import org.entityapi.utils.WorldUtil;
 
@@ -33,7 +33,7 @@ import java.util.Map;
  *
  * @param <T> Bukkit entity that this is based off
  */
-public abstract class ControllableBaseEntity<T extends LivingEntity> implements ControllableEntity<T> {
+public abstract class ControllableBaseEntity<T extends LivingEntity, S extends EntityLiving> implements ControllableEntity<T, S> {
 
     protected final EntityManager manager;
 
@@ -45,7 +45,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity> implements 
     protected boolean canFly;
     protected org.bukkit.Material loot;
 
-    protected EntityLiving handle;
+    protected S handle;
     protected ControllableEntityType entityType;
     protected HashMap<EntitySound, Map<String, String>> sounds = new HashMap<>();
 
@@ -79,7 +79,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity> implements 
     }
 
     @Override
-    public EntityLiving getHandle() {
+    public S getHandle() {
         return handle;
     }
 

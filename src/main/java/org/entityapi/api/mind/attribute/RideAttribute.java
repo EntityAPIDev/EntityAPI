@@ -1,7 +1,7 @@
 package org.entityapi.api.mind.attribute;
 
-import org.entityapi.api.mind.Mind;
 import net.minecraft.server.v1_7_R1.EntityLiving;
+import org.entityapi.api.mind.Mind;
 
 import java.lang.reflect.Field;
 

@@ -1,12 +1,12 @@
 package org.entityapi.metrics;
 
-import org.entityapi.reflection.FieldAccessor;
-import org.entityapi.reflection.SafeField;
-import org.entityapi.utils.LogicUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.SimplePluginManager;
+import org.entityapi.reflection.FieldAccessor;
+import org.entityapi.reflection.SafeField;
+import org.entityapi.utils.LogicUtil;
 
 import java.util.Arrays;
 import java.util.Collection;

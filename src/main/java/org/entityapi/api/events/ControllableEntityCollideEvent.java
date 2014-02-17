@@ -1,9 +1,9 @@
 package org.entityapi.api.events;
 
-import org.entityapi.api.ControllableEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
+import org.entityapi.api.ControllableEntity;
 
 public class ControllableEntityCollideEvent extends ControllableEntityEvent implements Cancellable {
 
