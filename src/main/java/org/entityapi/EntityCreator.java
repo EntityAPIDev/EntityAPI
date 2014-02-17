@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EntityCreator {
-
     private EntityCreator INSTANCE;
 
     private EntityManager ENTITYMANAGER;
@@ -104,7 +103,11 @@ public class EntityCreator {
                 if (this.NAME != null) {
                     entity.setName(this.NAME);
                 }
-                return (T) entity;
+                try {
+                    return (T) entity;
+                } catch (ClassCastException e) {
+                    throw new ControllableEntitySpawnException(e);
+                }
             } else {
                 throw new ControllableEntitySpawnException();
             }
