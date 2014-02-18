@@ -132,7 +132,7 @@ public class EntityAPICore extends JavaPlugin {
     public static EntityManager createEntityManager(Plugin owningPlugin, boolean keepInMemory) {
         EntityAPICore.getCore();
 
-        EntityManager manager = new EntityManager(owningPlugin, keepInMemory);
+        EntityManager manager = new SimpleEntityManager(owningPlugin, keepInMemory);
         registerManager(owningPlugin.getName(), manager);
 
         return manager;
