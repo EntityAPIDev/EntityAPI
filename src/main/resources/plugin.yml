@@ -1,8 +1,8 @@
 name: EntityAPI
 authors: [DSH105, Frostalf, CaptainBern]
 version: ${project.version}
-main: io.snw.entityapi.EntityAPICore
+main: org.entityapi.EntityAPICore
 description: Is awesome
-website: http://ci.drtshock.net
+website: http://entityapi.org
 
     
