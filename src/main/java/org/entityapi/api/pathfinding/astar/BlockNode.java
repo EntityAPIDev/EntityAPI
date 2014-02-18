@@ -1,16 +1,24 @@
 /**
  * For more info: http://www.policyalmanac.org/games/aStarTutorial.htm
+ *
+ * Some of the code in this class is based off:
+ * https://github.com/kumpelblase2/Remote-Entities/blob/master/src/main/java/de/kumpelblase2/remoteentities/api/pathfinding/BlockNode.java
+ *
+ * And:
+ * https://github.com/Adamki11s/AStar-Pathfinding/blob/master/src/com/adamki11s/pathing/Tile.java
  */
 package org.entityapi.api.pathfinding.astar;
 
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 
 public class BlockNode {
 
     private Pathfinder pathfinder;
     private Location location;
+    private BlockNode parent;
 
     public static double COST_NORMAL = 1.0d;
     public static double COST_UP = 1.1d;
@@ -47,14 +55,12 @@ public class BlockNode {
         return this.location.clone();
     }
 
-    @Override
-    public String toString() {
-        return getX() + ":" + getY() + ":" + getZ();
+    public BlockNode getParent() {
+        return this.parent;
     }
 
-    @Override
-    public int hashCode() {
-        return toString().hashCode();
+    public void setParent(BlockNode parent) {
+        this.parent = parent;
     }
 
     public double getHScore() {
@@ -74,6 +80,58 @@ public class BlockNode {
     }
 
     public void calculateGScore() {
+        BlockNode parent = null;
+        BlockNode current = this;
 
+        double g_cost = 0;
+
+        while((parent = current.parent) != null) {
+            int dx = Math.abs(parent.getX() - current.getX());
+            int dy = Math.abs(parent.getY() - current.getY());
+            int dz = Math.abs(parent.getZ() - current.getZ());
+
+            if(dx == 1 && dz == 1) {
+                if(dy == 1) {
+                    g_cost += BlockNode.COST_DIAGONAL_UP;
+                } else {
+                    g_cost += BlockNode.COST_DIAGONAL;
+                }
+            } else if (dy == 1) {
+                g_cost += BlockNode.COST_UP;
+            } else {
+                g_cost += BlockNode.COST_NORMAL;
+            }
+            current = parent;
+        }
+
+        this.g_score = g_cost;
+    }
+
+    public boolean canWalkTrough() {
+        return MaterialChecker.isTransparent(this.location.getBlock());
+    }
+
+    public boolean canJumpOn() {
+        return this.location.getBlock().getRelative(BlockFace.UP, 3).isEmpty();
+    }
+
+    @Override
+    public String toString() {
+        return getX() + ":" + getY() + ":" + getZ();
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode() ^ toString().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if(object instanceof BlockNode) {
+            BlockNode node = (BlockNode) object;
+
+            return node.toString().equalsIgnoreCase(this.toString());
+        }
+        return false;
     }
 }

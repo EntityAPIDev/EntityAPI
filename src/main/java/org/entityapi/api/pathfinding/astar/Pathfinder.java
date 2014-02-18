@@ -3,8 +3,10 @@ package org.entityapi.api.pathfinding.astar;
 import org.bukkit.Location;
 import org.entityapi.api.ControllableEntity;
 
+import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Pathfinder {
 
@@ -13,7 +15,9 @@ public class Pathfinder {
 
     private PriorityQueue<BlockNode> open_list = new PriorityQueue<>();
 
-    private HeuristicType heuristicType;
+    private HeuristicType heuristicType = HeuristicType.MANHATTAN;
+    private TreeSet<BlockNode> openList = new TreeSet<>();
+    private Set<BlockNode> closedList = new HashSet<>();
 
     public Pathfinder(ControllableEntity controllableEntity) {
         this(controllableEntity, true);
