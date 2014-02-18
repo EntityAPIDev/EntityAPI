@@ -7,12 +7,12 @@ import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 import org.entityapi.api.ControllableEntity;
 
-import java.util.Queue;
+import java.util.List;
 
 public class ChunkManager implements Listener {
 
     private final EntityManager ENTITY_MANAGER;
-    private Queue SPAWN_QUEUE = Lists.newLinkedList();
+    private List<ControllableEntity> SPAWN_QUEUE = Lists.newLinkedList();
 
     public ChunkManager(EntityManager entityManager) {
         this.ENTITY_MANAGER = entityManager;

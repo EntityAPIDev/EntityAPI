@@ -157,7 +157,7 @@ public class EntityAPICore extends JavaPlugin {
     }
 
     @EventHandler
-    protected void onDisable(PluginDisableEvent event) {
+    protected void onPluginDisable(PluginDisableEvent event) {
         if(hasEntityManager(event.getPlugin())) {
             EntityManager entityManager = getManagerFor(event.getPlugin());
 
