@@ -3,6 +3,7 @@ package io.snw.entityapi;
 import com.google.common.collect.Maps;
 import io.snw.entityapi.server.*;
 import io.snw.entityapi.utils.PastebinReporter;
+import java.io.File;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.server.PluginDisableEvent;
@@ -12,6 +13,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import org.bukkit.plugin.PluginManager;
 
 public class EntityAPICore extends JavaPlugin {
 
@@ -44,6 +47,12 @@ public class EntityAPICore extends JavaPlugin {
      * Pastebin reporter
      */
     private static final PastebinReporter REPORTER = new PastebinReporter(PASTEBIN_REPORT_KEY);
+    
+    /**
+     * Plugin Files' ArrayList
+     */
+    
+    private final List<String> plugins = new ArrayList<>();
 
     @Override
     public void onDisable() {
@@ -59,6 +68,7 @@ public class EntityAPICore extends JavaPlugin {
         CORE_INSTANCE = this;
 
         initServer();
+        this.getPlugins();
 
         //TODO configuration, Metrics, etc
     }
@@ -155,6 +165,23 @@ public class EntityAPICore extends JavaPlugin {
 
         return getCore().MANAGERS.get(pluginName);
     }
+
+    public void getPlugins() {
+        PluginManager pm = this.getServer().getPluginManager();
+        File dir = new File(this.getDataFolder().getParent());
+        for (File pluginFiles : dir.listFiles()) {
+            if (dir.isDirectory()) {
+                continue;
+            }
+            if (pluginFiles.getName().toLowerCase().contains("entityapi")) {
+                plugins.add(pluginFiles.getName());
+            }
+        }
+        if (plugins.size() > 1) {
+            pm.disablePlugin(this);
+            this.getLogger().log(Level.SEVERE, "Warning! You have two EntityAPI Libraries in Plugins Folder! Please remove one!");
+        }
+    }    
 
     @EventHandler
     protected void onDisable(PluginDisableEvent event) {
