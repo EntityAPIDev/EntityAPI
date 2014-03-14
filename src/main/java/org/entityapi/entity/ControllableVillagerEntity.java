@@ -3,6 +3,7 @@ package org.entityapi.entity;
 import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.ControllableEntityHandle;
 import org.entityapi.api.EntitySound;
@@ -101,6 +102,17 @@ public class ControllableVillagerEntity extends EntityVillager implements Contro
         }
         this.motY = motion[1];
         super.e(motion[0], motion[2]);
+    }
+
+    @Override
+    public void g(double x, double y, double z) {
+        if (this.controllableEntity != null) {
+            Vector velocity = ((ControllableBaseEntity) this.controllableEntity).onPush(x, y, z);
+            x = velocity.getX();
+            y = velocity.getY();
+            z = velocity.getZ();
+        }
+        super.g(x, y, z);
     }
 
     @Override

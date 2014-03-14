@@ -379,7 +379,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends E
         return !interactEvent.isCancelled();
     }
 
-    protected Vector onPush(float x, float y, float z) {
+    protected Vector onPush(double x, double y, double z) {
         ControllableEntityPushEvent pushEvent = new ControllableEntityPushEvent(this, new Vector(x, y, z));
         Bukkit.getServer().getPluginManager().callEvent(pushEvent);
         return pushEvent.getPushVelocity();

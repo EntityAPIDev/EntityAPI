@@ -109,6 +109,17 @@ public class ControllableEnderDragonEntity extends EntityEnderDragon implements 
     }
 
     @Override
+    public void g(double x, double y, double z) {
+        if (this.controllableEntity != null) {
+            Vector velocity = ((ControllableBaseEntity) this.controllableEntity).onPush(x, y, z);
+            x = velocity.getX();
+            y = velocity.getY();
+            z = velocity.getZ();
+        }
+        super.g(x, y, z);
+    }
+
+    @Override
     public void die(DamageSource damagesource) {
         if (this.controllableEntity != null) {
             ((ControllableBaseEntity) this.controllableEntity).onDeath();
