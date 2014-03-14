@@ -26,15 +26,20 @@ Behaviour Goals to Implement
     * (0 - 7), as per below
 * TODO -> More behaviours that are only implemented once
 
-**The Goals:**
+**Already Implemented**:
 
 * ArrowAttack (3) -> Change to RangedAttack (similar to MeleeAttack)
 * AvoidPlayer (1) -> Change to AvoidEntity class type
 * Beg (2) -> Change to beg for specific item (NMS only activates for wolfs and bones)
 * BreakDoor **(extends DoorInteract)**
 * Breed (3) -> Add breeding event (this is a must!)
-* DefendVillage (1)
 * DoorInteract (0)
+* NearestAttackableTarget (1) **(extends Target)** -> Change to MoveTowardsNearestAttackableTarget. Looks like we need to implement Entity Selector interfaces.
+* Target (0)
+
+**To be Implemented:**
+
+* DefendVillage (1) **(extends Target)**
 * EatTile (7) -> Change to EatGrass, cause apparently, this is all that this one achieves.
 * FleeSun (1)
 * Float (4)
@@ -46,7 +51,6 @@ Behaviour Goals to Implement
 * JumpOnBlock (5) -> Change to SitOnBlock to match “Sit” goal
 * LeapAtTarget (5)
 * LookAtPlayer (2) -> Change to LookAtNearestEntity, as this is what this class actually does
-* *LookAtExact*** *(extends LookAtNearestEntity)* ***-> Same functionality as LookAtNearestEntity, but it looks at a specific entity instance*
 * LookAtTradingPlayer **(extends LookAtPlayer)**
 * MakeLove (3) -> how cute
 * MeleeAttack (3)
@@ -55,12 +59,11 @@ Behaviour Goals to Implement
 * MoveTowardsRestriction (1)
 * MoveTowardsTarget (1)
 * *MoveTowardsLocation (1) -> Removed when it’s finished implementing (A way to do this needs to be added)*
-* NearestAttackableTarget (1) -> Change to MoveTowardsNearestAttackableTarget. Looks like we need to implement Entity Selector interfaces.
 * OcelotAttack (3)
 * OfferFlower (3) -> Instead of just offering it to villagers, allow the iron golem to give it to all entity types (change constructor)
 * OpenDoor **(extends DoorInteract)**
-* OwnerHurtByTarget (1) -> Possibly rename this so it’s a bit clearer?
-* OwnerHurtTarget (1)
+* OwnerHurtByTarget (1) **(extends Target)** -> Possibly rename this so it’s a bit clearer?
+* OwnerHurtTarget (1) **(extends Target)**
 * Panic (1)
 * PassengerCarrotStick (7) -> Change to FollowCarrotStick
 * Play (1) -> wut. Didn’t know this existed. Change to VillagerPlay
@@ -73,6 +76,5 @@ Behaviour Goals to Implement
 * Swell (1)
 * TakeFlower (3) -> Not just Villagers should be able to take flowers
 * Tame (1)
-* Target (0)
 * Tempt (3)
 * TradeWithPlayer (5)
