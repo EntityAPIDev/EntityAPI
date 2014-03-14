@@ -52,7 +52,7 @@ public class ControllableVillagerEntity extends EntityVillager implements Contro
     public void h() {
         super.h();
         if (this.controllableEntity != null) {
-            this.controllableEntity.onTick();
+            ((ControllableBaseEntity) this.controllableEntity).onTick();
             if (this.controllableEntity.shouldUpdateAttributes()) {
                 this.controllableEntity.getMind().tick();
             }
@@ -66,7 +66,7 @@ public class ControllableVillagerEntity extends EntityVillager implements Contro
             return;
         }
 
-        if (this.controllableEntity.onCollide(entity.getBukkitEntity())) {
+        if (((ControllableBaseEntity) this.controllableEntity).onCollide(entity.getBukkitEntity())) {
             super.collide(entity);
         }
     }
@@ -77,13 +77,13 @@ public class ControllableVillagerEntity extends EntityVillager implements Contro
             return super.c(entity);
         }
 
-        return controllableEntity.onInteract((Player) entity.getBukkitEntity(), true);
+        return ((ControllableBaseEntity) this.controllableEntity).onInteract((Player) entity.getBukkitEntity(), true);
     }
 
     @Override
     public boolean damageEntity(DamageSource damageSource, float v) {
         if (this.controllableEntity != null && damageSource.getEntity() != null && damageSource.getEntity().getBukkitEntity() instanceof Player) {
-            this.controllableEntity.onInteract((Player) damageSource.getEntity(), false);
+            ((ControllableBaseEntity) this.controllableEntity).onInteract((Player) damageSource.getEntity(), false);
         }
         return super.damageEntity(damageSource, v);
     }
@@ -106,7 +106,7 @@ public class ControllableVillagerEntity extends EntityVillager implements Contro
     @Override
     public void die(DamageSource damagesource) {
         if (this.controllableEntity != null) {
-            this.controllableEntity.onDeath();
+            ((ControllableBaseEntity) this.controllableEntity).onDeath();
         }
         super.die(damagesource);
     }

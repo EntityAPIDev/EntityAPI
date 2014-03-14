@@ -97,15 +97,5 @@ public abstract interface ControllableEntity<T extends LivingEntity, S extends E
 
     public boolean navigateTo(PathEntity path, double speed);
 
-    public void onTick();
-
-    public boolean onInteract(Player entity, boolean rightClick);
-
-    public Vector onPush(float x, float y, float z);
-
-    public boolean onCollide(Entity entity);
-
-    public void onDeath();
-
     public void setDefaultBehaviours();
 }

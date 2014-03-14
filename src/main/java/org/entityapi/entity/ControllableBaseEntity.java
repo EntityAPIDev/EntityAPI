@@ -21,6 +21,7 @@ import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
 import org.entityapi.api.events.*;
 import org.entityapi.api.mind.Mind;
+import org.entityapi.api.mind.behaviour.Behaviour;
 import org.entityapi.reflection.SafeConstructor;
 import org.entityapi.utils.WorldUtil;
 
@@ -367,35 +368,30 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends E
         }
     }
 
-    @Override
-    public void onTick() {
+    protected void onTick() {
         ControllableEntityTickEvent tickEvent = new ControllableEntityTickEvent(this);
         Bukkit.getServer().getPluginManager().callEvent(tickEvent);
     }
 
-    @Override
-    public boolean onInteract(Player entity, boolean rightClick) {
+    protected boolean onInteract(Player entity, boolean rightClick) {
         ControllableEntityInteractEvent interactEvent = new ControllableEntityInteractEvent(this, entity, rightClick ? Action.RIGHT_CLICK : Action.LEFT_CLICK);
         Bukkit.getServer().getPluginManager().callEvent(interactEvent);
         return !interactEvent.isCancelled();
     }
 
-    @Override
-    public Vector onPush(float x, float y, float z) {
+    protected Vector onPush(float x, float y, float z) {
         ControllableEntityPushEvent pushEvent = new ControllableEntityPushEvent(this, new Vector(x, y, z));
         Bukkit.getServer().getPluginManager().callEvent(pushEvent);
         return pushEvent.getPushVelocity();
     }
 
-    @Override
-    public boolean onCollide(Entity entity) {
+    protected boolean onCollide(Entity entity) {
         ControllableEntityCollideEvent collideEvent = new ControllableEntityCollideEvent(this, entity);
         Bukkit.getServer().getPluginManager().callEvent(collideEvent);
         return !collideEvent.isCancelled();
     }
 
-    @Override
-    public void onDeath() {
+    protected void onDeath() {
         ControllableEntityDeathEvent deathEvent = new ControllableEntityDeathEvent(this);
         Bukkit.getServer().getPluginManager().callEvent(deathEvent);
         this.getMind().setControllableEntity(null);
@@ -406,6 +402,12 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends E
 
     @Override
     public void setDefaultBehaviours() {
-        //TODO
+        for (Map.Entry<Behaviour, Integer> entry : this.getDefaultBehaviours().entrySet()) {
+            this.getMind().getBehaviourSelector().addBehaviour(entry.getKey(), entry.getValue());
+        }
+    }
+
+    public Map<Behaviour, Integer> getDefaultBehaviours() {
+        return new HashMap<>();
     }
 }
