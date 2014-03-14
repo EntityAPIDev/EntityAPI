@@ -1,12 +1,15 @@
 package org.entityapi.entity;
 
 import org.bukkit.entity.EnderDragon;
+import org.bukkit.util.Vector;
 import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntitySound;
 
-//TODO: finish this
 public class ControllableEnderDragon extends ControllableBaseEntity<EnderDragon, ControllableEnderDragonEntity> {
+
+    private boolean useAppliedTargetPosition;
+    private Vector targetPosition;
 
     public ControllableEnderDragon(int id, EntityManager manager) {
         super(id, ControllableEntityType.ENDERDRAGON, manager);
@@ -16,6 +19,22 @@ public class ControllableEnderDragon extends ControllableBaseEntity<EnderDragon,
         this(id, manager);
         this.handle = entityHandle;
         this.loot = entityHandle.getDefaultMaterialLoot();
+    }
+
+    public boolean shouldUseAppliedTargetPosition() {
+        return useAppliedTargetPosition;
+    }
+
+    public void setUsingAppliedTargetPosition(boolean flag) {
+        this.useAppliedTargetPosition = flag;
+    }
+
+    public Vector getTargetPosition() {
+        return targetPosition;
+    }
+
+    public void setTargetPosition(Vector position) {
+        this.targetPosition = position;
     }
 
     @Override
