@@ -82,34 +82,44 @@ public class NMSEntityUtil {
     public static boolean hasGuardedArea(EntityLiving entityLiving) {
         if (entityLiving instanceof EntityCreature) {
             return ((EntityCreature) entityLiving).bW();
-        } else return false;
+        }
+        return false;
     }
 
     public static boolean isInGuardedAreaOf(EntityLiving entityLiving) {
         if (entityLiving instanceof EntityCreature) {
             return ((EntityCreature) entityLiving).bS();
-        } else return false;
+        }
+        return false;
     }
 
     public static boolean isInGuardedAreaOf(EntityLiving entityLiving, int x, int y, int z) {
         if (entityLiving instanceof EntityCreature) {
             return ((EntityCreature) entityLiving).b(x, y, z);
-        } else return false;
+        }
+        return false;
     }
 
     public static float getRangeOfGuardedAreaFor(EntityLiving entityLiving) {
         if (entityLiving instanceof EntityCreature) {
             return ((EntityCreature) entityLiving).bU();
-        } else return 1.0F;
+        }
+        return 1.0F;
     }
 
-    public static ChunkCoordinates getChunkCoordinates(EntityLiving inEntity) {
-        if (inEntity instanceof EntityCreature) {
-            return ((EntityCreature) inEntity).bT();
-        } else if (inEntity instanceof EntityPlayer) {
-            return ((EntityPlayer) inEntity).getChunkCoordinates();
-        } else {
-            return new ChunkCoordinates(MathHelper.floor(inEntity.locX), MathHelper.floor(inEntity.locY), MathHelper.floor(inEntity.locZ));
+    public static ChunkCoordinates getChunkCoordinates(EntityLiving entityLiving) {
+        if (entityLiving instanceof EntityCreature) {
+            return ((EntityCreature) entityLiving).bT();
+        } else if (entityLiving instanceof EntityPlayer) {
+            return ((EntityPlayer) entityLiving).getChunkCoordinates();
         }
+        return new ChunkCoordinates(MathHelper.floor(entityLiving.locX), MathHelper.floor(entityLiving.locY), MathHelper.floor(entityLiving.locZ));
+    }
+
+    public static int getMaxHeadRotation(EntityLiving entityLiving) {
+        if (entityLiving instanceof EntityInsentient) {
+            return ((EntityInsentient) entityLiving).x();
+        }
+        return 40;
     }
 }

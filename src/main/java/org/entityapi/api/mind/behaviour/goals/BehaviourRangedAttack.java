@@ -1,9 +1,12 @@
 package org.entityapi.api.mind.behaviour.goals;
 
+import net.minecraft.server.v1_7_R1.Entity;
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import net.minecraft.server.v1_7_R1.MathHelper;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_7_R1.event.CraftEventFactory;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.event.entity.EntityTargetEvent;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.ProjectileType;
 import org.entityapi.api.mind.behaviour.Behaviour;
@@ -77,6 +80,10 @@ public class BehaviourRangedAttack extends Behaviour {
 
     @Override
     public void finish() {
+        // CraftBukkit start
+        EntityTargetEvent.TargetReason reason = this.target.isAlive() ? EntityTargetEvent.TargetReason.FORGOT_TARGET : EntityTargetEvent.TargetReason.TARGET_DIED;
+        CraftEventFactory.callEntityTargetEvent(controllableEntity.getHandle(), null, reason);
+        // CraftBukkit end
         this.target = null;
         this.inRangeTicks = 0;
         this.shootCooldown = -1;

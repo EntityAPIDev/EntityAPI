@@ -42,7 +42,7 @@ public class BehaviourAvoidEntity extends Behaviour {
 
     @Override
     public String getDefaultKey() {
-        return "Avoid Player";
+        return "Avoid Entity";
     }
 
     @Override

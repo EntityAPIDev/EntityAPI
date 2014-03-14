@@ -2,7 +2,9 @@ package org.entityapi.api.mind.behaviour.goals;
 
 import net.minecraft.server.v1_7_R1.*;
 import net.minecraft.util.org.apache.commons.lang3.StringUtils;
+import org.bukkit.craftbukkit.v1_7_R1.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
+import org.bukkit.event.entity.EntityTargetEvent;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.mind.behaviour.Behaviour;
 import org.entityapi.api.mind.behaviour.BehaviourType;
@@ -122,6 +124,35 @@ public abstract class BehaviourTarget extends Behaviour {
                         return false;
                     }
                 }
+
+                // CraftBukkit start - Check all the different target goals for the reason, default to RANDOM_TARGET
+                EntityTargetEvent.TargetReason reason = EntityTargetEvent.TargetReason.RANDOM_TARGET;
+
+                if (this instanceof BehaviourDefendVillage) {
+                    reason = EntityTargetEvent.TargetReason.DEFEND_VILLAGE;
+                } else if (this instanceof BehaviourHurtByTarget) {
+                    reason = EntityTargetEvent.TargetReason.TARGET_ATTACKED_ENTITY;
+                } else if (this instanceof BehaviourMoveTowardsNearestAttackableTarget) {
+                    if (entityliving instanceof EntityHuman) {
+                        reason = EntityTargetEvent.TargetReason.CLOSEST_PLAYER;
+                    }
+                } else if (this instanceof BehaviourOwnerHurtByTarget) {
+                    reason = EntityTargetEvent.TargetReason.TARGET_ATTACKED_OWNER;
+                } else if (this instanceof BehaviourOwnerHurtTarget) {
+                    reason = EntityTargetEvent.TargetReason.OWNER_ATTACKED_TARGET;
+                }
+
+                org.bukkit.event.entity.EntityTargetLivingEntityEvent event = org.bukkit.craftbukkit.v1_7_R1.event.CraftEventFactory.callEntityTargetLivingEvent(this.controllableEntity.getHandle(), entityliving, reason);
+                if (event.isCancelled() || event.getTarget() == null) {
+                    this.controllableEntity.setTarget(null);
+                    return false;
+                } else if (entityliving.getBukkitEntity() != event.getTarget()) {
+                    this.controllableEntity.setTarget(event.getTarget());
+                }
+                if (this.controllableEntity.getHandle() instanceof EntityCreature) {
+                    ((EntityCreature) this.controllableEntity.getHandle()).target = ((CraftEntity) event.getTarget()).getHandle();
+                }
+                // CraftBukkit end
 
                 return true;
             }

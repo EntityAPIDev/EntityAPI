@@ -97,9 +97,12 @@ public class BehaviourBreed extends Behaviour {
             EntityAPICore.getCore().getServer().getPluginManager().callEvent(breedEvent);
 
             if (child != null) {
+                // CraftBukkit start - set persistence for tame animals
                 if (child instanceof EntityTameableAnimal && ((EntityTameableAnimal) child).isTamed()) {
                     child.persistent = true;
                 }
+                // CraftBukkit end
+
                 EntityHuman human = this.handle.cb();
 
                 if (human == null && this.mate.cb() != null) {
