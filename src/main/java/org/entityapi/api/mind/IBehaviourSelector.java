@@ -14,7 +14,7 @@ public interface IBehaviourSelector {
 
     public abstract void removeBehaviour(String key);
 
-    public abstract void clearBehaviours(String key);
+    public abstract void clearBehaviours();
 
     public abstract Behaviour getBehaviour(String key);
 }

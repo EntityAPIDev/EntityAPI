@@ -28,6 +28,7 @@ public class BehaviourSelector implements IBehaviourSelector {
 
     @Override
     public void addBehaviour(String key, Behaviour behaviour, int priority) {
+        key = key.toLowerCase();
         BehaviourItem behaviourItem = new BehaviourItem(behaviour, priority);
         if (this.behaviourMap.containsKey(key)) {
             return;
@@ -38,6 +39,7 @@ public class BehaviourSelector implements IBehaviourSelector {
 
     @Override
     public void addAndReplaceBehaviour(String key, Behaviour behaviour, int priority) {
+        key = key.toLowerCase();
         if (this.behaviourMap.containsKey(key)) {
             this.removeBehaviour(key);
         }
@@ -65,6 +67,7 @@ public class BehaviourSelector implements IBehaviourSelector {
 
     @Override
     public void removeBehaviour(String key) {
+        key = key.toLowerCase();
         Iterator<Map.Entry<String, BehaviourItem>> iterator = this.behaviourMap.entrySet().iterator();
 
         while (iterator.hasNext()) {
@@ -87,7 +90,7 @@ public class BehaviourSelector implements IBehaviourSelector {
     }
 
     @Override
-    public void clearBehaviours(String key) {
+    public void clearBehaviours() {
         this.behaviourMap.clear();
         this.behaviours.clear();
 
@@ -108,7 +111,7 @@ public class BehaviourSelector implements IBehaviourSelector {
             BehaviourItem behaviourItem = entry.getValue();
             Behaviour behaviour = behaviourItem.getBehaviour();
 
-            if (key.equals(entry.getKey())) {
+            if (key.equalsIgnoreCase(entry.getKey())) {
                 return behaviour;
             }
         }
