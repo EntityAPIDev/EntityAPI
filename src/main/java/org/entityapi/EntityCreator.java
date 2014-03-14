@@ -19,7 +19,6 @@ public class EntityCreator {
     private ControllableEntityType TYPE;
     private String NAME;
     private Location LOCATION;
-    private ControllableEntity ENTITY;
     private boolean PREPARE;
     private Mind MIND;
     private HashMap<Behaviour, Integer> BEHAVIOURS;
