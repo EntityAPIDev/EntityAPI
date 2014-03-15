@@ -26,7 +26,7 @@ public abstract class Behaviour {
         return true;
     }
 
-    public abstract void tick(); //e
+    public void tick() {} //e
 
     protected boolean callEvent(Event e) {
         if (e != null) {

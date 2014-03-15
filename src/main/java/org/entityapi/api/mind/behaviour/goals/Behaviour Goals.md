@@ -33,20 +33,20 @@ Behaviour Goals to Implement
 * Beg (2) -> Change to beg for specific item (NMS only activates for wolfs and bones)
 * BreakDoor **(extends DoorInteract)**
 * Breed (3) -> Add breeding event (this is a must!)
+* DefendVillage (1) **(extends Target)**
 * DoorInteract (0)
+* HurtByTarget (1) **(extends GoalTarget)**
 * NearestAttackableTarget (1) **(extends Target)** -> Change to MoveTowardsNearestAttackableTarget. Looks like we need to implement Entity Selector interfaces.
 * Target (0)
 
 **To be Implemented:**
 
-* DefendVillage (1) **(extends Target)**
 * EatTile (7) -> Change to EatGrass, cause apparently, this is all that this one achieves.
 * FleeSun (1)
 * Float (4)
 * FollowOwner (3) -> Could name this something else for clarity? Any ideas?
 * FollowParent (0) -> Treats the ‘parent’ as the closest adult entity of the same type
 * *FollowExact (3) -> Similar to FollowParent, but follows a specific entity instance*
-* HurtByTarget (1) **(extends GoalTarget)**
 * Interact (3) **(extends LookAtPlayer)** -> Same functionality as LookAtPlayer, except it is compatible with different behaviours
 * JumpOnBlock (5) -> Change to SitOnBlock to match “Sit” goal
 * LeapAtTarget (5)
@@ -62,7 +62,6 @@ Behaviour Goals to Implement
 * OcelotAttack (3)
 * OfferFlower (3) -> Instead of just offering it to villagers, allow the iron golem to give it to all entity types (change constructor)
 * OpenDoor **(extends DoorInteract)**
-* OwnerHurtByTarget (1) **(extends Target)** -> Possibly rename this so it’s a bit clearer?
 * OwnerHurtTarget (1) **(extends Target)**
 * Panic (1)
 * PassengerCarrotStick (7) -> Change to FollowCarrotStick
@@ -78,3 +77,7 @@ Behaviour Goals to Implement
 * Tame (1)
 * Tempt (3)
 * TradeWithPlayer (5)
+
+**Need Extra Attention:**
+
+* OwnerHurtByTarget (1) **(extends Target)** -> Change to DefendOwner ---- TODO: TAMING ATTRIBUTE!!!

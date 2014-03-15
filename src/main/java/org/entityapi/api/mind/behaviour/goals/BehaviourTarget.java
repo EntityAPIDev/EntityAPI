@@ -136,7 +136,7 @@ public abstract class BehaviourTarget extends Behaviour {
                     if (entityliving instanceof EntityHuman) {
                         reason = EntityTargetEvent.TargetReason.CLOSEST_PLAYER;
                     }
-                } else if (this instanceof BehaviourOwnerHurtByTarget) {
+                } else if (this instanceof BehaviourDefendOwner) {
                     reason = EntityTargetEvent.TargetReason.TARGET_ATTACKED_OWNER;
                 } else if (this instanceof BehaviourOwnerHurtTarget) {
                     reason = EntityTargetEvent.TargetReason.OWNER_ATTACKED_TARGET;
