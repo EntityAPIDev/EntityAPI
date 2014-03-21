@@ -35,25 +35,25 @@ public class BehaviourHurtByTarget extends BehaviourTarget {
 
     @Override
     public boolean shouldStart() {
-        int lastAttackTick = this.handle.aK();
+        int lastAttackTick = this.getHandle().aK();
 
-        return lastAttackTick != this.lastAttackTick && this.isSuitableTarget(this.handle.getLastDamager(), false);
+        return lastAttackTick != this.lastAttackTick && this.isSuitableTarget(this.getHandle().getLastDamager(), false);
     }
 
     @Override
     public void tick() {
-        this.controllableEntity.setTarget((LivingEntity) this.handle.getLastDamager().getBukkitEntity());
-        this.lastAttackTick = this.handle.aK();
+        this.getControllableEntity().setTarget((LivingEntity) this.getHandle().getLastDamager().getBukkitEntity());
+        this.lastAttackTick = this.getHandle().aK();
         if (this.attackNearest) {
-            double range = this.controllableEntity.getPathfindingRange();
-            List list = this.handle.world.a(this.handle.getClass(), AxisAlignedBB.a().a(this.handle.locX, this.handle.locY, this.handle.locZ, this.handle.locX + 1.0D, this.handle.locY + 1.0D, this.handle.locZ + 1.0D).grow(range, 10.0D, range));
+            double range = this.getControllableEntity().getPathfindingRange();
+            List list = this.getHandle().world.a(this.getHandle().getClass(), AxisAlignedBB.a().a(this.getHandle().locX, this.getHandle().locY, this.getHandle().locZ, this.getHandle().locX + 1.0D, this.getHandle().locY + 1.0D, this.getHandle().locZ + 1.0D).grow(range, 10.0D, range));
             Iterator iterator = list.iterator();
 
             while (iterator.hasNext()) {
                 EntityCreature entitycreature = (EntityCreature) iterator.next();
 
-                if (this.handle != entitycreature && entitycreature.getGoalTarget() == null && !entitycreature.c(this.handle.getLastDamager())) {
-                    entitycreature.setGoalTarget(this.handle.getLastDamager());
+                if (this.getHandle() != entitycreature && entitycreature.getGoalTarget() == null && !entitycreature.c(this.getHandle().getLastDamager())) {
+                    entitycreature.setGoalTarget(this.getHandle().getLastDamager());
                 }
             }
         }

@@ -25,14 +25,14 @@ public class BehaviourBreakDoor extends BehaviourDoorInteract {
 
     @Override
     public boolean shouldStart() {
-        return !super.shouldStart() ? false : (!this.handle.world.getGameRules().getBoolean("mobGriefing") ? false : !this.door.f((IBlockAccess) this.handle.world, this.pointX, this.pointY, this.pointZ));
+        return !super.shouldStart() ? false : (!this.getHandle().world.getGameRules().getBoolean("mobGriefing") ? false : !this.door.f((IBlockAccess) this.getHandle().world, this.pointX, this.pointY, this.pointZ));
     }
 
     @Override
     public boolean shouldContinue() {
-        double dist = this.handle.e((double) this.pointX, (double) this.pointY, (double) this.pointZ);
+        double dist = this.getHandle().e((double) this.pointX, (double) this.pointY, (double) this.pointZ);
 
-        return this.breakTicks <= 240 && !this.door.f((IBlockAccess) this.handle.world, this.pointX, this.pointY, this.pointZ) && dist < 4.0D;
+        return this.breakTicks <= 240 && !this.door.f((IBlockAccess) this.getHandle().world, this.pointX, this.pointY, this.pointZ) && dist < 4.0D;
     }
 
     @Override
@@ -44,35 +44,35 @@ public class BehaviourBreakDoor extends BehaviourDoorInteract {
     @Override
     public void finish() {
         super.finish();
-        this.handle.world.d(this.handle.getId(), this.pointX, this.pointY, this.pointZ, -1);
+        this.getHandle().world.d(this.getHandle().getId(), this.pointX, this.pointY, this.pointZ, -1);
     }
 
     @Override
     public void tick() {
         super.tick();
-        if (this.handle.aI().nextInt(20) == 0) {
-            this.handle.world.triggerEffect(1010, this.pointX, this.pointY, this.pointZ, 0);
+        if (this.getHandle().aI().nextInt(20) == 0) {
+            this.getHandle().world.triggerEffect(1010, this.pointX, this.pointY, this.pointZ, 0);
         }
 
         ++this.breakTicks;
         int i = (int) ((float) this.breakTicks / 240.0F * 10.0F);
 
         if (i != this.lastBreakTicks) {
-            this.handle.world.d(this.handle.getId(), this.pointX, this.pointY, this.pointZ, i);
+            this.getHandle().world.d(this.getHandle().getId(), this.pointX, this.pointY, this.pointZ, i);
             this.lastBreakTicks = i;
         }
 
-        if (this.breakTicks == 240 && this.handle.world.difficulty == EnumDifficulty.HARD) {
+        if (this.breakTicks == 240 && this.getHandle().world.difficulty == EnumDifficulty.HARD) {
             // CraftBukkit start
-            if (org.bukkit.craftbukkit.v1_7_R1.event.CraftEventFactory.callEntityBreakDoorEvent(this.handle, this.pointX, this.pointY, this.pointZ).isCancelled()) {
+            if (org.bukkit.craftbukkit.v1_7_R1.event.CraftEventFactory.callEntityBreakDoorEvent(this.getHandle(), this.pointX, this.pointY, this.pointZ).isCancelled()) {
                 this.start();
                 return;
             }
             // CraftBukkit end
 
-            this.handle.world.setAir(this.pointX, this.pointY, this.pointZ);
-            this.handle.world.triggerEffect(1012, this.pointX, this.pointY, this.pointZ, 0);
-            this.handle.world.triggerEffect(2001, this.pointX, this.pointY, this.pointZ, Block.b(this.door));
+            this.getHandle().world.setAir(this.pointX, this.pointY, this.pointZ);
+            this.getHandle().world.triggerEffect(1012, this.pointX, this.pointY, this.pointZ, 0);
+            this.getHandle().world.triggerEffect(2001, this.pointX, this.pointY, this.pointZ, Block.b(this.door));
         }
     }
 }

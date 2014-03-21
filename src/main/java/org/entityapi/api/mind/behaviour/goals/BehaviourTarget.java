@@ -16,8 +16,6 @@ import org.entityapi.nms.NMSEntityUtil;
 
 public abstract class BehaviourTarget extends Behaviour {
 
-    protected ControllableEntity controllableEntity;
-    protected EntityLiving handle;
     private boolean checkSenses;
     private boolean useMelee;
     private int shouldAttack;
@@ -29,8 +27,7 @@ public abstract class BehaviourTarget extends Behaviour {
     }
 
     public BehaviourTarget(ControllableEntity controllableEntity, boolean checkSenses, boolean useMelee) {
-        this.controllableEntity = controllableEntity;
-        this.handle = controllableEntity.getHandle();
+        super(controllableEntity);
         this.checkSenses = checkSenses;
         this.useMelee = useMelee;
     }
@@ -47,20 +44,20 @@ public abstract class BehaviourTarget extends Behaviour {
 
     @Override
     public boolean shouldContinue() {
-        EntityLiving entityliving = ((CraftLivingEntity) this.controllableEntity.getTarget()).getHandle();
+        EntityLiving entityliving = ((CraftLivingEntity) this.getControllableEntity().getTarget()).getHandle();
 
         if (entityliving == null) {
             return false;
         } else if (!entityliving.isAlive()) {
             return false;
         } else {
-            double range = this.controllableEntity.getPathfindingRange();
+            double range = this.getControllableEntity().getPathfindingRange();
 
-            if (this.handle.e(entityliving) > range * range) {
+            if (this.getHandle().e(entityliving) > range * range) {
                 return false;
             } else {
                 if (this.checkSenses) {
-                    if (NMSEntityUtil.getEntitySenses(this.handle).canSee(entityliving)) {
+                    if (NMSEntityUtil.getEntitySenses(this.getHandle()).canSee(entityliving)) {
                         this.targetNotVisibleTicks = 0;
                     } else if (++this.targetNotVisibleTicks > 60) {
                         return false;
@@ -81,34 +78,34 @@ public abstract class BehaviourTarget extends Behaviour {
 
     @Override
     public void finish() {
-        this.controllableEntity.setTarget(null);
+        this.getControllableEntity().setTarget(null);
     }
 
     public boolean isSuitableTarget(EntityLiving entityliving, boolean flag) {
         if (entityliving == null) {
             return false;
-        } else if (entityliving == this.handle) {
+        } else if (entityliving == this.getHandle()) {
             return false;
         } else if (!entityliving.isAlive()) {
             return false;
         } else if (!this.canAttackClass(entityliving.getClass())) {
             return false;
         } else {
-            if (this.handle instanceof EntityOwnable && StringUtils.isNotEmpty(((EntityOwnable) this.handle).getOwnerName())) {
-                if (entityliving instanceof EntityOwnable && ((EntityOwnable) this.handle).getOwnerName().equals(((EntityOwnable) entityliving).getOwnerName())) {
+            if (this.getHandle() instanceof EntityOwnable && StringUtils.isNotEmpty(((EntityOwnable) this.getHandle()).getOwnerName())) {
+                if (entityliving instanceof EntityOwnable && ((EntityOwnable) this.getHandle()).getOwnerName().equals(((EntityOwnable) entityliving).getOwnerName())) {
                     return false;
                 }
 
-                if (entityliving == ((EntityOwnable) this.handle).getOwner()) {
+                if (entityliving == ((EntityOwnable) this.getHandle()).getOwner()) {
                     return false;
                 }
             } else if (entityliving instanceof EntityHuman && !flag && ((EntityHuman) entityliving).abilities.isInvulnerable) {
                 return false;
             }
 
-            if (!NMSEntityUtil.isInGuardedAreaOf(this.handle, MathHelper.floor(entityliving.locX), MathHelper.floor(entityliving.locY), MathHelper.floor(entityliving.locZ))) {
+            if (!NMSEntityUtil.isInGuardedAreaOf(this.getHandle(), MathHelper.floor(entityliving.locX), MathHelper.floor(entityliving.locY), MathHelper.floor(entityliving.locZ))) {
                 return false;
-            } else if (this.checkSenses && !NMSEntityUtil.getEntitySenses(this.handle).canSee(entityliving)) {
+            } else if (this.checkSenses && !NMSEntityUtil.getEntitySenses(this.getHandle()).canSee(entityliving)) {
                 return false;
             } else {
                 if (this.useMelee) {
@@ -142,15 +139,15 @@ public abstract class BehaviourTarget extends Behaviour {
                     reason = EntityTargetEvent.TargetReason.OWNER_ATTACKED_TARGET;
                 }
 
-                org.bukkit.event.entity.EntityTargetLivingEntityEvent event = org.bukkit.craftbukkit.v1_7_R1.event.CraftEventFactory.callEntityTargetLivingEvent(this.controllableEntity.getHandle(), entityliving, reason);
+                org.bukkit.event.entity.EntityTargetLivingEntityEvent event = org.bukkit.craftbukkit.v1_7_R1.event.CraftEventFactory.callEntityTargetLivingEvent(this.getControllableEntity().getHandle(), entityliving, reason);
                 if (event.isCancelled() || event.getTarget() == null) {
-                    this.controllableEntity.setTarget(null);
+                    this.getControllableEntity().setTarget(null);
                     return false;
                 } else if (entityliving.getBukkitEntity() != event.getTarget()) {
-                    this.controllableEntity.setTarget(event.getTarget());
+                    this.getControllableEntity().setTarget(event.getTarget());
                 }
-                if (this.controllableEntity.getHandle() instanceof EntityCreature) {
-                    ((EntityCreature) this.controllableEntity.getHandle()).target = ((CraftEntity) event.getTarget()).getHandle();
+                if (this.getControllableEntity().getHandle() instanceof EntityCreature) {
+                    ((EntityCreature) this.getControllableEntity().getHandle()).target = ((CraftEntity) event.getTarget()).getHandle();
                 }
                 // CraftBukkit end
 
@@ -160,8 +157,8 @@ public abstract class BehaviourTarget extends Behaviour {
     }
 
     private boolean attack(EntityLiving entityliving) {
-        this.ticksAfterLastAttack = 10 + this.handle.aI().nextInt(5);
-        PathEntity pathentity = NMSEntityUtil.getNavigation(this.handle).a(entityliving);
+        this.ticksAfterLastAttack = 10 + this.getHandle().aI().nextInt(5);
+        PathEntity pathentity = NMSEntityUtil.getNavigation(this.getHandle()).a(entityliving);
 
         if (pathentity == null) {
             return false;
@@ -180,8 +177,8 @@ public abstract class BehaviourTarget extends Behaviour {
     }
 
     private boolean canAttackClass(Class oclass) {
-        if (this.handle instanceof EntityInsentient) {
-            return ((EntityInsentient) this.handle).a(oclass);
+        if (this.getHandle() instanceof EntityInsentient) {
+            return ((EntityInsentient) this.getHandle()).a(oclass);
         } else {
             return EntityCreeper.class != oclass && EntityGhast.class != oclass;
         }

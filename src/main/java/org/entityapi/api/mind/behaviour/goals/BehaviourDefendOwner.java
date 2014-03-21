@@ -30,8 +30,8 @@ public class BehaviourDefendOwner extends BehaviourTarget {
     }
 
     private boolean isTamed() {
-       if (this.handle instanceof EntityTameableAnimal) {
-           return ((EntityTameableAnimal) this.handle).isTamed();
+       if (this.getHandle() instanceof EntityTameableAnimal) {
+           return ((EntityTameableAnimal) this.getHandle()).isTamed();
        }
         return false;
     }
@@ -61,7 +61,7 @@ public class BehaviourDefendOwner extends BehaviourTarget {
 
     @Override
     public void tick() {
-        this.controllableEntity.setTarget((LivingEntity) this.target.getBukkitEntity());
+        this.getControllableEntity().setTarget((LivingEntity) this.target.getBukkitEntity());
 
         EntityLiving owner = this.getOwner();
         if (owner != null) {

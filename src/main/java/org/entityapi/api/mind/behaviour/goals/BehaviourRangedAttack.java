@@ -19,7 +19,6 @@ import org.entityapi.nms.NMSEntityUtil;
 
 public class BehaviourRangedAttack extends Behaviour {
 
-    private ControllableEntity controllableEntity;
     private ProjectileType projectileType;
     private int minDelay;
     private int maxDelay;
@@ -43,7 +42,7 @@ public class BehaviourRangedAttack extends Behaviour {
     }
 
     public BehaviourRangedAttack(ControllableEntity controllableEntity, ProjectileType projectileType, int minDelay, int maxDelay, float range) {
-        this.controllableEntity = controllableEntity;
+        super(controllableEntity);
         this.projectileType = projectileType;
         this.minDelay = minDelay;
         this.maxDelay = maxDelay;
@@ -63,7 +62,7 @@ public class BehaviourRangedAttack extends Behaviour {
 
     @Override
     public boolean shouldStart() {
-        EntityLiving entityliving = ((CraftLivingEntity) this.controllableEntity.getTarget()).getHandle();
+        EntityLiving entityliving = ((CraftLivingEntity) this.getControllableEntity().getTarget()).getHandle();
 
         if (entityliving == null) {
             return false;
@@ -75,14 +74,14 @@ public class BehaviourRangedAttack extends Behaviour {
 
     @Override
     public boolean shouldContinue() {
-        return this.shouldStart() || !NMSEntityUtil.getNavigation(this.controllableEntity.getBukkitEntity()).g();
+        return this.shouldStart() || !NMSEntityUtil.getNavigation(this.getControllableEntity().getBukkitEntity()).g();
     }
 
     @Override
     public void finish() {
         // CraftBukkit start
         EntityTargetEvent.TargetReason reason = this.target.isAlive() ? EntityTargetEvent.TargetReason.FORGOT_TARGET : EntityTargetEvent.TargetReason.TARGET_DIED;
-        CraftEventFactory.callEntityTargetEvent(controllableEntity.getHandle(), null, reason);
+        CraftEventFactory.callEntityTargetEvent(this.getHandle(), null, reason);
         // CraftBukkit end
         this.target = null;
         this.inRangeTicks = 0;
@@ -91,8 +90,8 @@ public class BehaviourRangedAttack extends Behaviour {
 
     @Override
     public void tick() {
-        double distanceToTarget = this.controllableEntity.getHandle().e(this.target.locX, this.target.boundingBox.b, this.target.locZ);
-        boolean canSee = NMSEntityUtil.getEntitySenses(this.controllableEntity.getHandle()).canSee(this.target);
+        double distanceToTarget = this.getHandle().e(this.target.locX, this.target.boundingBox.b, this.target.locZ);
+        boolean canSee = NMSEntityUtil.getEntitySenses(this.getHandle()).canSee(this.target);
 
         if (canSee) {
             ++this.inRangeTicks;
@@ -101,12 +100,12 @@ public class BehaviourRangedAttack extends Behaviour {
         }
 
         if (distanceToTarget <= (double) this.rangeSquared && this.inRangeTicks >= 20) {
-            NMSEntityUtil.getNavigation(this.controllableEntity.getHandle()).h();
+            NMSEntityUtil.getNavigation(this.getHandle()).h();
         } else {
-            this.controllableEntity.navigateTo((LivingEntity) this.target.getBukkitEntity());
+            this.getControllableEntity().navigateTo((LivingEntity) this.target.getBukkitEntity());
         }
 
-        NMSEntityUtil.getControllerLook(this.controllableEntity.getHandle()).a(this.target, 30.0F, 30.0F);
+        NMSEntityUtil.getControllerLook(this.getHandle()).a(this.target, 30.0F, 30.0F);
         float strength;
 
         if (--this.shootCooldown == 0) {
@@ -125,7 +124,7 @@ public class BehaviourRangedAttack extends Behaviour {
                 finalStrength = 1.0F;
             }
 
-            this.projectileType.shootProjectile(this.controllableEntity, (LivingEntity) this.target.getBukkitEntity(), finalStrength);
+            this.projectileType.shootProjectile(this.getControllableEntity(), (LivingEntity) this.target.getBukkitEntity(), finalStrength);
             this.shootCooldown = MathHelper.d(strength * (float) (this.maxDelay - this.minDelay) + (float) this.minDelay);
         } else if (this.shootCooldown < 0) {
             strength = MathHelper.sqrt(distanceToTarget) / this.range;
@@ -134,6 +133,6 @@ public class BehaviourRangedAttack extends Behaviour {
     }
 
     private void shootProjectile(float strength) {
-        this.projectileType.shootProjectile(this.controllableEntity, (LivingEntity) this.target.getBukkitEntity(), strength);
+        this.projectileType.shootProjectile(this.getControllableEntity(), (LivingEntity) this.target.getBukkitEntity(), strength);
     }
 }

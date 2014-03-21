@@ -16,9 +16,6 @@ import java.util.List;
 public class BehaviourAvoidEntity extends Behaviour {
 
     private EntitySelectorViewable selector = new EntitySelectorViewable(this);
-    ;
-    private ControllableEntity controllableEntity;
-    private EntityLiving handle;
     private Class<?> classToAvoid;
     private float f;
     private double speedWhenFar;
@@ -27,8 +24,7 @@ public class BehaviourAvoidEntity extends Behaviour {
     private PathEntity path;
 
     public BehaviourAvoidEntity(ControllableEntity controllableEntity, Class<?> classToAvoid, float minDistance, double speedWhenFar, double speedWhenNear) {
-        this.controllableEntity = controllableEntity;
-        this.handle = controllableEntity.getHandle();
+        super(controllableEntity);
         this.classToAvoid = classToAvoid;
         this.speedWhenFar = speedWhenFar;
         this.speedWhenNear = speedWhenNear;
@@ -48,16 +44,16 @@ public class BehaviourAvoidEntity extends Behaviour {
     @Override
     public boolean shouldStart() {
         if (this.classToAvoid == EntityHuman.class) {
-            if (this.handle instanceof EntityTameableAnimal && ((EntityTameableAnimal) this.handle).isTamed()) {
+            if (this.getHandle() instanceof EntityTameableAnimal && ((EntityTameableAnimal) this.getHandle()).isTamed()) {
                 return false;
             }
 
-            this.entityToAvoid = this.handle.world.findNearbyPlayer(this.handle, (double) this.f);
+            this.entityToAvoid = this.getHandle().world.findNearbyPlayer(this.getHandle(), (double) this.f);
             if (this.entityToAvoid == null) {
                 return false;
             }
         } else {
-            List list = this.handle.world.a(this.classToAvoid, this.handle.boundingBox.grow((double) this.f, 3.0D, (double) this.f), this.selector);
+            List list = this.getHandle().world.a(this.classToAvoid, this.getHandle().boundingBox.grow((double) this.f, 3.0D, (double) this.f), this.selector);
 
             if (list.isEmpty()) {
                 return false;
@@ -66,26 +62,26 @@ public class BehaviourAvoidEntity extends Behaviour {
             this.entityToAvoid = (Entity) list.get(0);
         }
 
-        Vec3D vec3d = org.entityapi.nms.RandomPositionGenerator.b(this.handle, 16, 7, this.handle.world.getVec3DPool().create(this.entityToAvoid.locX, this.entityToAvoid.locY, this.entityToAvoid.locZ));
+        Vec3D vec3d = org.entityapi.nms.RandomPositionGenerator.b(this.getHandle(), 16, 7, this.getHandle().world.getVec3DPool().create(this.entityToAvoid.locX, this.entityToAvoid.locY, this.entityToAvoid.locZ));
 
         if (vec3d == null) {
             return false;
-        } else if (this.entityToAvoid.e(vec3d.c, vec3d.d, vec3d.e) < this.entityToAvoid.e(this.handle)) {
+        } else if (this.entityToAvoid.e(vec3d.c, vec3d.d, vec3d.e) < this.entityToAvoid.e(this.getHandle())) {
             return false;
         } else {
-            this.path = NMSEntityUtil.getNavigation(this.handle).a(vec3d.c, vec3d.d, vec3d.e);
+            this.path = NMSEntityUtil.getNavigation(this.getHandle()).a(vec3d.c, vec3d.d, vec3d.e);
             return this.path == null ? false : this.path.b(vec3d);
         }
     }
 
     @Override
     public boolean shouldContinue() {
-        return !NMSEntityUtil.getNavigation(this.handle).g();
+        return !NMSEntityUtil.getNavigation(this.getHandle()).g();
     }
 
     @Override
     public void start() {
-        NMSEntityUtil.getNavigation(this.handle).a(this.path, this.speedWhenFar);
+        NMSEntityUtil.getNavigation(this.getHandle()).a(this.path, this.speedWhenFar);
     }
 
     @Override
@@ -95,14 +91,14 @@ public class BehaviourAvoidEntity extends Behaviour {
 
     @Override
     public void tick() {
-        if (this.handle.e(this.entityToAvoid) < 49.0D) {
-            NMSEntityUtil.getNavigation(this.handle).a(this.speedWhenNear);
+        if (this.getHandle().e(this.entityToAvoid) < 49.0D) {
+            NMSEntityUtil.getNavigation(this.getHandle()).a(this.speedWhenNear);
         } else {
-            NMSEntityUtil.getNavigation(this.handle).a(this.speedWhenFar);
+            NMSEntityUtil.getNavigation(this.getHandle()).a(this.speedWhenFar);
         }
     }
 
     public static ControllableEntity getEntityFor(BehaviourAvoidEntity behaviourAvoidEntity) {
-        return behaviourAvoidEntity.controllableEntity;
+        return behaviourAvoidEntity.getControllableEntity();
     }
 }

@@ -12,8 +12,6 @@ import org.entityapi.nms.NMSEntityUtil;
 
 public class BehaviourBeg extends Behaviour {
 
-    private ControllableEntity controllableEntity;
-    private EntityLiving handle;
     private Material[] materialsToBegFor;
     private EntityHuman player;
     private float range;
@@ -24,8 +22,7 @@ public class BehaviourBeg extends Behaviour {
     }
 
     public BehaviourBeg(ControllableEntity controllableEntity, float range, Material[] materialsToBegFor) {
-        this.controllableEntity = controllableEntity;
-        this.handle = controllableEntity.getHandle();
+        super(controllableEntity);
         this.materialsToBegFor = materialsToBegFor;
         this.range = range;
     }
@@ -42,7 +39,7 @@ public class BehaviourBeg extends Behaviour {
 
     @Override
     public boolean shouldStart() {
-        this.player = this.handle.world.findNearbyPlayer(this.handle, (double) this.range);
+        this.player = this.getHandle().world.findNearbyPlayer(this.getHandle(), (double) this.range);
         return this.player == null ? false : this.isHoldingItem(this.player);
     }
 
@@ -50,7 +47,7 @@ public class BehaviourBeg extends Behaviour {
     public boolean shouldContinue() {
         if (!player.isAlive()) {
             return false;
-        } else if (this.handle.e(this.player) > (double) (this.range * this.range)) {
+        } else if (this.getHandle().e(this.player) > (double) (this.range * this.range)) {
             return false;
         }
         return this.ticks > 0 && this.isHoldingItem(this.player);
@@ -58,23 +55,23 @@ public class BehaviourBeg extends Behaviour {
 
     @Override
     public void start() {
-        if (this.handle instanceof EntityWolf) {
-            ((EntityWolf) this.handle).m(true);
+        if (this.getHandle() instanceof EntityWolf) {
+            ((EntityWolf) this.getHandle()).m(true);
         }
-        this.ticks = 40 + this.handle.aI().nextInt(40);
+        this.ticks = 40 + this.getHandle().aI().nextInt(40);
     }
 
     @Override
     public void finish() {
-        if (this.handle instanceof EntityWolf) {
-            ((EntityWolf) this.handle).m(false);
+        if (this.getHandle() instanceof EntityWolf) {
+            ((EntityWolf) this.getHandle()).m(false);
         }
         this.player = null;
     }
 
     @Override
     public void tick() {
-        NMSEntityUtil.getControllerLook(this.handle).a(this.player.locX, this.player.locY + (double) this.player.getHeadHeight(), this.player.locZ, 10.0F, (float) NMSEntityUtil.getMaxHeadRotation(this.handle));
+        NMSEntityUtil.getControllerLook(this.getHandle()).a(this.player.locX, this.player.locY + (double) this.player.getHeadHeight(), this.player.locZ, 10.0F, (float) NMSEntityUtil.getMaxHeadRotation(this.getHandle()));
         --this.ticks;
     }
 

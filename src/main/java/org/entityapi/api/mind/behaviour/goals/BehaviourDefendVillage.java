@@ -33,19 +33,19 @@ public class BehaviourDefendVillage extends BehaviourTarget {
     @Override
     public boolean shouldStart() {
         Village village;
-        if (this.handle instanceof EntityIronGolem) {
-            village = ((EntityIronGolem) this.handle).bX();
+        if (this.getHandle() instanceof EntityIronGolem) {
+            village = ((EntityIronGolem) this.getHandle()).bX();
         } else {
-            village = this.handle.world.villages.getClosestVillage(MathHelper.floor(this.handle.locX), MathHelper.floor(this.handle.locY), MathHelper.floor(this.handle.locZ), 32);
+            village = this.getHandle().world.villages.getClosestVillage(MathHelper.floor(this.getHandle().locX), MathHelper.floor(this.getHandle().locY), MathHelper.floor(this.getHandle().locZ), 32);
         }
 
         if (village == null) {
             return false;
         } else {
-            this.target = village.b(this.handle);
+            this.target = village.b(this.getHandle());
             if (!this.isSuitableTarget(this.target, false)) {
-                if (this.handle.aI().nextInt(20) == 0) {
-                    this.target = village.c(this.handle);
+                if (this.getHandle().aI().nextInt(20) == 0) {
+                    this.target = village.c(this.getHandle());
                     return this.isSuitableTarget(this.target, false);
                 } else {
                     return false;
@@ -58,7 +58,7 @@ public class BehaviourDefendVillage extends BehaviourTarget {
 
     @Override
     public void tick() {
-        this.controllableEntity.setTarget((LivingEntity) this.handle.getBukkitEntity());
+        this.getControllableEntity().setTarget((LivingEntity) this.getHandle().getBukkitEntity());
         super.tick();
     }
 }

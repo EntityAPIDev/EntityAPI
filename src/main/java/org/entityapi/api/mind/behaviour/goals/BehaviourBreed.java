@@ -17,13 +17,12 @@ import java.util.Random;
 
 public class BehaviourBreed extends Behaviour {
 
-    private ControllableEntity<Animals, EntityAnimal> controllableEntity;
     private EntityAnimal handle;
     private EntityAnimal mate;
     int matingTicks;
 
     public BehaviourBreed(ControllableEntity<Animals, EntityAnimal> controllableEntity) {
-        this.controllableEntity = controllableEntity;
+        super(controllableEntity);
         this.handle = controllableEntity.getHandle();
     }
 
@@ -60,8 +59,8 @@ public class BehaviourBreed extends Behaviour {
 
     @Override
     public void tick() {
-        NMSEntityUtil.getControllerLook(this.controllableEntity.getBukkitEntity()).a(this.mate, 10.0F, (float) this.handle.x());
-        NMSEntityUtil.getNavigation(this.controllableEntity.getBukkitEntity()).a(this.mate);
+        NMSEntityUtil.getControllerLook(this.getControllableEntity().getBukkitEntity()).a(this.mate, 10.0F, (float) this.handle.x());
+        NMSEntityUtil.getNavigation(this.getControllableEntity().getBukkitEntity()).a(this.mate);
         ++this.matingTicks;
         if (this.matingTicks >= 60 && this.handle.e(this.mate) < 9.0D) {
             this.breed();
@@ -88,12 +87,12 @@ public class BehaviourBreed extends Behaviour {
     }
 
     private void breed() {
-        ControllableEntityPreBreedEvent preBreedEvent = new ControllableEntityPreBreedEvent(this.controllableEntity, (Animals) this.mate.getBukkitEntity(), (CraftPlayer) this.handle.cb().getBukkitEntity());
+        ControllableEntityPreBreedEvent preBreedEvent = new ControllableEntityPreBreedEvent(this.getControllableEntity(), (Animals) this.mate.getBukkitEntity(), (CraftPlayer) this.handle.cb().getBukkitEntity());
         EntityAPICore.getCore().getServer().getPluginManager().callEvent(preBreedEvent);
         if (!preBreedEvent.isCancelled()) {
             EntityAgeable child = this.handle.createChild(this.mate);
 
-            ControllableEntityBreedEvent breedEvent = new ControllableEntityBreedEvent(this.controllableEntity, (Animals) this.mate.getBukkitEntity(), (Animals) child.getBukkitEntity(), (CraftPlayer) this.handle.cb().getBukkitEntity());
+            ControllableEntityBreedEvent breedEvent = new ControllableEntityBreedEvent(this.getControllableEntity(), (Animals) this.mate.getBukkitEntity(), (Animals) child.getBukkitEntity(), (CraftPlayer) this.handle.cb().getBukkitEntity());
             EntityAPICore.getCore().getServer().getPluginManager().callEvent(breedEvent);
 
             if (child != null) {

@@ -35,7 +35,7 @@ public class BehaviourMoveTowardsNearestAttackableTarget extends BehaviourTarget
         super(controllableEntity, checkSenses, useMelee);
         this.classToTarget = classToTarget;
         this.chance = chance;
-        this.distComparator = new DistanceComparator(this.handle);
+        this.distComparator = new DistanceComparator(this.getHandle());
         this.selector = new EntitySelectorNearestAttackableTarget(this, selector);
     }
 
@@ -51,11 +51,11 @@ public class BehaviourMoveTowardsNearestAttackableTarget extends BehaviourTarget
 
     @Override
     public boolean shouldStart() {
-        if (this.chance > 0 && this.handle.aI().nextInt(this.chance) != 0) {
+        if (this.chance > 0 && this.getHandle().aI().nextInt(this.chance) != 0) {
             return false;
         } else {
-            double range = this.controllableEntity.getPathfindingRange();
-            List list = this.handle.world.a(this.classToTarget, this.handle.boundingBox.grow(range, 4.0D, range), this.selector);
+            double range = this.getControllableEntity().getPathfindingRange();
+            List list = this.getHandle().world.a(this.classToTarget, this.getHandle().boundingBox.grow(range, 4.0D, range), this.selector);
 
             Collections.sort(list, this.distComparator);
             if (list.isEmpty()) {
@@ -69,7 +69,7 @@ public class BehaviourMoveTowardsNearestAttackableTarget extends BehaviourTarget
 
     @Override
     public void start() {
-        this.controllableEntity.setTarget((CraftLivingEntity) this.target.getBukkitEntity());
+        this.getControllableEntity().setTarget((CraftLivingEntity) this.target.getBukkitEntity());
         super.start();
     }
 

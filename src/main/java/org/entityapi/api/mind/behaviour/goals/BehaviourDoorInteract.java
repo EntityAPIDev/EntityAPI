@@ -8,8 +8,6 @@ import org.entityapi.nms.NMSEntityUtil;
 
 public class BehaviourDoorInteract extends Behaviour {
 
-    private ControllableEntity controllableEntity;
-    protected EntityLiving handle;
     private boolean searchForIronDoor;
     protected int pointX;
     protected int pointY;
@@ -24,8 +22,7 @@ public class BehaviourDoorInteract extends Behaviour {
     }
 
     public BehaviourDoorInteract(ControllableEntity controllableEntity, boolean searchForIronDoor) {
-        this.controllableEntity = controllableEntity;
-        this.handle = controllableEntity.getHandle();
+        super(controllableEntity);
         this.searchForIronDoor = searchForIronDoor;
     }
 
@@ -41,10 +38,10 @@ public class BehaviourDoorInteract extends Behaviour {
 
     @Override
     public boolean shouldStart() {
-        if (!this.handle.positionChanged) {
+        if (!this.getHandle().positionChanged) {
             return false;
         } else {
-            Navigation nav = NMSEntityUtil.getNavigation(this.handle);
+            Navigation nav = NMSEntityUtil.getNavigation(this.getHandle());
             PathEntity path = nav.e();
 
             if (path != null && !path.b() && nav.c()) {
@@ -54,7 +51,7 @@ public class BehaviourDoorInteract extends Behaviour {
                     this.pointX = pathpoint.a;
                     this.pointY = pathpoint.b + 1;
                     this.pointZ = pathpoint.c;
-                    if (this.handle.e((double) this.pointX, this.handle.locY, (double) this.pointZ) <= 2.25D) {
+                    if (this.getHandle().e((double) this.pointX, this.getHandle().locY, (double) this.pointZ) <= 2.25D) {
                         this.door = this.getDoorAt(this.pointX, this.pointY, this.pointZ);
                         if (this.door != null) {
                             return true;
@@ -62,9 +59,9 @@ public class BehaviourDoorInteract extends Behaviour {
                     }
                 }
 
-                this.pointX = MathHelper.floor(this.handle.locX);
-                this.pointY = MathHelper.floor(this.handle.locY + 1.0D);
-                this.pointZ = MathHelper.floor(this.handle.locZ);
+                this.pointX = MathHelper.floor(this.getHandle().locX);
+                this.pointY = MathHelper.floor(this.getHandle().locY + 1.0D);
+                this.pointZ = MathHelper.floor(this.getHandle().locZ);
                 this.door = this.getDoorAt(this.pointX, this.pointY, this.pointZ);
                 return this.door != null;
             } else {
@@ -81,14 +78,14 @@ public class BehaviourDoorInteract extends Behaviour {
     @Override
     public void start() {
         this.doorFound = false;
-        this.distX = (float) ((double) ((float) this.pointX + 0.5F) - this.handle.locX);
-        this.distY = (float) ((double) ((float) this.pointZ + 0.5F) - this.handle.locZ);
+        this.distX = (float) ((double) ((float) this.pointX + 0.5F) - this.getHandle().locX);
+        this.distY = (float) ((double) ((float) this.pointZ + 0.5F) - this.getHandle().locZ);
     }
 
     @Override
     public void tick() {
-        float distX = (float) ((double) ((float) this.pointX + 0.5F) - this.handle.locX);
-        float distY = (float) ((double) ((float) this.pointZ + 0.5F) - this.handle.locZ);
+        float distX = (float) ((double) ((float) this.pointX + 0.5F) - this.getHandle().locX);
+        float distY = (float) ((double) ((float) this.pointZ + 0.5F) - this.getHandle().locZ);
         float dist = this.distX * distX + this.distY * distY;
 
         if (dist < 0.0F) {
@@ -97,7 +94,7 @@ public class BehaviourDoorInteract extends Behaviour {
     }
 
     private BlockDoor getDoorAt(int i, int j, int k) {
-        Block block = this.handle.world.getType(i, j, k);
+        Block block = this.getHandle().world.getType(i, j, k);
         return (!this.searchForIronDoor && block == Blocks.WOODEN_DOOR) || (this.searchForIronDoor && block == Blocks.IRON_DOOR_BLOCK) ? (BlockDoor) block : null;
     }
 }

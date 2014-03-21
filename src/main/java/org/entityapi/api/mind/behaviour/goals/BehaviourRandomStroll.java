@@ -1,9 +1,14 @@
 package org.entityapi.api.mind.behaviour.goals;
 
+import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.mind.behaviour.Behaviour;
 import org.entityapi.api.mind.behaviour.BehaviourType;
 
 public class BehaviourRandomStroll extends Behaviour {
+
+    public BehaviourRandomStroll(ControllableEntity controllableEntity) {
+        super(controllableEntity);
+    }
 
     @Override
     public BehaviourType getType() {
