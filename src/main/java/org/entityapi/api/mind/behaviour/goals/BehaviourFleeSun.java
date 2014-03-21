@@ -12,9 +12,9 @@ import java.util.Random;
 
 public class BehaviourFleeSun extends Behaviour {
 
-    private double b;
-    private double c;
-    private double d;
+    private double fleeX;
+    private double fleeY;
+    private double fleeZ;
 
     public BehaviourFleeSun(ControllableEntity controllableEntity) {
         super(controllableEntity);
@@ -44,9 +44,9 @@ public class BehaviourFleeSun extends Behaviour {
             if (vec3d == null) {
                 return false;
             } else {
-                this.b = vec3d.c;
-                this.c = vec3d.d;
-                this.d = vec3d.e;
+                this.fleeX = vec3d.c;
+                this.fleeY = vec3d.d;
+                this.fleeZ = vec3d.e;
                 return true;
             }
         }
@@ -59,7 +59,7 @@ public class BehaviourFleeSun extends Behaviour {
 
     @Override
     public void start() {
-        NMSEntityUtil.getNavigation(this.getHandle()).a(this.b, this.c, this.d, this.getControllableEntity().getSpeed());
+        NMSEntityUtil.getNavigation(this.getHandle()).a(this.fleeX, this.fleeY, this.fleeZ, this.getControllableEntity().getSpeed());
     }
 
     @Override
