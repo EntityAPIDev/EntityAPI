@@ -1,4 +1,4 @@
-package org.entityapi.utils;
+package org.entityapi.api.utils;
 
 import java.io.*;
 import java.net.HttpURLConnection;

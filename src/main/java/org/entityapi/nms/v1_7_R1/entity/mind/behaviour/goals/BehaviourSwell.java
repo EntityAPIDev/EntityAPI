@@ -4,9 +4,9 @@ import net.minecraft.server.v1_7_R1.EntityCreeper;
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.Creeper;
-import org.entityapi.EntityAPICore;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.mind.BehaviourType;
+import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
 
@@ -25,7 +25,7 @@ public class BehaviourSwell extends BehaviourBase {
 
     @Override
     public EntityCreeper getHandle() {
-        return (EntityCreeper) ((BasicEntityUtil) EntityAPICore.getBasicEntityUtil()).getHandle(this.getControllableEntity());
+        return (EntityCreeper) ((BasicEntityUtil) EntityAPI.getBasicEntityUtil()).getHandle(this.getControllableEntity());
     }
 
     @Override

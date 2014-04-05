@@ -1,10 +1,10 @@
-package org.entityapi.reflection.refs;
+package org.entityapi.api.reflection.refs;
 
 import org.bukkit.Server;
-import org.entityapi.reflection.CBClassTemplate;
-import org.entityapi.reflection.ClassTemplate;
-import org.entityapi.reflection.MethodAccessor;
-import org.entityapi.reflection.NMSClassTemplate;
+import org.entityapi.api.reflection.CBClassTemplate;
+import org.entityapi.api.reflection.ClassTemplate;
+import org.entityapi.api.reflection.MethodAccessor;
+import org.entityapi.api.reflection.NMSClassTemplate;
 
 public class MinecraftServerRef {
 

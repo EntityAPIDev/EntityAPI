@@ -1,7 +1,7 @@
-package org.entityapi.utils;
+package org.entityapi.api.utils;
 
 import org.bukkit.Bukkit;
-import org.entityapi.EntityAPICore;
+import org.entityapi.api.plugin.EntityAPI;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,9 +26,9 @@ public class ErrorReporter {
 
     protected static void addSystemInfo(PastebinReporter.Paste paste) {
         paste.appendLine("----------System INFO----------")
-                .appendLine("EntityAPI version: " + EntityAPICore.getVersion())
+                .appendLine("EntityAPI version: " + EntityAPI.getCore().getVersion())
                 .appendLine("Server version: " + Bukkit.getVersion())
-                .appendLine("Server brand: " + EntityAPICore.SERVER.getName())
+                .appendLine("Server brand: " + EntityAPI.getCore().getAPIServer().getName())
                 .appendLine("Java Version: " + System.getProperty("java.vendor") + " " + System.getProperty("java.version"))
                 .appendLine("OS: " + System.getProperty("os.name") + " v:" + System.getProperty("os.version"))
                 .appendLine("Java Version: " + System.getProperty("java.vendor") + " " + System.getProperty("java.version"));

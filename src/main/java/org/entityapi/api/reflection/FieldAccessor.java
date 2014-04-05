@@ -1,4 +1,4 @@
-package org.entityapi.reflection;
+package org.entityapi.api.reflection;
 
 import java.lang.reflect.Field;
 

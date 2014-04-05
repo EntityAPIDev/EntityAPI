@@ -1,7 +1,7 @@
-package org.entityapi.utils;
+package org.entityapi.api.utils;
 
 import com.google.common.collect.BiMap;
-import org.entityapi.ModuleLogger;
+import org.entityapi.api.plugin.ModuleLogger;
 
 import java.lang.reflect.Array;
 import java.util.Collection;

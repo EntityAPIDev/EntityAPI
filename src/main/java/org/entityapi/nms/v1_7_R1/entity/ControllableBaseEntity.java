@@ -7,14 +7,14 @@ import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_7_R1.CraftSound;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
-import org.entityapi.EntityAPICore;
-import org.entityapi.EntityManager;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.ControllableEntityType;
+import org.entityapi.api.EntityManager;
 import org.entityapi.api.EntitySound;
 import org.entityapi.api.events.ControllableEntityPreSpawnEvent;
 import org.entityapi.api.mind.Behaviour;
 import org.entityapi.api.mind.Mind;
+import org.entityapi.api.plugin.EntityAPI;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -29,7 +29,6 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends E
     protected Mind mind;
     protected boolean tickAttributes;
 
-    protected boolean canFly;
     protected org.bukkit.Material loot;
 
     protected S handle;
@@ -87,11 +86,11 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends E
     @Override
     public boolean spawnEntity(Location spawnLocation) {
         ControllableEntityPreSpawnEvent spawnEvent = new ControllableEntityPreSpawnEvent(this, spawnLocation);
-        EntityAPICore.getCore().getServer().getPluginManager().callEvent(spawnEvent);
+        EntityAPI.getCore().getServer().getPluginManager().callEvent(spawnEvent);
         if (spawnEvent.isCancelled()) {
             return false;
         }
-        if (EntityAPICore.getSpawnUtil().spawnEntity(this, spawnEvent.getSpawnLocation())) {
+        if (EntityAPI.getSpawnUtil().spawnEntity(this, spawnEvent.getSpawnLocation())) {
             this.hasSpawned = true;
         }
         return this.hasSpawned;
@@ -222,16 +221,6 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends E
     @Override
     public void setSound(EntitySound type, HashMap<String, String> soundMap) {
         this.sounds.put(type, soundMap);
-    }
-
-    @Override
-    public boolean canFly() {
-        return this.canFly;
-    }
-
-    @Override
-    public void setCanFly(boolean flag) {
-        this.canFly = flag;
     }
 
     @Override

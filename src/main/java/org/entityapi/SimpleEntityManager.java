@@ -7,6 +7,8 @@ import org.bukkit.plugin.Plugin;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.DespawnReason;
+import org.entityapi.api.EntityManager;
+import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.exceptions.NameRequiredException;
 
 import java.util.*;
@@ -27,7 +29,7 @@ public class SimpleEntityManager implements EntityManager {
 
         this.CHUNK_MANAGER = new ChunkManager(this);
 
-        Bukkit.getPluginManager().registerEvents(this.CHUNK_MANAGER, EntityAPICore.getCore());
+        Bukkit.getPluginManager().registerEvents(this.CHUNK_MANAGER, EntityAPI.getCore());
 
         this.TASK_ID = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
             @Override
@@ -37,12 +39,12 @@ public class SimpleEntityManager implements EntityManager {
                 while (iterator.hasNext()) {
                     Map.Entry<Integer, ControllableEntity> entry = iterator.next();
 
-                    if (EntityAPICore.getBasicEntityUtil().getHandle(entry.getValue()) == null) {
+                    if (EntityAPI.getBasicEntityUtil().getHandle(entry.getValue()) == null) {
                         if (!keepEntitiesInMemory)
                             iterator.remove();
                     } else {
-                        EntityAPICore.getBasicEntityUtil().callBaseTick(entry.getValue());
-                        if (!EntityAPICore.getBasicEntityUtil().isAlive(entry.getValue())) {
+                        EntityAPI.getBasicEntityUtil().callBaseTick(entry.getValue());
+                        if (!EntityAPI.getBasicEntityUtil().isAlive(entry.getValue())) {
                             //TODO: despawn
                         }
                     }
@@ -97,7 +99,7 @@ public class SimpleEntityManager implements EntityManager {
 
             return context.create();
         } catch (Throwable throwable) {
-            EntityAPICore.LOGGER.warning("Failed to create an Entity handle for type: " + entityType.getName());
+            EntityAPI.LOGGER.warning("Failed to create an Entity handle for type: " + entityType.getName());
             throwable.printStackTrace();
             return null;
         }

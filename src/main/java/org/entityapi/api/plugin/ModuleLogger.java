@@ -1,8 +1,8 @@
-package org.entityapi;
+package org.entityapi.api.plugin;
 
 import org.bukkit.Bukkit;
-import org.entityapi.utils.LogicUtil;
-import org.entityapi.utils.StringUtil;
+import org.entityapi.api.utils.LogicUtil;
+import org.entityapi.api.utils.StringUtil;
 
 import java.util.logging.Level;
 import java.util.logging.LogRecord;

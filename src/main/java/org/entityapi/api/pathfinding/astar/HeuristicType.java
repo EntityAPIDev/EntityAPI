@@ -1,7 +1,7 @@
 package org.entityapi.api.pathfinding.astar;
 
 import org.bukkit.Location;
-import org.entityapi.utils.WorldUtil;
+import org.entityapi.api.utils.WorldUtil;
 
 public enum HeuristicType {
 

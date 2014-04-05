@@ -1,11 +1,21 @@
 EntityAPI
 =========
 
-API to allow Custom Mobs or Entities without need to mess with NMS.
+A Bukkit API that enables you to easily control your own custom entities
 
-Code Formatting
-===============
-- I'll do this so there's no need to worry about it. If you need any help, ask DSH105 :)
+Contributing
+============
+
+[Pull Requests should always follow the EntityAPI guidelines](CONTRIBUTING.md).
+
+Compiling
+=========
+
+We use maven to handle the compilation of EntityAPI
+- Install [Maven 3](http://maven.apache.org/download.html)
+- Run `mvn` and EntityAPI will automatically build and compile for you
+
+All contributions must be thoroughly tested and debugged.
 
 Collaborators
 =============

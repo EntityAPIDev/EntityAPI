@@ -1,4 +1,4 @@
-package org.entityapi.utils;
+package org.entityapi.api.utils;
 
 import java.util.Arrays;
 import java.util.Collection;

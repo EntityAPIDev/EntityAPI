@@ -1,8 +1,8 @@
-package org.entityapi.utils;
+package org.entityapi.api.utils;
 
 import org.bukkit.entity.Player;
-import org.entityapi.reflection.MethodAccessor;
-import org.entityapi.reflection.SafeMethod;
+import org.entityapi.api.reflection.MethodAccessor;
+import org.entityapi.api.reflection.SafeMethod;
 
 public class PlayerUtil {
 

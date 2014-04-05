@@ -1,6 +1,6 @@
 package org.entityapi.wrapper;
 
-import org.entityapi.EntityAPICore;
+import org.entityapi.api.plugin.EntityAPI;
 
 public abstract class AbstractWrapper {
 
@@ -11,7 +11,7 @@ public abstract class AbstractWrapper {
 
     protected void setHandle(Object handle) {
         if (handle == null) {
-            EntityAPICore.LOGGER_REFLECTION.warning("Cannot create a wrapper with a null handle!");
+            EntityAPI.LOGGER_REFLECTION.warning("Cannot create a wrapper with a null handle!");
             return;
         }
         this.handle = handle;

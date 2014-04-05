@@ -2,7 +2,7 @@ package org.entityapi.metrics;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
-import org.entityapi.utils.LogicUtil;
+import org.entityapi.api.utils.LogicUtil;
 
 import java.util.List;
 

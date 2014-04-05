@@ -1,8 +1,31 @@
-package org.entityapi;
+package org.entityapi.api.plugin;
 
 import org.bukkit.plugin.Plugin;
+import org.entityapi.api.EntityManager;
+import org.entityapi.api.IBasicEntityUtil;
+import org.entityapi.api.ISpawnUtil;
 
 public class EntityAPI {
+
+    private static IEntityAPICore CORE;
+
+    /**
+     * Several Loggers
+     */
+    public static final ModuleLogger LOGGER = new ModuleLogger("EntityAPI");
+    public static final ModuleLogger LOGGER_REFLECTION = LOGGER.getModule("Reflection");
+    public static final ModuleLogger LOGGER_DATA_STORE = LOGGER_REFLECTION.getModule("Persistence");
+
+    public static void setCore(IEntityAPICore core) {
+        if (CORE != null) {
+            return;
+        }
+        CORE = core;
+    }
+
+    public static IEntityAPICore getCore() {
+        return CORE;
+    }
 
     /**
      * Creates an EntityManager for the given Plugin.
@@ -11,7 +34,7 @@ public class EntityAPI {
      * @return The EntityManager object for the given plugin.
      */
     public static EntityManager createManager(Plugin owningPlugin) {
-        return EntityAPICore.createManager(owningPlugin);
+        return CORE.createManager(owningPlugin);
     }
 
     /**
@@ -22,7 +45,7 @@ public class EntityAPI {
      * @return The EntityManager for the given plugin.
      */
     public static EntityManager createEntityManager(Plugin owningPlugin, boolean keepInMemory) {
-        return EntityAPICore.createEntityManager(owningPlugin, keepInMemory);
+        return CORE.createEntityManager(owningPlugin, keepInMemory);
     }
 
     /**
@@ -32,7 +55,7 @@ public class EntityAPI {
      * @param manager The EntityManager.
      */
     public static void registerManager(String name, EntityManager manager) {
-        EntityAPICore.registerManager(name, manager);
+        CORE.registerManager(name, manager);
     }
 
     /**
@@ -42,18 +65,26 @@ public class EntityAPI {
      * @return Whether or not the plugin has an EntityManager.
      */
     public static boolean hasEntityManager(Plugin plugin) {
-        return EntityAPICore.hasEntityManager(plugin);
+        return CORE.hasEntityManager(plugin);
     }
 
     public static boolean hasEntityManager(String pluginName) {
-        return EntityAPICore.hasEntityManager(pluginName);
+        return CORE.hasEntityManager(pluginName);
     }
 
     public static EntityManager getManagerFor(Plugin plugin) {
-        return EntityAPICore.getManagerFor(plugin);
+        return CORE.getManagerFor(plugin);
     }
 
     public static EntityManager getManagerFor(String pluginName) {
-        return EntityAPICore.getManagerFor(pluginName);
+        return CORE.getManagerFor(pluginName);
+    }
+
+    public static ISpawnUtil getSpawnUtil() {
+        return CORE.getSpawnUtil();
+    }
+
+    public static IBasicEntityUtil getBasicEntityUtil() {
+        return CORE.getBasicEntityUtil();
     }
 }

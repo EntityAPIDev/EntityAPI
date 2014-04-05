@@ -5,9 +5,9 @@ import net.minecraft.server.v1_7_R1.EntityVillager;
 import net.minecraft.server.v1_7_R1.Vec3D;
 import net.minecraft.server.v1_7_R1.Village;
 import org.bukkit.entity.Villager;
-import org.entityapi.EntityAPICore;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.mind.BehaviourType;
+import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
 import org.entityapi.nms.v1_7_R1.RandomPositionGenerator;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
@@ -32,7 +32,7 @@ public class BehaviourMakeLove extends BehaviourBase {
 
     @Override
     public EntityVillager getHandle() {
-        return (EntityVillager) ((BasicEntityUtil) EntityAPICore.getBasicEntityUtil()).getHandle(this.getControllableEntity());
+        return (EntityVillager) ((BasicEntityUtil) EntityAPI.getBasicEntityUtil()).getHandle(this.getControllableEntity());
     }
 
     @Override

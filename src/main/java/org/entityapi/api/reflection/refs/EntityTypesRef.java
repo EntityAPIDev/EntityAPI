@@ -1,10 +1,10 @@
-package org.entityapi.reflection.refs;
+package org.entityapi.api.reflection.refs;
 
 import org.entityapi.internal.Constants;
-import org.entityapi.reflection.ClassTemplate;
-import org.entityapi.reflection.FieldAccessor;
-import org.entityapi.reflection.MethodAccessor;
-import org.entityapi.reflection.NMSClassTemplate;
+import org.entityapi.api.reflection.ClassTemplate;
+import org.entityapi.api.reflection.FieldAccessor;
+import org.entityapi.api.reflection.MethodAccessor;
+import org.entityapi.api.reflection.NMSClassTemplate;
 
 import java.util.Map;
 

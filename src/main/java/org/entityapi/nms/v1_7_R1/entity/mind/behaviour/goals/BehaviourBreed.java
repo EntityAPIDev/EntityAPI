@@ -3,11 +3,11 @@ package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftPlayer;
 import org.bukkit.entity.Animals;
-import org.entityapi.EntityAPICore;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.events.ControllableEntityBreedEvent;
 import org.entityapi.api.events.ControllableEntityPreBreedEvent;
 import org.entityapi.api.mind.BehaviourType;
+import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
@@ -24,7 +24,7 @@ public class BehaviourBreed extends BehaviourBase {
 
     public BehaviourBreed(ControllableEntity<Animals> controllableEntity) {
         super(controllableEntity);
-        this.handle = (EntityAnimal) ((BasicEntityUtil) EntityAPICore.getBasicEntityUtil()).getHandle(this.getControllableEntity());
+        this.handle = (EntityAnimal) ((BasicEntityUtil) EntityAPI.getBasicEntityUtil()).getHandle(this.getControllableEntity());
     }
 
     @Override
@@ -89,12 +89,12 @@ public class BehaviourBreed extends BehaviourBase {
 
     private void breed() {
         ControllableEntityPreBreedEvent preBreedEvent = new ControllableEntityPreBreedEvent(this.getControllableEntity(), (Animals) this.mate.getBukkitEntity(), (CraftPlayer) this.handle.cb().getBukkitEntity());
-        EntityAPICore.getCore().getServer().getPluginManager().callEvent(preBreedEvent);
+        EntityAPI.getCore().getServer().getPluginManager().callEvent(preBreedEvent);
         if (!preBreedEvent.isCancelled()) {
             EntityAgeable child = this.handle.createChild(this.mate);
 
             ControllableEntityBreedEvent breedEvent = new ControllableEntityBreedEvent(this.getControllableEntity(), (Animals) this.mate.getBukkitEntity(), (Animals) child.getBukkitEntity(), (CraftPlayer) this.handle.cb().getBukkitEntity());
-            EntityAPICore.getCore().getServer().getPluginManager().callEvent(breedEvent);
+            EntityAPI.getCore().getServer().getPluginManager().callEvent(breedEvent);
 
             if (child != null) {
                 // CraftBukkit start - set persistence for tame animals

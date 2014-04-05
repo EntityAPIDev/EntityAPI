@@ -1,6 +1,6 @@
-package org.entityapi.reflection;
+package org.entityapi.api.reflection;
 
-import org.entityapi.EntityAPICore;
+import org.entityapi.api.plugin.EntityAPI;
 
 public class CBClassTemplate extends ClassTemplate<Object> {
 
@@ -13,9 +13,9 @@ public class CBClassTemplate extends ClassTemplate<Object> {
     }
 
     protected void setCBClass(String name) {
-        Class clazz = EntityAPICore.SERVER.getCBClass(name);
+        Class clazz = EntityAPI.getCore().getAPIServer().getCBClass(name);
         if (clazz == null) {
-            EntityAPICore.LOGGER_REFLECTION.warning("Failed to find a matching class with name: " + name);
+            EntityAPI.LOGGER_REFLECTION.warning("Failed to find a matching class with name: " + name);
         }
         setClass(clazz);
     }

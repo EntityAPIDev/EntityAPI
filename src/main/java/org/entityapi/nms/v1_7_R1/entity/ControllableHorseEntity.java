@@ -4,14 +4,14 @@ import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-import org.entityapi.EntityAPICore;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.ControllableEntityHandle;
 import org.entityapi.api.EntitySound;
 import org.entityapi.api.mind.Attribute;
+import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.entity.mind.attribute.RideAttribute;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
-import org.entityapi.reflection.SafeField;
+import org.entityapi.api.reflection.SafeField;
 
 public class ControllableHorseEntity extends EntityHorse implements ControllableEntityHandle {
 
@@ -53,7 +53,7 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
     public void h() {
         super.h();
         if (this.controllableEntity != null) {
-            EntityAPICore.callOnTick(this.controllableEntity);
+            EntityAPI.getCore().callOnTick(this.controllableEntity);
             if (this.controllableEntity.shouldUpdateAttributes()) {
                 this.controllableEntity.getMind().tick();
             }
@@ -67,7 +67,7 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
             return;
         }
 
-        if (EntityAPICore.callOnCollide(this.controllableEntity, entity.getBukkitEntity())) {
+        if (EntityAPI.getCore().callOnCollide(this.controllableEntity, entity.getBukkitEntity())) {
             super.collide(entity);
         }
     }
@@ -78,13 +78,13 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
             return super.c(entity);
         }
 
-        return EntityAPICore.callOnInteract(this.controllableEntity, (Player) entity.getBukkitEntity(), true);
+        return EntityAPI.getCore().callOnInteract(this.controllableEntity, (Player) entity.getBukkitEntity(), true);
     }
 
     @Override
     public boolean damageEntity(DamageSource damageSource, float v) {
         if (this.controllableEntity != null && damageSource.getEntity() != null && damageSource.getEntity().getBukkitEntity() instanceof Player) {
-            EntityAPICore.callOnInteract(this.controllableEntity, (Player) damageSource.getEntity(), false);
+            EntityAPI.getCore().callOnInteract(this.controllableEntity, (Player) damageSource.getEntity(), false);
         }
         return super.damageEntity(damageSource, v);
     }
@@ -107,7 +107,7 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
     @Override
     public void g(double x, double y, double z) {
         if (this.controllableEntity != null) {
-            Vector velocity = EntityAPICore.callOnPush(this.controllableEntity, x, y, z);
+            Vector velocity = EntityAPI.getCore().callOnPush(this.controllableEntity, x, y, z);
             x = velocity.getX();
             y = velocity.getY();
             z = velocity.getZ();
@@ -118,7 +118,7 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
     @Override
     public void die(DamageSource damagesource) {
         if (this.controllableEntity != null) {
-            EntityAPICore.callOnDeath(this.controllableEntity);
+            EntityAPI.getCore().callOnDeath(this.controllableEntity);
         }
         super.die(damagesource);
     }

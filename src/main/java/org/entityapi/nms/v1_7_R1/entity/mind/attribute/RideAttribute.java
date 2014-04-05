@@ -1,9 +1,9 @@
 package org.entityapi.nms.v1_7_R1.entity.mind.attribute;
 
 import net.minecraft.server.v1_7_R1.EntityLiving;
-import org.entityapi.EntityAPICore;
 import org.entityapi.api.mind.Attribute;
 import org.entityapi.api.mind.Mind;
+import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
 
 import java.lang.reflect.Field;
@@ -12,13 +12,14 @@ public class RideAttribute extends Attribute {
 
     private boolean vehicleMotionOverriden;
     private boolean jumpingEnabled;
+    private boolean canFly;
 
     public RideAttribute(Mind mind) {
         super(mind);
     }
 
     public void onRide(float[] motion) {
-        EntityLiving entity = ((BasicEntityUtil) EntityAPICore.getBasicEntityUtil()).getHandle(this.getControllableEntity());
+        EntityLiving entity = ((BasicEntityUtil) EntityAPI.getBasicEntityUtil()).getHandle(this.getControllableEntity());
         if (entity.passenger == null) {
             return;
         }
@@ -43,7 +44,7 @@ public class RideAttribute extends Attribute {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (this.getControllableEntity().canFly()) {
+        if (this.canFly()) {
             if (jumping) {
                 motion[1] = 0.5F;
             } else if (entity.passenger.pitch >= 50) {
@@ -56,20 +57,28 @@ public class RideAttribute extends Attribute {
         }
     }
 
+    public boolean canFly() {
+        return canFly;
+    }
+
+    public void setCanFly(boolean flag) {
+        this.canFly = flag;
+    }
+
     public boolean isJumpingEnabled() {
         return jumpingEnabled;
     }
 
-    public void setJumpingEnabled(boolean jumpingEnabled) {
-        this.jumpingEnabled = jumpingEnabled;
+    public void setJumpingEnabled(boolean flag) {
+        this.jumpingEnabled = flag;
     }
 
     public boolean isVehicleMotionOverriden() {
         return vehicleMotionOverriden;
     }
 
-    public void setVehicleMotionOverriden(boolean vehicleMotionOverriden) {
-        this.vehicleMotionOverriden = vehicleMotionOverriden;
+    public void setVehicleMotionOverriden(boolean flag) {
+        this.vehicleMotionOverriden = flag;
     }
 
     @Override

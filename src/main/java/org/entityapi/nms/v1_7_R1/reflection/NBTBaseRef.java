@@ -1,9 +1,9 @@
 package org.entityapi.nms.v1_7_R1.reflection;
 
 import net.minecraft.server.v1_7_R1.NBTBase;
-import org.entityapi.reflection.ClassTemplate;
-import org.entityapi.reflection.MethodAccessor;
-import org.entityapi.reflection.NMSClassTemplate;
+import org.entityapi.api.reflection.ClassTemplate;
+import org.entityapi.api.reflection.MethodAccessor;
+import org.entityapi.api.reflection.NMSClassTemplate;
 
 public class NBTBaseRef {
 

@@ -1,7 +1,9 @@
 package org.entityapi.api;
 
+import org.entityapi.api.utils.ReflectionUtil;
 import org.entityapi.internal.Constants;
-import org.entityapi.utils.ReflectionUtil;
+
+import java.util.regex.Pattern;
 
 public enum ControllableEntityType {
 
@@ -48,6 +50,7 @@ public enum ControllableEntityType {
         if (!ControllableEntityHandle.class.isAssignableFrom(handleClass))
             throw new RuntimeException("Handle class needs to implement ControllableEntityHandle!");
 
+        Pattern p = Pattern.compile("org\\.entityapi\\.[^api]");
         this.name = name;
         this.id = id;
         this.isNameRequired = isNameRequired;

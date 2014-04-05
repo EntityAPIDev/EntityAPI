@@ -3,16 +3,16 @@ package org.entityapi;
 import org.bukkit.Location;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.ControllableEntityType;
+import org.entityapi.api.EntityManager;
 import org.entityapi.api.mind.Behaviour;
 import org.entityapi.api.mind.Mind;
 import org.entityapi.exceptions.ControllableEntitySpawnException;
-import org.entityapi.reflection.SafeConstructor;
+import org.entityapi.api.reflection.SafeConstructor;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class EntityCreator {
-    private EntityCreator INSTANCE;
 
     private EntityManager ENTITYMANAGER;
     private int ID;
@@ -23,58 +23,54 @@ public class EntityCreator {
     private Mind MIND;
     private HashMap<Behaviour, Integer> BEHAVIOURS;
 
-    {
+    public EntityCreator(EntityManager entityManager) {
+        this.ENTITYMANAGER = entityManager;
         this.BEHAVIOURS = new HashMap<>();
         this.PREPARE = false;
     }
 
-    public EntityCreator(EntityManager entityManager) {
-        this.ENTITYMANAGER = entityManager;
-        this.INSTANCE = this;
-    }
-
     public EntityCreator withID(int id) {
         this.ID = id;
-        return this.INSTANCE;
+        return this;
     }
 
     public EntityCreator withType(ControllableEntityType entityType) {
         this.TYPE = entityType;
-        return this.INSTANCE;
+        return this;
     }
 
     public EntityCreator withName(String name) {
         this.NAME = name;
-        return this.INSTANCE;
+        return this;
     }
 
     public EntityCreator atLocation(Location location) {
         this.LOCATION = location;
-        return this.INSTANCE;
+        return this;
     }
 
     public EntityCreator withMind(Mind mind) {
         this.MIND = mind;
-        return this.INSTANCE;
+        return this;
     }
 
     public EntityCreator withBehaviours(Behaviour... behaviours) {
         for (Behaviour behaviour1 : behaviours) {
             this.BEHAVIOURS.put(behaviour1, 1);
         }
-        return this.INSTANCE;
+        return this;
     }
 
     public EntityCreator withBehaviours(HashMap<Behaviour, Integer> prioritisedBehaviours) {
         for (Map.Entry<Behaviour, Integer> entry : prioritisedBehaviours.entrySet()) {
             this.BEHAVIOURS.put(entry.getKey(), entry.getValue());
         }
-        return this.INSTANCE;
+        return this;
     }
 
     public EntityCreator withDefaults() {
         this.PREPARE = true;
-        return this.INSTANCE;
+        return this;
     }
 
     public <T extends ControllableEntity> T create() {

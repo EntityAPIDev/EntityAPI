@@ -1,4 +1,4 @@
-package org.entityapi.server;
+package org.entityapi.api.plugin;
 
 public interface Server {
 

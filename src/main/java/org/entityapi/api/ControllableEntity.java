@@ -4,7 +4,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
-import org.entityapi.EntityManager;
 import org.entityapi.api.mind.Mind;
 
 import java.util.HashMap;
@@ -57,10 +56,6 @@ public abstract interface ControllableEntity<T extends LivingEntity> extends Nam
     public void setSound(EntitySound type, String key, String sound);
 
     public void setSound(EntitySound type, HashMap<String, String> soundMap);
-
-    public boolean canFly();
-
-    public void setCanFly(boolean flag);
 
     public Material getLoot();
 

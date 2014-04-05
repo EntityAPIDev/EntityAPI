@@ -1,7 +1,7 @@
 package org.entityapi.api;
 
 import org.bukkit.entity.LivingEntity;
-import org.entityapi.EntityAPICore;
+import org.entityapi.api.plugin.EntityAPI;
 
 public enum ProjectileType {
 
@@ -13,6 +13,6 @@ public enum ProjectileType {
     THROWN_POTION;
 
     public void shootProjectile(ControllableEntity controllableEntity, LivingEntity target, float strength) {
-        EntityAPICore.getBasicEntityUtil().shootProjectile(this, controllableEntity, target, strength);
+        EntityAPI.getBasicEntityUtil().shootProjectile(this, controllableEntity, target, strength);
     }
 }

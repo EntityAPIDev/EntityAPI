@@ -1,7 +1,7 @@
-package org.entityapi.reflection.refs;
+package org.entityapi.api.reflection.refs;
 
 import org.bukkit.World;
-import org.entityapi.reflection.*;
+import org.entityapi.api.reflection.*;
 
 public class CraftWorldRef {
 

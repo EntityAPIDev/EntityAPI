@@ -3,8 +3,8 @@ package org.entityapi.nms.v1_7_R1.network;
 import net.minecraft.server.v1_7_R1.NetworkManager;
 import net.minecraft.util.io.netty.channel.Channel;
 import org.entityapi.internal.Constants;
-import org.entityapi.reflection.FieldAccessor;
-import org.entityapi.reflection.SafeField;
+import org.entityapi.api.reflection.FieldAccessor;
+import org.entityapi.api.reflection.SafeField;
 
 import java.net.InetSocketAddress;
 
