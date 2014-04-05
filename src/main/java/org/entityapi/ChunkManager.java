@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ChunkManager implements Listener {
 
-    private final EntityManager ENTITY_MANAGER;
+    private final EntityManager ENTITY_MANAGER; // Useless comment
     private List<ControllableEntity> SPAWN_QUEUE = Lists.newLinkedList();
 
     public ChunkManager(EntityManager entityManager) {
