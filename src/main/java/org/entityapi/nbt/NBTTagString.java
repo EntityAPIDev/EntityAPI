@@ -1,4 +1,4 @@
-package org.entityapi.nms.v1_7_R1.nbt;
+package org.entityapi.nbt;
 
 import org.entityapi.exceptions.NBTReadException;
 import org.entityapi.exceptions.NBTWriteException;

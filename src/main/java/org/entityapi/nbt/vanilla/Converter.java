@@ -1,5 +1,6 @@
-package org.entityapi.nms.v1_7_R1.nbt.vanilla;
+package org.entityapi.nbt.vanilla;
 
+import org.entityapi.nbt.*;
 import org.entityapi.nms.v1_7_R1.nbt.*;
 import org.entityapi.nms.v1_7_R1.reflection.NBTBaseRef;
 import org.entityapi.reflection.ClassTemplate;

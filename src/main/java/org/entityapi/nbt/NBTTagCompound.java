@@ -1,4 +1,4 @@
-package org.entityapi.nms.v1_7_R1.nbt;
+package org.entityapi.nbt;
 
 import org.entityapi.exceptions.NBTException;
 
@@ -195,7 +195,7 @@ public class NBTTagCompound extends NBTBase {
     }
 
     static NBTBase read(byte id, DataInput input, int depth) {
-        NBTBase nbtBase = NBTBase.createTagById(id);
+        NBTBase nbtBase = createTagById(id);
 
         try {
             nbtBase.load(input, depth);
@@ -208,7 +208,7 @@ public class NBTTagCompound extends NBTBase {
 
     static NBTBase readTag(byte b, String s, DataInput datainput, int i) {
         try {
-            NBTBase nbtbase = NBTBase.createTagById(b);
+            NBTBase nbtbase = createTagById(b);
             nbtbase.load(datainput, i);
             return nbtbase;
         } catch (Exception e) {
