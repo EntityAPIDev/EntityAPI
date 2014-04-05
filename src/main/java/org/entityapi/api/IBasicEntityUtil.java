@@ -18,8 +18,6 @@
 package org.entityapi.api;
 
 import org.bukkit.entity.LivingEntity;
-import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.ProjectileType;
 
 public interface IBasicEntityUtil {
 

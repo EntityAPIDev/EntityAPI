@@ -30,9 +30,9 @@ public class BehaviourDefendOwner extends BehaviourTarget {
     }
 
     private boolean isTamed() {
-       if (this.getHandle() instanceof EntityTameableAnimal) {
-           return ((EntityTameableAnimal) this.getHandle()).isTamed();
-       }
+        if (this.getHandle() instanceof EntityTameableAnimal) {
+            return ((EntityTameableAnimal) this.getHandle()).isTamed();
+        }
         return false;
     }
 

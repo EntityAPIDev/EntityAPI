@@ -1,13 +1,16 @@
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
-import net.minecraft.server.v1_7_R1.*;
+import net.minecraft.server.v1_7_R1.Entity;
+import net.minecraft.server.v1_7_R1.EntityVillager;
+import net.minecraft.server.v1_7_R1.Vec3D;
+import net.minecraft.server.v1_7_R1.Village;
 import org.bukkit.entity.Villager;
 import org.entityapi.EntityAPICore;
 import org.entityapi.api.ControllableEntity;
-import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
-import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
 import org.entityapi.api.mind.BehaviourType;
+import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
 import org.entityapi.nms.v1_7_R1.RandomPositionGenerator;
+import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
 
 import java.util.Iterator;
 import java.util.List;

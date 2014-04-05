@@ -77,7 +77,7 @@ public class ControllableCowEntity extends EntityCow implements ControllableEnti
             return super.c(entity);
         }
 
-       return  EntityAPICore.callOnInteract(this.controllableEntity, (Player) entity.getBukkitEntity(), true);
+        return EntityAPICore.callOnInteract(this.controllableEntity, (Player) entity.getBukkitEntity(), true);
     }
 
     @Override

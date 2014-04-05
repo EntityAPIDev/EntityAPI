@@ -4,7 +4,6 @@ import net.minecraft.server.v1_7_R1.EntityCreature;
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import net.minecraft.server.v1_7_R1.MathHelper;
 import net.minecraft.server.v1_7_R1.Vec3D;
-import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
 
 import java.util.Random;
 

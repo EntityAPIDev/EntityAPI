@@ -21,8 +21,8 @@ import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
 import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.ProjectileType;
 import org.entityapi.api.IBasicEntityUtil;
+import org.entityapi.api.ProjectileType;
 
 public class BasicEntityUtil implements IBasicEntityUtil {
 

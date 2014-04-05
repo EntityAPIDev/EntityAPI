@@ -85,13 +85,13 @@ public class BlockNode {
 
         double g_cost = 0;
 
-        while((parent = current.parent) != null) {
+        while ((parent = current.parent) != null) {
             int dx = Math.abs(parent.getX() - current.getX());
             int dy = Math.abs(parent.getY() - current.getY());
             int dz = Math.abs(parent.getZ() - current.getZ());
 
-            if(dx == 1 && dz == 1) {
-                if(dy == 1) {
+            if (dx == 1 && dz == 1) {
+                if (dy == 1) {
                     g_cost += BlockNode.COST_DIAGONAL_UP;
                 } else {
                     g_cost += BlockNode.COST_DIAGONAL;
@@ -127,7 +127,7 @@ public class BlockNode {
 
     @Override
     public boolean equals(Object object) {
-        if(object instanceof BlockNode) {
+        if (object instanceof BlockNode) {
             BlockNode node = (BlockNode) object;
 
             return node.toString().equalsIgnoreCase(this.toString());

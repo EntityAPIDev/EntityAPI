@@ -1,29 +1,29 @@
 package org.entityapi;
 
 import com.google.common.collect.Maps;
-import java.io.File;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 import org.entityapi.api.ControllableEntity;
+import org.entityapi.api.IBasicEntityUtil;
 import org.entityapi.api.ISpawnUtil;
 import org.entityapi.api.events.*;
-import org.entityapi.api.IBasicEntityUtil;
 import org.entityapi.reflection.SafeConstructor;
 import org.entityapi.server.*;
 import org.entityapi.utils.PastebinReporter;
+import org.entityapi.utils.ReflectionUtil;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
-import org.bukkit.plugin.PluginManager;
-import org.entityapi.utils.ReflectionUtil;
 
 public class EntityAPICore extends JavaPlugin {
 
@@ -59,11 +59,11 @@ public class EntityAPICore extends JavaPlugin {
      * Pastebin reporter
      */
     private static final PastebinReporter REPORTER = new PastebinReporter(PASTEBIN_REPORT_KEY);
-    
+
     /**
      * Plugin files list for checking more than 1 Lib
      */
-    private final List<String> plugins = new ArrayList<>();    
+    private final List<String> plugins = new ArrayList<>();
 
     @Override
     public void onDisable() {
@@ -197,11 +197,11 @@ public class EntityAPICore extends JavaPlugin {
             pm.disablePlugin(this);
             this.getLogger().log(Level.SEVERE, "Warning! You have two EntityAPI Libraries in Plugins Folder! Please remove one!");
         }
-    }    
+    }
 
     @EventHandler
     protected void onPluginDisable(PluginDisableEvent event) {
-        if(hasEntityManager(event.getPlugin())) {
+        if (hasEntityManager(event.getPlugin())) {
             EntityManager entityManager = getManagerFor(event.getPlugin());
 
 

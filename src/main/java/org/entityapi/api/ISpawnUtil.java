@@ -18,7 +18,6 @@
 package org.entityapi.api;
 
 import org.bukkit.Location;
-import org.entityapi.api.ControllableEntity;
 
 public interface ISpawnUtil {
 

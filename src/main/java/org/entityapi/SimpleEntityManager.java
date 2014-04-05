@@ -92,7 +92,7 @@ public class SimpleEntityManager implements EntityManager {
                     .withType(entityType)
                     .atLocation(location);
 
-            if(prepare)
+            if (prepare)
                 context.withDefaults();
 
             return context.create();

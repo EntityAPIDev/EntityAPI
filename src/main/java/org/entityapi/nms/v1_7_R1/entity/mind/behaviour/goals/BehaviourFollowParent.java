@@ -4,9 +4,9 @@ import net.minecraft.server.v1_7_R1.EntityAnimal;
 import org.bukkit.entity.Animals;
 import org.entityapi.EntityAPICore;
 import org.entityapi.api.ControllableEntity;
+import org.entityapi.api.mind.BehaviourType;
 import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
-import org.entityapi.api.mind.BehaviourType;
 
 import java.util.Iterator;
 import java.util.List;

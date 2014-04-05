@@ -60,5 +60,6 @@ public abstract class BehaviourBase implements Behaviour {
         return true;
     }
 
-    public void tick() {} //e
+    public void tick() {
+    } //e
 }

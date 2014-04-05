@@ -2,8 +2,8 @@ package org.entityapi.nms.v1_7_R1.entity.selector;
 
 import net.minecraft.server.v1_7_R1.Entity;
 import net.minecraft.server.v1_7_R1.IEntitySelector;
-import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.BehaviourAvoidEntity;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
+import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.BehaviourAvoidEntity;
 
 public class EntitySelectorViewable implements IEntitySelector {
 

@@ -2,8 +2,8 @@ package org.entityapi.nms.v1_7_R1.entity.mind.attribute;
 
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import org.entityapi.EntityAPICore;
-import org.entityapi.api.mind.Mind;
 import org.entityapi.api.mind.Attribute;
+import org.entityapi.api.mind.Mind;
 import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
 
 import java.lang.reflect.Field;

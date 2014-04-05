@@ -3,8 +3,8 @@ package org.entityapi;
 import org.bukkit.Location;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.ControllableEntityType;
-import org.entityapi.api.mind.Mind;
 import org.entityapi.api.mind.Behaviour;
+import org.entityapi.api.mind.Mind;
 import org.entityapi.exceptions.ControllableEntitySpawnException;
 import org.entityapi.reflection.SafeConstructor;
 
