@@ -1,4 +1,4 @@
-package org.entityapi.nms.v1_7_R1.nbt;
+package org.entityapi.nbt;
 
 import java.io.DataInput;
 import java.io.DataOutput;

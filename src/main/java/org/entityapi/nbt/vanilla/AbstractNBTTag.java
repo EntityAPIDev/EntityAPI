@@ -1,7 +1,7 @@
-package org.entityapi.nms.v1_7_R1.nbt.vanilla;
+package org.entityapi.nbt.vanilla;
 
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.nms.v1_7_R1.nbt.NBTBase;
+import org.entityapi.nbt.NBTBase;
 import org.entityapi.wrapper.AbstractWrapper;
 
 public class AbstractNBTTag<T extends NBTBase> extends AbstractWrapper {

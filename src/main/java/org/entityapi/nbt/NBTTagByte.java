@@ -1,4 +1,4 @@
-package org.entityapi.nms.v1_7_R1.nbt;
+package org.entityapi.nbt;
 
 import org.entityapi.exceptions.NBTReadException;
 import org.entityapi.exceptions.NBTWriteException;
@@ -7,38 +7,38 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class NBTTagInt extends NBTNumber<Integer> {
+public class NBTTagByte extends NBTNumber<Byte> {
 
-    private int data;
+    private byte data;
 
-    public NBTTagInt() {
+    public NBTTagByte() {
     }
 
-    public NBTTagInt(int i) {
-        this.data = i;
+    public NBTTagByte(byte b) {
+        this.data = b;
     }
 
     @Override
     public byte getTypeId() {
-        return 3;
+        return 1;
     }
 
     @Override
-    public Integer getValue() {
+    public Byte getValue() {
         return this.data;
     }
 
     @Override
     public String toString() {
-        return "" + this.data + "i";
+        return "" + this.data + "b";
     }
 
     @Override
     public boolean equals(Object object) {
         if (super.equals(object)) {
-            NBTTagInt nbttagint = (NBTTagInt) object;
+            NBTTagByte nbttagbyte = (NBTTagByte) object;
 
-            return this.data == nbttagint.data;
+            return this.data == nbttagbyte.data;
         } else {
             return false;
         }
@@ -52,7 +52,7 @@ public class NBTTagInt extends NBTNumber<Integer> {
     @Override
     void write(DataOutput dataoutput) {
         try {
-            dataoutput.writeInt(this.data);
+            dataoutput.writeByte(this.data);
         } catch (IOException e) {
             throw new NBTWriteException(e);
         }
@@ -61,7 +61,7 @@ public class NBTTagInt extends NBTNumber<Integer> {
     @Override
     void load(DataInput datainput, int depth) {
         try {
-            this.data = datainput.readInt();
+            this.data = datainput.readByte();
         } catch (IOException e) {
             throw new NBTReadException(e);
         }
@@ -69,6 +69,6 @@ public class NBTTagInt extends NBTNumber<Integer> {
 
     @Override
     public NBTBase clone() {
-        return new NBTTagInt(this.data);
+        return new NBTTagByte(this.data);
     }
 }

@@ -1,4 +1,4 @@
-package org.entityapi.nms.v1_7_R1.nbt;
+package org.entityapi.nbt;
 
 public abstract class NBTReturnable<T> extends NBTBase {
 

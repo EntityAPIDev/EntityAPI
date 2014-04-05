@@ -1,4 +1,4 @@
-package org.entityapi.nms.v1_7_R1.nbt;
+package org.entityapi.nbt;
 
 import org.entityapi.exceptions.NBTReadException;
 import org.entityapi.exceptions.NBTWriteException;
@@ -7,38 +7,38 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class NBTTagShort extends NBTNumber<Short> {
+public class NBTTagInt extends NBTNumber<Integer> {
 
-    private short data;
+    private int data;
 
-    public NBTTagShort() {
+    public NBTTagInt() {
     }
 
-    public NBTTagShort(short s) {
-        this.data = s;
+    public NBTTagInt(int i) {
+        this.data = i;
     }
 
     @Override
     public byte getTypeId() {
-        return 2;
+        return 3;
     }
 
     @Override
-    public Short getValue() {
+    public Integer getValue() {
         return this.data;
     }
 
     @Override
     public String toString() {
-        return "" + this.data + "s";
+        return "" + this.data + "i";
     }
 
     @Override
     public boolean equals(Object object) {
         if (super.equals(object)) {
-            NBTTagShort nbttagshort = (NBTTagShort) object;
+            NBTTagInt nbttagint = (NBTTagInt) object;
 
-            return this.data == nbttagshort.data;
+            return this.data == nbttagint.data;
         } else {
             return false;
         }
@@ -52,7 +52,7 @@ public class NBTTagShort extends NBTNumber<Short> {
     @Override
     void write(DataOutput dataoutput) {
         try {
-            dataoutput.writeShort(this.data);
+            dataoutput.writeInt(this.data);
         } catch (IOException e) {
             throw new NBTWriteException(e);
         }
@@ -61,7 +61,7 @@ public class NBTTagShort extends NBTNumber<Short> {
     @Override
     void load(DataInput datainput, int depth) {
         try {
-            this.data = datainput.readShort();
+            this.data = datainput.readInt();
         } catch (IOException e) {
             throw new NBTReadException(e);
         }
@@ -69,6 +69,6 @@ public class NBTTagShort extends NBTNumber<Short> {
 
     @Override
     public NBTBase clone() {
-        return new NBTTagShort(this.data);
+        return new NBTTagInt(this.data);
     }
 }
