@@ -1,5 +1,7 @@
 package org.entityapi.nms.v1_7_R1.nbt;
 
+import org.entityapi.nbt.NBTStreamTools;
+import org.entityapi.nbt.NBTTagCompound;
 import org.junit.Test;
 
 import java.io.File;

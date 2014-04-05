@@ -18,10 +18,13 @@ import org.entityapi.api.events.*;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.plugin.IEntityAPICore;
 import org.entityapi.api.plugin.Server;
+import org.entityapi.api.reflection.SafeConstructor;
 import org.entityapi.api.utils.PastebinReporter;
 import org.entityapi.api.utils.ReflectionUtil;
-import org.entityapi.api.reflection.SafeConstructor;
-import org.entityapi.server.*;
+import org.entityapi.server.CraftBukkitServer;
+import org.entityapi.server.MCPCPlusServer;
+import org.entityapi.server.SpigotServer;
+import org.entityapi.server.UnknownServer;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -6,8 +6,8 @@ import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntityManager;
 import org.entityapi.api.mind.Behaviour;
 import org.entityapi.api.mind.Mind;
-import org.entityapi.exceptions.ControllableEntitySpawnException;
 import org.entityapi.api.reflection.SafeConstructor;
+import org.entityapi.exceptions.ControllableEntitySpawnException;
 
 import java.util.HashMap;
 import java.util.Map;

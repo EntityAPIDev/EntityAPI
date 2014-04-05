@@ -9,9 +9,9 @@ import org.entityapi.api.ControllableEntityHandle;
 import org.entityapi.api.EntitySound;
 import org.entityapi.api.mind.Attribute;
 import org.entityapi.api.plugin.EntityAPI;
+import org.entityapi.api.reflection.SafeField;
 import org.entityapi.nms.v1_7_R1.entity.mind.attribute.RideAttribute;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
-import org.entityapi.api.reflection.SafeField;
 
 public class ControllableHorseEntity extends EntityHorse implements ControllableEntityHandle {
 

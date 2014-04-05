@@ -1,10 +1,9 @@
 package org.entityapi.nbt.vanilla;
 
-import org.entityapi.nbt.*;
-import org.entityapi.nms.v1_7_R1.nbt.*;
-import org.entityapi.nms.v1_7_R1.reflection.NBTBaseRef;
 import org.entityapi.api.reflection.ClassTemplate;
 import org.entityapi.api.reflection.NMSClassTemplate;
+import org.entityapi.nbt.*;
+import org.entityapi.nms.v1_7_R1.reflection.NBTBaseRef;
 
 import java.util.List;
 import java.util.Map;

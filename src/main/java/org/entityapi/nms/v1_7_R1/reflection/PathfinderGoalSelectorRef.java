@@ -2,11 +2,11 @@ package org.entityapi.nms.v1_7_R1.reflection;
 
 import net.minecraft.server.v1_7_R1.EntityInsentient;
 import net.minecraft.server.v1_7_R1.PathfinderGoal;
-import org.entityapi.internal.Constants;
 import org.entityapi.api.reflection.ClassTemplate;
 import org.entityapi.api.reflection.FieldAccessor;
 import org.entityapi.api.reflection.MethodAccessor;
 import org.entityapi.api.reflection.NMSClassTemplate;
+import org.entityapi.internal.Constants;
 
 import java.util.List;
 

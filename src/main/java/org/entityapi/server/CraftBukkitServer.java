@@ -3,8 +3,8 @@ package org.entityapi.server;
 import org.bukkit.Bukkit;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.plugin.Server;
-import org.entityapi.internal.Constants;
 import org.entityapi.api.reflection.refs.MinecraftServerRef;
+import org.entityapi.internal.Constants;
 
 public class CraftBukkitServer implements Server {
 

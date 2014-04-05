@@ -1,6 +1,5 @@
 package org.entityapi.server;
 
-import org.entityapi.EntityAPICore;
 import org.entityapi.api.plugin.EntityAPI;
 
 public class UnknownServer extends CraftBukkitServer { //we do not know this server brand so let's guess it's some random bukkit server.
