@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class NMSEntityClassRef {
 
-    private static HashMap<Class<? extends org.bukkit.entity.Entity>, Class<? extends net.minecraft.server.v1_7_R1.Entity>> CLASS_MAP = new HashMap<>();
+    private static HashMap<Class<? extends org.bukkit.entity.Entity>, Class<?>> CLASS_MAP = new HashMap<>();
 
     static {
         CLASS_MAP.put(org.bukkit.entity.Entity.class, EntityAPICore.SERVER.getNMSClass("Entity"));
@@ -54,7 +54,7 @@ public class NMSEntityClassRef {
         CLASS_MAP.put(Zombie.class, EntityAPICore.SERVER.getNMSClass("EntityZombie"));
     }
 
-    public static Class<? extends net.minecraft.server.v1_7_R1.Entity> getNMSClass(Class<? extends org.bukkit.entity.Entity> bukkitClass) {
+    public static Class<?> getNMSClass(Class<? extends org.bukkit.entity.Entity> bukkitClass) {
         Class result = null;
         Class superClass = bukkitClass;
         while (result == null && superClass != Object.class) {
@@ -64,11 +64,11 @@ public class NMSEntityClassRef {
         return result;
     }
 
-    public static Class<? extends org.bukkit.entity.Entity> getBukkitClass(Class<? extends net.minecraft.server.v1_7_R1.Entity> nmsClass) {
+    public static Class<? extends org.bukkit.entity.Entity> getBukkitClass(Class<?> nmsClass) {
         Class result = null;
         Class superClass = nmsClass;
         while (result == null && superClass != Object.class) {
-            for (Map.Entry<Class<? extends org.bukkit.entity.Entity>, Class<? extends net.minecraft.server.v1_7_R1.Entity>> entry : CLASS_MAP.entrySet()) {
+            for (Map.Entry<Class<? extends org.bukkit.entity.Entity>, Class<?>> entry : CLASS_MAP.entrySet()) {
                 if (entry.getValue() == nmsClass) {
                     result = entry.getKey();
                 }

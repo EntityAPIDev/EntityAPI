@@ -3,10 +3,18 @@ package org.entityapi;
 import com.google.common.collect.Maps;
 import java.io.File;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.Vector;
+import org.entityapi.api.ControllableEntity;
+import org.entityapi.api.ISpawnUtil;
+import org.entityapi.api.events.*;
+import org.entityapi.api.IBasicEntityUtil;
+import org.entityapi.reflection.SafeConstructor;
 import org.entityapi.server.*;
 import org.entityapi.utils.PastebinReporter;
 
@@ -15,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import org.bukkit.plugin.PluginManager;
+import org.entityapi.utils.ReflectionUtil;
 
 public class EntityAPICore extends JavaPlugin {
 
@@ -22,6 +31,9 @@ public class EntityAPICore extends JavaPlugin {
      * EntityAPI instance
      */
     private static EntityAPICore CORE_INSTANCE;
+
+    private static ISpawnUtil SPAWN_UTIL;
+    private static IBasicEntityUtil BASIC_ENTITY_UTIL;
 
     /**
      * The Server brand
@@ -65,6 +77,8 @@ public class EntityAPICore extends JavaPlugin {
         }
 
         CORE_INSTANCE = this;
+        SPAWN_UTIL = new SafeConstructor<ISpawnUtil>(ReflectionUtil.getVersionedClass("SpawnUtil")).newInstance();
+        BASIC_ENTITY_UTIL = new SafeConstructor<IBasicEntityUtil>(ReflectionUtil.getVersionedClass("BasicEntityUtil")).newInstance();
 
         initServer();
 
@@ -192,5 +206,42 @@ public class EntityAPICore extends JavaPlugin {
 
 
         }
+    }
+
+    public static ISpawnUtil getSpawnUtil() {
+        return SPAWN_UTIL;
+    }
+
+    public static IBasicEntityUtil getBasicEntityUtil() {
+        return BASIC_ENTITY_UTIL;
+    }
+
+    public static void callOnTick(ControllableEntity controllableEntity) {
+        ControllableEntityTickEvent tickEvent = new ControllableEntityTickEvent(controllableEntity);
+        Bukkit.getServer().getPluginManager().callEvent(tickEvent);
+    }
+
+    public static boolean callOnInteract(ControllableEntity controllableEntity, Player entity, boolean rightClick) {
+        ControllableEntityInteractEvent interactEvent = new ControllableEntityInteractEvent(controllableEntity, entity, rightClick ? Action.RIGHT_CLICK : Action.LEFT_CLICK);
+        Bukkit.getServer().getPluginManager().callEvent(interactEvent);
+        return !interactEvent.isCancelled();
+    }
+
+    public static Vector callOnPush(ControllableEntity controllableEntity, double x, double y, double z) {
+        ControllableEntityPushEvent pushEvent = new ControllableEntityPushEvent(controllableEntity, new Vector(x, y, z));
+        Bukkit.getServer().getPluginManager().callEvent(pushEvent);
+        return pushEvent.getPushVelocity();
+    }
+
+    public static boolean callOnCollide(ControllableEntity controllableEntity, Entity entity) {
+        ControllableEntityCollideEvent collideEvent = new ControllableEntityCollideEvent(controllableEntity, entity);
+        Bukkit.getServer().getPluginManager().callEvent(collideEvent);
+        return !collideEvent.isCancelled();
+    }
+
+    public static void callOnDeath(ControllableEntity controllableEntity) {
+        ControllableEntityDeathEvent deathEvent = new ControllableEntityDeathEvent(controllableEntity);
+        Bukkit.getServer().getPluginManager().callEvent(deathEvent);
+        controllableEntity.getMind().setControllableEntity(null);
     }
 }

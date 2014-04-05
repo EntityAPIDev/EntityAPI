@@ -1,7 +1,5 @@
 package org.entityapi.api.mind;
 
-import org.entityapi.api.mind.behaviour.Behaviour;
-
 public interface IBehaviourSelector {
 
     public abstract void addBehaviour(Behaviour behaviour, int priority);

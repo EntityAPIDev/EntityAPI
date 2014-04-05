@@ -37,12 +37,12 @@ public class SimpleEntityManager implements EntityManager {
                 while (iterator.hasNext()) {
                     Map.Entry<Integer, ControllableEntity> entry = iterator.next();
 
-                    if (entry.getValue().getHandle() == null) {
+                    if (EntityAPICore.getBasicEntityUtil().getHandle(entry.getValue()) == null) {
                         if (!keepEntitiesInMemory)
                             iterator.remove();
                     } else {
-                        entry.getValue().getHandle().C();
-                        if (!entry.getValue().getHandle().isAlive()) {
+                        EntityAPICore.getBasicEntityUtil().callBaseTick(entry.getValue());
+                        if (!EntityAPICore.getBasicEntityUtil().isAlive(entry.getValue())) {
                             //TODO: despawn
                         }
                     }
