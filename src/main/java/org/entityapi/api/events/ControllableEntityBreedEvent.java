@@ -1,6 +1,5 @@
 package org.entityapi.api.events;
 
-import net.minecraft.server.v1_7_R1.EntityAnimal;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
@@ -14,7 +13,7 @@ public class ControllableEntityBreedEvent extends ControllableEntityEvent {
     private Animals mate;
     private Player breeder;
 
-    public ControllableEntityBreedEvent(ControllableEntity<Animals, EntityAnimal> firstParent, Animals mate, Animals child, Player breeder) {
+    public ControllableEntityBreedEvent(ControllableEntity<Animals> firstParent, Animals mate, Animals child, Player breeder) {
         super(firstParent);
         this.child = child;
         this.mate = mate;

@@ -1,7 +1,6 @@
 package org.entityapi.api.mind;
 
 import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.mind.attribute.Attribute;
 
 import java.util.HashMap;
 import java.util.Iterator;

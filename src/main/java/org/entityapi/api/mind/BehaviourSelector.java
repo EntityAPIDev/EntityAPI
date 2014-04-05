@@ -1,8 +1,6 @@
 package org.entityapi.api.mind;
 
 import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.mind.behaviour.Behaviour;
-import org.entityapi.api.mind.behaviour.BehaviourItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -119,8 +117,9 @@ public class BehaviourSelector implements IBehaviourSelector {
     }
 
     protected void updateBehaviours() {
+        Iterator<BehaviourItem> iterator;
         if (this.delay++ % 3 == 0) {
-            Iterator<BehaviourItem> iterator = this.behaviours.iterator();
+            iterator = this.behaviours.iterator();
 
             while (iterator.hasNext()) {
                 BehaviourItem behaviourItem = iterator.next();
@@ -130,13 +129,18 @@ public class BehaviourSelector implements IBehaviourSelector {
                     }
                     behaviourItem.getBehaviour().finish();
                     this.activeBehaviours.remove(behaviourItem);
+                } else {
+                    if (this.canUse(behaviourItem) && behaviourItem.getBehaviour().shouldStart()) {
+                        behaviourItem.getBehaviour().start();
+                        this.activeBehaviours.add(behaviourItem);
+                    }
                 }
 
             }
 
             this.delay = 0;
         } else {
-            Iterator<BehaviourItem> iterator = this.activeBehaviours.iterator();
+            iterator = this.activeBehaviours.iterator();
 
             while (iterator.hasNext()) {
                 BehaviourItem behaviourItem = iterator.next();
@@ -147,7 +151,7 @@ public class BehaviourSelector implements IBehaviourSelector {
             }
         }
 
-        Iterator<BehaviourItem> iterator = this.activeBehaviours.iterator();
+        iterator = this.activeBehaviours.iterator();
 
         while (iterator.hasNext()) {
             BehaviourItem behaviourItem = iterator.next();

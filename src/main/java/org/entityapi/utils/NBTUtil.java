@@ -1,8 +1,8 @@
 package org.entityapi.utils;
 
 import org.bukkit.entity.Entity;
-import org.entityapi.nbt.NBTBase;
-import org.entityapi.nbt.NBTTagCompound;
+import org.entityapi.nms.v1_7_R1.nbt.NBTBase;
+import org.entityapi.nms.v1_7_R1.nbt.NBTTagCompound;
 
 public class NBTUtil {
 
