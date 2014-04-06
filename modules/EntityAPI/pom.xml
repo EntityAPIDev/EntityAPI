@@ -90,7 +90,7 @@
             <resource>
                 <targetPath>.</targetPath>
                 <filtering>true</filtering>
-                <directory>../../src/main/resources/</directory>
+                <directory>src/main/resources/</directory>
                 <includes>
                     <include>*.yml</include>
                 </includes>
@@ -147,7 +147,7 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <minimizeJar>true</minimizeJar>
+                            <minimizeJar>false</minimizeJar>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <artifactSet>
                                 <includes>
