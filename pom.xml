@@ -1,31 +1,56 @@
+<!--
+  ~ This file is part of EntityAPI.
+  ~
+  ~ EntityAPI is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ EntityAPI is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>io.snw</groupId>
-    <artifactId>EntityAPI</artifactId>
-    <version>0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
-
-    <name>EntityAPI</name>
-    <url>http://dev.bukkit.org/bukkit-plugins/entityapi/</url>
+    <groupId>org.entityapi</groupId>
+    <artifactId>EntityAPI-Parent</artifactId>
+    <name>EntityAPI Parent</name>
+    <version>parent</version>
+    <packaging>pom</packaging>
+    <url>http://github.com/EntityAPIDev/EntityAPI</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <minecraft.version>1.7.2</minecraft.version>
-        <craftbukkit.version>R0.4</craftbukkit.version>
-        <cb_package>v1_7_2R0.4</cb_package>
     </properties>
+
+    <modules>
+        <module>modules/API</module>
+        <module>modules/v1_7_R1</module>
+        <module>modules/EntityAPI</module>
+    </modules>
+
+    <repositories>
+        <repository>
+            <id>bukkit-repo</id>
+            <url>http://repo.bukkit.org/content/groups/public/</url>
+        </repository>
+    </repositories>
 
     <build>
         <defaultGoal>clean package install</defaultGoal>
-        <finalName>EntityAPI</finalName>
-        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+        <finalName>${project.name}</finalName>
+        <sourceDirectory>src/main/java</sourceDirectory>
         <resources>
             <resource>
                 <targetPath>.</targetPath>
                 <filtering>true</filtering>
-                <directory>${basedir}/src/main/resources/</directory>
+                <directory>src/main/resources/</directory>
                 <includes>
                     <include>*.yml</include>
                 </includes>
@@ -33,12 +58,18 @@
         </resources>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
             </plugin>
         </plugins>
         <extensions>
@@ -50,38 +81,4 @@
         </extensions>
     </build>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>bukkit</artifactId>
-            <version>${minecraft.version}-${craftbukkit.version}-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>craftbukkit</artifactId>
-            <version>${minecraft.version}-${craftbukkit.version}-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-        </dependency>
-
-    </dependencies>
-
-    <repositories>
-        <repository>
-            <id>bukkit-repo</id>
-            <url>http://repo.bukkit.org/content/groups/public/</url>
-        </repository>
-    </repositories>
-
-    <distributionManagement>
-        <repository>
-            <id>EntityAPI</id>
-            <url>http://ci.drtshock.net/plugin/repository/everything/</url>
-        </repository>
-    </distributionManagement>
 </project>
