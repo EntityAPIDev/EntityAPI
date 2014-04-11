@@ -21,12 +21,48 @@ import org.entityapi.api.ControllableEntity;
 
 public class BehaviourOpenDoor extends BehaviourDoorInteract {
 
+    private boolean closeDoor;
+    private int closeTicks;
+
     public BehaviourOpenDoor(ControllableEntity controllableEntity) {
-        super(controllableEntity);
+        this(controllableEntity, false);
+    }
+
+    public BehaviourOpenDoor(ControllableEntity controllableEntity, boolean closeDoor) {
+        this(controllableEntity, false, closeDoor);
+    }
+
+    public BehaviourOpenDoor(ControllableEntity controllableEntity, boolean searchForIronDoor, boolean closeDoor) {
+        super(controllableEntity, searchForIronDoor);
+        this.closeDoor = closeDoor;
     }
 
     @Override
     public String getDefaultKey() {
         return "Open Door";
+    }
+
+    @Override
+    public boolean shouldContinue() {
+        return this.closeDoor && this.closeTicks > 0 && super.shouldContinue();
+    }
+
+    @Override
+    public void start() {
+        this.closeTicks = 20;
+        this.door.setDoor(this.getHandle().world, this.pointX, this.pointY, this.pointZ, true);
+    }
+
+    @Override
+    public void finish() {
+        if (this.closeDoor) {
+            this.door.setDoor(this.getHandle().world, this.pointX, this.pointY, this.pointZ, false);
+        }
+    }
+
+    @Override
+    public void tick() {
+        --this.closeTicks;
+        super.tick();
     }
 }

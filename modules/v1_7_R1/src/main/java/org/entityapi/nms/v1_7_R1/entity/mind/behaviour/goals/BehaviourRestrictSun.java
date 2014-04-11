@@ -19,6 +19,7 @@ package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.mind.behaviour.BehaviourType;
+import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
 
 public class BehaviourRestrictSun extends BehaviourBase {
@@ -39,7 +40,17 @@ public class BehaviourRestrictSun extends BehaviourBase {
 
     @Override
     public boolean shouldStart() {
-        return false;
+        return this.getHandle().world.v();
+    }
+
+    @Override
+    public void start() {
+        NMSEntityUtil.getNavigation(this.getHandle()).d(true);
+    }
+
+    @Override
+    public void finish() {
+        NMSEntityUtil.getNavigation(this.getHandle()).d(false);
     }
 
     @Override

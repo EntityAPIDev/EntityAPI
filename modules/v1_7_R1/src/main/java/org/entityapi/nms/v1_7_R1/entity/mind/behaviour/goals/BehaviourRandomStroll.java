@@ -17,11 +17,19 @@
 
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
+import net.minecraft.server.v1_7_R1.Vec3D;
+import org.bukkit.Location;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.mind.behaviour.BehaviourType;
+import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
+import org.entityapi.nms.v1_7_R1.RandomPositionGenerator;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
 
 public class BehaviourRandomStroll extends BehaviourBase {
+
+    private double randX;
+    private double randY;
+    private double randZ;
 
     public BehaviourRandomStroll(ControllableEntity controllableEntity) {
         super(controllableEntity);
@@ -39,7 +47,32 @@ public class BehaviourRandomStroll extends BehaviourBase {
 
     @Override
     public boolean shouldStart() {
-        return false;
+        if (this.getHandle().aN() >= 100) {
+            return false;
+        } else if (this.getHandle().aI().nextInt(120) != 0) {
+            return false;
+        } else {
+            Vec3D vec3d = RandomPositionGenerator.a(this.getHandle(), 10, 7);
+
+            if (vec3d == null) {
+                return false;
+            } else {
+                this.randX = vec3d.c;
+                this.randY = vec3d.d;
+                this.randZ = vec3d.e;
+                return true;
+            }
+        }
+    }
+
+    @Override
+    public boolean shouldContinue() {
+        return !NMSEntityUtil.getNavigation(this.getHandle()).g();
+    }
+
+    @Override
+    public void start() {
+        this.getControllableEntity().navigateTo(new Location(this.getHandle().world.getWorld(), this.randX, this.randY, this.randZ));
     }
 
     @Override

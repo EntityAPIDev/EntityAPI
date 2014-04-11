@@ -38,8 +38,8 @@ Behaviour Goals to Implement
 * EatTile (7) -> Change to EatGrass, cause apparently, this is all that this one achieves.
 * FleeSun (1)
 * Float (4)
-* FollowParent (0) -> Treats the ‘parent’ as the closest adult entity of the same type
 * *FollowExact (3) -> Similar to FollowParent, but follows a specific entity instance*
+* FollowParent (0) -> Treats the ‘parent’ as the closest adult entity of the same type
 * FollowOwner (3) -> Change to FollowTamer
 * HurtByTarget (1) **(extends GoalTarget)**
 * Interact (3) **(extends LookAtPlayer)** -> Same functionality as LookAtPlayer, except it is compatible with different behaviours
@@ -51,11 +51,16 @@ Behaviour Goals to Implement
 * MeleeAttack (3)
 * MoveIndoors (1)
 * MoveThroughVillage (1)
-* MoveTowardsRestriction (1)
 * NearestAttackableTarget (1) **(extends Target)** -> Change to MoveTowardsNearestAttackableTarget. Looks like we need to implement Entity Selector interfaces.
+* OpenDoor **(extends DoorInteract)**
 * OwnerHurtByTarget (1) **(extends Target)** -> Change to DefendTamer
 * OwnerHurtTarget (1) **(extends Target)** -> Change to TamerHurtTarget
 * Panic (1)
+* RandomLookaround (3) -> Change to LookAtRandom
+* RandomStroll (1)
+* RandomTargetNonTamed **(extends NearestAttackableTarget)**
+* RestrictOpenDoor (0)
+* RestrictSun (0)
 * Sit (5)
 * Swell (1)
 * TakeFlower (3) -> Not just Villagers should be able to take flowers
@@ -67,14 +72,9 @@ Behaviour Goals to Implement
 **To be Implemented:**
 
 * MoveTowardsTarget (1)
+* MoveTowardsRestriction (1)
 * *MoveTowardsLocation (1) -> Removed when it’s finished implementing (A way to do this needs to be added)*
 * OcelotAttack (3)
 * OfferFlower (3) -> Instead of just offering it to villagers, allow the iron golem to give it to all entity types (change constructor)
-* OpenDoor **(extends DoorInteract)**
 * PassengerCarrotStick (7) -> Change to FollowCarrotStick
 * Play (1) -> wut. Didn’t know this existed. Change to VillagerPlay
-* RandomLookaround (3) -> Change to LookAtRandom
-* RandomStroll (1)
-* RandomTargetNonTamed **(extends NearestAttackableTarget)**
-* RestrictOpenDoor (0)
-* RestrictSun (0)

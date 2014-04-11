@@ -17,7 +17,11 @@
 
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
+import net.minecraft.server.v1_7_R1.EntityLiving;
+import net.minecraft.server.v1_7_R1.EntityTameableAnimal;
+import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.entityapi.api.ControllableEntity;
+import org.entityapi.api.mind.attribute.TamingAttribute;
 
 public class BehaviourRandomTargetNonTamed extends BehaviourMoveTowardsNearestAttackableTarget {
 
@@ -25,8 +29,35 @@ public class BehaviourRandomTargetNonTamed extends BehaviourMoveTowardsNearestAt
         super(controllableEntity, classToTarget, chance, checkSenses);
     }
 
+    private boolean isTamed() {
+        if (this.getHandle() instanceof EntityTameableAnimal) {
+            return ((EntityTameableAnimal) this.getHandle()).isTamed();
+        }
+        TamingAttribute tamingAttribute = this.getControllableEntity().getMind().getAttribute(TamingAttribute.class);
+        if (tamingAttribute != null) {
+            return tamingAttribute.isTamed();
+        }
+        return false;
+    }
+
+    private EntityLiving getTamer() {
+        if (this.getHandle() instanceof EntityTameableAnimal) {
+            return ((EntityTameableAnimal) this.getHandle()).getOwner();
+        }
+        TamingAttribute tamingAttribute = this.getControllableEntity().getMind().getAttribute(TamingAttribute.class);
+        if (tamingAttribute != null) {
+            return ((CraftLivingEntity) tamingAttribute.getTamer()).getHandle();
+        }
+        return null;
+    }
+
     @Override
     public String getDefaultKey() {
         return "Random Target Non Tamed";
+    }
+
+    @Override
+    public boolean shouldStart() {
+        return !this.isTamed() && super.shouldStart();
     }
 }

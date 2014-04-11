@@ -19,9 +19,14 @@ package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.mind.behaviour.BehaviourType;
+import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
 
 public class BehaviourLookAtRandom extends BehaviourBase {
+
+    private double xDiff;
+    private double yDiff;
+    private int lookTicks;
 
     public BehaviourLookAtRandom(ControllableEntity controllableEntity) {
         super(controllableEntity);
@@ -39,11 +44,26 @@ public class BehaviourLookAtRandom extends BehaviourBase {
 
     @Override
     public boolean shouldStart() {
-        return false;
+        return this.getHandle().aI().nextFloat() < 0.02F;
+    }
+
+    @Override
+    public boolean shouldContinue() {
+        return this.lookTicks >= 0;
+    }
+
+    @Override
+    public void start() {
+        double d0 = 6.283185307179586D * this.getHandle().aI().nextDouble();
+
+        this.xDiff = Math.cos(d0);
+        this.yDiff = Math.sin(d0);
+        this.lookTicks = 20 + this.getHandle().aI().nextInt(20);
     }
 
     @Override
     public void tick() {
-
+        --this.lookTicks;
+        NMSEntityUtil.getControllerLook(this.getHandle()).a(this.getHandle().locX + this.xDiff, this.getHandle().locY + (double) this.getHandle().getHeadHeight(), this.getHandle().locZ + this.yDiff, 10.0F, (float) NMSEntityUtil.getMaxHeadRotation(this.getHandle()));
     }
 }

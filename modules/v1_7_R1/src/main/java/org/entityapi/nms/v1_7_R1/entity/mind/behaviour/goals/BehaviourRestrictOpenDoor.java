@@ -17,11 +17,17 @@
 
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
+import net.minecraft.server.v1_7_R1.MathHelper;
+import net.minecraft.server.v1_7_R1.Village;
+import net.minecraft.server.v1_7_R1.VillageDoor;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.mind.behaviour.BehaviourType;
+import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
 
 public class BehaviourRestrictOpenDoor extends BehaviourBase {
+
+    private VillageDoor door;
 
     public BehaviourRestrictOpenDoor(ControllableEntity controllableEntity) {
         super(controllableEntity);
@@ -39,11 +45,40 @@ public class BehaviourRestrictOpenDoor extends BehaviourBase {
 
     @Override
     public boolean shouldStart() {
-        return false;
+        if (this.getHandle().world.v()) {
+            return false;
+        } else {
+            Village closestVillage = this.getHandle().world.villages.getClosestVillage(MathHelper.floor(this.getHandle().locX), MathHelper.floor(this.getHandle().locY), MathHelper.floor(this.getHandle().locZ), 16);
+
+            if (closestVillage == null) {
+                return false;
+            } else {
+                this.door = closestVillage.b(MathHelper.floor(this.getHandle().locX), MathHelper.floor(this.getHandle().locY), MathHelper.floor(this.getHandle().locZ));
+                return this.door == null ? false : (double) this.door.c(MathHelper.floor(this.getHandle().locX), MathHelper.floor(this.getHandle().locY), MathHelper.floor(this.getHandle().locZ)) < 2.25D;
+            }
+        }
+    }
+
+    @Override
+    public boolean shouldContinue() {
+        return this.getHandle().world.v() ? false : !this.door.removed && this.door.a(MathHelper.floor(this.getHandle().locX), MathHelper.floor(this.getHandle().locZ));
+    }
+
+    @Override
+    public void start() {
+        NMSEntityUtil.getNavigation(this.getHandle()).b(false);
+        NMSEntityUtil.getNavigation(this.getHandle()).c(false);
+    }
+
+    @Override
+    public void finish() {
+        NMSEntityUtil.getNavigation(this.getHandle()).b(true);
+        NMSEntityUtil.getNavigation(this.getHandle()).c(true);
+        this.door = null;
     }
 
     @Override
     public void tick() {
-
+        this.door.e();
     }
 }
