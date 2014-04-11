@@ -23,8 +23,13 @@ import org.bukkit.entity.LivingEntity;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.IBasicEntityUtil;
 import org.entityapi.api.ProjectileType;
+import org.entityapi.api.plugin.EntityAPI;
 
 public class BasicEntityUtil implements IBasicEntityUtil {
+
+    public static BasicEntityUtil getInstance() {
+        return (BasicEntityUtil) EntityAPI.getBasicEntityUtil();
+    }
 
     @Override
     public EntityLiving getHandle(ControllableEntity controllableEntity) {

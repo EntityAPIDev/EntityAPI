@@ -29,9 +29,11 @@ import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntityManager;
 import org.entityapi.api.EntitySound;
 import org.entityapi.api.events.ControllableEntityPreSpawnEvent;
-import org.entityapi.api.mind.Behaviour;
+import org.entityapi.api.mind.behaviour.Behaviour;
 import org.entityapi.api.mind.Mind;
+import org.entityapi.api.mind.attribute.RideControlAttribute;
 import org.entityapi.api.plugin.EntityAPI;
+import org.entityapi.nms.v1_7_R1.entity.mind.attribute.RideControlAttributeBase;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -303,6 +305,15 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends E
     }
 
     @Override
+    public boolean navigateTo(Location to) {
+        if (to == null) {
+            return false;
+        }
+        PathEntity path = this.handle.world.a(this.handle, MathHelper.floor(to.getX()), MathHelper.f(to.getY()), MathHelper.floor(to.getZ()), (float) this.getPathfindingRange(), true, false, false, true);
+        return this.navigateTo(path, this.getSpeed());
+    }
+
+    @Override
     public boolean navigateTo(Location to, double speed) {
         if (to == null) {
             return false;
@@ -311,7 +322,14 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends E
         return this.navigateTo(path, speed);
     }
 
-    private boolean navigateTo(PathEntity path, double speed) {
+    public boolean navigateTo(PathEntity path) {
+        if (!(this.handle instanceof EntityInsentient) || path == null) {
+            return false;
+        }
+        return ((EntityInsentient) this.handle).getNavigation().a(path, this.getSpeed());
+    }
+
+    public boolean navigateTo(PathEntity path, double speed) {
         if (!(this.handle instanceof EntityInsentient) || path == null) {
             return false;
         }
@@ -357,5 +375,55 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends E
 
     public Map<Behaviour, Integer> getDefaultBehaviours() {
         return new HashMap<>();
+    }
+
+    @Override
+    public boolean isStationary() {
+        return this.getMind().isStationary();
+    }
+
+    @Override
+    public void setStationary(boolean flag) {
+        this.getMind().setStationary(flag);
+        this.getMind().setFixedYaw(this.getBukkitEntity().getLocation().getYaw());
+        this.getMind().setFixedHeadYaw(this.handle.aP);
+        this.getMind().setFixedPitch(this.getBukkitEntity().getLocation().getPitch());
+    }
+
+    @Override
+    public void setYaw(float value) {
+        if (this.getMind().isStationary()) {
+            this.getMind().setFixedYaw(value);
+        }
+        this.handle.yaw = value;
+        this.handle.aO = value;
+    }
+
+    @Override
+    public void setHeadYaw(float value) {
+        if (this.getMind().isStationary()) {
+            this.getMind().setFixedHeadYaw(value);
+        }
+        this.handle.aP = value;
+        this.handle.aQ = value;
+        this.handle.aN = value;
+    }
+
+    @Override
+    public void setPitch(float value) {
+        if (this.getMind().isStationary()) {
+            this.getMind().setFixedPitch(value);
+        }
+        this.handle.pitch = value;
+    }
+
+    @Override
+    public boolean isControllableRiding() {
+        return this.getMind().hasAttribute(RideControlAttribute.class);
+    }
+
+    @Override
+    public void setControllableRiding(boolean flag) {
+        this.getMind().addAttribute(new RideControlAttributeBase(this.getMind()));
     }
 }

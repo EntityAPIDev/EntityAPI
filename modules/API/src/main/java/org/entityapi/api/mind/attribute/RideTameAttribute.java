@@ -15,35 +15,38 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
+package org.entityapi.api.mind.attribute;
 
-import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.mind.BehaviourType;
-import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
+import org.entityapi.api.mind.Mind;
 
-public class BehaviourFollowOwner extends BehaviourBase {
+public class RideTameAttribute extends Attribute {
 
-    public BehaviourFollowOwner(ControllableEntity controllableEntity) {
-        super(controllableEntity);
+    private int temper;
+    private boolean rideable;
+
+    public RideTameAttribute(Mind mind) {
+        super(mind);
     }
 
     @Override
-    public BehaviourType getType() {
-        return BehaviourType.THREE;
+    public String getKey() {
+        return "Ride Tame";
     }
 
-    @Override
-    public String getDefaultKey() {
-        return "Follow Owner";
+    public void increaseSuccessChance(int amount) {
+        int temper = this.getTemper() + amount;
+        this.temper = this.getTemper() + temper < 0 ? 0 : (temper > this.getMaxDomestication() ? this.getMaxDomestication() : temper);
     }
 
-    @Override
-    public boolean shouldStart() {
-        return false;
+    public int getTemper() {
+        return temper;
     }
 
-    @Override
-    public void tick() {
+    public int getMaxDomestication() {
+        return 100;
+    }
 
+    public boolean isRideable() {
+        return rideable;
     }
 }

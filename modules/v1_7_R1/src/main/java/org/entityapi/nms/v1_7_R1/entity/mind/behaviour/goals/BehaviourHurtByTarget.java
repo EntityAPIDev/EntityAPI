@@ -21,7 +21,7 @@ import net.minecraft.server.v1_7_R1.AxisAlignedBB;
 import net.minecraft.server.v1_7_R1.EntityCreature;
 import org.bukkit.entity.LivingEntity;
 import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.mind.BehaviourType;
+import org.entityapi.api.mind.behaviour.BehaviourType;
 
 import java.util.Iterator;
 import java.util.List;
@@ -32,11 +32,7 @@ public class BehaviourHurtByTarget extends BehaviourTarget {
     private int lastAttackTick;
 
     public BehaviourHurtByTarget(ControllableEntity controllableEntity, boolean attackNearest) {
-        this(controllableEntity, false, false, attackNearest);
-    }
-
-    public BehaviourHurtByTarget(ControllableEntity controllableEntity, boolean checkSenses, boolean useMelee, boolean attackNearest) {
-        super(controllableEntity, checkSenses, useMelee);
+        super(controllableEntity, false);
         this.attackNearest = attackNearest;
     }
 

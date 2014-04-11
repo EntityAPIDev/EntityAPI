@@ -15,23 +15,25 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.mind;
+package org.entityapi.api.mind.behaviour;
 
-public class BehaviourItem {
+public enum BehaviourType {
 
-    private Behaviour behaviour;
-    private int priority;
+    ZERO,
+    ONE,
+    TWO,
+    THREE,
+    FOUR,
+    FIVE,
+    SIX,
+    SEVEN;
 
-    public BehaviourItem(Behaviour behaviour, int priority) {
-        this.behaviour = behaviour;
-        this.priority = priority;
-    }
+    // NMS Goals have stored integers to check compatibility -> goal.j()
+    // This enum is used to compare these goals easily and more friendly
 
-    public Behaviour getBehaviour() {
-        return behaviour;
-    }
+    ;
 
-    public int getPriority() {
-        return priority;
+    public boolean isCompatibleWith(BehaviourType type) {
+        return (this.ordinal() & type.ordinal()) == 0;
     }
 }

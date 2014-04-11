@@ -21,7 +21,7 @@ import org.bukkit.Location;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntityManager;
-import org.entityapi.api.mind.Behaviour;
+import org.entityapi.api.mind.behaviour.Behaviour;
 import org.entityapi.api.mind.Mind;
 import org.entityapi.api.reflection.SafeConstructor;
 import org.entityapi.exceptions.ControllableEntitySpawnException;

@@ -15,34 +15,21 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
+package org.entityapi.api.mind.behaviour;
 
-import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.mind.BehaviourType;
+public interface IBehaviourSelector {
 
-public class BehaviourOwnerHurtTarget extends BehaviourTarget {
+    public abstract void addBehaviour(Behaviour behaviour, int priority);
 
-    public BehaviourOwnerHurtTarget(ControllableEntity controllableEntity, boolean checkSenses) {
-        super(controllableEntity, checkSenses);
-    }
+    public abstract void addBehaviour(String key, Behaviour behaviour, int priority);
 
-    @Override
-    public BehaviourType getType() {
-        return BehaviourType.ONE;
-    }
+    public void addAndReplaceBehaviour(String key, Behaviour behaviour, int priority);
 
-    @Override
-    public String getDefaultKey() {
-        return "Owner Hurt Target";
-    }
+    public abstract void removeBehaviour(Behaviour behaviour);
 
-    @Override
-    public boolean shouldStart() {
-        return false;
-    }
+    public abstract void removeBehaviour(String key);
 
-    @Override
-    public void tick() {
+    public abstract void clearBehaviours();
 
-    }
+    public abstract Behaviour getBehaviour(String key);
 }

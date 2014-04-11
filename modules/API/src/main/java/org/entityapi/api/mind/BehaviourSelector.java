@@ -18,6 +18,9 @@
 package org.entityapi.api.mind;
 
 import org.entityapi.api.ControllableEntity;
+import org.entityapi.api.mind.behaviour.Behaviour;
+import org.entityapi.api.mind.behaviour.BehaviourItem;
+import org.entityapi.api.mind.behaviour.IBehaviourSelector;
 
 import java.util.ArrayList;
 import java.util.HashMap;

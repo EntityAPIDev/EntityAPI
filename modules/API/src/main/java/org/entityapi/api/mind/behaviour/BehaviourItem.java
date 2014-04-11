@@ -15,35 +15,23 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
+package org.entityapi.api.mind.behaviour;
 
-import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.mind.BehaviourType;
-import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
+public class BehaviourItem {
 
-public class BehaviourMeleeAttack extends BehaviourBase {
+    private Behaviour behaviour;
+    private int priority;
 
-    public BehaviourMeleeAttack(ControllableEntity controllableEntity) {
-        super(controllableEntity);
+    public BehaviourItem(Behaviour behaviour, int priority) {
+        this.behaviour = behaviour;
+        this.priority = priority;
     }
 
-    @Override
-    public BehaviourType getType() {
-        return BehaviourType.THREE;
+    public Behaviour getBehaviour() {
+        return behaviour;
     }
 
-    @Override
-    public String getDefaultKey() {
-        return "Melee Attack";
-    }
-
-    @Override
-    public boolean shouldStart() {
-        return false;
-    }
-
-    @Override
-    public void tick() {
-
+    public int getPriority() {
+        return priority;
     }
 }

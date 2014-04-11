@@ -17,14 +17,31 @@
 
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
+import net.minecraft.server.v1_7_R1.EntityLiving;
+import net.minecraft.server.v1_7_R1.EntityTameableAnimal;
+import org.bukkit.entity.Animals;
 import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.mind.BehaviourType;
+import org.entityapi.api.mind.behaviour.BehaviourType;
+import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
+import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
 
 public class BehaviourSit extends BehaviourBase {
 
-    public BehaviourSit(ControllableEntity controllableEntity) {
+    private boolean willSit;
+
+    public BehaviourSit(ControllableEntity<Animals> controllableEntity) {
         super(controllableEntity);
+    }
+
+    @Override
+    public ControllableEntity<Animals> getControllableEntity() {
+        return super.getControllableEntity();
+    }
+
+    @Override
+    public EntityTameableAnimal getHandle() {
+        return (EntityTameableAnimal) BasicEntityUtil.getInstance().getHandle(this.getControllableEntity());
     }
 
     @Override
@@ -39,7 +56,32 @@ public class BehaviourSit extends BehaviourBase {
 
     @Override
     public boolean shouldStart() {
-        return false;
+        if (!this.getHandle().isTamed()) {
+            return this.willSit && this.getHandle().getGoalTarget() == null; // CraftBukkit - Allow sitting for wild animals
+        } else if (this.getHandle().M()) {
+            return false;
+        } else if (!this.getHandle().onGround) {
+            return false;
+        } else {
+            EntityLiving owner = this.getHandle().getOwner();
+
+            return owner == null ? true : (this.getHandle().e(owner) < 144.0D && owner.getLastDamager() != null ? false : this.willSit);
+        }
+    }
+
+    @Override
+    public void start() {
+        NMSEntityUtil.getNavigation(this.getHandle()).h();
+        this.getHandle().setSitting(true);
+    }
+
+    @Override
+    public void finish() {
+        this.getHandle().setSitting(false);
+    }
+
+    public void setSitting(boolean flag) {
+        this.willSit = flag;
     }
 
     @Override

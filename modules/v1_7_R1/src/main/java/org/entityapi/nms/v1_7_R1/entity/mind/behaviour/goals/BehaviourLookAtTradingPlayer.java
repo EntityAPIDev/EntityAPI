@@ -18,8 +18,13 @@
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
 import net.minecraft.server.v1_7_R1.EntityVillager;
+import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
 import org.entityapi.api.ControllableEntity;
+import org.entityapi.api.mind.attribute.TradingAttribute;
+
+import java.util.List;
 
 public class BehaviourLookAtTradingPlayer extends BehaviourLookAtNearestEntity {
 
@@ -44,7 +49,13 @@ public class BehaviourLookAtTradingPlayer extends BehaviourLookAtNearestEntity {
                 return true;
             } else return false;
         } else {
-            // TODO: Trading Attribute
+            TradingAttribute tradingAttribute = this.getControllableEntity().getMind().getAttribute(TradingAttribute.class);
+            if (tradingAttribute != null) {
+                List<Player> tradingPlayers = tradingAttribute.getTradingPlayers();
+                if (tradingPlayers.size() != 0) {
+                    this.target = ((CraftLivingEntity) tradingPlayers.get(tradingPlayers.size() - 1)).getHandle();
+                }
+            }
         }
         return false;
     }

@@ -94,7 +94,23 @@ public abstract interface ControllableEntity<T extends LivingEntity> extends Nam
 
     public boolean navigateTo(LivingEntity livingEntity, double speed);
 
+    public boolean navigateTo(Location to);
+
     public boolean navigateTo(Location to, double speed);
 
     public void setDefaultBehaviours();
+
+    public boolean isStationary();
+
+    public void setStationary(boolean flag);
+
+    public void setYaw(float value);
+
+    public void setHeadYaw(float value);
+
+    public void setPitch(float value);
+
+    public boolean isControllableRiding();
+
+    public void setControllableRiding(boolean flag);
 }

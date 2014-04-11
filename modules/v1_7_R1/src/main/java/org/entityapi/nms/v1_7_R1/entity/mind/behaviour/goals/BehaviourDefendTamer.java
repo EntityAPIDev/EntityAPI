@@ -19,21 +19,19 @@ package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import net.minecraft.server.v1_7_R1.EntityTameableAnimal;
+import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
 import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.mind.BehaviourType;
+import org.entityapi.api.mind.attribute.TamingAttribute;
+import org.entityapi.api.mind.behaviour.BehaviourType;
 
-public class BehaviourDefendOwner extends BehaviourTarget {
+public class BehaviourDefendTamer extends BehaviourTarget {
 
     private EntityLiving target;
     private int lastAttackTick;
 
-    public BehaviourDefendOwner(ControllableEntity controllableEntity) {
-        this(controllableEntity, false, false);
-    }
-
-    public BehaviourDefendOwner(ControllableEntity controllableEntity, boolean checkSenses, boolean useMelee) {
-        super(controllableEntity, checkSenses, useMelee);
+    public BehaviourDefendTamer(ControllableEntity controllableEntity) {
+        super(controllableEntity, false);
     }
 
     @Override
@@ -43,33 +41,43 @@ public class BehaviourDefendOwner extends BehaviourTarget {
 
     @Override
     public String getDefaultKey() {
-        return "Owner Hurt By Target";
+        return "Defend Tamer";
     }
 
     private boolean isTamed() {
         if (this.getHandle() instanceof EntityTameableAnimal) {
             return ((EntityTameableAnimal) this.getHandle()).isTamed();
         }
+        TamingAttribute tamingAttribute = this.getControllableEntity().getMind().getAttribute(TamingAttribute.class);
+        if (tamingAttribute != null) {
+            return tamingAttribute.isTamed();
+        }
         return false;
     }
 
-    private EntityLiving getOwner() {
-        return null; // TODO!!!
+    private EntityLiving getTamer() {
+        if (this.getHandle() instanceof EntityTameableAnimal) {
+            return ((EntityTameableAnimal) this.getHandle()).getOwner();
+        }
+        TamingAttribute tamingAttribute = this.getControllableEntity().getMind().getAttribute(TamingAttribute.class);
+        if (tamingAttribute != null) {
+            return ((CraftLivingEntity) tamingAttribute.getTamer()).getHandle();
+        }
+        return null;
     }
 
     @Override
     public boolean shouldStart() {
-        // TODO: Taming Attribute
         if (!this.isTamed()) {
             return false;
         } else {
-            EntityLiving owner = this.getOwner();
+            EntityLiving tamer = this.getTamer();
 
-            if (owner == null) {
+            if (tamer == null) {
                 return false;
             } else {
-                this.target = owner.getLastDamager();
-                int lastAttackTick = owner.aK();
+                this.target = tamer.getLastDamager();
+                int lastAttackTick = tamer.aK();
 
                 return lastAttackTick != this.lastAttackTick && this.isSuitableTarget(this.target, false);
             }
@@ -80,9 +88,9 @@ public class BehaviourDefendOwner extends BehaviourTarget {
     public void tick() {
         this.getControllableEntity().setTarget((LivingEntity) this.target.getBukkitEntity());
 
-        EntityLiving owner = this.getOwner();
-        if (owner != null) {
-            this.lastAttackTick = owner.aK();
+        EntityLiving tamer = this.getTamer();
+        if (tamer != null) {
+            this.lastAttackTick = tamer.aK();
         }
 
         super.tick();

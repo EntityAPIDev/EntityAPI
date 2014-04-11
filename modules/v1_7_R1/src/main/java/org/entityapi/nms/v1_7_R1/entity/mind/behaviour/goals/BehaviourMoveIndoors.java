@@ -17,11 +17,21 @@
 
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
+import net.minecraft.server.v1_7_R1.MathHelper;
+import net.minecraft.server.v1_7_R1.Vec3D;
+import net.minecraft.server.v1_7_R1.Village;
+import net.minecraft.server.v1_7_R1.VillageDoor;
 import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.mind.BehaviourType;
+import org.entityapi.api.mind.behaviour.BehaviourType;
+import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
+import org.entityapi.nms.v1_7_R1.RandomPositionGenerator;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
 
 public class BehaviourMoveIndoors extends BehaviourBase {
+
+    private VillageDoor villageDoor;
+    private int indoorsX = -1;
+    private int indoorsZ = -1;
 
     public BehaviourMoveIndoors(ControllableEntity controllableEntity) {
         super(controllableEntity);
@@ -39,7 +49,54 @@ public class BehaviourMoveIndoors extends BehaviourBase {
 
     @Override
     public boolean shouldStart() {
-        return false;
+        int locX = MathHelper.floor(this.getHandle().locX);
+        int locY = MathHelper.floor(this.getHandle().locY);
+        int locZ = MathHelper.floor(this.getHandle().locZ);
+
+        if ((!this.getHandle().world.v() || this.getHandle().world.P() || !this.getHandle().world.getBiome(locX, locZ).e()) && !this.getHandle().world.worldProvider.g) {
+            if (this.getHandle().aI().nextInt(50) != 0) {
+                return false;
+            } else if (this.indoorsX != -1 && this.getHandle().e((double) this.indoorsX, this.getHandle().locY, (double) this.indoorsZ) < 4.0D) {
+                return false;
+            } else {
+                Village village = this.getHandle().world.villages.getClosestVillage(locX, locY, locZ, 14);
+
+                if (village == null) {
+                    return false;
+                } else {
+                    this.villageDoor = village.c(locX, locY, locZ);
+                    return this.villageDoor != null;
+                }
+            }
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean shouldContinue() {
+        return !NMSEntityUtil.getNavigation(this.getHandle()).g();
+    }
+
+    @Override
+    public void start() {
+        this.indoorsX = -1;
+        if (this.getHandle().e((double) this.villageDoor.getIndoorsX(), (double) this.villageDoor.locY, (double) this.villageDoor.getIndoorsZ()) > 256.0D) {
+            Vec3D vec3d = RandomPositionGenerator.a(this.getHandle(), 14, 3, this.getHandle().world.getVec3DPool().create((double) this.villageDoor.getIndoorsX() + 0.5D, (double) this.villageDoor.getIndoorsY(), (double) this.villageDoor.getIndoorsZ() + 0.5D));
+
+            if (vec3d != null) {
+                NMSEntityUtil.getNavigation(this.getHandle()).a(vec3d.c, vec3d.d, vec3d.e, 1.0D);
+            }
+        } else {
+            NMSEntityUtil.getNavigation(this.getHandle()).a((double) this.villageDoor.getIndoorsX() + 0.5D, (double) this.villageDoor.getIndoorsY(), (double) this.villageDoor.getIndoorsZ() + 0.5D, 1.0D);
+        }
+    }
+
+    @Override
+    public void finish() {
+        this.indoorsX = this.villageDoor.getIndoorsX();
+        this.indoorsZ = this.villageDoor.getIndoorsZ();
+        this.villageDoor = null;
     }
 
     @Override

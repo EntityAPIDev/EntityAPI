@@ -23,18 +23,14 @@ import net.minecraft.server.v1_7_R1.MathHelper;
 import net.minecraft.server.v1_7_R1.Village;
 import org.bukkit.entity.LivingEntity;
 import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.mind.BehaviourType;
+import org.entityapi.api.mind.behaviour.BehaviourType;
 
 public class BehaviourDefendVillage extends BehaviourTarget {
 
     private EntityLiving target;
 
     public BehaviourDefendVillage(ControllableEntity controllableEntity) {
-        this(controllableEntity, false, true);
-    }
-
-    public BehaviourDefendVillage(ControllableEntity controllableEntity, boolean checkSenses, boolean useMelee) {
-        super(controllableEntity, checkSenses, useMelee);
+        super(controllableEntity, false, true);
     }
 
     @Override

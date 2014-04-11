@@ -15,35 +15,32 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
+package org.entityapi.api.mind.attribute;
 
-import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.mind.BehaviourType;
-import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
+import org.entityapi.api.mind.Mind;
 
-public class BehaviourTempt extends BehaviourBase {
+public abstract class RideControlAttribute extends Attribute {
 
-    public BehaviourTempt(ControllableEntity controllableEntity) {
-        super(controllableEntity);
+    protected RideControlAttribute(Mind mind) {
+        super(mind);
     }
 
     @Override
-    public BehaviourType getType() {
-        return BehaviourType.THREE;
+    public String getKey() {
+        return "Ride";
     }
 
-    @Override
-    public String getDefaultKey() {
-        return "Tempt";
-    }
+    public abstract void onRide(float[] motion);
 
-    @Override
-    public boolean shouldStart() {
-        return false;
-    }
+    public abstract boolean canFly();
 
-    @Override
-    public void tick() {
+    public abstract void setCanFly(boolean flag);
 
-    }
+    public abstract boolean isJumpingEnabled();
+
+    public abstract void setJumpingEnabled(boolean flag);
+
+    public abstract boolean isVehicleMotionOverriden();
+
+    public abstract void setVehicleMotionOverriden(boolean flag);
 }

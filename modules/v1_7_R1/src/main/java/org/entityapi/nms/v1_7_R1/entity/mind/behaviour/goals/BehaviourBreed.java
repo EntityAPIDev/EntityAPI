@@ -23,7 +23,7 @@ import org.bukkit.entity.Animals;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.events.ControllableEntityBreedEvent;
 import org.entityapi.api.events.ControllableEntityPreBreedEvent;
-import org.entityapi.api.mind.BehaviourType;
+import org.entityapi.api.mind.behaviour.BehaviourType;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
@@ -41,7 +41,7 @@ public class BehaviourBreed extends BehaviourBase {
 
     public BehaviourBreed(ControllableEntity<Animals> controllableEntity) {
         super(controllableEntity);
-        this.handle = (EntityAnimal) ((BasicEntityUtil) EntityAPI.getBasicEntityUtil()).getHandle(this.getControllableEntity());
+        this.handle = (EntityAnimal) BasicEntityUtil.getInstance().getHandle(this.getControllableEntity());
     }
 
     @Override

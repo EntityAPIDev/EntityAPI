@@ -278,6 +278,21 @@ public class Constants {
         }
     }
 
+    public static enum Entity {
+
+        JUMP("bd");
+
+        private String v1_7_R1;
+
+        Entity(String v1_7_R1) {
+            this.v1_7_R1 = v1_7_R1;
+        }
+
+        public String get() {
+            return new SafeField<String>(this.getClass(), ReflectionUtil.getServerVersion()).get(this);
+        }
+    }
+
     public static enum Server {
 
         CRAFBUKKIT_ROOT("org.bukkit.craftbukkit"),

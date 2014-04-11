@@ -18,25 +18,24 @@
 package org.entityapi.nms.v1_7_R1.entity.mind.attribute;
 
 import net.minecraft.server.v1_7_R1.EntityLiving;
-import org.entityapi.api.mind.Attribute;
+import org.entityapi.api.internal.Constants;
 import org.entityapi.api.mind.Mind;
-import org.entityapi.api.plugin.EntityAPI;
+import org.entityapi.api.mind.attribute.RideControlAttribute;
+import org.entityapi.api.reflection.SafeField;
 import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
 
-import java.lang.reflect.Field;
-
-public class RideAttribute extends Attribute {
+public class RideControlAttributeBase extends RideControlAttribute {
 
     private boolean vehicleMotionOverriden;
     private boolean jumpingEnabled;
     private boolean canFly;
 
-    public RideAttribute(Mind mind) {
+    public RideControlAttributeBase(Mind mind) {
         super(mind);
     }
 
     public void onRide(float[] motion) {
-        EntityLiving entity = ((BasicEntityUtil) EntityAPI.getBasicEntityUtil()).getHandle(this.getControllableEntity());
+        EntityLiving entity = BasicEntityUtil.getInstance().getHandle(this.getControllableEntity());
         if (entity.passenger == null) {
             return;
         }
@@ -53,14 +52,7 @@ public class RideAttribute extends Attribute {
             motion[2] = ((EntityLiving) entity.passenger).bf;
         }
 
-        boolean jumping = false;
-        try {
-            Field field_isJumping = EntityLiving.class.getDeclaredField("bd");
-            field_isJumping.setAccessible(true);
-            jumping = field_isJumping.getBoolean(entity);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        boolean jumping = new SafeField<Boolean>(EntityLiving.class, Constants.Entity.JUMP.get()).get(entity);
         if (this.canFly()) {
             if (jumping) {
                 motion[1] = 0.5F;
@@ -96,10 +88,5 @@ public class RideAttribute extends Attribute {
 
     public void setVehicleMotionOverriden(boolean flag) {
         this.vehicleMotionOverriden = flag;
-    }
-
-    @Override
-    public String getKey() {
-        return "RIDE";
     }
 }

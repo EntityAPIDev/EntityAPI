@@ -15,23 +15,30 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.mind;
+package org.entityapi.api.mind.attribute;
 
-public interface Behaviour {
+import org.entityapi.api.ControllableEntity;
+import org.entityapi.api.mind.Mind;
 
-    public abstract BehaviourType getType();
+public abstract class Attribute {
 
-    public abstract String getDefaultKey();
+    protected Mind mind;
 
-    public abstract boolean shouldStart();
+    public Attribute(Mind mind) {
+        this.mind = mind;
+    }
 
-    public boolean shouldContinue();
+    public Mind getMind() {
+        return mind;
+    }
 
-    public void start();
+    public ControllableEntity getControllableEntity() {
+        return this.mind.getControllableEntity();
+    }
 
-    public void finish();
+    public abstract String getKey();
 
-    public boolean isContinuous();
+    public void tick() {
 
-    public void tick();
+    }
 }

@@ -40,29 +40,37 @@ Behaviour Goals to Implement
 * Float (4)
 * FollowParent (0) -> Treats the ‘parent’ as the closest adult entity of the same type
 * *FollowExact (3) -> Similar to FollowParent, but follows a specific entity instance*
+* FollowOwner (3) -> Change to FollowTamer
 * HurtByTarget (1) **(extends GoalTarget)**
 * Interact (3) **(extends LookAtPlayer)** -> Same functionality as LookAtPlayer, except it is compatible with different behaviours
-* LookAtPlayer (2) -> Change to LookAtNearestEntity, as this is what this class actually does
-* MakeLove (3) -> how cute
-* NearestAttackableTarget (1) **(extends Target)** -> Change to MoveTowardsNearestAttackableTarget. Looks like we need to implement Entity Selector interfaces.
-* Panic (1)
-* Swell (1)
-* Target (0)
-
-**To be Implemented:**
-
 * JumpOnBlock (5) -> Change to SitOnBlock to match “Sit” goal
 * LeapAtTarget (5)
+* LookAtPlayer (2) -> Change to LookAtNearestEntity, as this is what this class actually does
+* LookAtTradingPlayer **(extends LookAtPlayer)**
+* MakeLove (3) -> how cute
 * MeleeAttack (3)
 * MoveIndoors (1)
 * MoveThroughVillage (1)
 * MoveTowardsRestriction (1)
+* NearestAttackableTarget (1) **(extends Target)** -> Change to MoveTowardsNearestAttackableTarget. Looks like we need to implement Entity Selector interfaces.
+* OwnerHurtByTarget (1) **(extends Target)** -> Change to DefendTamer
+* OwnerHurtTarget (1) **(extends Target)** -> Change to TamerHurtTarget
+* Panic (1)
+* Sit (5)
+* Swell (1)
+* TakeFlower (3) -> Not just Villagers should be able to take flowers
+* Tame (1) -> Change to TameByRiding
+* Target (0)
+* Tempt (3)
+* TradeWithPlayer (5)
+
+**To be Implemented:**
+
 * MoveTowardsTarget (1)
 * *MoveTowardsLocation (1) -> Removed when it’s finished implementing (A way to do this needs to be added)*
 * OcelotAttack (3)
 * OfferFlower (3) -> Instead of just offering it to villagers, allow the iron golem to give it to all entity types (change constructor)
 * OpenDoor **(extends DoorInteract)**
-* OwnerHurtTarget (1) **(extends Target)**
 * PassengerCarrotStick (7) -> Change to FollowCarrotStick
 * Play (1) -> wut. Didn’t know this existed. Change to VillagerPlay
 * RandomLookaround (3) -> Change to LookAtRandom
@@ -70,14 +78,3 @@ Behaviour Goals to Implement
 * RandomTargetNonTamed **(extends NearestAttackableTarget)**
 * RestrictOpenDoor (0)
 * RestrictSun (0)
-* Sit (5)
-* TakeFlower (3) -> Not just Villagers should be able to take flowers
-* Tame (1)
-* Tempt (3)
-* TradeWithPlayer (5)
-
-**Need Extra Attention:**
-
-* OwnerHurtByTarget (1) **(extends Target)** -> Change to DefendOwner ---- TODO: TAMING ATTRIBUTE!!!
-* FollowOwner (3) -> TODO: TAMING ATTRIBUTE!!!
-* LookAtTradingPlayer **(extends LookAtPlayer)** -> TODO: Trading Attribute

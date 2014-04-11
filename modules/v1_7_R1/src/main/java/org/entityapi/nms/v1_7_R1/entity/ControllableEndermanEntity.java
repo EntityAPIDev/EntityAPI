@@ -24,9 +24,8 @@ import org.bukkit.util.Vector;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.ControllableEntityHandle;
 import org.entityapi.api.EntitySound;
-import org.entityapi.api.mind.Attribute;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.nms.v1_7_R1.entity.mind.attribute.RideAttribute;
+import org.entityapi.api.mind.attribute.RideControlAttribute;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
 
 public class ControllableEndermanEntity extends EntityEnderman implements ControllableEntityHandle {
@@ -115,11 +114,9 @@ public class ControllableEndermanEntity extends EntityEnderman implements Contro
     public void e(float xMotion, float zMotion) {
         float[] motion = new float[]{xMotion, (float) this.motY, zMotion};
         if (this.controllableEntity != null) {
-            if (this.controllableEntity.getMind().hasAttribute("RIDE")) {
-                Attribute b = this.controllableEntity.getMind().getAttribute("RIDE");
-                if (b instanceof RideAttribute) {
-                    ((RideAttribute) b).onRide(motion);
-                }
+            RideControlAttribute rideControlAttribute = this.controllableEntity.getMind().getAttribute(RideControlAttribute.class);
+            if (rideControlAttribute != null) {
+                rideControlAttribute.onRide(motion);
             }
         }
         this.motY = motion[1];

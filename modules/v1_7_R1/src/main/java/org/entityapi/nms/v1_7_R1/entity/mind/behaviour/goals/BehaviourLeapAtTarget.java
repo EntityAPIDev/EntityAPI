@@ -17,14 +17,25 @@
 
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
+import net.minecraft.server.v1_7_R1.EntityLiving;
+import net.minecraft.server.v1_7_R1.MathHelper;
+import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.mind.BehaviourType;
+import org.entityapi.api.mind.behaviour.BehaviourType;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
 
 public class BehaviourLeapAtTarget extends BehaviourBase {
 
+    private EntityLiving target;
+    private float jumpHeight;
+
     public BehaviourLeapAtTarget(ControllableEntity controllableEntity) {
+        this(controllableEntity, 0.4F);
+    }
+
+    public BehaviourLeapAtTarget(ControllableEntity controllableEntity, float jumpHeight) {
         super(controllableEntity);
+        this.jumpHeight = jumpHeight;
     }
 
     @Override
@@ -39,11 +50,29 @@ public class BehaviourLeapAtTarget extends BehaviourBase {
 
     @Override
     public boolean shouldStart() {
-        return false;
+        this.target = ((CraftLivingEntity) this.getControllableEntity().getTarget()).getHandle();
+        if (this.target == null) {
+            return false;
+        } else {
+            double d0 = this.getHandle().e(this.target);
+
+            return d0 >= 4.0D && d0 <= 16.0D ? (!this.getHandle().onGround ? false : this.getHandle().aI().nextInt(5) == 0) : false;
+        }
+    }
+
+    @Override
+    public boolean shouldContinue() {
+        return !this.getHandle().onGround;
     }
 
     @Override
     public void tick() {
+        double diffX = this.target.locX - this.getHandle().locX;
+        double diffZ = this.target.locZ - this.getHandle().locZ;
+        float dist = MathHelper.sqrt(diffX * diffX + diffZ * diffZ);
 
+        this.getHandle().motX += diffX / (double) dist * 0.5D * 0.800000011920929D + this.getHandle().motX * 0.20000000298023224D;
+        this.getHandle().motZ += diffZ / (double) dist * 0.5D * 0.800000011920929D + this.getHandle().motZ * 0.20000000298023224D;
+        this.getHandle().motY = (double) this.jumpHeight;
     }
 }

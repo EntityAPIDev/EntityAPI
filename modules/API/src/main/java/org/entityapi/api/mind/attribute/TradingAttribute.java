@@ -15,21 +15,35 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.mind;
+package org.entityapi.api.mind.attribute;
 
-public interface IBehaviourSelector {
+import org.bukkit.entity.Player;
+import org.entityapi.api.mind.Mind;
 
-    public abstract void addBehaviour(Behaviour behaviour, int priority);
+import java.util.ArrayList;
+import java.util.List;
 
-    public abstract void addBehaviour(String key, Behaviour behaviour, int priority);
+public class TradingAttribute extends Attribute {
 
-    public void addAndReplaceBehaviour(String key, Behaviour behaviour, int priority);
+    // TODO: Some neat stuff here...
 
-    public abstract void removeBehaviour(Behaviour behaviour);
+    private String tradeName;
+    private List<Player> tradingPlayers = new ArrayList<>();
 
-    public abstract void removeBehaviour(String key);
+    public TradingAttribute(Mind mind) {
+        super(mind);
+    }
 
-    public abstract void clearBehaviours();
+    @Override
+    public String getKey() {
+        return "Trading";
+    }
 
-    public abstract Behaviour getBehaviour(String key);
+    public String getTradeName() {
+        return tradeName;
+    }
+
+    public List<Player> getTradingPlayers() {
+        return tradingPlayers;
+    }
 }

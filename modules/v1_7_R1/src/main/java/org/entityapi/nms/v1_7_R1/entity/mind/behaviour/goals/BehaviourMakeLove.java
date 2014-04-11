@@ -17,15 +17,14 @@
 
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
-import net.minecraft.server.v1_7_R1.Entity;
 import net.minecraft.server.v1_7_R1.EntityVillager;
 import net.minecraft.server.v1_7_R1.Vec3D;
 import net.minecraft.server.v1_7_R1.Village;
 import org.bukkit.entity.Villager;
 import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.mind.BehaviourType;
-import org.entityapi.api.plugin.EntityAPI;
+import org.entityapi.api.mind.behaviour.BehaviourType;
 import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
+import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
 import org.entityapi.nms.v1_7_R1.RandomPositionGenerator;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
 
@@ -49,7 +48,7 @@ public class BehaviourMakeLove extends BehaviourBase {
 
     @Override
     public EntityVillager getHandle() {
-        return (EntityVillager) ((BasicEntityUtil) EntityAPI.getBasicEntityUtil()).getHandle(this.getControllableEntity());
+        return (EntityVillager) BasicEntityUtil.getInstance().getHandle(this.getControllableEntity());
     }
 
     @Override
@@ -121,7 +120,7 @@ public class BehaviourMakeLove extends BehaviourBase {
         --this.ticks;
         this.getHandle().getControllerLook().a(this.mate, 10.0F, 30.0F);
         if (this.getHandle().e(this.mate) > 2.25D) {
-            this.getHandle().getNavigation().a((Entity) this.mate, 0.25D);
+            NMSEntityUtil.getNavigation(this.getHandle()).a(this.mate, 0.25D);
         } else if (this.ticks == 0 && this.mate.bY()) {
             this.createBaby();
         }

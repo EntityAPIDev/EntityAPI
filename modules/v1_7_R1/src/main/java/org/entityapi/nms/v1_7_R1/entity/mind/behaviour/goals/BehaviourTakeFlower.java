@@ -17,11 +17,22 @@
 
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
+import net.minecraft.server.v1_7_R1.Entity;
+import net.minecraft.server.v1_7_R1.EntityAgeable;
+import net.minecraft.server.v1_7_R1.EntityIronGolem;
 import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.mind.BehaviourType;
+import org.entityapi.api.mind.behaviour.BehaviourType;
+import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
 
+import java.util.Iterator;
+import java.util.List;
+
 public class BehaviourTakeFlower extends BehaviourBase {
+
+    private EntityIronGolem flowerHolder;
+    private int acceptTicks;
+    private boolean canAccept;
 
     public BehaviourTakeFlower(ControllableEntity controllableEntity) {
         super(controllableEntity);
@@ -39,11 +50,61 @@ public class BehaviourTakeFlower extends BehaviourBase {
 
     @Override
     public boolean shouldStart() {
-        return false;
+        if (this.getHandle() instanceof EntityAgeable && ((EntityAgeable) this.getHandle()).getAge() >= 0) {
+            return false;
+        } else if (!this.getHandle().world.v()) {
+            return false;
+        } else {
+            List list = this.getHandle().world.a(EntityIronGolem.class, this.getHandle().boundingBox.grow(6.0D, 2.0D, 6.0D));
+
+            if (list.isEmpty()) {
+                return false;
+            } else {
+                Iterator iterator = list.iterator();
+
+                while (iterator.hasNext()) {
+                    EntityIronGolem candidate = (EntityIronGolem) iterator.next();
+
+                    if (candidate.bZ() > 0) {
+                        this.flowerHolder = candidate;
+                        break;
+                    }
+                }
+
+                return this.flowerHolder != null;
+            }
+        }
+    }
+
+    @Override
+    public boolean shouldContinue() {
+        return this.flowerHolder.bZ() > 0;
+    }
+
+    @Override
+    public void start() {
+        this.acceptTicks = this.getHandle().aI().nextInt(320);
+        this.canAccept = false;
+        this.flowerHolder.getNavigation().h();
+    }
+
+    @Override
+    public void finish() {
+        this.flowerHolder = null;
+        NMSEntityUtil.getNavigation(this.getHandle()).h();
     }
 
     @Override
     public void tick() {
+        NMSEntityUtil.getControllerLook(this.getHandle()).a(this.flowerHolder, 30.0F, 30.0F);
+        if (this.flowerHolder.bZ() == this.acceptTicks) {
+            NMSEntityUtil.getNavigation(this.getHandle()).a((Entity) this.flowerHolder, 0.5D);
+            this.canAccept = true;
+        }
 
+        if (this.canAccept && this.getHandle().e(this.flowerHolder) < 4.0D) {
+            this.flowerHolder.a(false);
+            NMSEntityUtil.getNavigation(this.getHandle()).h();
+        }
     }
 }

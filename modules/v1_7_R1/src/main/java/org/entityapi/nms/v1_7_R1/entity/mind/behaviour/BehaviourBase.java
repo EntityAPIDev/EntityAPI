@@ -19,9 +19,8 @@ package org.entityapi.nms.v1_7_R1.entity.mind.behaviour;
 
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.mind.Behaviour;
-import org.entityapi.api.mind.BehaviourType;
-import org.entityapi.api.plugin.EntityAPI;
+import org.entityapi.api.mind.behaviour.Behaviour;
+import org.entityapi.api.mind.behaviour.BehaviourType;
 import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
 
 public abstract class BehaviourBase implements Behaviour {
@@ -37,7 +36,7 @@ public abstract class BehaviourBase implements Behaviour {
     }
 
     public EntityLiving getHandle() {
-        return ((BasicEntityUtil) EntityAPI.getBasicEntityUtil()).getHandle(this.getControllableEntity());
+        return BasicEntityUtil.getInstance().getHandle(this.getControllableEntity());
     }
 
     public abstract BehaviourType getType();

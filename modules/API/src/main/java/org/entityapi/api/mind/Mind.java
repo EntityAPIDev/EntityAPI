@@ -18,6 +18,7 @@
 package org.entityapi.api.mind;
 
 import org.entityapi.api.ControllableEntity;
+import org.entityapi.api.mind.attribute.Attribute;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -30,6 +31,11 @@ public class Mind {
 
     protected BehaviourSelector behaviourSelector;
 
+    protected boolean stationary;
+    protected float fixedYaw;
+    protected float fixedHeadYaw;
+    protected float fixedPitch;
+
     public Mind() {
     }
 
@@ -40,6 +46,38 @@ public class Mind {
 
     public ControllableEntity getControllableEntity() {
         return controllableEntity;
+    }
+
+    public boolean isStationary() {
+        return stationary;
+    }
+
+    public void setStationary(boolean stationary) {
+        this.stationary = stationary;
+    }
+
+    public double getFixedYaw() {
+        return fixedYaw;
+    }
+
+    public void setFixedYaw(float fixedYaw) {
+        this.fixedYaw = fixedYaw;
+    }
+
+    public float getFixedHeadYaw() {
+        return fixedHeadYaw;
+    }
+
+    public void setFixedHeadYaw(float fixedHeadYaw) {
+        this.fixedHeadYaw = fixedHeadYaw;
+    }
+
+    public float getFixedPitch() {
+        return fixedPitch;
+    }
+
+    public void setFixedPitch(float fixedPitch) {
+        this.fixedPitch = fixedPitch;
     }
 
     public HashMap<String, Attribute> getAttributes() {
@@ -64,6 +102,15 @@ public class Mind {
         }
     }
 
+    public <T extends Attribute> T getAttribute(Class<T> type) {
+        for (Map.Entry<String, Attribute> entry : this.attributes.entrySet()) {
+            if (type.isAssignableFrom(entry.getValue().getClass())) {
+                return (T) entry.getValue();
+            }
+        }
+        return null;
+    }
+
     public Attribute getAttribute(String key) {
         for (String k : this.attributes.keySet()) {
             if (k.equals(key)) {
@@ -71,6 +118,15 @@ public class Mind {
             }
         }
         return null;
+    }
+
+    public boolean hasAttribute(Class<? extends Attribute> type) {
+        for (Map.Entry<String, Attribute> entry : this.attributes.entrySet()) {
+            if (type.isAssignableFrom(entry.getValue().getClass())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean hasAttribute(String key) {
@@ -86,8 +142,15 @@ public class Mind {
         if (this.behaviourSelector != null) {
             this.behaviourSelector.updateBehaviours();
         }
-        for (Attribute b : this.attributes.values()) {
-            b.tick();
+
+        for (Attribute attribute : this.attributes.values()) {
+            attribute.tick();
+        }
+
+        if (this.isStationary()) {
+            this.getControllableEntity().setPitch(this.fixedPitch);
+            this.getControllableEntity().setYaw(this.fixedYaw);
+            this.getControllableEntity().setHeadYaw(this.fixedHeadYaw);
         }
     }
 }
