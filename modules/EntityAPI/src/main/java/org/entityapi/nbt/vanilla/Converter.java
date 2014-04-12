@@ -41,17 +41,17 @@ public class Converter {
         TAG_SHORT(NMSClassTemplate.create("NBTTagShort"), NBTTagShort.class, short.class),
         TAG_STRING(NMSClassTemplate.create("NBTTagString"), NBTTagString.class, String.class);
 
-        private ClassTemplate<net.minecraft.server.v1_7_R1.NBTBase> nmsClass;
+        private ClassTemplate nmsClass;
         private Class<? extends NBTBase> tagClass;
         private Class<?> storageType;
 
-        private TagType(ClassTemplate<net.minecraft.server.v1_7_R1.NBTBase> nmsClass, Class<? extends NBTBase> tagClass, Class<?> storageType) {
+        private TagType(ClassTemplate nmsClass, Class<? extends NBTBase> tagClass, Class<?> storageType) {
             this.nmsClass = nmsClass;
             this.tagClass = tagClass;
             this.storageType = storageType;
         }
 
-        public ClassTemplate<net.minecraft.server.v1_7_R1.NBTBase> getNMSClass() {
+        public ClassTemplate getNMSClass() {
             return this.nmsClass;
         }
 
