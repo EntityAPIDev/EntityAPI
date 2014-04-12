@@ -18,10 +18,10 @@
 package org.entityapi.nms.v1_7_R1.entity;
 
 import org.bukkit.entity.Witch;
-import org.entityapi.api.ControllableEntityType;
+import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.EntityManager;
-import org.entityapi.api.EntitySound;
-import org.entityapi.api.entity.ControllableWitch;
+import org.entityapi.api.entity.EntitySound;
+import org.entityapi.api.entity.type.ControllableWitch;
 
 public class ControllableWitchBase extends ControllableBaseEntity<Witch, ControllableWitchEntity> implements ControllableWitch {
 

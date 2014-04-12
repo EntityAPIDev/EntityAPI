@@ -21,9 +21,9 @@ import net.minecraft.server.v1_7_R1.EntityLiving;
 import net.minecraft.server.v1_7_R1.EntityTameableAnimal;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
-import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.mind.attribute.TamingAttribute;
-import org.entityapi.api.mind.behaviour.BehaviourType;
+import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.mind.attribute.TamingAttribute;
+import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 
 public class BehaviourTamerHurtTarget extends BehaviourTarget {
 

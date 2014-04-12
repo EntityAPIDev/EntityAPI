@@ -18,10 +18,10 @@
 package org.entityapi.nms.v1_7_R1.entity;
 
 import org.bukkit.entity.PigZombie;
-import org.entityapi.api.ControllableEntityType;
+import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.EntityManager;
-import org.entityapi.api.EntitySound;
-import org.entityapi.api.entity.ControllablePigZombie;
+import org.entityapi.api.entity.EntitySound;
+import org.entityapi.api.entity.type.ControllablePigZombie;
 
 public class ControllablePigZombieBase extends ControllableBaseEntity<PigZombie, ControllablePigZombieEntity> implements ControllablePigZombie {
 

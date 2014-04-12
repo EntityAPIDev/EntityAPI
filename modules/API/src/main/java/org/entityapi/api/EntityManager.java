@@ -19,6 +19,9 @@ package org.entityapi.api;
 
 import org.bukkit.Location;
 import org.bukkit.plugin.Plugin;
+import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.ControllableEntityType;
+import org.entityapi.api.entity.DespawnReason;
 
 import java.util.Collection;
 

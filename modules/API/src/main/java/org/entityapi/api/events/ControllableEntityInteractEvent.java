@@ -20,7 +20,7 @@ package org.entityapi.api.events;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
-import org.entityapi.api.ControllableEntity;
+import org.entityapi.api.entity.ControllableEntity;
 
 public class ControllableEntityInteractEvent extends ControllableEntityEvent implements Cancellable {
 

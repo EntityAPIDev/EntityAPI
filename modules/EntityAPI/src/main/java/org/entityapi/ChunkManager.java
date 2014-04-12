@@ -22,7 +22,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
-import org.entityapi.api.ControllableEntity;
+import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.EntityManager;
 
 import java.util.List;

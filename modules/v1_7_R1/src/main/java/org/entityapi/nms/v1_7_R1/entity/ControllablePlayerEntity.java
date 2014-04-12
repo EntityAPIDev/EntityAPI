@@ -19,8 +19,8 @@ package org.entityapi.nms.v1_7_R1.entity;
 
 import net.minecraft.server.v1_7_R1.*;
 import net.minecraft.util.com.mojang.authlib.GameProfile;
-import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.ControllableEntityHandle;
+import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.ControllableEntityHandle;
 import org.entityapi.nms.v1_7_R1.PlayerNavigation;
 import org.entityapi.nms.v1_7_R1.network.FixedNetworkManager;
 import org.entityapi.nms.v1_7_R1.network.NullPlayerConnection;

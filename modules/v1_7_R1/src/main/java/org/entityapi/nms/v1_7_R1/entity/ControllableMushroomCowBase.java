@@ -18,10 +18,10 @@
 package org.entityapi.nms.v1_7_R1.entity;
 
 import org.bukkit.entity.MushroomCow;
-import org.entityapi.api.ControllableEntityType;
+import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.EntityManager;
-import org.entityapi.api.EntitySound;
-import org.entityapi.api.entity.ControllableMushroomCow;
+import org.entityapi.api.entity.EntitySound;
+import org.entityapi.api.entity.type.ControllableMushroomCow;
 
 public class ControllableMushroomCowBase extends ControllableBaseEntity<MushroomCow, ControllableMushroomCowEntity> implements ControllableMushroomCow {
 

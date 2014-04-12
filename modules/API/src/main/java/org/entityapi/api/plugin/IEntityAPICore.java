@@ -21,7 +21,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
-import org.entityapi.api.ControllableEntity;
+import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.EntityManager;
 import org.entityapi.api.IBasicEntityUtil;
 import org.entityapi.api.ISpawnUtil;

@@ -21,8 +21,8 @@ import net.minecraft.server.v1_7_R1.EntityVillager;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
-import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.mind.attribute.TradingAttribute;
+import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.mind.attribute.TradingAttribute;
 
 import java.util.List;
 

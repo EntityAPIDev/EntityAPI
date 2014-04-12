@@ -18,10 +18,10 @@
 package org.entityapi.nms.v1_7_R1.entity;
 
 import org.bukkit.entity.CaveSpider;
-import org.entityapi.api.ControllableEntityType;
+import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.EntityManager;
-import org.entityapi.api.EntitySound;
-import org.entityapi.api.entity.ControllableCaveSpider;
+import org.entityapi.api.entity.EntitySound;
+import org.entityapi.api.entity.type.ControllableCaveSpider;
 
 public class ControllableCaveSpiderBase extends ControllableBaseEntity<CaveSpider, ControllableCaveSpiderEntity> implements ControllableCaveSpider {
 

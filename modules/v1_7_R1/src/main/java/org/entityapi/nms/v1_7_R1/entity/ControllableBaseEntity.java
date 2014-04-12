@@ -25,16 +25,16 @@ import org.bukkit.craftbukkit.v1_7_R1.CraftSound;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
-import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.ControllableEntityType;
+import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.EntityManager;
-import org.entityapi.api.EntitySound;
+import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.events.ControllableEntityPreSpawnEvent;
-import org.entityapi.api.mind.behaviour.Behaviour;
-import org.entityapi.api.mind.Mind;
-import org.entityapi.api.mind.attribute.RideControlAttribute;
+import org.entityapi.api.entity.mind.behaviour.Behaviour;
+import org.entityapi.api.entity.mind.Mind;
+import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.nms.v1_7_R1.entity.mind.attribute.RideControlAttributeBase;
+import org.entityapi.nms.v1_7_R1.entity.mind.attribute.ControlledRidingAttributeBase;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -430,11 +430,11 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends E
 
     @Override
     public boolean isControllableRiding() {
-        return this.getMind().hasAttribute(RideControlAttribute.class);
+        return this.getMind().hasAttribute(ControlledRidingAttribute.class);
     }
 
     @Override
     public void setControllableRiding(boolean flag) {
-        this.getMind().addAttribute(new RideControlAttributeBase(this.getMind()));
+        this.getMind().addAttribute(new ControlledRidingAttributeBase(this.getMind()));
     }
 }

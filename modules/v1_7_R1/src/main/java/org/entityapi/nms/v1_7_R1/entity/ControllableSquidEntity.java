@@ -21,10 +21,10 @@ import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.ControllableEntityHandle;
+import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.ControllableEntityHandle;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.api.mind.attribute.RideControlAttribute;
+import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
 
 public class ControllableSquidEntity extends EntitySquid implements ControllableEntityHandle {
@@ -107,9 +107,9 @@ public class ControllableSquidEntity extends EntitySquid implements Controllable
     public void e(float xMotion, float zMotion) {
         float[] motion = new float[]{xMotion, (float) this.motY, zMotion};
         if (this.controllableEntity != null) {
-            RideControlAttribute rideControlAttribute = this.controllableEntity.getMind().getAttribute(RideControlAttribute.class);
-            if (rideControlAttribute != null) {
-                rideControlAttribute.onRide(motion);
+            ControlledRidingAttribute controlledRidingAttribute = this.controllableEntity.getMind().getAttribute(ControlledRidingAttribute.class);
+            if (controlledRidingAttribute != null) {
+                controlledRidingAttribute.onRide(motion);
             }
         }
         this.motY = motion[1];

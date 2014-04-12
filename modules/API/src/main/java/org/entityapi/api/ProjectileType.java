@@ -18,6 +18,7 @@
 package org.entityapi.api;
 
 import org.bukkit.entity.LivingEntity;
+import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.plugin.EntityAPI;
 
 public enum ProjectileType {

@@ -20,8 +20,8 @@ package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 import net.minecraft.server.v1_7_R1.AxisAlignedBB;
 import net.minecraft.server.v1_7_R1.EntityCreature;
 import org.bukkit.entity.LivingEntity;
-import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.mind.behaviour.BehaviourType;
+import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 
 import java.util.Iterator;
 import java.util.List;

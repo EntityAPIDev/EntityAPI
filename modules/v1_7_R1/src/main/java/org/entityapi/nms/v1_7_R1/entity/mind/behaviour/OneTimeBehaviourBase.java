@@ -17,8 +17,8 @@
 
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour;
 
-import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.mind.behaviour.OneTimeBehaviour;
+import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.mind.behaviour.OneTimeBehaviour;
 
 public abstract class OneTimeBehaviourBase extends BehaviourBase implements OneTimeBehaviour {
 

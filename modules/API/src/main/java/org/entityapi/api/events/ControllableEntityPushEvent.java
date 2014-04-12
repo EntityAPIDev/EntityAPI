@@ -19,7 +19,7 @@ package org.entityapi.api.events;
 
 import org.bukkit.event.HandlerList;
 import org.bukkit.util.Vector;
-import org.entityapi.api.ControllableEntity;
+import org.entityapi.api.entity.ControllableEntity;
 
 public class ControllableEntityPushEvent extends ControllableEntityEvent {
 

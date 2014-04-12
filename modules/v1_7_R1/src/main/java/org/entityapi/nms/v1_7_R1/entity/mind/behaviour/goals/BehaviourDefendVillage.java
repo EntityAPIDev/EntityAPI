@@ -22,8 +22,8 @@ import net.minecraft.server.v1_7_R1.EntityLiving;
 import net.minecraft.server.v1_7_R1.MathHelper;
 import net.minecraft.server.v1_7_R1.Village;
 import org.bukkit.entity.LivingEntity;
-import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.mind.behaviour.BehaviourType;
+import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 
 public class BehaviourDefendVillage extends BehaviourTarget {
 

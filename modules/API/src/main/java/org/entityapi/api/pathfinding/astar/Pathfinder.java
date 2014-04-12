@@ -18,7 +18,7 @@
 package org.entityapi.api.pathfinding.astar;
 
 import org.bukkit.Location;
-import org.entityapi.api.ControllableEntity;
+import org.entityapi.api.entity.ControllableEntity;
 
 import java.util.HashSet;
 import java.util.PriorityQueue;

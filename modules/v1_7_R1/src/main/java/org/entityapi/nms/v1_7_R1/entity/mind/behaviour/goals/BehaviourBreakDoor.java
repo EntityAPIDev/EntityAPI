@@ -20,7 +20,7 @@ package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 import net.minecraft.server.v1_7_R1.Block;
 import net.minecraft.server.v1_7_R1.EnumDifficulty;
 import net.minecraft.server.v1_7_R1.IBlockAccess;
-import org.entityapi.api.ControllableEntity;
+import org.entityapi.api.entity.ControllableEntity;
 
 public class BehaviourBreakDoor extends BehaviourDoorInteract {
 

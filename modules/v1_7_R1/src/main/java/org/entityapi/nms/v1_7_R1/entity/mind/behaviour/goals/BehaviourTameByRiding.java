@@ -19,9 +19,9 @@ package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
 import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.util.Vector;
-import org.entityapi.api.ControllableEntity;
-import org.entityapi.api.mind.attribute.RideTameAttribute;
-import org.entityapi.api.mind.behaviour.BehaviourType;
+import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.mind.attribute.TamedRidingAttribute;
+import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
 import org.entityapi.nms.v1_7_R1.RandomPositionGenerator;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
@@ -50,9 +50,9 @@ public class BehaviourTameByRiding extends BehaviourBase {
         if (this.getHandle() instanceof EntityHorse) {
             return ((EntityHorse) this.getHandle()).isTame();
         }
-        RideTameAttribute rideTameAttribute = this.getControllableEntity().getMind().getAttribute(RideTameAttribute.class);
-        if (rideTameAttribute != null) {
-            return rideTameAttribute.isRideable();
+        TamedRidingAttribute tamedRidingAttribute = this.getControllableEntity().getMind().getAttribute(TamedRidingAttribute.class);
+        if (tamedRidingAttribute != null) {
+            return tamedRidingAttribute.isRideable();
         }
         return false;
     }
@@ -61,7 +61,7 @@ public class BehaviourTameByRiding extends BehaviourBase {
         if (this.getHandle() instanceof EntityHorse) {
             ((EntityHorse) this.getHandle()).v(amount);
         } else {
-            this.getControllableEntity().getMind().getAttribute(RideTameAttribute.class).increaseSuccessChance(amount);
+            this.getControllableEntity().getMind().getAttribute(TamedRidingAttribute.class).increaseSuccessChance(amount);
         }
     }
 
@@ -69,7 +69,7 @@ public class BehaviourTameByRiding extends BehaviourBase {
         if (this.getHandle() instanceof EntityHorse) {
             return ((EntityHorse) this.getHandle()).getTemper();
         } else {
-            return this.getControllableEntity().getMind().getAttribute(RideTameAttribute.class).getTemper();
+            return this.getControllableEntity().getMind().getAttribute(TamedRidingAttribute.class).getTemper();
         }
     }
 
@@ -77,13 +77,13 @@ public class BehaviourTameByRiding extends BehaviourBase {
         if (this.getHandle() instanceof EntityHorse) {
             return ((EntityHorse) this.getHandle()).getMaxDomestication();
         } else {
-            return this.getControllableEntity().getMind().getAttribute(RideTameAttribute.class).getMaxDomestication();
+            return this.getControllableEntity().getMind().getAttribute(TamedRidingAttribute.class).getMaxDomestication();
         }
     }
 
     @Override
     public boolean shouldStart() {
-        if (!(this.getHandle() instanceof EntityHorse) && !this.getControllableEntity().getMind().hasAttribute(RideTameAttribute.class)) {
+        if (!(this.getHandle() instanceof EntityHorse) && !this.getControllableEntity().getMind().hasAttribute(TamedRidingAttribute.class)) {
             return false;
         }
         if (!this.isRidingAllowed() && this.getHandle().passenger != null) {
