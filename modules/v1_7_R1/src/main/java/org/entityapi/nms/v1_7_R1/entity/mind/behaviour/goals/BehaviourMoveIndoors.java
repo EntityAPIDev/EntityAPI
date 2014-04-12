@@ -39,7 +39,7 @@ public class BehaviourMoveIndoors extends BehaviourBase {
 
     @Override
     public BehaviourType getType() {
-        return BehaviourType.ONE;
+        return BehaviourType.INSTINCT;
     }
 
     @Override

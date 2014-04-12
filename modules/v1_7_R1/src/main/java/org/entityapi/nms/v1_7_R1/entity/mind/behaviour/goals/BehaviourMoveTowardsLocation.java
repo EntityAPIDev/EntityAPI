@@ -17,19 +17,30 @@
 
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
+import org.bukkit.Location;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.mind.behaviour.BehaviourType;
-import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.DiscontinuousBehaviour;
+import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
+import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.OneTimeBehaviourBase;
 
-public class BehaviourMoveTowardsLocation extends DiscontinuousBehaviour {
+public class BehaviourMoveTowardsLocation extends OneTimeBehaviourBase {
 
-    public BehaviourMoveTowardsLocation(ControllableEntity controllableEntity) {
+    private Location targetLocation;
+    private double stopDistance;
+
+    public BehaviourMoveTowardsLocation(ControllableEntity controllableEntity, Location targetLocation) {
+        this(controllableEntity, targetLocation, 2);
+    }
+
+    public BehaviourMoveTowardsLocation(ControllableEntity controllableEntity, Location targetLocation, double stopDistance) {
         super(controllableEntity);
+        this.targetLocation = targetLocation;
+        this.stopDistance = stopDistance;
     }
 
     @Override
     public BehaviourType getType() {
-        return BehaviourType.ONE;
+        return BehaviourType.INSTINCT;
     }
 
     @Override
@@ -38,8 +49,23 @@ public class BehaviourMoveTowardsLocation extends DiscontinuousBehaviour {
     }
 
     @Override
+    public boolean isFinished() {
+        return !this.shouldContinue() && this.getControllableEntity().getBukkitEntity().getLocation().distanceSquared(this.targetLocation) < this.stopDistance;
+    }
+
+    @Override
     public boolean shouldStart() {
-        return false;
+        return this.getControllableEntity().getBukkitEntity().getLocation().distanceSquared(this.targetLocation) > 1;
+    }
+
+    @Override
+    public boolean shouldContinue() {
+        return NMSEntityUtil.getNavigation(this.getHandle()).g();
+    }
+
+    @Override
+    public void start() {
+        this.getControllableEntity().navigateTo(this.targetLocation.toVector());
     }
 
     @Override

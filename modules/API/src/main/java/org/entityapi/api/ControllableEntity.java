@@ -21,6 +21,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.util.Vector;
 import org.entityapi.api.mind.Mind;
 
 import java.util.HashMap;
@@ -97,6 +98,10 @@ public abstract interface ControllableEntity<T extends LivingEntity> extends Nam
     public boolean navigateTo(Location to);
 
     public boolean navigateTo(Location to, double speed);
+
+    public boolean navigateTo(Vector to);
+
+    public boolean navigateTo(Vector to, double speed);
 
     public void setDefaultBehaviours();
 

@@ -46,7 +46,7 @@ public class BehaviourFollowTamer extends BehaviourBase {
 
     @Override
     public BehaviourType getType() {
-        return BehaviourType.THREE;
+        return BehaviourType.ACTION;
     }
 
     @Override

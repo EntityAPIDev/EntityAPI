@@ -24,6 +24,7 @@ import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_7_R1.CraftSound;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.util.Vector;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.ControllableEntityType;
 import org.entityapi.api.EntityManager;
@@ -306,6 +307,16 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends E
 
     @Override
     public boolean navigateTo(Location to) {
+        return this.navigateTo(to.toVector());
+    }
+
+    @Override
+    public boolean navigateTo(Location to, double speed) {
+        return this.navigateTo(to.toVector(), speed);
+    }
+
+    @Override
+    public boolean navigateTo(Vector to) {
         if (to == null) {
             return false;
         }
@@ -314,7 +325,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends E
     }
 
     @Override
-    public boolean navigateTo(Location to, double speed) {
+    public boolean navigateTo(Vector to, double speed) {
         if (to == null) {
             return false;
         }

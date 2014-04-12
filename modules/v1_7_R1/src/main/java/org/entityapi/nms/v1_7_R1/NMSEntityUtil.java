@@ -103,21 +103,21 @@ public class NMSEntityUtil {
         return false;
     }
 
-    public static boolean isInGuardedAreaOf(EntityLiving entityLiving) {
+    public static boolean isInHomeArea(EntityLiving entityLiving) {
         if (entityLiving instanceof EntityCreature) {
             return ((EntityCreature) entityLiving).bS();
         }
         return false;
     }
 
-    public static boolean isInGuardedAreaOf(EntityLiving entityLiving, int x, int y, int z) {
+    public static boolean isInHomeArea(EntityLiving entityLiving, int x, int y, int z) {
         if (entityLiving instanceof EntityCreature) {
             return ((EntityCreature) entityLiving).b(x, y, z);
         }
         return false;
     }
 
-    public static float getRangeOfGuardedAreaFor(EntityLiving entityLiving) {
+    public static float getHomeAreaRange(EntityLiving entityLiving) {
         if (entityLiving instanceof EntityCreature) {
             return ((EntityCreature) entityLiving).bU();
         }
@@ -138,5 +138,19 @@ public class NMSEntityUtil {
             return ((EntityInsentient) entityLiving).x();
         }
         return 40;
+    }
+
+    public static boolean canBeSteered(LivingEntity livingEntity) {
+        if (livingEntity instanceof CraftLivingEntity) {
+            return canBeSteered(((CraftLivingEntity) livingEntity).getHandle());
+        }
+        return false;
+    }
+
+    public static boolean canBeSteered(EntityLiving entityLiving) {
+        if (entityLiving instanceof EntityInsentient) {
+            return ((EntityInsentient) entityLiving).bC();
+        }
+        return false;
     }
 }

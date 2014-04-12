@@ -46,7 +46,7 @@ public class BehaviourSit extends BehaviourBase {
 
     @Override
     public BehaviourType getType() {
-        return BehaviourType.FIVE;
+        return BehaviourType.IMPULSE;
     }
 
     @Override

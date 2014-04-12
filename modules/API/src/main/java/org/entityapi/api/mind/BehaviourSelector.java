@@ -21,6 +21,7 @@ import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.mind.behaviour.Behaviour;
 import org.entityapi.api.mind.behaviour.BehaviourItem;
 import org.entityapi.api.mind.behaviour.IBehaviourSelector;
+import org.entityapi.api.mind.behaviour.OneTimeBehaviour;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -149,6 +150,9 @@ public class BehaviourSelector implements IBehaviourSelector {
                     }
                     behaviourItem.getBehaviour().finish();
                     this.activeBehaviours.remove(behaviourItem);
+                    if (behaviourItem.getBehaviour() instanceof OneTimeBehaviour && ((OneTimeBehaviour) behaviourItem.getBehaviour()).isFinished()) {
+                        this.behaviours.remove(behaviourItem);
+                    }
                 } else {
                     if (this.canUse(behaviourItem) && behaviourItem.getBehaviour().shouldStart()) {
                         behaviourItem.getBehaviour().start();
@@ -166,6 +170,9 @@ public class BehaviourSelector implements IBehaviourSelector {
                 BehaviourItem behaviourItem = iterator.next();
                 if (!behaviourItem.getBehaviour().shouldContinue()) {
                     behaviourItem.getBehaviour().finish();
+                    if (behaviourItem.getBehaviour() instanceof OneTimeBehaviour && ((OneTimeBehaviour) behaviourItem.getBehaviour()).isFinished()) {
+                        this.behaviours.remove(behaviourItem);
+                    }
                     iterator.remove();
                 }
             }
@@ -176,6 +183,9 @@ public class BehaviourSelector implements IBehaviourSelector {
         while (iterator.hasNext()) {
             BehaviourItem behaviourItem = iterator.next();
             behaviourItem.getBehaviour().tick();
+            if (behaviourItem.getBehaviour() instanceof OneTimeBehaviour && ((OneTimeBehaviour) behaviourItem.getBehaviour()).isFinished()) {
+                this.behaviours.remove(behaviourItem);
+            }
         }
     }
 

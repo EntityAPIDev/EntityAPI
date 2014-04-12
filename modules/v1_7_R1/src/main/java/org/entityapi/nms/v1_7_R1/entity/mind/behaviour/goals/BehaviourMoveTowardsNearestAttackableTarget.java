@@ -58,7 +58,7 @@ public class BehaviourMoveTowardsNearestAttackableTarget extends BehaviourTarget
 
     @Override
     public BehaviourType getType() {
-        return BehaviourType.ONE;
+        return BehaviourType.INSTINCT;
     }
 
     @Override

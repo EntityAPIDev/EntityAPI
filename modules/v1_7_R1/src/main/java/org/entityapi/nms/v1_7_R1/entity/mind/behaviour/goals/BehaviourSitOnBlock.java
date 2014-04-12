@@ -18,8 +18,8 @@
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
 import net.minecraft.server.v1_7_R1.*;
-import org.bukkit.Location;
 import org.bukkit.entity.Ocelot;
+import org.bukkit.util.Vector;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.mind.behaviour.BehaviourType;
 import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
@@ -50,7 +50,7 @@ public class BehaviourSitOnBlock extends BehaviourBase {
 
     @Override
     public BehaviourType getType() {
-        return BehaviourType.FIVE;
+        return BehaviourType.IMPULSE;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class BehaviourSitOnBlock extends BehaviourBase {
 
     @Override
     public void start() {
-        this.getControllableEntity().navigateTo(new Location(this.getHandle().world.getWorld(), (double) ((float) this.targetX) + 0.5D, (double) (this.targetY + 1), (double) ((float) this.targetZ) + 0.5D));
+        this.getControllableEntity().navigateTo(new Vector((double) ((float) this.targetX) + 0.5D, (double) (this.targetY + 1), (double) ((float) this.targetZ) + 0.5D));
         this.sitTicks = 0;
         this.actionTicks = 0;
         this.maxSitTicks = this.getHandle().aI().nextInt(this.getHandle().aI().nextInt(1200) + 1200) + 1200;
@@ -88,7 +88,7 @@ public class BehaviourSitOnBlock extends BehaviourBase {
         this.getHandle().getGoalSit().setSitting(false);
         if (this.getHandle().e((double) this.targetX, (double) (this.targetY + 1), (double) this.targetZ) > 1.0D) {
             this.getHandle().setSitting(false);
-            this.getControllableEntity().navigateTo(new Location(this.getHandle().world.getWorld(), (double) ((float) this.targetX) + 0.5D, (double) (this.targetY + 1), (double) ((float) this.targetZ) + 0.5D));
+            this.getControllableEntity().navigateTo(new Vector((double) ((float) this.targetX) + 0.5D, (double) (this.targetY + 1), (double) ((float) this.targetZ) + 0.5D));
             ++this.actionTicks;
         } else if (!this.getHandle().isSitting()) {
             this.getHandle().setSitting(true);

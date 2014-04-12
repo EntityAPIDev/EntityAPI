@@ -51,7 +51,7 @@ public abstract class BehaviourTarget extends BehaviourBase {
 
     @Override
     public BehaviourType getType() {
-        return BehaviourType.ZERO;
+        return BehaviourType.SUBCONSCIOUS;
     }
 
     @Override
@@ -120,7 +120,7 @@ public abstract class BehaviourTarget extends BehaviourBase {
                 return false;
             }
 
-            if (!NMSEntityUtil.isInGuardedAreaOf(this.getHandle(), MathHelper.floor(entityliving.locX), MathHelper.floor(entityliving.locY), MathHelper.floor(entityliving.locZ))) {
+            if (!NMSEntityUtil.isInHomeArea(this.getHandle(), MathHelper.floor(entityliving.locX), MathHelper.floor(entityliving.locY), MathHelper.floor(entityliving.locZ))) {
                 return false;
             } else if (this.checkSenses && !NMSEntityUtil.getEntitySenses(this.getHandle()).canSee(entityliving)) {
                 return false;

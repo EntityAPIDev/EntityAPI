@@ -17,11 +17,20 @@
 
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
+import net.minecraft.server.v1_7_R1.ChunkCoordinates;
+import net.minecraft.server.v1_7_R1.Vec3D;
+import org.bukkit.util.Vector;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.mind.behaviour.BehaviourType;
+import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
+import org.entityapi.nms.v1_7_R1.RandomPositionGenerator;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
 
 public class BehaviourMoveTowardsRestriction extends BehaviourBase {
+
+    private double targetX;
+    private double targetY;
+    private double targetZ;
 
     public BehaviourMoveTowardsRestriction(ControllableEntity controllableEntity) {
         super(controllableEntity);
@@ -29,7 +38,7 @@ public class BehaviourMoveTowardsRestriction extends BehaviourBase {
 
     @Override
     public BehaviourType getType() {
-        return BehaviourType.ONE;
+        return BehaviourType.INSTINCT;
     }
 
     @Override
@@ -39,7 +48,31 @@ public class BehaviourMoveTowardsRestriction extends BehaviourBase {
 
     @Override
     public boolean shouldStart() {
-        return false;
+        if (NMSEntityUtil.isInHomeArea(this.getHandle())) {
+            return false;
+        } else {
+            ChunkCoordinates chunkcoordinates = NMSEntityUtil.getChunkCoordinates(this.getHandle());
+            Vec3D vec3d = RandomPositionGenerator.a(this.getHandle(), 16, 7, this.getHandle().world.getVec3DPool().create((double) chunkcoordinates.x, (double) chunkcoordinates.y, (double) chunkcoordinates.z));
+
+            if (vec3d == null) {
+                return false;
+            } else {
+                this.targetX = vec3d.c;
+                this.targetY = vec3d.d;
+                this.targetZ = vec3d.e;
+                return true;
+            }
+        }
+    }
+
+    @Override
+    public boolean shouldContinue() {
+        return !NMSEntityUtil.getNavigation(this.getHandle()).g();
+    }
+
+    @Override
+    public void start() {
+        this.getControllableEntity().navigateTo(new Vector(this.targetX, this.targetY, this.targetZ));
     }
 
     @Override

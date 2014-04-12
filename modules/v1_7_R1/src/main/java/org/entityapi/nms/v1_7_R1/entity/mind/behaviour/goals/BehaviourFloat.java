@@ -31,7 +31,7 @@ public class BehaviourFloat extends BehaviourBase {
 
     @Override
     public BehaviourType getType() {
-        return BehaviourType.FOUR;
+        return BehaviourType.MOVEMENT;
     }
 
     @Override

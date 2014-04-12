@@ -19,21 +19,68 @@ package org.entityapi.api.mind.behaviour;
 
 public enum BehaviourType {
 
-    ZERO,
-    ONE,
-    TWO,
-    THREE,
-    FOUR,
-    FIVE,
-    SIX,
-    SEVEN;
+    /*
+     * NMS Goals have stored integers to check compatibility -> goal.j()
+     * This enum is used to compare these goals easily and more friendly
+     */
 
-    // NMS Goals have stored integers to check compatibility -> goal.j()
-    // This enum is used to compare these goals easily and more friendly
+    /**
+     * Subconscious behaviours that the entity does without thinking. Should be compatible with all other behaviours
+     */
+    SUBCONSCIOUS(0),
 
-    ;
+    /**
+     * Instinctive behaviours of the entity
+     */
+    INSTINCT(1),
 
+    /**
+     * Behaviours involving attention to players
+     */
+    ATTENTION(2),
+
+    /**
+     * Active behaviours requiring full concentration
+     */
+    ACTION(3),
+
+    /**
+     * Behaviours that deal with additions to movement
+     */
+    MOVEMENT(4),
+
+    /**
+     * Behaviours that may occasionally occur
+     */
+    IMPULSE(5),
+
+    /**
+     * Food-related or includes eating of something
+     */
+    FOOD(7);
+
+    private int id;
+
+    BehaviourType(int id) {
+        this.id = id;
+    }
+
+    /**
+     * Gets the compatibility ID of the behaviour
+     *
+     * @return compatibility ID
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Checks if a behaviour is compatible with another
+     *
+     * @param type behaviour to check compatibility against
+     * @return true if the two behaviours are compatible
+     */
     public boolean isCompatibleWith(BehaviourType type) {
-        return (this.ordinal() & type.ordinal()) == 0;
+        return (this.getId() & type.getId()) == 0;
     }
 }

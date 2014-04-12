@@ -18,10 +18,11 @@
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour;
 
 import org.entityapi.api.ControllableEntity;
+import org.entityapi.api.mind.behaviour.OneTimeBehaviour;
 
-public abstract class DiscontinuousBehaviour extends BehaviourBase {
+public abstract class OneTimeBehaviourBase extends BehaviourBase implements OneTimeBehaviour {
 
-    protected DiscontinuousBehaviour(ControllableEntity controllableEntity) {
+    protected OneTimeBehaviourBase(ControllableEntity controllableEntity) {
         super(controllableEntity);
     }
 
@@ -29,4 +30,6 @@ public abstract class DiscontinuousBehaviour extends BehaviourBase {
     public boolean isContinuous() {
         return false;
     }
+
+    public abstract boolean isFinished();
 }

@@ -18,7 +18,7 @@
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
 import net.minecraft.server.v1_7_R1.*;
-import org.bukkit.Location;
+import org.bukkit.util.Vector;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.mind.attribute.RideTameAttribute;
 import org.entityapi.api.mind.behaviour.BehaviourType;
@@ -38,7 +38,7 @@ public class BehaviourTameByRiding extends BehaviourBase {
 
     @Override
     public BehaviourType getType() {
-        return BehaviourType.ONE;
+        return BehaviourType.INSTINCT;
     }
 
     @Override
@@ -109,7 +109,7 @@ public class BehaviourTameByRiding extends BehaviourBase {
 
     @Override
     public void start() {
-        this.getControllableEntity().navigateTo(new Location(this.getHandle().world.getWorld(), this.walkX, this.walkY, this.walkZ));
+        this.getControllableEntity().navigateTo(new Vector(this.walkX, this.walkY, this.walkZ));
     }
 
     @Override

@@ -17,19 +17,44 @@
 
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
+import net.minecraft.server.v1_7_R1.EntityLiving;
+import net.minecraft.server.v1_7_R1.EntityVillager;
+import net.minecraft.server.v1_7_R1.Vec3D;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Villager;
+import org.bukkit.util.Vector;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.mind.behaviour.BehaviourType;
+import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
+import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
+import org.entityapi.nms.v1_7_R1.RandomPositionGenerator;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class BehaviourVillagerPlay extends BehaviourBase {
 
-    public BehaviourVillagerPlay(ControllableEntity controllableEntity) {
+    private EntityLiving playMate;
+    private int playTicks;
+
+    public BehaviourVillagerPlay(ControllableEntity<Villager> controllableEntity) {
         super(controllableEntity);
     }
 
     @Override
+    public ControllableEntity<Villager> getControllableEntity() {
+        return super.getControllableEntity();
+    }
+
+    @Override
+    public EntityVillager getHandle() {
+        return (EntityVillager) BasicEntityUtil.getInstance().getHandle(this.getControllableEntity());
+    }
+
+    @Override
     public BehaviourType getType() {
-        return BehaviourType.ONE;
+        return BehaviourType.INSTINCT;
     }
 
     @Override
@@ -39,11 +64,75 @@ public class BehaviourVillagerPlay extends BehaviourBase {
 
     @Override
     public boolean shouldStart() {
-        return false;
+        if (this.getHandle().getAge() >= 0) {
+            return false;
+        } else if (this.getHandle().aI().nextInt(400) != 0) {
+            return false;
+        } else {
+            List nearbyVillagers = this.getHandle().world.a(EntityVillager.class, this.getHandle().boundingBox.grow(6.0D, 3.0D, 6.0D));
+            double minDistance = Double.MAX_VALUE;
+            Iterator iterator = nearbyVillagers.iterator();
+
+            while (iterator.hasNext()) {
+                EntityVillager closest = (EntityVillager) iterator.next();
+
+                if (closest != this.getHandle() && !closest.bZ() && closest.getAge() < 0) {
+                    double distance = closest.e(this.getHandle());
+
+                    if (distance <= minDistance) {
+                        minDistance = distance;
+                        this.playMate = closest;
+                    }
+                }
+            }
+
+            if (this.playMate == null) {
+                Vec3D vec3d = RandomPositionGenerator.a(this.getHandle(), 16, 3);
+
+                if (vec3d == null) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
+
+    @Override
+    public boolean shouldContinue() {
+        return this.playTicks > 0;
+    }
+
+    @Override
+    public void start() {
+        if (this.playMate != null) {
+            this.getHandle().j(true);
+        }
+
+        this.playTicks = 1000;
+    }
+
+    @Override
+    public void finish() {
+        this.getHandle().j(false);
+        this.playMate = null;
     }
 
     @Override
     public void tick() {
+        --this.playTicks;
+        if (this.playMate != null) {
+            if (this.getHandle().e(this.playMate) > 4.0D) {
+                this.getControllableEntity().navigateTo((LivingEntity) this.playMate.getBukkitEntity());
+            }
+        } else if (NMSEntityUtil.getNavigation(this.getHandle()).g()) {
+            Vec3D vec3d = RandomPositionGenerator.a(this.getHandle(), 16, 3);
 
+            if (vec3d == null) {
+                return;
+            }
+
+            this.getControllableEntity().navigateTo(new Vector(vec3d.c, vec3d.d, vec3d.e));
+        }
     }
 }

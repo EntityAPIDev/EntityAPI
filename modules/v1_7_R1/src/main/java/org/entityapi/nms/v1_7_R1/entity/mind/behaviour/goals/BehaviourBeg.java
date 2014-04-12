@@ -45,7 +45,7 @@ public class BehaviourBeg extends BehaviourBase {
 
     @Override
     public BehaviourType getType() {
-        return BehaviourType.TWO;
+        return BehaviourType.ATTENTION;
     }
 
     @Override

@@ -18,7 +18,7 @@
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
 import net.minecraft.server.v1_7_R1.Vec3D;
-import org.bukkit.Location;
+import org.bukkit.util.Vector;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.mind.behaviour.BehaviourType;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
@@ -37,7 +37,7 @@ public class BehaviourRandomStroll extends BehaviourBase {
 
     @Override
     public BehaviourType getType() {
-        return BehaviourType.ONE;
+        return BehaviourType.INSTINCT;
     }
 
     @Override
@@ -72,7 +72,7 @@ public class BehaviourRandomStroll extends BehaviourBase {
 
     @Override
     public void start() {
-        this.getControllableEntity().navigateTo(new Location(this.getHandle().world.getWorld(), this.randX, this.randY, this.randZ));
+        this.getControllableEntity().navigateTo(new Vector(this.randX, this.randY, this.randZ));
     }
 
     @Override

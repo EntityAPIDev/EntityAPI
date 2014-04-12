@@ -45,7 +45,7 @@ public class BehaviourDoorInteract extends BehaviourBase {
 
     @Override
     public BehaviourType getType() {
-        return BehaviourType.ZERO;
+        return BehaviourType.SUBCONSCIOUS;
     }
 
     @Override

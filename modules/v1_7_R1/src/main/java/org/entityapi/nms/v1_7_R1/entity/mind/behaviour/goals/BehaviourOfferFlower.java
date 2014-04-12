@@ -17,19 +17,43 @@
 
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
+import net.minecraft.server.v1_7_R1.Entity;
+import net.minecraft.server.v1_7_R1.EntityIronGolem;
+import net.minecraft.server.v1_7_R1.EntityLiving;
+import org.bukkit.entity.IronGolem;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.mind.behaviour.BehaviourType;
+import org.entityapi.api.reflection.refs.NMSEntityClassRef;
+import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
 
 public class BehaviourOfferFlower extends BehaviourBase {
 
-    public BehaviourOfferFlower(ControllableEntity controllableEntity) {
+    private Class<? extends Entity> typeToOffer;
+    private EntityLiving toOffer;
+    private int offerTicks;
+
+    public BehaviourOfferFlower(ControllableEntity<IronGolem> controllableEntity, Class<? extends org.bukkit.entity.Entity> classToOffer) {
         super(controllableEntity);
+        this.typeToOffer = (Class<? extends Entity>) NMSEntityClassRef.getNMSClass(classToOffer);
+        if (this.typeToOffer == null || !(EntityLiving.class.isAssignableFrom(classToOffer))) {
+            throw new IllegalArgumentException("Could not find valid NMS class for " + classToOffer.getSimpleName());
+        }
+    }
+
+    @Override
+    public ControllableEntity<IronGolem> getControllableEntity() {
+        return super.getControllableEntity();
+    }
+
+    @Override
+    public EntityIronGolem getHandle() {
+        return (EntityIronGolem) BasicEntityUtil.getInstance().getHandle(this.getControllableEntity());
     }
 
     @Override
     public BehaviourType getType() {
-        return BehaviourType.THREE;
+        return BehaviourType.ACTION;
     }
 
     @Override
@@ -39,11 +63,36 @@ public class BehaviourOfferFlower extends BehaviourBase {
 
     @Override
     public boolean shouldStart() {
-        return false;
+        if (!this.getHandle().world.v()) {
+            return false;
+        } else if (this.getHandle().aI().nextInt(8000) != 0) {
+            return false;
+        } else {
+            this.toOffer = (EntityLiving) this.getHandle().world.a(this.typeToOffer, this.getHandle().boundingBox.grow(6.0D, 2.0D, 6.0D), (Entity) this.getHandle());
+            return this.toOffer != null;
+        }
+    }
+
+    @Override
+    public boolean shouldContinue() {
+        return this.offerTicks > 0;
+    }
+
+    @Override
+    public void start() {
+        this.offerTicks = 400;
+        this.getHandle().a(true);
+    }
+
+    @Override
+    public void finish() {
+        this.getHandle().a(false);
+        this.toOffer = null;
     }
 
     @Override
     public void tick() {
-
+        this.getHandle().getControllerLook().a(this.toOffer, 30.0F, 30.0F);
+        --this.offerTicks;
     }
 }

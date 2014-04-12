@@ -38,7 +38,7 @@ public class BehaviourEatGrass extends BehaviourBase {
 
     @Override
     public BehaviourType getType() {
-        return BehaviourType.SEVEN;
+        return BehaviourType.FOOD;
     }
 
     @Override

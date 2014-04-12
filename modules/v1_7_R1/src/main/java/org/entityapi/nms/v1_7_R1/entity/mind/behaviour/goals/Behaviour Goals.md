@@ -51,11 +51,18 @@ Behaviour Goals to Implement
 * MeleeAttack (3)
 * MoveIndoors (1)
 * MoveThroughVillage (1)
+* *MoveTowardsLocation (1) -> Removed when it’s finished implementing (A way to do this needs to be added)*
+* MoveTowardsRestriction (1)
+* MoveTowardsTarget (1)
 * NearestAttackableTarget (1) **(extends Target)** -> Change to MoveTowardsNearestAttackableTarget. Looks like we need to implement Entity Selector interfaces.
+* OcelotAttack (3)
+* OfferFlower (3) -> Instead of just offering it to villagers, allow the iron golem to give it to all entity types (change constructor)
 * OpenDoor **(extends DoorInteract)**
 * OwnerHurtByTarget (1) **(extends Target)** -> Change to DefendTamer
 * OwnerHurtTarget (1) **(extends Target)** -> Change to TamerHurtTarget
 * Panic (1)
+* PassengerCarrotStick (7) -> Change to FollowCarrotStick
+* Play (1) -> wut. Didn’t know this existed. Change to VillagerPlay
 * RandomLookaround (3) -> Change to LookAtRandom
 * RandomStroll (1)
 * RandomTargetNonTamed **(extends NearestAttackableTarget)**
@@ -68,13 +75,3 @@ Behaviour Goals to Implement
 * Target (0)
 * Tempt (3)
 * TradeWithPlayer (5)
-
-**To be Implemented:**
-
-* MoveTowardsTarget (1)
-* MoveTowardsRestriction (1)
-* *MoveTowardsLocation (1) -> Removed when it’s finished implementing (A way to do this needs to be added)*
-* OcelotAttack (3)
-* OfferFlower (3) -> Instead of just offering it to villagers, allow the iron golem to give it to all entity types (change constructor)
-* PassengerCarrotStick (7) -> Change to FollowCarrotStick
-* Play (1) -> wut. Didn’t know this existed. Change to VillagerPlay

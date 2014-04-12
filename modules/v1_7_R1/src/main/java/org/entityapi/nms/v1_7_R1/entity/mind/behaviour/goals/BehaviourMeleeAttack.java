@@ -50,7 +50,7 @@ public class BehaviourMeleeAttack extends BehaviourBase {
 
     @Override
     public BehaviourType getType() {
-        return BehaviourType.THREE;
+        return BehaviourType.ACTION;
     }
 
     @Override
@@ -91,7 +91,7 @@ public class BehaviourMeleeAttack extends BehaviourBase {
             return false;
         }
         EntityLiving targetHandle = ((CraftLivingEntity) target).getHandle();
-        return !targetHandle.isAlive() ? false : (!this.ignoreSight ? !NMSEntityUtil.getNavigation(this.getHandle()).g() : NMSEntityUtil.isInGuardedAreaOf(this.getHandle(), MathHelper.floor(targetHandle.locX), MathHelper.floor(targetHandle.locY), MathHelper.floor(targetHandle.locZ)));
+        return !targetHandle.isAlive() ? false : (!this.ignoreSight ? !NMSEntityUtil.getNavigation(this.getHandle()).g() : NMSEntityUtil.isInHomeArea(this.getHandle(), MathHelper.floor(targetHandle.locX), MathHelper.floor(targetHandle.locY), MathHelper.floor(targetHandle.locZ)));
     }
 
     @Override

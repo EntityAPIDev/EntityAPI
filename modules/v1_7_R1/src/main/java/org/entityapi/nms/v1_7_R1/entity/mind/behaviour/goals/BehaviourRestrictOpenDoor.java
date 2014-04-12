@@ -35,7 +35,7 @@ public class BehaviourRestrictOpenDoor extends BehaviourBase {
 
     @Override
     public BehaviourType getType() {
-        return BehaviourType.ZERO;
+        return BehaviourType.SUBCONSCIOUS;
     }
 
     @Override

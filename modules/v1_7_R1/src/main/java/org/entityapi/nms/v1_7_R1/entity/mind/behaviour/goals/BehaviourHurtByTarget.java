@@ -38,7 +38,7 @@ public class BehaviourHurtByTarget extends BehaviourTarget {
 
     @Override
     public BehaviourType getType() {
-        return BehaviourType.ONE;
+        return BehaviourType.INSTINCT;
     }
 
     @Override

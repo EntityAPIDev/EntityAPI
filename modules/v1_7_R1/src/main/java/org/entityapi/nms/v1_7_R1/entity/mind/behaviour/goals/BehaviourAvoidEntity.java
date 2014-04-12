@@ -20,6 +20,7 @@ package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 import net.minecraft.server.v1_7_R1.*;
 import org.entityapi.api.ControllableEntity;
 import org.entityapi.api.mind.behaviour.BehaviourType;
+import org.entityapi.api.reflection.refs.NMSEntityClassRef;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
 import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorViewable;
@@ -33,16 +34,19 @@ import java.util.List;
 public class BehaviourAvoidEntity extends BehaviourBase {
 
     private EntitySelectorViewable selector = new EntitySelectorViewable(this);
-    private Class<?> classToAvoid;
+    private Class<? extends Entity> classToAvoid;
     private float f;
     private double speedWhenFar;
     private double speedWhenNear;
     private Entity entityToAvoid;
     private PathEntity path;
 
-    public BehaviourAvoidEntity(ControllableEntity controllableEntity, Class<?> classToAvoid, float minDistance, double speedWhenFar, double speedWhenNear) {
+    public BehaviourAvoidEntity(ControllableEntity controllableEntity, Class<? extends org.bukkit.entity.Entity> classToAvoid, float minDistance, double speedWhenFar, double speedWhenNear) {
         super(controllableEntity);
-        this.classToAvoid = classToAvoid;
+        this.classToAvoid = (Class<? extends Entity>) NMSEntityClassRef.getNMSClass(classToAvoid);
+        if (this.classToAvoid == null && !(EntityLiving.class.isAssignableFrom(classToAvoid))) {
+            throw new IllegalArgumentException("Could not find valid NMS class for " + classToAvoid.getSimpleName());
+        }
         this.speedWhenFar = speedWhenFar;
         this.speedWhenNear = speedWhenNear;
         this.f = minDistance;
@@ -50,7 +54,7 @@ public class BehaviourAvoidEntity extends BehaviourBase {
 
     @Override
     public BehaviourType getType() {
-        return BehaviourType.ONE;
+        return BehaviourType.INSTINCT;
     }
 
     @Override

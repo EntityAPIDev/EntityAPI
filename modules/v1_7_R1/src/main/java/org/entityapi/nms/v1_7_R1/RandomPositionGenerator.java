@@ -57,7 +57,7 @@ public class RandomPositionGenerator {
 
         if (NMSEntityUtil.hasGuardedArea(entity)) {
             double d0 = (double) (NMSEntityUtil.getChunkCoordinates(entity).e(MathHelper.floor(entity.locX), MathHelper.floor(entity.locY), MathHelper.floor(entity.locZ)) + 4.0F);
-            double d1 = (double) (NMSEntityUtil.getRangeOfGuardedAreaFor(entity) + (float) i);
+            double d1 = (double) (NMSEntityUtil.getHomeAreaRange(entity) + (float) i);
 
             flag1 = d0 < d1 * d1;
         } else {
@@ -73,7 +73,7 @@ public class RandomPositionGenerator {
                 k1 += MathHelper.floor(entity.locX);
                 l1 += MathHelper.floor(entity.locY);
                 i2 += MathHelper.floor(entity.locZ);
-                if (!flag1 || NMSEntityUtil.isInGuardedAreaOf(entity, k1, l1, i2)) {
+                if (!flag1 || NMSEntityUtil.isInHomeArea(entity, k1, l1, i2)) {
                     float f1;
                     if (entity instanceof EntityCreature) {
                         f1 = ((EntityCreature) entity).a(k1, l1, i2);
