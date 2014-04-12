@@ -71,6 +71,14 @@ public class ControllableCaveSpiderEntity extends EntityCaveSpider implements Co
     }
 
     @Override
+    public void move(double d0, double d1, double d2) {
+        if (this.controllableEntity != null && this.controllableEntity.isStationary()) {
+            return;
+        }
+        super.move(d0, d1, d2);
+    }
+
+    @Override
     public void h() {
         super.h();
         if (this.controllableEntity != null) {

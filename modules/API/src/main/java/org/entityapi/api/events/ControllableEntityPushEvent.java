@@ -17,13 +17,15 @@
 
 package org.entityapi.api.events;
 
+import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 import org.bukkit.util.Vector;
 import org.entityapi.api.entity.ControllableEntity;
 
-public class ControllableEntityPushEvent extends ControllableEntityEvent {
+public class ControllableEntityPushEvent extends ControllableEntityEvent implements Cancellable {
 
     private static final HandlerList handlers = new HandlerList();
+    private boolean cancelled;
 
     private Vector pushVelocity;
 
@@ -51,6 +53,16 @@ public class ControllableEntityPushEvent extends ControllableEntityEvent {
         if (pushVelocity != null) {
             this.pushVelocity = pushVelocity;
         }
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return cancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
     }
 
     @Override

@@ -265,7 +265,11 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
     @Override
     public Vector callOnPush(ControllableEntity controllableEntity, double x, double y, double z) {
         ControllableEntityPushEvent pushEvent = new ControllableEntityPushEvent(controllableEntity, new Vector(x, y, z));
+        pushEvent.setCancelled(controllableEntity.isStationary());
         Bukkit.getServer().getPluginManager().callEvent(pushEvent);
+        if (pushEvent.isCancelled()) {
+            return new Vector(0, 0, 0);
+        }
         return pushEvent.getPushVelocity();
     }
 
