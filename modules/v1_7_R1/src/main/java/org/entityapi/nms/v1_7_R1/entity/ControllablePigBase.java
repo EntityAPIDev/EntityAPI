@@ -20,8 +20,8 @@ package org.entityapi.nms.v1_7_R1.entity;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Pig;
-import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.EntityManager;
+import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllablePig;
@@ -49,7 +49,7 @@ public class ControllablePigBase extends ControllableBaseEntity<Pig, Controllabl
 
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
-        return new BehaviourItem[] {
+        return new BehaviourItem[]{
                 new BehaviourItem(new BehaviourFloat(this), 0),
                 new BehaviourItem(new BehaviourPanic(this, 1.25D), 1),
                 new BehaviourItem(new BehaviourFollowCarrotStick(this, 0.3F), 2),

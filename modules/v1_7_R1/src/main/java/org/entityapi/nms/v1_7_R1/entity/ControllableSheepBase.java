@@ -20,13 +20,11 @@ package org.entityapi.nms.v1_7_R1.entity;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Sheep;
-import org.bukkit.entity.Slime;
 import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllableSheep;
-import org.entityapi.api.entity.type.ControllableSlime;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.*;
 
 public class ControllableSheepBase extends ControllableBaseEntity<Sheep, ControllableSheepEntity> implements ControllableSheep {
@@ -52,7 +50,7 @@ public class ControllableSheepBase extends ControllableBaseEntity<Sheep, Control
 
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
-        return new BehaviourItem[] {
+        return new BehaviourItem[]{
                 new BehaviourItem(new BehaviourFloat(this), 0),
                 new BehaviourItem(new BehaviourPanic(this, 1.25D), 1),
                 new BehaviourItem(new BehaviourBreed(this, 1.0D), 2),

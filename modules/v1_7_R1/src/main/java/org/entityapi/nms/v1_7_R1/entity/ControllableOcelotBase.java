@@ -21,8 +21,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Ocelot;
-import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.EntityManager;
+import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllableOcelot;
@@ -51,7 +51,7 @@ public class ControllableOcelotBase extends ControllableBaseEntity<Ocelot, Contr
 
     @Override
     public BehaviourItem[] getDefaultTargetingBehaviours() {
-        return new BehaviourItem[] {
+        return new BehaviourItem[]{
                 new BehaviourItem(new BehaviourFloat(this), 1),
                 new BehaviourItem(new BehaviourSit(this), 2),
                 new BehaviourItem(new BehaviourTempt(this, Material.RAW_FISH, true, 0.6D), 3),
@@ -68,7 +68,7 @@ public class ControllableOcelotBase extends ControllableBaseEntity<Ocelot, Contr
 
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
-        return new BehaviourItem[] {
+        return new BehaviourItem[]{
                 new BehaviourItem(new BehaviourRandomTargetNonTamed(this, Chicken.class, 750, false), 1)
         };
     }

@@ -36,6 +36,7 @@ public class BehaviourMoveTowardsLocation extends OneTimeBehaviourBase {
     public BehaviourMoveTowardsLocation(ControllableEntity controllableEntity, Location targetLocation, double stopDistance) {
         this(controllableEntity, targetLocation, stopDistance, -1);
     }
+
     public BehaviourMoveTowardsLocation(ControllableEntity controllableEntity, Location targetLocation, double stopDistance, double navigationSpeed) {
         super(controllableEntity);
         this.targetLocation = targetLocation;

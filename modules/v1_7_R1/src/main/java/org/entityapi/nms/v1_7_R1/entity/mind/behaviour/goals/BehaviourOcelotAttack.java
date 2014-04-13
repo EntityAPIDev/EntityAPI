@@ -17,7 +17,6 @@
 
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
-import net.minecraft.server.v1_7_R1.Entity;
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;

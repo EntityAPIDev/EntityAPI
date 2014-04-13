@@ -20,8 +20,8 @@ package org.entityapi.nms.v1_7_R1.entity;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Zombie;
-import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.EntityManager;
+import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllableVillager;
@@ -52,7 +52,7 @@ public class ControllableVillagerBase extends ControllableBaseEntity<Villager, C
 
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
-        return new BehaviourItem[] {
+        return new BehaviourItem[]{
                 new BehaviourItem(new BehaviourFloat(this), 0),
                 new BehaviourItem(new BehaviourAvoidEntity(this, Zombie.class, 8.0F, 0.6D, 0.6D), 1),
                 new BehaviourItem(new BehaviourTradeWithPlayer(this), 1),

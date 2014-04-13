@@ -23,7 +23,6 @@ import org.bukkit.entity.LivingEntity;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
-import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
 
 import java.util.Iterator;

@@ -19,14 +19,10 @@ package org.entityapi.nms.v1_7_R1.entity;
 
 import net.minecraft.server.v1_7_R1.IMonster;
 import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Snowman;
 import org.entityapi.api.EntityManager;
-import org.entityapi.api.ProjectileType;
 import org.entityapi.api.entity.ControllableEntityType;
-import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
-import org.entityapi.api.entity.type.ControllableSkeleton;
 import org.entityapi.api.entity.type.ControllableSnowman;
 import org.entityapi.api.entity.type.bukkit.InsentientEntity;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.*;
@@ -45,7 +41,7 @@ public class ControllableSnowmanBase extends ControllableBaseEntity<Snowman, Con
 
     @Override
     public BehaviourItem[] getDefaultTargetingBehaviours() {
-        return new BehaviourItem[] {
+        return new BehaviourItem[]{
                 new BehaviourItem(new BehaviourRangedAttack(this, 20, 10.0F, 1.25), 1),
                 new BehaviourItem(new BehaviourRandomStroll(this, 1.0D), 2),
                 new BehaviourItem(new BehaviourLookAtNearestEntity(this, HumanEntity.class, 6.0F), 3),
@@ -55,7 +51,7 @@ public class ControllableSnowmanBase extends ControllableBaseEntity<Snowman, Con
 
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
-        return new BehaviourItem[] {
+        return new BehaviourItem[]{
                 new BehaviourItem(new BehaviourMoveTowardsNearestAttackableTarget(this, InsentientEntity.class, 0, true, false, IMonster.a), 1)
         };
     }

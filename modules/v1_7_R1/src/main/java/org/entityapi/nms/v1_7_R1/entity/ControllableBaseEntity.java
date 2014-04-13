@@ -25,15 +25,14 @@ import org.bukkit.craftbukkit.v1_7_R1.CraftSound;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
+import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityType;
-import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.EntitySound;
-import org.entityapi.api.entity.mind.behaviour.Behaviour;
-import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
-import org.entityapi.api.events.ControllableEntityPreSpawnEvent;
 import org.entityapi.api.entity.mind.Mind;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
+import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
+import org.entityapi.api.events.ControllableEntityPreSpawnEvent;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.entity.mind.attribute.ControlledRidingAttributeBase;
 

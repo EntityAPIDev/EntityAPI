@@ -19,8 +19,8 @@ package org.entityapi.nms.v1_7_R1.entity;
 
 import org.bukkit.entity.CaveSpider;
 import org.bukkit.entity.HumanEntity;
-import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.EntityManager;
+import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllableCaveSpider;
@@ -48,7 +48,7 @@ public class ControllableCaveSpiderBase extends ControllableBaseEntity<CaveSpide
 
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
-        return new BehaviourItem[] {
+        return new BehaviourItem[]{
                 new BehaviourItem(new BehaviourFloat(this), 1),
                 new BehaviourItem(new BehaviourLeapAtTarget(this, 2F), 2),
                 new BehaviourItem(new BehaviourMoveTowardsRestriction(this), 3),
@@ -60,7 +60,7 @@ public class ControllableCaveSpiderBase extends ControllableBaseEntity<CaveSpide
 
     @Override
     public BehaviourItem[] getDefaultTargetingBehaviours() {
-        return new BehaviourItem[] {
+        return new BehaviourItem[]{
                 new BehaviourItem(new BehaviourHurtByTarget(this, true, false, true), 1),
                 new BehaviourItem(new BehaviourMoveTowardsNearestAttackableTarget(this, HumanEntity.class, 0, true), 2)
         };

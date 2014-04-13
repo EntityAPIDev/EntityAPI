@@ -17,7 +17,6 @@
 
 package org.entityapi.api.entity.type;
 
-import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Snowman;
 import org.entityapi.api.entity.ControllableEntity;
 

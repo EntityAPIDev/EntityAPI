@@ -20,8 +20,8 @@ package org.entityapi.nms.v1_7_R1.entity;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Zombie;
-import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.EntityManager;
+import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllableZombie;
@@ -49,7 +49,7 @@ public class ControllableZombieBase extends ControllableBaseEntity<Zombie, Contr
 
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
-        return new BehaviourItem[] {
+        return new BehaviourItem[]{
                 new BehaviourItem(new BehaviourFloat(this), 0),
                 new BehaviourItem(new BehaviourBreakDoor(this, false), 1),
                 new BehaviourItem(new BehaviourMeleeAttack(this, HumanEntity.class, false, 1.0D), 2),
@@ -64,7 +64,7 @@ public class ControllableZombieBase extends ControllableBaseEntity<Zombie, Contr
 
     @Override
     public BehaviourItem[] getDefaultTargetingBehaviours() {
-        return new BehaviourItem[] {
+        return new BehaviourItem[]{
                 new BehaviourItem(new BehaviourHurtByTarget(this, true), 1),
                 new BehaviourItem(new BehaviourMoveTowardsNearestAttackableTarget(this, HumanEntity.class, 0, true), 2),
                 new BehaviourItem(new BehaviourMoveTowardsNearestAttackableTarget(this, Villager.class, 0, false), 2)

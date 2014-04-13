@@ -21,8 +21,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Wolf;
-import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.EntityManager;
+import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllableWolf;
@@ -53,7 +53,7 @@ public class ControllableWolfBase extends ControllableBaseEntity<Wolf, Controlla
 
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
-        return new BehaviourItem[] {
+        return new BehaviourItem[]{
                 new BehaviourItem(new BehaviourFloat(this), 1),
                 new BehaviourItem(new BehaviourSit(this), 2),
                 new BehaviourItem(new BehaviourLeapAtTarget(this, 0.4F), 3),
@@ -61,7 +61,7 @@ public class ControllableWolfBase extends ControllableBaseEntity<Wolf, Controlla
                 new BehaviourItem(new BehaviourFollowTamer(this, 10.0F, 2.0F, 1.0D), 5),
                 new BehaviourItem(new BehaviourBreed(this, 1.0D), 6),
                 new BehaviourItem(new BehaviourRandomStroll(this, 1.0D), 7),
-                new BehaviourItem(new BehaviourBeg(this, new Material[] {Material.BONE}), 8),
+                new BehaviourItem(new BehaviourBeg(this, new Material[]{Material.BONE}), 8),
                 new BehaviourItem(new BehaviourLookAtNearestEntity(this, HumanEntity.class, 8.0F), 9),
                 new BehaviourItem(new BehaviourLookAtRandom(this), 9)
         };
@@ -69,7 +69,7 @@ public class ControllableWolfBase extends ControllableBaseEntity<Wolf, Controlla
 
     @Override
     public BehaviourItem[] getDefaultTargetingBehaviours() {
-        return new BehaviourItem[] {
+        return new BehaviourItem[]{
                 new BehaviourItem(new BehaviourHelpTamerTarget(this), 1),
                 new BehaviourItem(new BehaviourDefendTamer(this), 2),
                 new BehaviourItem(new BehaviourHurtByTarget(this, true), 3),

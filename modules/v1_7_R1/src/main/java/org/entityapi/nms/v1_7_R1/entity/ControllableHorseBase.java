@@ -17,11 +17,10 @@
 
 package org.entityapi.nms.v1_7_R1.entity;
 
-import org.bukkit.Material;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.HumanEntity;
-import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.EntityManager;
+import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllableHorse;
@@ -61,7 +60,7 @@ public class ControllableHorseBase extends ControllableBaseEntity<Horse, Control
 
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
-        return new BehaviourItem[] {
+        return new BehaviourItem[]{
                 new BehaviourItem(new BehaviourFloat(this), 0),
                 new BehaviourItem(new BehaviourPanic(this, 1.2D), 1),
                 new BehaviourItem(new BehaviourTameByRiding(this, 1.2D), 1),

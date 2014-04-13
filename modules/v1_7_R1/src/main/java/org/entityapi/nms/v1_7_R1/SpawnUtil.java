@@ -22,9 +22,9 @@ import net.minecraft.server.v1_7_R1.World;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_7_R1.CraftWorld;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.entityapi.api.ISpawnUtil;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityHandle;
-import org.entityapi.api.ISpawnUtil;
 import org.entityapi.api.reflection.SafeConstructor;
 import org.entityapi.api.utils.WorldUtil;
 

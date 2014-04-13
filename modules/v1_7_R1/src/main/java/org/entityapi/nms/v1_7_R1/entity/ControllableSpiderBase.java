@@ -19,8 +19,8 @@ package org.entityapi.nms.v1_7_R1.entity;
 
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Spider;
-import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.EntityManager;
+import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllableSpider;
@@ -48,7 +48,7 @@ public class ControllableSpiderBase extends ControllableBaseEntity<Spider, Contr
 
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
-        return new BehaviourItem[] {
+        return new BehaviourItem[]{
                 new BehaviourItem(new BehaviourFloat(this), 0),
                 new BehaviourItem(new BehaviourLeapAtTarget(this, 1F), 1),
                 new BehaviourItem(new BehaviourMoveTowardsRestriction(this), 2),
@@ -60,7 +60,7 @@ public class ControllableSpiderBase extends ControllableBaseEntity<Spider, Contr
 
     @Override
     public BehaviourItem[] getDefaultTargetingBehaviours() {
-        return new BehaviourItem[] {
+        return new BehaviourItem[]{
                 new BehaviourItem(new BehaviourHurtByTarget(this, true, false, true), 0),
                 new BehaviourItem(new BehaviourMoveTowardsNearestAttackableTarget(this, HumanEntity.class, 0, true), 1)
         };

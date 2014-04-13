@@ -24,9 +24,9 @@ import org.bukkit.util.Vector;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityHandle;
 import org.entityapi.api.entity.EntitySound;
+import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.reflection.SafeField;
-import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
 
 public class ControllableHorseEntity extends EntityHorse implements ControllableEntityHandle {

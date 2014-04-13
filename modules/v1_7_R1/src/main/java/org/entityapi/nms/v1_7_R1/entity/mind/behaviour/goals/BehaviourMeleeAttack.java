@@ -17,7 +17,10 @@
 
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
-import net.minecraft.server.v1_7_R1.*;
+import net.minecraft.server.v1_7_R1.Entity;
+import net.minecraft.server.v1_7_R1.EntityLiving;
+import net.minecraft.server.v1_7_R1.MathHelper;
+import net.minecraft.server.v1_7_R1.PathEntity;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityTargetEvent;

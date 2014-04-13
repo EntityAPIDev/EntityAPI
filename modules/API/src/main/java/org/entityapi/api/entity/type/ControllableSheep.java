@@ -18,7 +18,6 @@
 package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.Sheep;
-import org.bukkit.entity.Slime;
 import org.entityapi.api.entity.ControllableEntity;
 
 public interface ControllableSheep extends ControllableEntity<Sheep> {

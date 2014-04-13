@@ -17,7 +17,10 @@
 
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
-import net.minecraft.server.v1_7_R1.*;
+import net.minecraft.server.v1_7_R1.EntityHorse;
+import net.minecraft.server.v1_7_R1.EntityHuman;
+import net.minecraft.server.v1_7_R1.EntityInsentient;
+import net.minecraft.server.v1_7_R1.Vec3D;
 import org.bukkit.util.Vector;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.attribute.TamedRidingAttribute;

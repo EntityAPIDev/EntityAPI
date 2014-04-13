@@ -154,7 +154,7 @@ public class BehaviourTempt extends BehaviourBase {
             this.getControllableEntity().navigateTo(this.nearbyPlayer.getBukkitEntity(), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
         }
     }
-    
+
     public boolean isTempted() {
         return this.tempted;
     }

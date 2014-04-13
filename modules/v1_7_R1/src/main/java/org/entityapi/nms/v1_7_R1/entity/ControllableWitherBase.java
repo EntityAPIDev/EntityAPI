@@ -19,8 +19,8 @@ package org.entityapi.nms.v1_7_R1.entity;
 
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Wither;
-import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.EntityManager;
+import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllableWither;
@@ -49,7 +49,7 @@ public class ControllableWitherBase extends ControllableBaseEntity<Wither, Contr
 
     @Override
     public BehaviourItem[] getDefaultTargetingBehaviours() {
-        return new BehaviourItem[] {
+        return new BehaviourItem[]{
                 new BehaviourItem(new BehaviourFloat(this), 0),
                 new BehaviourItem(new BehaviourRangedAttack(this, 40, 20.0F, 1.0D), 2),
                 new BehaviourItem(new BehaviourRandomStroll(this, 1.0D), 5),
@@ -60,7 +60,7 @@ public class ControllableWitherBase extends ControllableBaseEntity<Wither, Contr
 
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
-        return new BehaviourItem[] {
+        return new BehaviourItem[]{
                 new BehaviourItem(new BehaviourHurtByTarget(this, false), 1),
                 new BehaviourItem(new BehaviourMoveTowardsNearestAttackableTarget(this, InsentientEntity.class, 0, false, false, new EntitySelectorNotUndead()), 2)
         };

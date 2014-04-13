@@ -102,7 +102,7 @@ public class BehaviourSitOnBlock extends BehaviourBase {
             --this.actionTicks;
         }
     }
-    
+
     private boolean isSuitableBlockNearby() {
         int y = (int) this.getHandle().locY;
         double minDist = 2.147483647E9D;

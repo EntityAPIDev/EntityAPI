@@ -21,8 +21,8 @@ import net.minecraft.server.v1_7_R1.IMonster;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.IronGolem;
 import org.bukkit.entity.LivingEntity;
-import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.EntityManager;
+import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllableIronGolem;
@@ -51,7 +51,7 @@ public class ControllableIronGolemBase extends ControllableBaseEntity<IronGolem,
 
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
-        return new BehaviourItem[] {
+        return new BehaviourItem[]{
                 new BehaviourItem(new BehaviourMeleeAttack(this, true, 1.0D), 1),
                 new BehaviourItem(new BehaviourMoveTowardsTarget(this, 32.0F), 2),
                 new BehaviourItem(new BehaviourMoveThroughVillage(this, true, 0.6D), 3),
@@ -65,7 +65,7 @@ public class ControllableIronGolemBase extends ControllableBaseEntity<IronGolem,
 
     @Override
     public BehaviourItem[] getDefaultTargetingBehaviours() {
-        return new BehaviourItem[] {
+        return new BehaviourItem[]{
                 new BehaviourItem(new BehaviourDefendVillage(this), 1),
                 new BehaviourItem(new BehaviourHurtByTarget(this, false), 2),
                 new BehaviourItem(new BehaviourMoveTowardsNearestAttackableTarget(this, InsentientEntity.class, 0, false, true, IMonster.a), 3)
