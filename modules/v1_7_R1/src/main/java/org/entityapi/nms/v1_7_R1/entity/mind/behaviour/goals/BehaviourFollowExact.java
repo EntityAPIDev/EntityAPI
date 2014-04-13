@@ -21,6 +21,7 @@ import net.minecraft.server.v1_7_R1.Entity;
 import net.minecraft.server.v1_7_R1.MathHelper;
 import net.minecraft.server.v1_7_R1.World;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftEntity;
+import org.bukkit.entity.LivingEntity;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
@@ -33,16 +34,22 @@ public class BehaviourFollowExact extends BehaviourBase {
     private float minDist;
     private float maxDist;
     private boolean avoidWater;
+    private double navigationSpeed;
 
     public BehaviourFollowExact(ControllableEntity controllableEntity, org.bukkit.entity.Entity toFollow, float minDist) {
-        this(controllableEntity, toFollow, minDist, 144.0F);
+        this(controllableEntity, toFollow, minDist, 144.0F, -1);
     }
 
-    public BehaviourFollowExact(ControllableEntity controllableEntity, org.bukkit.entity.Entity toFollow, float minDistance, float maxDistance) {
+    public BehaviourFollowExact(ControllableEntity controllableEntity, org.bukkit.entity.Entity toFollow, float minDist, double navigationSpeed) {
+        this(controllableEntity, toFollow, minDist, 144.0F, navigationSpeed);
+    }
+
+    public BehaviourFollowExact(ControllableEntity controllableEntity, org.bukkit.entity.Entity toFollow, float minDistance, float maxDistance, double navigationSpeed) {
         super(controllableEntity);
         this.toFollow = ((CraftEntity) toFollow).getHandle();
         this.minDist = minDistance;
         this.maxDist = maxDistance;
+        this.navigationSpeed = navigationSpeed;
     }
 
     @Override
@@ -92,7 +99,7 @@ public class BehaviourFollowExact extends BehaviourBase {
         NMSEntityUtil.getControllerLook(this.getHandle()).a(this.toFollow, 10.0F, (float) NMSEntityUtil.getMaxHeadRotation(this.getHandle()));
         if (--this.ticks <= 0) {
             this.ticks = 10;
-            if (!NMSEntityUtil.getNavigation(this.getHandle()).a(this.toFollow, this.getControllableEntity().getSpeed())) {
+            if (!this.getControllableEntity().navigateTo((LivingEntity) this.toFollow.getBukkitEntity(), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed())) {
                 if (this.getHandle().e(this.toFollow) >= (this.maxDist * this.maxDist)) {
                     int x = MathHelper.floor(this.toFollow.locX) - 2;
                     int y = MathHelper.floor(this.toFollow.locZ) - 2;

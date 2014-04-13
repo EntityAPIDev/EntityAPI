@@ -27,15 +27,20 @@ public class BehaviourMoveTowardsLocation extends OneTimeBehaviourBase {
 
     private Location targetLocation;
     private double stopDistance;
+    private double navigationSpeed;
 
     public BehaviourMoveTowardsLocation(ControllableEntity controllableEntity, Location targetLocation) {
         this(controllableEntity, targetLocation, 2);
     }
 
     public BehaviourMoveTowardsLocation(ControllableEntity controllableEntity, Location targetLocation, double stopDistance) {
+        this(controllableEntity, targetLocation, stopDistance, -1);
+    }
+    public BehaviourMoveTowardsLocation(ControllableEntity controllableEntity, Location targetLocation, double stopDistance, double navigationSpeed) {
         super(controllableEntity);
         this.targetLocation = targetLocation;
         this.stopDistance = stopDistance;
+        this.navigationSpeed = navigationSpeed;
     }
 
     @Override
@@ -65,7 +70,7 @@ public class BehaviourMoveTowardsLocation extends OneTimeBehaviourBase {
 
     @Override
     public void start() {
-        this.getControllableEntity().navigateTo(this.targetLocation.toVector());
+        this.getControllableEntity().navigateTo(this.targetLocation.toVector(), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
     }
 
     @Override

@@ -17,12 +17,11 @@
 
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
-import net.minecraft.server.v1_7_R1.DistanceComparator;
-import net.minecraft.server.v1_7_R1.EntityLiving;
-import net.minecraft.server.v1_7_R1.IEntitySelector;
+import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
+import org.entityapi.api.reflection.refs.NMSEntityClassRef;
 import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorNearestAttackableTarget;
 
 import java.util.Collections;
@@ -34,23 +33,26 @@ import java.util.List;
 
 public class BehaviourMoveTowardsNearestAttackableTarget extends BehaviourTarget {
 
-    private final Class classToTarget;
+    private final Class<? extends Entity> classToTarget;
     private final int chance;
     private final DistanceComparator distComparator;
     private final IEntitySelector selector;
     private EntityLiving target;
 
-    public BehaviourMoveTowardsNearestAttackableTarget(ControllableEntity controllableEntity, Class classToTarget, int chance, boolean checkSenses) {
+    public BehaviourMoveTowardsNearestAttackableTarget(ControllableEntity controllableEntity, Class<? extends org.bukkit.entity.Entity> classToTarget, int chance, boolean checkSenses) {
         this(controllableEntity, classToTarget, chance, checkSenses, false);
     }
 
-    public BehaviourMoveTowardsNearestAttackableTarget(ControllableEntity controllableEntity, Class classToTarget, int chance, boolean checkSenses, boolean useMelee) {
+    public BehaviourMoveTowardsNearestAttackableTarget(ControllableEntity controllableEntity, Class<? extends org.bukkit.entity.Entity> classToTarget, int chance, boolean checkSenses, boolean useMelee) {
         this(controllableEntity, classToTarget, chance, checkSenses, useMelee, null);
     }
 
-    public BehaviourMoveTowardsNearestAttackableTarget(ControllableEntity controllableEntity, Class classToTarget, int chance, boolean checkSenses, boolean useMelee, IEntitySelector selector) {
+    public BehaviourMoveTowardsNearestAttackableTarget(ControllableEntity controllableEntity, Class<? extends org.bukkit.entity.Entity> classToTarget, int chance, boolean checkSenses, boolean useMelee, IEntitySelector selector) {
         super(controllableEntity, checkSenses, useMelee);
-        this.classToTarget = classToTarget;
+        this.classToTarget = (Class<? extends Entity>) NMSEntityClassRef.getNMSClass(classToTarget);
+        if (this.classToTarget == null && !(EntityLiving.class.isAssignableFrom(classToTarget))) {
+            throw new IllegalArgumentException("Could not find valid NMS class for " + classToTarget.getSimpleName());
+        }
         this.chance = chance;
         this.distComparator = new DistanceComparator(this.getHandle());
         this.selector = new EntitySelectorNearestAttackableTarget(this, selector);

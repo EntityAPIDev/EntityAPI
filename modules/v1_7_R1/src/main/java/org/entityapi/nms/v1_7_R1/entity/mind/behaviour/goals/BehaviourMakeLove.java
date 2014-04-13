@@ -20,6 +20,7 @@ package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 import net.minecraft.server.v1_7_R1.EntityVillager;
 import net.minecraft.server.v1_7_R1.Vec3D;
 import net.minecraft.server.v1_7_R1.Village;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Villager;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
@@ -36,13 +37,19 @@ public class BehaviourMakeLove extends BehaviourBase {
     private EntityVillager mate;
     private int ticks;
     private Village village;
+    private double navigationSpeed;
 
     public BehaviourMakeLove(ControllableEntity controllableEntity) {
+        this(controllableEntity, 0.25D);
+    }
+
+    public BehaviourMakeLove(ControllableEntity controllableEntity, double navigationSpeed) {
         super(controllableEntity);
+        this.navigationSpeed = navigationSpeed;
     }
 
     @Override
-    public ControllableEntity<Villager> getControllableEntity() {
+    public ControllableEntity<? extends Villager> getControllableEntity() {
         return super.getControllableEntity();
     }
 
@@ -120,6 +127,7 @@ public class BehaviourMakeLove extends BehaviourBase {
         --this.ticks;
         this.getHandle().getControllerLook().a(this.mate, 10.0F, 30.0F);
         if (this.getHandle().e(this.mate) > 2.25D) {
+            this.getControllableEntity().navigateTo((LivingEntity) this.mate.getBukkitEntity(), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
             NMSEntityUtil.getNavigation(this.getHandle()).a(this.mate, 0.25D);
         } else if (this.ticks == 0 && this.mate.bY()) {
             this.createBaby();

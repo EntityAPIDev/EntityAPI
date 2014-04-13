@@ -29,12 +29,12 @@ import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
 
 public class BehaviourTradeWithPlayer extends BehaviourBase {
 
-    public BehaviourTradeWithPlayer(ControllableEntity<Villager> controllableEntity) {
+    public BehaviourTradeWithPlayer(ControllableEntity<? extends Villager> controllableEntity) {
         super(controllableEntity);
     }
 
     @Override
-    public ControllableEntity<Villager> getControllableEntity() {
+    public ControllableEntity<? extends Villager> getControllableEntity() {
         return super.getControllableEntity();
     }
 

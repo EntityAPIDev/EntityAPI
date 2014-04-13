@@ -17,11 +17,16 @@
 
 package org.entityapi.nms.v1_7_R1.entity;
 
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Villager;
+import org.bukkit.entity.Zombie;
 import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.EntitySound;
+import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllableVillager;
+import org.entityapi.api.entity.type.bukkit.InsentientEntity;
+import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.*;
 
 public class ControllableVillagerBase extends ControllableBaseEntity<Villager, ControllableVillagerEntity> implements ControllableVillager {
 
@@ -43,5 +48,26 @@ public class ControllableVillagerBase extends ControllableBaseEntity<Villager, C
         this.setSound(EntitySound.DEATH, "mob.villager.death");
         this.setSound(EntitySound.YES, "mob.villager.yes");
         this.setSound(EntitySound.NO, "mob.villager.no");
+    }
+
+    @Override
+    public BehaviourItem[] getDefaultMovementBehaviours() {
+        return new BehaviourItem[] {
+                new BehaviourItem(new BehaviourFloat(this), 0),
+                new BehaviourItem(new BehaviourAvoidEntity(this, Zombie.class, 8.0F, 0.6D, 0.6D), 1),
+                new BehaviourItem(new BehaviourTradeWithPlayer(this), 1),
+                new BehaviourItem(new BehaviourLookAtTradingPlayer(this), 1),
+                new BehaviourItem(new BehaviourMoveIndoors(this), 2),
+                new BehaviourItem(new BehaviourRestrictOpenDoor(this), 3),
+                new BehaviourItem(new BehaviourOpenDoor(this, true), 4),
+                new BehaviourItem(new BehaviourMoveTowardsRestriction(this, 0.6D), 5),
+                new BehaviourItem(new BehaviourMakeLove(this), 6),
+                new BehaviourItem(new BehaviourTakeFlower(this), 7),
+                new BehaviourItem(new BehaviourVillagerPlay(this, 0.32D), 8),
+                new BehaviourItem(new BehaviourInteract(this, HumanEntity.class, 3.0F, 1.0F), 9),
+                new BehaviourItem(new BehaviourInteract(this, Villager.class, 3.0F, 1.0F), 9),
+                new BehaviourItem(new BehaviourRandomStroll(this, 0.6D), 9),
+                new BehaviourItem(new BehaviourLookAtNearestEntity(this, InsentientEntity.class, 8.0F), 10)
+        };
     }
 }

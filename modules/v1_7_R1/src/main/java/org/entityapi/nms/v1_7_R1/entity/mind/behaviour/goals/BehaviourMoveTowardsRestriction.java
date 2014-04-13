@@ -31,9 +31,15 @@ public class BehaviourMoveTowardsRestriction extends BehaviourBase {
     private double targetX;
     private double targetY;
     private double targetZ;
+    private double navigationSpeed;
 
     public BehaviourMoveTowardsRestriction(ControllableEntity controllableEntity) {
+        this(controllableEntity, -1);
+    }
+
+    public BehaviourMoveTowardsRestriction(ControllableEntity controllableEntity, double navigationSpeed) {
         super(controllableEntity);
+        this.navigationSpeed = navigationSpeed;
     }
 
     @Override
@@ -72,7 +78,7 @@ public class BehaviourMoveTowardsRestriction extends BehaviourBase {
 
     @Override
     public void start() {
-        this.getControllableEntity().navigateTo(new Vector(this.targetX, this.targetY, this.targetZ));
+        this.getControllableEntity().navigateTo(new Vector(this.targetX, this.targetY, this.targetZ), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
     }
 
     @Override

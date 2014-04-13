@@ -20,6 +20,7 @@ package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 import net.minecraft.server.v1_7_R1.Entity;
 import net.minecraft.server.v1_7_R1.EntityAgeable;
 import net.minecraft.server.v1_7_R1.EntityIronGolem;
+import org.bukkit.entity.LivingEntity;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
@@ -33,9 +34,15 @@ public class BehaviourTakeFlower extends BehaviourBase {
     private EntityIronGolem flowerHolder;
     private int acceptTicks;
     private boolean canAccept;
+    private double navigationSpeed;
 
     public BehaviourTakeFlower(ControllableEntity controllableEntity) {
+        this(controllableEntity, 0.5D);
+    }
+
+    public BehaviourTakeFlower(ControllableEntity controllableEntity, double navigationSpeed) {
         super(controllableEntity);
+        this.navigationSpeed = navigationSpeed;
     }
 
     @Override
@@ -98,7 +105,7 @@ public class BehaviourTakeFlower extends BehaviourBase {
     public void tick() {
         NMSEntityUtil.getControllerLook(this.getHandle()).a(this.flowerHolder, 30.0F, 30.0F);
         if (this.flowerHolder.bZ() == this.acceptTicks) {
-            NMSEntityUtil.getNavigation(this.getHandle()).a((Entity) this.flowerHolder, 0.5D);
+            this.getControllableEntity().navigateTo((LivingEntity) this.flowerHolder.getBukkitEntity(), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
             this.canAccept = true;
         }
 

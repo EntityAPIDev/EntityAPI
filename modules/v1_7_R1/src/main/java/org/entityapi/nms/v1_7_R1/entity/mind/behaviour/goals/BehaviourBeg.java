@@ -34,10 +34,10 @@ public class BehaviourBeg extends BehaviourBase {
     private int ticks;
 
     public BehaviourBeg(ControllableEntity controllableEntity, Material[] materialsToBegFor) {
-        this(controllableEntity, 8.0F, materialsToBegFor);
+        this(controllableEntity, materialsToBegFor, 8.0F);
     }
 
-    public BehaviourBeg(ControllableEntity controllableEntity, float range, Material[] materialsToBegFor) {
+    public BehaviourBeg(ControllableEntity controllableEntity, Material[] materialsToBegFor, float range) {
         super(controllableEntity);
         this.materialsToBegFor = materialsToBegFor;
         this.range = range;

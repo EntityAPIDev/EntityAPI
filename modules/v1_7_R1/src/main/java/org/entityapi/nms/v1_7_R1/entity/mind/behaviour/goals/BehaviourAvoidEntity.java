@@ -22,6 +22,7 @@ import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 import org.entityapi.api.reflection.refs.NMSEntityClassRef;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
+import org.entityapi.nms.v1_7_R1.entity.ControllableBaseEntity;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
 import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorViewable;
 
@@ -35,21 +36,25 @@ public class BehaviourAvoidEntity extends BehaviourBase {
 
     private EntitySelectorViewable selector = new EntitySelectorViewable(this);
     private Class<? extends Entity> classToAvoid;
-    private float f;
-    private double speedWhenFar;
-    private double speedWhenNear;
+    private float minDistance;
+    private double navigationSpeedWhenFar;
+    private double navigationSpeedWhenNear;
     private Entity entityToAvoid;
     private PathEntity path;
 
-    public BehaviourAvoidEntity(ControllableEntity controllableEntity, Class<? extends org.bukkit.entity.Entity> classToAvoid, float minDistance, double speedWhenFar, double speedWhenNear) {
+    public BehaviourAvoidEntity(ControllableEntity controllableEntity, Class<? extends org.bukkit.entity.Entity> classToAvoid, float minDistance) {
+        this(controllableEntity, classToAvoid, minDistance, -1, -1);
+    }
+
+    public BehaviourAvoidEntity(ControllableEntity controllableEntity, Class<? extends org.bukkit.entity.Entity> classToAvoid, float minDistance, double navigationSpeedWhenFar, double navigationSpeedWhenNear) {
         super(controllableEntity);
         this.classToAvoid = (Class<? extends Entity>) NMSEntityClassRef.getNMSClass(classToAvoid);
         if (this.classToAvoid == null && !(EntityLiving.class.isAssignableFrom(classToAvoid))) {
             throw new IllegalArgumentException("Could not find valid NMS class for " + classToAvoid.getSimpleName());
         }
-        this.speedWhenFar = speedWhenFar;
-        this.speedWhenNear = speedWhenNear;
-        this.f = minDistance;
+        this.navigationSpeedWhenFar = navigationSpeedWhenFar;
+        this.navigationSpeedWhenNear = navigationSpeedWhenNear;
+        this.minDistance = minDistance;
     }
 
     @Override
@@ -69,12 +74,12 @@ public class BehaviourAvoidEntity extends BehaviourBase {
                 return false;
             }
 
-            this.entityToAvoid = this.getHandle().world.findNearbyPlayer(this.getHandle(), (double) this.f);
+            this.entityToAvoid = this.getHandle().world.findNearbyPlayer(this.getHandle(), (double) this.minDistance);
             if (this.entityToAvoid == null) {
                 return false;
             }
         } else {
-            List list = this.getHandle().world.a(this.classToAvoid, this.getHandle().boundingBox.grow((double) this.f, 3.0D, (double) this.f), this.selector);
+            List list = this.getHandle().world.a(this.classToAvoid, this.getHandle().boundingBox.grow((double) this.minDistance, 3.0D, (double) this.minDistance), this.selector);
 
             if (list.isEmpty()) {
                 return false;
@@ -102,7 +107,7 @@ public class BehaviourAvoidEntity extends BehaviourBase {
 
     @Override
     public void start() {
-        NMSEntityUtil.getNavigation(this.getHandle()).a(this.path, this.speedWhenFar);
+        ((ControllableBaseEntity) this.getControllableEntity()).navigateTo(this.path, this.navigationSpeedWhenFar > 0 ? this.navigationSpeedWhenFar : this.getControllableEntity().getSpeed());
     }
 
     @Override
@@ -113,9 +118,9 @@ public class BehaviourAvoidEntity extends BehaviourBase {
     @Override
     public void tick() {
         if (this.getHandle().e(this.entityToAvoid) < 49.0D) {
-            NMSEntityUtil.getNavigation(this.getHandle()).a(this.speedWhenNear);
+            NMSEntityUtil.getNavigation(this.getHandle()).a(this.navigationSpeedWhenNear);
         } else {
-            NMSEntityUtil.getNavigation(this.getHandle()).a(this.speedWhenFar);
+            NMSEntityUtil.getNavigation(this.getHandle()).a(this.navigationSpeedWhenFar);
         }
     }
 

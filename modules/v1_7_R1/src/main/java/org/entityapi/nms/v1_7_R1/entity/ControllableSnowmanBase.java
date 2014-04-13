@@ -1,0 +1,62 @@
+/*
+ * This file is part of EntityAPI.
+ *
+ * EntityAPI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * EntityAPI is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package org.entityapi.nms.v1_7_R1.entity;
+
+import net.minecraft.server.v1_7_R1.IMonster;
+import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Sheep;
+import org.bukkit.entity.Snowman;
+import org.entityapi.api.EntityManager;
+import org.entityapi.api.ProjectileType;
+import org.entityapi.api.entity.ControllableEntityType;
+import org.entityapi.api.entity.EntitySound;
+import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
+import org.entityapi.api.entity.type.ControllableSkeleton;
+import org.entityapi.api.entity.type.ControllableSnowman;
+import org.entityapi.api.entity.type.bukkit.InsentientEntity;
+import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.*;
+
+public class ControllableSnowmanBase extends ControllableBaseEntity<Snowman, ControllableSnowmanEntity> implements ControllableSnowman {
+
+    public ControllableSnowmanBase(int id, EntityManager manager) {
+        super(id, ControllableEntityType.SLIME, manager);
+    }
+
+    public ControllableSnowmanBase(int id, ControllableSnowmanEntity entityHandle, EntityManager manager) {
+        this(id, manager);
+        this.handle = entityHandle;
+        this.loot = entityHandle.getDefaultMaterialLoot();
+    }
+
+    @Override
+    public BehaviourItem[] getDefaultTargetingBehaviours() {
+        return new BehaviourItem[] {
+                new BehaviourItem(new BehaviourRangedAttack(this, 20, 10.0F, 1.25), 1),
+                new BehaviourItem(new BehaviourRandomStroll(this, 1.0D), 2),
+                new BehaviourItem(new BehaviourLookAtNearestEntity(this, HumanEntity.class, 6.0F), 3),
+                new BehaviourItem(new BehaviourLookAtRandom(this), 4),
+        };
+    }
+
+    @Override
+    public BehaviourItem[] getDefaultMovementBehaviours() {
+        return new BehaviourItem[] {
+                new BehaviourItem(new BehaviourMoveTowardsNearestAttackableTarget(this, InsentientEntity.class, 0, true, false, IMonster.a), 1)
+        };
+    }
+}

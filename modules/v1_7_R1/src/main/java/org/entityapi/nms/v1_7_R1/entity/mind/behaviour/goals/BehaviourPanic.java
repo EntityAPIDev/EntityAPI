@@ -19,6 +19,7 @@ package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import net.minecraft.server.v1_7_R1.Vec3D;
+import org.bukkit.util.Vector;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
@@ -30,9 +31,15 @@ public class BehaviourPanic extends BehaviourBase {
     private double panicX;
     private double panicY;
     private double panicZ;
+    private double navigationSpeed;
 
     public BehaviourPanic(ControllableEntity controllableEntity) {
+        this(controllableEntity, -1);
+    }
+
+    public BehaviourPanic(ControllableEntity controllableEntity, double navigationSpeed) {
         super(controllableEntity);
+        this.navigationSpeed = navigationSpeed;
     }
 
     @Override
@@ -76,7 +83,7 @@ public class BehaviourPanic extends BehaviourBase {
 
     @Override
     public void start() {
-        NMSEntityUtil.getNavigation(this.getHandle()).a(this.panicX, this.panicY, this.panicZ, this.getControllableEntity().getSpeed());
+        this.getControllableEntity().navigateTo(new Vector(this.panicX, this.panicY, this.panicZ), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
     }
 
     @Override

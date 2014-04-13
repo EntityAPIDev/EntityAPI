@@ -17,11 +17,15 @@
 
 package org.entityapi.nms.v1_7_R1.entity;
 
+import org.bukkit.Material;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Pig;
 import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.EntitySound;
+import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllablePig;
+import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.*;
 
 public class ControllablePigBase extends ControllableBaseEntity<Pig, ControllablePigEntity> implements ControllablePig {
 
@@ -41,5 +45,21 @@ public class ControllablePigBase extends ControllableBaseEntity<Pig, Controllabl
         this.setSound(EntitySound.HURT, "mob.pig.say");
         this.setSound(EntitySound.DEATH, "mob.pig.death");
         this.setSound(EntitySound.STEP, "mob.pig.step");
+    }
+
+    @Override
+    public BehaviourItem[] getDefaultMovementBehaviours() {
+        return new BehaviourItem[] {
+                new BehaviourItem(new BehaviourFloat(this), 0),
+                new BehaviourItem(new BehaviourPanic(this, 1.25D), 1),
+                new BehaviourItem(new BehaviourFollowCarrotStick(this, 0.3F), 2),
+                new BehaviourItem(new BehaviourBreed(this, 1.0D), 3),
+                new BehaviourItem(new BehaviourTempt(this, Material.CARROT, false), 4),
+                new BehaviourItem(new BehaviourTempt(this, Material.CARROT_STICK, false), 4),
+                new BehaviourItem(new BehaviourFollowParent(this, 1.1D), 5),
+                new BehaviourItem(new BehaviourRandomStroll(this, 1.0D), 6),
+                new BehaviourItem(new BehaviourLookAtNearestEntity(this, HumanEntity.class, 6.0F), 7),
+                new BehaviourItem(new BehaviourLookAtRandom(this), 8)
+        };
     }
 }

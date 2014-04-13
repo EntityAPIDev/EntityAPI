@@ -20,6 +20,7 @@ package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 import net.minecraft.server.v1_7_R1.EntityCreature;
 import net.minecraft.server.v1_7_R1.MathHelper;
 import net.minecraft.server.v1_7_R1.Vec3D;
+import org.bukkit.util.Vector;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
@@ -32,9 +33,15 @@ public class BehaviourFleeSun extends BehaviourBase {
     private double fleeX;
     private double fleeY;
     private double fleeZ;
+    private double navigationSpeed;
+
+    public BehaviourFleeSun(ControllableEntity controllableEntity, double navigationSpeed) {
+        super(controllableEntity);
+        this.navigationSpeed = navigationSpeed;
+    }
 
     public BehaviourFleeSun(ControllableEntity controllableEntity) {
-        super(controllableEntity);
+        this(controllableEntity, -1);
     }
 
     @Override
@@ -76,7 +83,7 @@ public class BehaviourFleeSun extends BehaviourBase {
 
     @Override
     public void start() {
-        NMSEntityUtil.getNavigation(this.getHandle()).a(this.fleeX, this.fleeY, this.fleeZ, this.getControllableEntity().getSpeed());
+        this.getControllableEntity().navigateTo(new Vector(this.fleeX, this.fleeY, this.fleeZ), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
     }
 
     @Override

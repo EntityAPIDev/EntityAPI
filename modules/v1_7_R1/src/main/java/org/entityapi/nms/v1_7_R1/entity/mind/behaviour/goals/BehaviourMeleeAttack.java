@@ -23,6 +23,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
+import org.entityapi.api.reflection.refs.NMSEntityClassRef;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
 import org.entityapi.nms.v1_7_R1.entity.ControllableBaseEntity;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
@@ -32,20 +33,33 @@ public class BehaviourMeleeAttack extends BehaviourBase {
     private int attackTicks;
     private boolean ignoreSight;
     private PathEntity pathToAttack;
-    private Class typeToAttack;
+    private Class<? extends Entity> typeToAttack;
     private int moveTicks;
     private double targetX;
     private double targetY;
     private double targetZ;
+    private double navigationSpeed;
 
-    public BehaviourMeleeAttack(ControllableEntity controllableEntity, Class typeToAttack, boolean ignoreSight) {
-        this(controllableEntity, ignoreSight);
-        this.typeToAttack = typeToAttack;
+    public BehaviourMeleeAttack(ControllableEntity controllableEntity, Class<? extends org.bukkit.entity.Entity> typeToAttack, boolean ignoreSight, double navigationSpeed) {
+        super(controllableEntity);
+        this.ignoreSight = ignoreSight;
+        this.typeToAttack = (Class<? extends Entity>) NMSEntityClassRef.getNMSClass(typeToAttack);
+        if (this.typeToAttack == null && !(EntityLiving.class.isAssignableFrom(typeToAttack))) {
+            throw new IllegalArgumentException("Could not find valid NMS class for " + typeToAttack.getSimpleName());
+        }
+        this.navigationSpeed = navigationSpeed;
+    }
+
+    public BehaviourMeleeAttack(ControllableEntity controllableEntity, Class<? extends org.bukkit.entity.Entity> typeToAttack, boolean ignoreSight) {
+        this(controllableEntity, typeToAttack, ignoreSight, -1);
     }
 
     public BehaviourMeleeAttack(ControllableEntity controllableEntity, boolean ignoreSight) {
-        super(controllableEntity);
-        this.ignoreSight = ignoreSight;
+        this(controllableEntity, ignoreSight, -1);
+    }
+
+    public BehaviourMeleeAttack(ControllableEntity controllableEntity, boolean ignoreSight, double navigationSpeed) {
+        this(controllableEntity, null, ignoreSight, navigationSpeed);
     }
 
     @Override
@@ -96,7 +110,7 @@ public class BehaviourMeleeAttack extends BehaviourBase {
 
     @Override
     public void start() {
-        ((ControllableBaseEntity) this.getControllableEntity()).navigateTo(this.pathToAttack);
+        ((ControllableBaseEntity) this.getControllableEntity()).navigateTo(this.pathToAttack, this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
         this.moveTicks = 0;
     }
 
@@ -126,7 +140,7 @@ public class BehaviourMeleeAttack extends BehaviourBase {
                 this.moveTicks += 5;
             }
 
-            if (!((ControllableBaseEntity) this.getControllableEntity()).navigateTo(this.pathToAttack)) {
+            if (!((ControllableBaseEntity) this.getControllableEntity()).navigateTo(this.pathToAttack, this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed())) {
                 this.moveTicks += 15;
             }
         }

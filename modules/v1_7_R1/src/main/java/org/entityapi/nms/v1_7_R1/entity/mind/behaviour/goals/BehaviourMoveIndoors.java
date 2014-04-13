@@ -21,6 +21,7 @@ import net.minecraft.server.v1_7_R1.MathHelper;
 import net.minecraft.server.v1_7_R1.Vec3D;
 import net.minecraft.server.v1_7_R1.Village;
 import net.minecraft.server.v1_7_R1.VillageDoor;
+import org.bukkit.util.Vector;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
@@ -32,9 +33,15 @@ public class BehaviourMoveIndoors extends BehaviourBase {
     private VillageDoor villageDoor;
     private int indoorsX = -1;
     private int indoorsZ = -1;
+    private double navigationSpeed;
 
     public BehaviourMoveIndoors(ControllableEntity controllableEntity) {
+        this(controllableEntity, 1.0D);
+    }
+
+    public BehaviourMoveIndoors(ControllableEntity controllableEntity, double navigationSpeed) {
         super(controllableEntity);
+        this.navigationSpeed = navigationSpeed;
     }
 
     @Override
@@ -85,10 +92,10 @@ public class BehaviourMoveIndoors extends BehaviourBase {
             Vec3D vec3d = RandomPositionGenerator.a(this.getHandle(), 14, 3, this.getHandle().world.getVec3DPool().create((double) this.villageDoor.getIndoorsX() + 0.5D, (double) this.villageDoor.getIndoorsY(), (double) this.villageDoor.getIndoorsZ() + 0.5D));
 
             if (vec3d != null) {
-                NMSEntityUtil.getNavigation(this.getHandle()).a(vec3d.c, vec3d.d, vec3d.e, 1.0D);
+                this.getControllableEntity().navigateTo(new Vector(vec3d.c, vec3d.d, vec3d.e), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
             }
         } else {
-            NMSEntityUtil.getNavigation(this.getHandle()).a((double) this.villageDoor.getIndoorsX() + 0.5D, (double) this.villageDoor.getIndoorsY(), (double) this.villageDoor.getIndoorsZ() + 0.5D, 1.0D);
+            this.getControllableEntity().navigateTo(new Vector((double) this.villageDoor.getIndoorsX() + 0.5D, (double) this.villageDoor.getIndoorsY(), (double) this.villageDoor.getIndoorsZ() + 0.5D), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
         }
     }
 

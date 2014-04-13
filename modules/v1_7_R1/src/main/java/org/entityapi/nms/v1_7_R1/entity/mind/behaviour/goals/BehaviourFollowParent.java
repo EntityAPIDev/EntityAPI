@@ -19,6 +19,7 @@ package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
 import net.minecraft.server.v1_7_R1.EntityAnimal;
 import org.bukkit.entity.Animals;
+import org.bukkit.entity.LivingEntity;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
@@ -32,13 +33,19 @@ public class BehaviourFollowParent extends BehaviourBase {
 
     private EntityAnimal parent;
     private int followTicks;
+    private double navigationSpeed;
 
-    public BehaviourFollowParent(ControllableEntity<Animals> controllableEntity) {
+    public BehaviourFollowParent(ControllableEntity<? extends Animals> controllableEntity) {
+        this(controllableEntity, -1);
+    }
+
+    public BehaviourFollowParent(ControllableEntity controllableEntity, double navigationSpeed) {
         super(controllableEntity);
+        this.navigationSpeed = navigationSpeed;
     }
 
     @Override
-    public ControllableEntity<Animals> getControllableEntity() {
+    public ControllableEntity<? extends Animals> getControllableEntity() {
         return super.getControllableEntity();
     }
 
@@ -116,7 +123,7 @@ public class BehaviourFollowParent extends BehaviourBase {
     public void tick() {
         if (--this.followTicks <= 0) {
             this.followTicks = 10;
-            NMSEntityUtil.getNavigation(this.getHandle()).a(this.parent, this.getControllableEntity().getSpeed());
+            this.getControllableEntity().navigateTo((LivingEntity) this.parent.getBukkitEntity(), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
         }
     }
 }

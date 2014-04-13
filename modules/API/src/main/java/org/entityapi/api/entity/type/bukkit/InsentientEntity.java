@@ -15,26 +15,10 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.entity;
+package org.entityapi.api.entity.type.bukkit;
 
-public enum EntitySound {
+import org.bukkit.entity.LivingEntity;
 
-    IDLE,
-    HURT,
-    DEATH,
-    STEP,
-    ATTACK,
-    JUMP,
-    BREATHE,
-    HIT,
-    WINGS,
-    LAY_EGG,
-    STARE,
-    TELEPORT,
-    THROW,
-    ANGRY,
-    SHAKE,
-    SHEAR,
-    YES,
-    NO;
+public interface InsentientEntity extends LivingEntity {
+
 }

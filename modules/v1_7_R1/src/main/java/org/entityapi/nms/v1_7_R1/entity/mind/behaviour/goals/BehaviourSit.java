@@ -30,12 +30,12 @@ public class BehaviourSit extends BehaviourBase {
 
     private boolean willSit;
 
-    public BehaviourSit(ControllableEntity<Animals> controllableEntity) {
+    public BehaviourSit(ControllableEntity<? extends Animals> controllableEntity) {
         super(controllableEntity);
     }
 
     @Override
-    public ControllableEntity<Animals> getControllableEntity() {
+    public ControllableEntity<? extends Animals> getControllableEntity() {
         return super.getControllableEntity();
     }
 

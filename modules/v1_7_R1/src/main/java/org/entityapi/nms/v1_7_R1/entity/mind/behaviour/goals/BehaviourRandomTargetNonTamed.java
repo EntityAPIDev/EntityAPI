@@ -25,7 +25,7 @@ import org.entityapi.api.entity.mind.attribute.TamingAttribute;
 
 public class BehaviourRandomTargetNonTamed extends BehaviourMoveTowardsNearestAttackableTarget {
 
-    public BehaviourRandomTargetNonTamed(ControllableEntity controllableEntity, Class classToTarget, int chance, boolean checkSenses) {
+    public BehaviourRandomTargetNonTamed(ControllableEntity controllableEntity, Class<? extends org.bukkit.entity.Entity> classToTarget, int chance, boolean checkSenses) {
         super(controllableEntity, classToTarget, chance, checkSenses);
     }
 
@@ -38,17 +38,6 @@ public class BehaviourRandomTargetNonTamed extends BehaviourMoveTowardsNearestAt
             return tamingAttribute.isTamed();
         }
         return false;
-    }
-
-    private EntityLiving getTamer() {
-        if (this.getHandle() instanceof EntityTameableAnimal) {
-            return ((EntityTameableAnimal) this.getHandle()).getOwner();
-        }
-        TamingAttribute tamingAttribute = this.getControllableEntity().getMind().getAttribute(TamingAttribute.class);
-        if (tamingAttribute != null) {
-            return ((CraftLivingEntity) tamingAttribute.getTamer()).getHandle();
-        }
-        return null;
     }
 
     @Override

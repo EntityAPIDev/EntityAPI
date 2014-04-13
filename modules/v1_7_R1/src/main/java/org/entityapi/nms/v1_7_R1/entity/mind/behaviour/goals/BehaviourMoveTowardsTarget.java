@@ -34,10 +34,16 @@ public class BehaviourMoveTowardsTarget extends BehaviourBase {
     private double targetY;
     private double targetZ;
     private double minDistance;
+    private double navigationSpeed;
 
     public BehaviourMoveTowardsTarget(ControllableEntity controllableEntity, double minDistance) {
+        this(controllableEntity, minDistance, -1);
+    }
+
+    public BehaviourMoveTowardsTarget(ControllableEntity controllableEntity, double minDistance, double navigationSpeed) {
         super(controllableEntity);
         this.minDistance = minDistance;
+        this.navigationSpeed = navigationSpeed;
     }
 
     @Override
@@ -78,7 +84,7 @@ public class BehaviourMoveTowardsTarget extends BehaviourBase {
 
     @Override
     public void start() {
-        this.getControllableEntity().navigateTo(new Vector(this.targetX, this.targetY, this.targetZ));
+        this.getControllableEntity().navigateTo(new Vector(this.targetX, this.targetY, this.targetZ), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
     }
 
     @Override

@@ -30,9 +30,15 @@ public class BehaviourRandomStroll extends BehaviourBase {
     private double randX;
     private double randY;
     private double randZ;
+    private double navigationSpeed;
 
     public BehaviourRandomStroll(ControllableEntity controllableEntity) {
+        this(controllableEntity, -1);
+    }
+
+    public BehaviourRandomStroll(ControllableEntity controllableEntity, double navigationSpeed) {
         super(controllableEntity);
+        this.navigationSpeed = navigationSpeed;
     }
 
     @Override
@@ -72,7 +78,7 @@ public class BehaviourRandomStroll extends BehaviourBase {
 
     @Override
     public void start() {
-        this.getControllableEntity().navigateTo(new Vector(this.randX, this.randY, this.randZ));
+        this.getControllableEntity().navigateTo(new Vector(this.randX, this.randY, this.randZ), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
     }
 
     @Override

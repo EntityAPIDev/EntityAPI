@@ -29,8 +29,9 @@ import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.EntitySound;
-import org.entityapi.api.events.ControllableEntityPreSpawnEvent;
 import org.entityapi.api.entity.mind.behaviour.Behaviour;
+import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
+import org.entityapi.api.events.ControllableEntityPreSpawnEvent;
 import org.entityapi.api.entity.mind.Mind;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.plugin.EntityAPI;
@@ -48,6 +49,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends E
     private final int ID;
     protected Mind mind;
     protected boolean tickAttributes;
+    protected boolean overridePathfindingSpeed;
 
     protected org.bukkit.Material loot;
 
@@ -273,7 +275,13 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends E
 
     @Override
     public void setSpeed(double speed) {
+        this.setSpeed(speed, false);
+    }
+
+    @Override
+    public void setSpeed(double speed, boolean overridePathfindingSpeed) {
         this.handle.getAttributeInstance(GenericAttributes.d).setValue(speed);
+        this.overridePathfindingSpeed = overridePathfindingSpeed;
     }
 
     @Override
@@ -334,15 +342,15 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends E
     }
 
     public boolean navigateTo(PathEntity path) {
-        if (!(this.handle instanceof EntityInsentient) || path == null) {
-            return false;
-        }
-        return ((EntityInsentient) this.handle).getNavigation().a(path, this.getSpeed());
+        return this.navigateTo(path, this.getSpeed());
     }
 
     public boolean navigateTo(PathEntity path, double speed) {
         if (!(this.handle instanceof EntityInsentient) || path == null) {
             return false;
+        }
+        if (this.overridePathfindingSpeed) {
+            speed = this.getSpeed();
         }
         return ((EntityInsentient) this.handle).getNavigation().a(path, speed);
     }
@@ -379,13 +387,21 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends E
 
     @Override
     public void setDefaultBehaviours() {
-        for (Map.Entry<Behaviour, Integer> entry : this.getDefaultBehaviours().entrySet()) {
-            this.getMind().getBehaviourSelector().addBehaviour(entry.getKey(), entry.getValue());
+        for (BehaviourItem behaviourItem : this.getDefaultMovementBehaviours()) {
+            this.getMind().getMovementBehaviourSelector().addBehaviour(behaviourItem.getBehaviour(), behaviourItem.getPriority());
+        }
+
+        for (BehaviourItem behaviourItem : this.getDefaultTargetingBehaviours()) {
+            this.getMind().getTargetingBehaviourSelector().addBehaviour(behaviourItem.getBehaviour(), behaviourItem.getPriority());
         }
     }
 
-    public Map<Behaviour, Integer> getDefaultBehaviours() {
-        return new HashMap<>();
+    public BehaviourItem[] getDefaultMovementBehaviours() {
+        return new BehaviourItem[0];
+    }
+
+    public BehaviourItem[] getDefaultTargetingBehaviours() {
+        return new BehaviourItem[0];
     }
 
     @Override

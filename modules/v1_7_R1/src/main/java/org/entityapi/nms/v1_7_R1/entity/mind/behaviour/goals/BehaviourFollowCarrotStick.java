@@ -28,7 +28,7 @@ public class BehaviourFollowCarrotStick extends BehaviourBase {
     private float maxSpeed;
     private float currentSpeed;
     private boolean boostSpeed;
-    private int speedBoostTicks;
+    private int navigationSpeedBoostTicks;
     private int maxSpeedBoostTicks;
 
     public BehaviourFollowCarrotStick(ControllableEntity controllableEntity) {
@@ -91,14 +91,14 @@ public class BehaviourFollowCarrotStick extends BehaviourBase {
         int locX = MathHelper.floor(this.getHandle().locX);
         int locY = MathHelper.floor(this.getHandle().locY);
         int locZ = MathHelper.floor(this.getHandle().locZ);
-        float speed = this.currentSpeed;
+        float navigationSpeed = this.currentSpeed;
 
         if (this.boostSpeed) {
-            if (this.speedBoostTicks++ > this.maxSpeedBoostTicks) {
+            if (this.navigationSpeedBoostTicks++ > this.maxSpeedBoostTicks) {
                 this.boostSpeed = false;
             }
 
-            speed += speed * 1.15F * MathHelper.sin((float) this.speedBoostTicks / (float) this.maxSpeedBoostTicks * 3.1415927F);
+            navigationSpeed += navigationSpeed * 1.15F * MathHelper.sin((float) this.navigationSpeedBoostTicks / (float) this.maxSpeedBoostTicks * 3.1415927F);
         }
 
         float blockFriction = 0.91F;
@@ -113,10 +113,10 @@ public class BehaviourFollowCarrotStick extends BehaviourBase {
         float f4 = MathHelper.sin(this.getHandle().yaw * 3.1415927F / 180.0F);
         float f5 = MathHelper.cos(this.getHandle().yaw * 3.1415927F / 180.0F);
         float f6 = this.getHandle().bl() * f3;
-        float f7 = Math.max(speed, 1.0F);
+        float f7 = Math.max(navigationSpeed, 1.0F);
 
         f7 = f6 / f7;
-        float f8 = speed * f7;
+        float f8 = navigationSpeed * f7;
         float f9 = -(f8 * f4);
         float f10 = f8 * f5;
 
@@ -168,7 +168,7 @@ public class BehaviourFollowCarrotStick extends BehaviourBase {
             }
         }
 
-        this.getHandle().e(0.0F, speed);
+        this.getHandle().e(0.0F, navigationSpeed);
     }
 
     private boolean isTypeStep(Block block) {
@@ -181,7 +181,7 @@ public class BehaviourFollowCarrotStick extends BehaviourBase {
 
     public void boostSpeed() {
         this.boostSpeed = true;
-        this.speedBoostTicks = 0;
+        this.navigationSpeedBoostTicks = 0;
         this.maxSpeedBoostTicks = this.getHandle().aI().nextInt(841) + 140;
     }
 

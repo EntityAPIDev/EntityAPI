@@ -33,11 +33,17 @@ public class BehaviourFollowTamer extends BehaviourBase {
     private float maxDistance;
     private float minDistance;
     private boolean waterAvoidance;
+    private double navigationSpeed;
 
     public BehaviourFollowTamer(ControllableEntity controllableEntity, float maxDistance, float minDistance) {
+        this(controllableEntity, maxDistance, minDistance, -1);
+    }
+
+    public BehaviourFollowTamer(ControllableEntity controllableEntity, float maxDistance, float minDistance, double navigationSpeed) {
         super(controllableEntity);
         this.maxDistance = maxDistance;
         this.minDistance = minDistance;
+        this.navigationSpeed = navigationSpeed;
     }
 
     public BehaviourFollowTamer(ControllableEntity controllableEntity) {
@@ -117,7 +123,7 @@ public class BehaviourFollowTamer extends BehaviourBase {
         if (!(this.isSitting())) {
             if (--this.followTicks <= 0) {
                 this.followTicks = 10;
-                if (!this.getControllableEntity().navigateTo((LivingEntity) this.tamer.getBukkitEntity())) {
+                if (!this.getControllableEntity().navigateTo((LivingEntity) this.tamer.getBukkitEntity(), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed())) {
                     if (!this.isLeashed()) {
                         if (this.getHandle().e(this.tamer) >= 144.0D) {
                             int x = MathHelper.floor(this.tamer.locX) - 2;

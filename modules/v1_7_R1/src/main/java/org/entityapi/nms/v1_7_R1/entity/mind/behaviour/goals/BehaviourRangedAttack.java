@@ -42,6 +42,7 @@ public class BehaviourRangedAttack extends BehaviourBase {
     private float rangeSquared;
     private int inRangeTicks;
     private int shootCooldown;
+    private double navigationSpeed;
 
     private EntityLiving target;
 
@@ -58,12 +59,29 @@ public class BehaviourRangedAttack extends BehaviourBase {
     }
 
     public BehaviourRangedAttack(ControllableEntity controllableEntity, ProjectileType projectileType, int minDelay, int maxDelay, float range) {
+        this(controllableEntity, minDelay, maxDelay, range, -1);
+    }
+
+    public BehaviourRangedAttack(ControllableEntity controllableEntity, int minDelay, float range, double navigationSpeed) {
+        this(controllableEntity, ProjectileType.DEFAULT, minDelay, range, navigationSpeed);
+    }
+
+    public BehaviourRangedAttack(ControllableEntity controllableEntity, int minDelay, int maxDelay, float range, double navigationSpeed) {
+        this(controllableEntity, ProjectileType.DEFAULT, minDelay, maxDelay, range, navigationSpeed);
+    }
+
+    public BehaviourRangedAttack(ControllableEntity controllableEntity, ProjectileType projectileType, int minDelay, float range, double navigationSpeed) {
+        this(controllableEntity, projectileType, minDelay, minDelay, range, navigationSpeed);
+    }
+
+    public BehaviourRangedAttack(ControllableEntity controllableEntity, ProjectileType projectileType, int minDelay, int maxDelay, float range, double navigationSpeed) {
         super(controllableEntity);
         this.projectileType = projectileType;
         this.minDelay = minDelay;
         this.maxDelay = maxDelay;
         this.range = range;
         this.rangeSquared = range * range;
+        this.navigationSpeed = navigationSpeed;
     }
 
     @Override
@@ -118,7 +136,7 @@ public class BehaviourRangedAttack extends BehaviourBase {
         if (distanceToTarget <= (double) this.rangeSquared && this.inRangeTicks >= 20) {
             NMSEntityUtil.getNavigation(this.getHandle()).h();
         } else {
-            this.getControllableEntity().navigateTo((LivingEntity) this.target.getBukkitEntity());
+            this.getControllableEntity().navigateTo((LivingEntity) this.target.getBukkitEntity(), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
         }
 
         NMSEntityUtil.getControllerLook(this.getHandle()).a(this.target, 30.0F, 30.0F);

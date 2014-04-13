@@ -20,6 +20,7 @@ package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 import net.minecraft.server.v1_7_R1.Entity;
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
+import org.bukkit.entity.LivingEntity;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
@@ -72,15 +73,15 @@ public class BehaviourOcelotAttack extends BehaviourBase {
         NMSEntityUtil.getControllerLook(this.getHandle()).a(this.target, 30.0F, 30.0F);
         double minDistance = (double) (this.getHandle().width * 2.0F * this.getHandle().width * 2.0F);
         double distance = this.getHandle().e(this.target.locX, this.target.boundingBox.b, this.target.locZ);
-        double speed = 0.8D;
+        double navigationSpeed = 0.8D;
 
         if (distance > minDistance && distance < 16.0D) {
-            speed = 1.33D;
+            navigationSpeed = 1.33D;
         } else if (distance < 225.0D) {
-            speed = 0.6D;
+            navigationSpeed = 0.6D;
         }
 
-        NMSEntityUtil.getNavigation(this.getHandle()).a((Entity) this.target, speed);
+        this.getControllableEntity().navigateTo((LivingEntity) this.target.getBukkitEntity(), navigationSpeed);
         this.attackTicks = Math.max(this.attackTicks - 1, 0);
         if (distance <= minDistance) {
             if (this.attackTicks <= 0) {

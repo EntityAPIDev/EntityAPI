@@ -152,7 +152,7 @@ public abstract class BehaviourTarget extends BehaviourBase {
                     }
                 } else if (this instanceof BehaviourDefendTamer) {
                     reason = EntityTargetEvent.TargetReason.TARGET_ATTACKED_OWNER;
-                } else if (this instanceof BehaviourTamerHurtTarget) {
+                } else if (this instanceof BehaviourHelpTamerTarget) {
                     reason = EntityTargetEvent.TargetReason.OWNER_ATTACKED_TARGET;
                 }
 

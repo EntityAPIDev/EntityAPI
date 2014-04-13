@@ -37,13 +37,19 @@ public class BehaviourVillagerPlay extends BehaviourBase {
 
     private EntityLiving playMate;
     private int playTicks;
+    private double navigationSpeed;
 
-    public BehaviourVillagerPlay(ControllableEntity<Villager> controllableEntity) {
+    public BehaviourVillagerPlay(ControllableEntity<? extends Villager> controllableEntity) {
+        this(controllableEntity, -1);
+    }
+
+    public BehaviourVillagerPlay(ControllableEntity<? extends Villager> controllableEntity, double navigationSpeed) {
         super(controllableEntity);
+        this.navigationSpeed = navigationSpeed;
     }
 
     @Override
-    public ControllableEntity<Villager> getControllableEntity() {
+    public ControllableEntity<? extends Villager> getControllableEntity() {
         return super.getControllableEntity();
     }
 
@@ -123,7 +129,7 @@ public class BehaviourVillagerPlay extends BehaviourBase {
         --this.playTicks;
         if (this.playMate != null) {
             if (this.getHandle().e(this.playMate) > 4.0D) {
-                this.getControllableEntity().navigateTo((LivingEntity) this.playMate.getBukkitEntity());
+                this.getControllableEntity().navigateTo((LivingEntity) this.playMate.getBukkitEntity(), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
             }
         } else if (NMSEntityUtil.getNavigation(this.getHandle()).g()) {
             Vec3D vec3d = RandomPositionGenerator.a(this.getHandle(), 16, 3);
@@ -132,7 +138,7 @@ public class BehaviourVillagerPlay extends BehaviourBase {
                 return;
             }
 
-            this.getControllableEntity().navigateTo(new Vector(vec3d.c, vec3d.d, vec3d.e));
+            this.getControllableEntity().navigateTo(new Vector(vec3d.c, vec3d.d, vec3d.e), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
         }
     }
 }

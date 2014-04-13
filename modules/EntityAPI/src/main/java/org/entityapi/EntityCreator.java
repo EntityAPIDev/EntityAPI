@@ -109,7 +109,7 @@ public class EntityCreator {
                     entity.setDefaultBehaviours();
                 } else {
                     for (Map.Entry<Behaviour, Integer> entry : this.BEHAVIOURS.entrySet()) {
-                        entity.getMind().getBehaviourSelector().addBehaviour(entry.getKey(), entry.getValue());
+                        entity.getMind().getMovementBehaviourSelector().addBehaviour(entry.getKey(), entry.getValue());
                     }
                 }
                 if (this.NAME != null) {

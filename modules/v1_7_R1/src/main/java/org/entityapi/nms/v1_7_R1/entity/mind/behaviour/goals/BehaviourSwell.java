@@ -31,12 +31,12 @@ public class BehaviourSwell extends BehaviourBase {
 
     private EntityLiving target;
 
-    public BehaviourSwell(ControllableEntity<Creeper> controllableEntity) {
+    public BehaviourSwell(ControllableEntity<? extends Creeper> controllableEntity) {
         super(controllableEntity);
     }
 
     @Override
-    public ControllableEntity<Creeper> getControllableEntity() {
+    public ControllableEntity<? extends Creeper> getControllableEntity() {
         return super.getControllableEntity();
     }
 

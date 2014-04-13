@@ -30,7 +30,7 @@ public class ControllableEntityBreedEvent extends ControllableEntityEvent {
     private Animals mate;
     private Player breeder;
 
-    public ControllableEntityBreedEvent(ControllableEntity<Animals> firstParent, Animals mate, Animals child, Player breeder) {
+    public ControllableEntityBreedEvent(ControllableEntity<? extends Animals> firstParent, Animals mate, Animals child, Player breeder) {
         super(firstParent);
         this.child = child;
         this.mate = mate;

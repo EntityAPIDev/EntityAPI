@@ -30,6 +30,7 @@ public class Mind {
     protected HashMap<String, Attribute> attributes = new HashMap<>();
 
     protected BehaviourSelector behaviourSelector;
+    protected BehaviourSelector targetSelector;
 
     protected boolean stationary;
     protected float fixedYaw;
@@ -41,7 +42,10 @@ public class Mind {
 
     public void setControllableEntity(ControllableEntity controllableEntity) {
         this.controllableEntity = controllableEntity;
-        this.behaviourSelector = controllableEntity == null ? null : new BehaviourSelector(this.controllableEntity);
+        if (this.controllableEntity != null) {
+            this.behaviourSelector = new BehaviourSelector(this.controllableEntity);
+            this.targetSelector = new BehaviourSelector(this.controllableEntity);
+        }
     }
 
     public ControllableEntity getControllableEntity() {
@@ -84,8 +88,12 @@ public class Mind {
         return attributes;
     }
 
-    public BehaviourSelector getBehaviourSelector() {
+    public BehaviourSelector getMovementBehaviourSelector() {
         return behaviourSelector;
+    }
+
+    public BehaviourSelector getTargetingBehaviourSelector() {
+        return targetSelector;
     }
 
     public void addAttribute(Attribute attribute) {
@@ -141,6 +149,10 @@ public class Mind {
     public void tick() {
         if (this.behaviourSelector != null) {
             this.behaviourSelector.updateBehaviours();
+        }
+
+        if (this.targetSelector != null) {
+            this.targetSelector.updateBehaviours();
         }
 
         for (Attribute attribute : this.attributes.values()) {

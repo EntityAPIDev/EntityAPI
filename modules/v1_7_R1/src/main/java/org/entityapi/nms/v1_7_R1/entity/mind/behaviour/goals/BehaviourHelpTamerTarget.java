@@ -25,12 +25,12 @@ import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.attribute.TamingAttribute;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 
-public class BehaviourTamerHurtTarget extends BehaviourTarget {
+public class BehaviourHelpTamerTarget extends BehaviourTarget {
 
     private EntityLiving target;
     private int lastAttackTick;
 
-    public BehaviourTamerHurtTarget(ControllableEntity controllableEntity) {
+    public BehaviourHelpTamerTarget(ControllableEntity controllableEntity) {
         super(controllableEntity, false);
     }
 

@@ -18,6 +18,7 @@
 package org.entityapi.api.reflection.refs;
 
 import org.bukkit.entity.*;
+import org.entityapi.api.entity.type.bukkit.InsentientEntity;
 import org.entityapi.api.plugin.EntityAPI;
 
 import java.util.HashMap;
@@ -25,7 +26,7 @@ import java.util.Map;
 
 public class NMSEntityClassRef {
 
-    private static HashMap<Class<? extends org.bukkit.entity.Entity>, Class<?>> CLASS_MAP = new HashMap<>();
+    private static HashMap<Class<?>, Class<?>> CLASS_MAP = new HashMap<>();
 
     static {
         CLASS_MAP.put(org.bukkit.entity.Entity.class, EntityAPI.getCore().getAPIServer().getNMSClass("Entity"));
@@ -35,6 +36,8 @@ public class NMSEntityClassRef {
         CLASS_MAP.put(Flying.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityFlying"));
         CLASS_MAP.put(LivingEntity.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityLiving"));
         CLASS_MAP.put(Monster.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityMonster"));
+
+        CLASS_MAP.put(InsentientEntity.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityInsentient"));
 
         CLASS_MAP.put(Bat.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityBat"));
         CLASS_MAP.put(Blaze.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityBlaze"));
@@ -85,7 +88,7 @@ public class NMSEntityClassRef {
         Class result = null;
         Class superClass = nmsClass;
         while (result == null && superClass != Object.class) {
-            for (Map.Entry<Class<? extends org.bukkit.entity.Entity>, Class<?>> entry : CLASS_MAP.entrySet()) {
+            for (Map.Entry<Class<?>, Class<?>> entry : CLASS_MAP.entrySet()) {
                 if (entry.getValue() == nmsClass) {
                     result = entry.getKey();
                 }

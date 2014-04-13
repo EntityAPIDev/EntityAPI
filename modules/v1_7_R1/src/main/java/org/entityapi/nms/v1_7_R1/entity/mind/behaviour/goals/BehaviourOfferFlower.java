@@ -33,7 +33,7 @@ public class BehaviourOfferFlower extends BehaviourBase {
     private EntityLiving toOffer;
     private int offerTicks;
 
-    public BehaviourOfferFlower(ControllableEntity<IronGolem> controllableEntity, Class<? extends org.bukkit.entity.Entity> classToOffer) {
+    public BehaviourOfferFlower(ControllableEntity<? extends IronGolem> controllableEntity, Class<? extends org.bukkit.entity.Entity> classToOffer) {
         super(controllableEntity);
         this.typeToOffer = (Class<? extends Entity>) NMSEntityClassRef.getNMSClass(classToOffer);
         if (this.typeToOffer == null || !(EntityLiving.class.isAssignableFrom(classToOffer))) {
@@ -42,7 +42,7 @@ public class BehaviourOfferFlower extends BehaviourBase {
     }
 
     @Override
-    public ControllableEntity<IronGolem> getControllableEntity() {
+    public ControllableEntity<? extends IronGolem> getControllableEntity() {
         return super.getControllableEntity();
     }
 

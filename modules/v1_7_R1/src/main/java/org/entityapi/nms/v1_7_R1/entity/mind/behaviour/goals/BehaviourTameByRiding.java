@@ -31,9 +31,15 @@ public class BehaviourTameByRiding extends BehaviourBase {
     private double walkX;
     private double walkY;
     private double walkZ;
+    private double walkSpeed;
 
     public BehaviourTameByRiding(ControllableEntity controllableEntity) {
+        this(controllableEntity, -1);
+    }
+
+    public BehaviourTameByRiding(ControllableEntity controllableEntity, double walkSpeed) {
         super(controllableEntity);
+        this.walkSpeed = walkSpeed;
     }
 
     @Override
@@ -109,7 +115,7 @@ public class BehaviourTameByRiding extends BehaviourBase {
 
     @Override
     public void start() {
-        this.getControllableEntity().navigateTo(new Vector(this.walkX, this.walkY, this.walkZ));
+        this.getControllableEntity().navigateTo(new Vector(this.walkX, this.walkY, this.walkZ), this.walkSpeed > 0 ? this.walkSpeed : this.getControllableEntity().getSpeed());
     }
 
     @Override

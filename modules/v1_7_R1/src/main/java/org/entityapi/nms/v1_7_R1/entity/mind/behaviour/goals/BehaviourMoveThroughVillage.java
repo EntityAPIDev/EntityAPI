@@ -34,10 +34,16 @@ public class BehaviourMoveThroughVillage extends BehaviourBase {
     private VillageDoor villageDoor;
     private boolean onlyMoveAtNight;
     private List<VillageDoor> doors = new ArrayList<>();
+    private double navigationSpeed;
 
     public BehaviourMoveThroughVillage(ControllableEntity controllableEntity, boolean onlyMoveAtNight) {
+        this(controllableEntity, onlyMoveAtNight, -1);
+    }
+
+    public BehaviourMoveThroughVillage(ControllableEntity controllableEntity, boolean onlyMoveAtNight, double navigationSpeed) {
         super(controllableEntity);
         this.onlyMoveAtNight = onlyMoveAtNight;
+        this.navigationSpeed = navigationSpeed;
     }
 
     @Override
@@ -101,7 +107,7 @@ public class BehaviourMoveThroughVillage extends BehaviourBase {
 
     @Override
     public void start() {
-        ((ControllableBaseEntity) this.getControllableEntity()).navigateTo(this.path);
+        ((ControllableBaseEntity) this.getControllableEntity()).navigateTo(this.path, this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
     }
 
     @Override

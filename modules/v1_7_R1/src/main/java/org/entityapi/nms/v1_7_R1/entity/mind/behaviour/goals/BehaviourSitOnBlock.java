@@ -33,13 +33,19 @@ public class BehaviourSitOnBlock extends BehaviourBase {
     private int targetX;
     private int targetY;
     private int targetZ;
+    private double navigationSpeed;
 
-    public BehaviourSitOnBlock(ControllableEntity<Ocelot> controllableEntity) {
+    public BehaviourSitOnBlock(ControllableEntity<? extends Ocelot> controllableEntity) {
+        this(controllableEntity, -1);
+    }
+
+    public BehaviourSitOnBlock(ControllableEntity<? extends Ocelot> controllableEntity, double navigationSpeed) {
         super(controllableEntity);
+        this.navigationSpeed = navigationSpeed;
     }
 
     @Override
-    public ControllableEntity<Ocelot> getControllableEntity() {
+    public ControllableEntity<? extends Ocelot> getControllableEntity() {
         return super.getControllableEntity();
     }
 
@@ -70,7 +76,7 @@ public class BehaviourSitOnBlock extends BehaviourBase {
 
     @Override
     public void start() {
-        this.getControllableEntity().navigateTo(new Vector((double) ((float) this.targetX) + 0.5D, (double) (this.targetY + 1), (double) ((float) this.targetZ) + 0.5D));
+        this.getControllableEntity().navigateTo(new Vector((double) ((float) this.targetX) + 0.5D, (double) (this.targetY + 1), (double) ((float) this.targetZ) + 0.5D), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
         this.sitTicks = 0;
         this.actionTicks = 0;
         this.maxSitTicks = this.getHandle().aI().nextInt(this.getHandle().aI().nextInt(1200) + 1200) + 1200;
@@ -88,7 +94,7 @@ public class BehaviourSitOnBlock extends BehaviourBase {
         this.getHandle().getGoalSit().setSitting(false);
         if (this.getHandle().e((double) this.targetX, (double) (this.targetY + 1), (double) this.targetZ) > 1.0D) {
             this.getHandle().setSitting(false);
-            this.getControllableEntity().navigateTo(new Vector((double) ((float) this.targetX) + 0.5D, (double) (this.targetY + 1), (double) ((float) this.targetZ) + 0.5D));
+            this.getControllableEntity().navigateTo(new Vector((double) ((float) this.targetX) + 0.5D, (double) (this.targetY + 1), (double) ((float) this.targetZ) + 0.5D), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
             ++this.actionTicks;
         } else if (!this.getHandle().isSitting()) {
             this.getHandle().setSitting(true);

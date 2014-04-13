@@ -15,26 +15,12 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.entity;
+package org.entityapi.api.entity.type;
 
-public enum EntitySound {
+import org.bukkit.entity.Sheep;
+import org.bukkit.entity.Skeleton;
+import org.entityapi.api.entity.ControllableEntity;
 
-    IDLE,
-    HURT,
-    DEATH,
-    STEP,
-    ATTACK,
-    JUMP,
-    BREATHE,
-    HIT,
-    WINGS,
-    LAY_EGG,
-    STARE,
-    TELEPORT,
-    THROW,
-    ANGRY,
-    SHAKE,
-    SHEAR,
-    YES,
-    NO;
+public interface ControllableSkeleton extends ControllableEntity<Skeleton> {
+
 }

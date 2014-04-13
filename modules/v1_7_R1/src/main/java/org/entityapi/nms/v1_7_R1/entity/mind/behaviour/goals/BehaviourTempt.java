@@ -20,6 +20,7 @@ package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 import net.minecraft.server.v1_7_R1.EntityHuman;
 import net.minecraft.server.v1_7_R1.Item;
 import net.minecraft.server.v1_7_R1.ItemStack;
+import org.bukkit.Material;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
@@ -27,8 +28,9 @@ import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourBase;
 
 public class BehaviourTempt extends BehaviourBase {
 
-    private int temptItemId;
+    private org.bukkit.Material temptItemMaterial;
     private boolean isScaredByMovement;
+    private double navigationSpeed;
 
     private double playerX;
     private double playerY;
@@ -40,14 +42,37 @@ public class BehaviourTempt extends BehaviourBase {
     private boolean tempted;
     private boolean avoidWater;
 
+    public BehaviourTempt(ControllableEntity controllableEntity, org.bukkit.Material temptItemId) {
+        this(controllableEntity, temptItemId, false);
+    }
+
+    public BehaviourTempt(ControllableEntity controllableEntity, org.bukkit.Material temptItemId, boolean isScaredByMovement) {
+        this(controllableEntity, temptItemId, isScaredByMovement, -1);
+    }
+
+    public BehaviourTempt(ControllableEntity controllableEntity, org.bukkit.Material temptItemId, boolean isScaredByMovement, double navigationSpeed) {
+        super(controllableEntity);
+        this.navigationSpeed = navigationSpeed;
+        this.isScaredByMovement = isScaredByMovement;
+        this.temptItemMaterial = temptItemId;
+    }
+
+    @Deprecated
     public BehaviourTempt(ControllableEntity controllableEntity, int temptItemId) {
         this(controllableEntity, temptItemId, false);
     }
 
+    @Deprecated
     public BehaviourTempt(ControllableEntity controllableEntity, int temptItemId, boolean isScaredByMovement) {
+        this(controllableEntity, temptItemId, isScaredByMovement, -1);
+    }
+
+    @Deprecated
+    public BehaviourTempt(ControllableEntity controllableEntity, int temptItemId, boolean isScaredByMovement, double navigationSpeed) {
         super(controllableEntity);
-        this.temptItemId = temptItemId;
+        this.navigationSpeed = navigationSpeed;
         this.isScaredByMovement = isScaredByMovement;
+        this.temptItemMaterial = Material.getMaterial(temptItemId);
     }
 
     @Override
@@ -72,7 +97,7 @@ public class BehaviourTempt extends BehaviourBase {
             } else {
                 ItemStack heldItem = this.nearbyPlayer.bD();
 
-                return heldItem == null ? false : Item.b(heldItem.getItem()) == this.temptItemId;
+                return heldItem == null ? false : Item.b(heldItem.getItem()) == this.temptItemMaterial.getId();
             }
         }
     }
@@ -126,7 +151,7 @@ public class BehaviourTempt extends BehaviourBase {
         if (this.getHandle().e(this.nearbyPlayer) < 6.25D) {
             NMSEntityUtil.getNavigation(this.getHandle()).h();
         } else {
-            this.getControllableEntity().navigateTo(this.nearbyPlayer.getBukkitEntity());
+            this.getControllableEntity().navigateTo(this.nearbyPlayer.getBukkitEntity(), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
         }
     }
     

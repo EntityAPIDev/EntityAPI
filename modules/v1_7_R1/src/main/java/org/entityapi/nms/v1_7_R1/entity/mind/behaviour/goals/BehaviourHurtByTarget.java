@@ -36,6 +36,11 @@ public class BehaviourHurtByTarget extends BehaviourTarget {
         this.attackNearest = attackNearest;
     }
 
+    public BehaviourHurtByTarget(ControllableEntity controllableEntity, boolean checkSenses, boolean useMelee, boolean attackNearest) {
+        super(controllableEntity, checkSenses, useMelee);
+        this.attackNearest = attackNearest;
+    }
+
     @Override
     public BehaviourType getType() {
         return BehaviourType.INSTINCT;

@@ -88,6 +88,8 @@ public abstract interface ControllableEntity<T extends LivingEntity> extends Nam
 
     public void setSpeed(double speed);
 
+    public void setSpeed(double speed, boolean overridePathfindingSpeed);
+
     public void setPathfindingRange(double range);
 
     public double getPathfindingRange();
