@@ -19,19 +19,19 @@ package org.entityapi.api.entity.mind.behaviour;
 
 public class BehaviourItem {
 
-    private Behaviour behaviour;
     private int priority;
+    private Behaviour behaviour;
 
-    public BehaviourItem(Behaviour behaviour, int priority) {
-        this.behaviour = behaviour;
+    public BehaviourItem(int priority, Behaviour behaviour) {
         this.priority = priority;
-    }
-
-    public Behaviour getBehaviour() {
-        return behaviour;
+        this.behaviour = behaviour;
     }
 
     public int getPriority() {
         return priority;
+    }
+
+    public Behaviour getBehaviour() {
+        return behaviour;
     }
 }

@@ -25,7 +25,7 @@ import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllablePigZombie;
-import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.*;
+import org.entityapi.api.entity.mind.behaviour.goals.*;
 
 public class ControllablePigZombieBase extends ControllableBaseEntity<PigZombie, ControllablePigZombieEntity> implements ControllablePigZombie {
 
@@ -51,23 +51,23 @@ public class ControllablePigZombieBase extends ControllableBaseEntity<PigZombie,
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourFloat(this), 0),
-                new BehaviourItem(new BehaviourMeleeAttack(this, HumanEntity.class, false, 1.0D), 2),
-                new BehaviourItem(new BehaviourMeleeAttack(this, Villager.class, true, 1.0D), 4),
-                new BehaviourItem(new BehaviourMoveTowardsRestriction(this, 1.0D), 5),
-                new BehaviourItem(new BehaviourMoveThroughVillage(this, false, 1.0D), 6),
-                new BehaviourItem(new BehaviourRandomStroll(this, 1.0D), 7),
-                new BehaviourItem(new BehaviourLookAtNearestEntity(this, HumanEntity.class, 8.0F), 8),
-                new BehaviourItem(new BehaviourLookAtRandom(this), 8)
+                new BehaviourItem(0, new BehaviourFloat(this)),
+                new BehaviourItem(2, new BehaviourMeleeAttack(this, HumanEntity.class, false, 1.0D)),
+                new BehaviourItem(4, new BehaviourMeleeAttack(this, Villager.class, true, 1.0D)),
+                new BehaviourItem(5, new BehaviourMoveTowardsRestriction(this, 1.0D)),
+                new BehaviourItem(6, new BehaviourMoveThroughVillage(this, false, 1.0D)),
+                new BehaviourItem(7, new BehaviourRandomStroll(this, 1.0D)),
+                new BehaviourItem(8, new BehaviourLookAtNearestEntity(this, HumanEntity.class, 8.0F)),
+                new BehaviourItem(8, new BehaviourLookAtRandom(this))
         };
     }
 
     @Override
     public BehaviourItem[] getDefaultTargetingBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourHurtByTarget(this, true), 1),
-                new BehaviourItem(new BehaviourMoveTowardsNearestAttackableTarget(this, HumanEntity.class, 0, true), 2),
-                new BehaviourItem(new BehaviourMoveTowardsNearestAttackableTarget(this, Villager.class, 0, false), 2)
+                new BehaviourItem(1, new BehaviourHurtByTarget(this, true)),
+                new BehaviourItem(2, new BehaviourMoveTowardsNearestAttackableTarget(this, HumanEntity.class, 0, true)),
+                new BehaviourItem(2, new BehaviourMoveTowardsNearestAttackableTarget(this, Villager.class, 0, false))
         };
     }
 }

@@ -17,21 +17,32 @@
 
 package org.entityapi.api.entity.mind.behaviour;
 
-public interface Behaviour {
+import org.entityapi.api.reflection.SafeConstructor;
+import org.entityapi.api.utils.ReflectionUtil;
 
-    public abstract BehaviourType getType();
+public abstract class Behaviour {
 
-    public abstract String getDefaultKey();
+    private BehaviourGoal behaviourGoal;
 
-    public abstract boolean shouldStart();
+    protected Behaviour(Object... args) {
+        Class<?>[] classes = new Class[args.length];
+        if (args.length > 0) {
+            for (int i = 0; i < args.length; i++) {
+                classes[i] = args[i].getClass();
+            }
+        }
+        this.behaviourGoal = new SafeConstructor<BehaviourGoal>(ReflectionUtil.getVersionedClass("entity.mind.behaviour.goals.BehaviourGoal" + this.getKey()), classes).newInstance(args);
+    }
 
-    public boolean shouldContinue();
+    public Behaviour(BehaviourGoal behaviourGoal) {
+        this.behaviourGoal = behaviourGoal;
+    }
 
-    public void start();
+    public BehaviourGoal getGoal() {
+        return this.behaviourGoal;
+    }
 
-    public void finish();
-
-    public boolean isContinuous();
-
-    public void tick();
+    protected String getKey() {
+        return this.getClass().getSimpleName().split("Goal")[1];
+    }
 }

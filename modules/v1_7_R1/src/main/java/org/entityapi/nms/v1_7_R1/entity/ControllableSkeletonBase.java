@@ -19,14 +19,15 @@ package org.entityapi.nms.v1_7_R1.entity;
 
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Sheep;
+import org.bukkit.entity.Skeleton;
 import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllableSkeleton;
-import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.*;
+import org.entityapi.api.entity.mind.behaviour.goals.*;
 
-public class ControllableSkeletonBase extends ControllableBaseEntity<Sheep, ControllableSkeletonEntity> implements ControllableSkeleton {
+public class ControllableSkeletonBase extends ControllableBaseEntity<Skeleton, ControllableSkeletonEntity> implements ControllableSkeleton {
 
     public ControllableSkeletonBase(int id, EntityManager manager) {
         super(id, ControllableEntityType.SLIME, manager);
@@ -49,21 +50,21 @@ public class ControllableSkeletonBase extends ControllableBaseEntity<Sheep, Cont
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourFloat(this), 1),
-                new BehaviourItem(new BehaviourRestrictSun(this), 2),
-                new BehaviourItem(new BehaviourFleeSun(this, 1.0D), 3),
-                //new BehaviourItem(new BehaviourRangedAttack(this, 60, 15.0F, 1.0D), 4),
-                new BehaviourItem(new BehaviourRandomStroll(this, 1.0D), 5),
-                new BehaviourItem(new BehaviourLookAtNearestEntity(this, HumanEntity.class, 8.0F), 6),
-                new BehaviourItem(new BehaviourLookAtRandom(this), 6)
+                new BehaviourItem(1, new BehaviourFloat(this)),
+                new BehaviourItem(2, new BehaviourRestrictSun(this)),
+                new BehaviourItem(3, new BehaviourFleeSun(this, 1.0D)),
+                //new BehaviourItem(4, new BehaviourRangedAttack(this, 60, 15.0F, 1.0D)),
+                new BehaviourItem(5, new BehaviourRandomStroll(this, 1.0D)),
+                new BehaviourItem(6, new BehaviourLookAtNearestEntity(this, HumanEntity.class, 8.0F)),
+                new BehaviourItem(6, new BehaviourLookAtRandom(this))
         };
     }
 
     @Override
     public BehaviourItem[] getDefaultTargetingBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourHurtByTarget(this, false), 1),
-                new BehaviourItem(new BehaviourMoveTowardsNearestAttackableTarget(this, HumanEntity.class, 0, true), 2)
+                new BehaviourItem(1, new BehaviourHurtByTarget(this, false)),
+                new BehaviourItem(2, new BehaviourMoveTowardsNearestAttackableTarget(this, HumanEntity.class, 0, true))
         };
     }
 }

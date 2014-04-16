@@ -26,7 +26,7 @@ import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllableWolf;
-import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.*;
+import org.entityapi.api.entity.mind.behaviour.goals.*;
 
 public class ControllableWolfBase extends ControllableBaseEntity<Wolf, ControllableWolfEntity> implements ControllableWolf {
 
@@ -54,26 +54,26 @@ public class ControllableWolfBase extends ControllableBaseEntity<Wolf, Controlla
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourFloat(this), 1),
-                new BehaviourItem(new BehaviourSit(this), 2),
-                new BehaviourItem(new BehaviourLeapAtTarget(this, 0.4F), 3),
-                new BehaviourItem(new BehaviourMeleeAttack(this, true, 1.0D), 4),
-                new BehaviourItem(new BehaviourFollowTamer(this, 10.0F, 2.0F, 1.0D), 5),
-                new BehaviourItem(new BehaviourBreed(this, 1.0D), 6),
-                new BehaviourItem(new BehaviourRandomStroll(this, 1.0D), 7),
-                new BehaviourItem(new BehaviourBeg(this, new Material[]{Material.BONE}), 8),
-                new BehaviourItem(new BehaviourLookAtNearestEntity(this, HumanEntity.class, 8.0F), 9),
-                new BehaviourItem(new BehaviourLookAtRandom(this), 9)
+                new BehaviourItem(1, new BehaviourFloat(this)),
+                new BehaviourItem(2, new BehaviourSit(this)),
+                new BehaviourItem(3, new BehaviourLeapAtTarget(this, 0.4F)),
+                new BehaviourItem(4, new BehaviourMeleeAttack(this, true, 1.0D)),
+                new BehaviourItem(5, new BehaviourFollowTamer(this, 10.0F, 2.0F, 1.0D)),
+                new BehaviourItem(6, new BehaviourBreed(this, 1.0D)),
+                new BehaviourItem(7, new BehaviourRandomStroll(this, 1.0D)),
+                new BehaviourItem(8, new BehaviourBeg(this, new Material[]{Material.BONE})),
+                new BehaviourItem(9, new BehaviourLookAtNearestEntity(this, HumanEntity.class, 8.0F)),
+                new BehaviourItem(9, new BehaviourLookAtRandom(this))
         };
     }
 
     @Override
     public BehaviourItem[] getDefaultTargetingBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourHelpTamerTarget(this), 1),
-                new BehaviourItem(new BehaviourDefendTamer(this), 2),
-                new BehaviourItem(new BehaviourHurtByTarget(this, true), 3),
-                new BehaviourItem(new BehaviourRandomTargetNonTamed(this, Sheep.class, 200, false), 4)
+                new BehaviourItem(1, new BehaviourHelpTamerTarget(this)),
+                new BehaviourItem(2, new BehaviourDefendTamer(this)),
+                new BehaviourItem(3, new BehaviourHurtByTarget(this, true)),
+                new BehaviourItem(4, new BehaviourRandomTargetNonTamed(this, Sheep.class, 200, false))
         };
     }
 }

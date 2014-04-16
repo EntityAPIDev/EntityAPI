@@ -25,7 +25,7 @@ import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllableWither;
 import org.entityapi.api.entity.type.bukkit.InsentientEntity;
-import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.*;
+import org.entityapi.api.entity.mind.behaviour.goals.*;
 import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorNotUndead;
 
 public class ControllableWitherBase extends ControllableBaseEntity<Wither, ControllableWitherEntity> implements ControllableWither {
@@ -50,19 +50,19 @@ public class ControllableWitherBase extends ControllableBaseEntity<Wither, Contr
     @Override
     public BehaviourItem[] getDefaultTargetingBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourFloat(this), 0),
-                new BehaviourItem(new BehaviourRangedAttack(this, 40, 20.0F, 1.0D), 2),
-                new BehaviourItem(new BehaviourRandomStroll(this, 1.0D), 5),
-                new BehaviourItem(new BehaviourLookAtNearestEntity(this, HumanEntity.class, 8.0F), 6),
-                new BehaviourItem(new BehaviourLookAtRandom(this), 7)
+                new BehaviourItem(0, new BehaviourFloat(this)),
+                new BehaviourItem(2, new BehaviourRangedAttack(this, 40, 20.0F, 1.0D)),
+                new BehaviourItem(5, new BehaviourRandomStroll(this, 1.0D)),
+                new BehaviourItem(6, new BehaviourLookAtNearestEntity(this, HumanEntity.class, 8.0F)),
+                new BehaviourItem(7, new BehaviourLookAtRandom(this))
         };
     }
 
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourHurtByTarget(this, false), 1),
-                new BehaviourItem(new BehaviourMoveTowardsNearestAttackableTarget(this, InsentientEntity.class, 0, false, false, new EntitySelectorNotUndead()), 2)
+                new BehaviourItem(1, new BehaviourHurtByTarget(this, false)),
+                new BehaviourItem(2, new BehaviourMoveTowardsNearestAttackableTarget(this, InsentientEntity.class, 0, false, false, new EntitySelectorNotUndead()))
         };
     }
 }

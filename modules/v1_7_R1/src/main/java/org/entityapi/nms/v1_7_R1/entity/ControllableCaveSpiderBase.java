@@ -24,7 +24,7 @@ import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllableCaveSpider;
-import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.*;
+import org.entityapi.api.entity.mind.behaviour.goals.*;
 
 public class ControllableCaveSpiderBase extends ControllableBaseEntity<CaveSpider, ControllableCaveSpiderEntity> implements ControllableCaveSpider {
 
@@ -49,20 +49,20 @@ public class ControllableCaveSpiderBase extends ControllableBaseEntity<CaveSpide
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourFloat(this), 1),
-                new BehaviourItem(new BehaviourLeapAtTarget(this, 2F), 2),
-                new BehaviourItem(new BehaviourMoveTowardsRestriction(this), 3),
-                new BehaviourItem(new BehaviourRandomStroll(this), 4),
-                new BehaviourItem(new BehaviourLookAtNearestEntity(this, HumanEntity.class, 8F), 5),
-                new BehaviourItem(new BehaviourLookAtRandom(this), 6)
+                new BehaviourItem(1, new BehaviourFloat(this)),
+                new BehaviourItem(2, new BehaviourLeapAtTarget(this, 2F)),
+                new BehaviourItem(3, new BehaviourMoveTowardsRestriction(this)),
+                new BehaviourItem(4, new BehaviourRandomStroll(this)),
+                new BehaviourItem(5, new BehaviourLookAtNearestEntity(this, HumanEntity.class, 8F)),
+                new BehaviourItem(6, new BehaviourLookAtRandom(this))
         };
     }
 
     @Override
     public BehaviourItem[] getDefaultTargetingBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourHurtByTarget(this, true, false, true), 1),
-                new BehaviourItem(new BehaviourMoveTowardsNearestAttackableTarget(this, HumanEntity.class, 0, true), 2)
+                new BehaviourItem(1, new BehaviourHurtByTarget(this, true, false, true)),
+                new BehaviourItem(2, new BehaviourMoveTowardsNearestAttackableTarget(this, HumanEntity.class, 0, true))
         };
     }
 }

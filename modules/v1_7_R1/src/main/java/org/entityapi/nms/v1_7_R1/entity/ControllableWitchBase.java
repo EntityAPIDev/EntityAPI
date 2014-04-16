@@ -24,7 +24,7 @@ import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllableWitch;
-import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.*;
+import org.entityapi.api.entity.mind.behaviour.goals.*;
 
 public class ControllableWitchBase extends ControllableBaseEntity<Witch, ControllableWitchEntity> implements ControllableWitch {
 
@@ -48,19 +48,19 @@ public class ControllableWitchBase extends ControllableBaseEntity<Witch, Control
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourFloat(this), 1),
-                new BehaviourItem(new BehaviourRangedAttack(this, 60, 10.0F, 1.0D), 2),
-                new BehaviourItem(new BehaviourRandomStroll(this, 1.0D), 2),
-                new BehaviourItem(new BehaviourLookAtNearestEntity(this, HumanEntity.class, 8.0F), 3),
-                new BehaviourItem(new BehaviourLookAtRandom(this), 3)
+                new BehaviourItem(1, new BehaviourFloat(this)),
+                new BehaviourItem(2, new BehaviourRangedAttack(this, 60, 10.0F, 1.0D)),
+                new BehaviourItem(2, new BehaviourRandomStroll(this, 1.0D)),
+                new BehaviourItem(3, new BehaviourLookAtNearestEntity(this, HumanEntity.class, 8.0F)),
+                new BehaviourItem(3, new BehaviourLookAtRandom(this))
         };
     }
 
     @Override
     public BehaviourItem[] getDefaultTargetingBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourHurtByTarget(this, false), 1),
-                new BehaviourItem(new BehaviourMoveTowardsNearestAttackableTarget(this, HumanEntity.class, 0, true), 2)
+                new BehaviourItem(1, new BehaviourHurtByTarget(this, false)),
+                new BehaviourItem(2, new BehaviourMoveTowardsNearestAttackableTarget(this, HumanEntity.class, 0, true))
         };
     }
 }

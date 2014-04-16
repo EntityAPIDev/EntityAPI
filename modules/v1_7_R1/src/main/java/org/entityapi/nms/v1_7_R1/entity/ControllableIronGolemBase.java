@@ -27,7 +27,7 @@ import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllableIronGolem;
 import org.entityapi.api.entity.type.bukkit.InsentientEntity;
-import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.*;
+import org.entityapi.api.entity.mind.behaviour.goals.*;
 
 public class ControllableIronGolemBase extends ControllableBaseEntity<IronGolem, ControllableIronGolemEntity> implements ControllableIronGolem {
 
@@ -52,23 +52,23 @@ public class ControllableIronGolemBase extends ControllableBaseEntity<IronGolem,
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourMeleeAttack(this, true, 1.0D), 1),
-                new BehaviourItem(new BehaviourMoveTowardsTarget(this, 32.0F), 2),
-                new BehaviourItem(new BehaviourMoveThroughVillage(this, true, 0.6D), 3),
-                new BehaviourItem(new BehaviourMoveTowardsRestriction(this, 1.0D), 4),
-                new BehaviourItem(new BehaviourOfferFlower(this, LivingEntity.class), 5),
-                new BehaviourItem(new BehaviourRandomStroll(this), 6),
-                new BehaviourItem(new BehaviourLookAtNearestEntity(this, HumanEntity.class, 6.0F), 7),
-                new BehaviourItem(new BehaviourLookAtRandom(this), 8)
+                new BehaviourItem(1, new BehaviourMeleeAttack(this, true, 1.0D)),
+                new BehaviourItem(2, new BehaviourMoveTowardsTarget(this, 32.0F)),
+                new BehaviourItem(3, new BehaviourMoveThroughVillage(this, true, 0.6D)),
+                new BehaviourItem(4, new BehaviourMoveTowardsRestriction(this, 1.0D)),
+                new BehaviourItem(5, new BehaviourOfferFlower(this, LivingEntity.class)),
+                new BehaviourItem(6, new BehaviourRandomStroll(this)),
+                new BehaviourItem(7, new BehaviourLookAtNearestEntity(this, HumanEntity.class, 6.0F)),
+                new BehaviourItem(8, new BehaviourLookAtRandom(this))
         };
     }
 
     @Override
     public BehaviourItem[] getDefaultTargetingBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourDefendVillage(this), 1),
-                new BehaviourItem(new BehaviourHurtByTarget(this, false), 2),
-                new BehaviourItem(new BehaviourMoveTowardsNearestAttackableTarget(this, InsentientEntity.class, 0, false, true, IMonster.a), 3)
+                new BehaviourItem(1, new BehaviourDefendVillage(this)),
+                new BehaviourItem(2, new BehaviourHurtByTarget(this, false)),
+                new BehaviourItem(3, new BehaviourMoveTowardsNearestAttackableTarget(this, InsentientEntity.class, 0, false, true, IMonster.a))
         };
     }
 }

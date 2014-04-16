@@ -26,7 +26,7 @@ import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllableVillager;
 import org.entityapi.api.entity.type.bukkit.InsentientEntity;
-import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.*;
+import org.entityapi.api.entity.mind.behaviour.goals.*;
 
 public class ControllableVillagerBase extends ControllableBaseEntity<Villager, ControllableVillagerEntity> implements ControllableVillager {
 
@@ -53,21 +53,21 @@ public class ControllableVillagerBase extends ControllableBaseEntity<Villager, C
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourFloat(this), 0),
-                new BehaviourItem(new BehaviourAvoidEntity(this, Zombie.class, 8.0F, 0.6D, 0.6D), 1),
-                new BehaviourItem(new BehaviourTradeWithPlayer(this), 1),
-                new BehaviourItem(new BehaviourLookAtTradingPlayer(this), 1),
-                new BehaviourItem(new BehaviourMoveIndoors(this), 2),
-                new BehaviourItem(new BehaviourRestrictOpenDoor(this), 3),
-                new BehaviourItem(new BehaviourOpenDoor(this, true), 4),
-                new BehaviourItem(new BehaviourMoveTowardsRestriction(this, 0.6D), 5),
-                new BehaviourItem(new BehaviourMakeLove(this), 6),
-                new BehaviourItem(new BehaviourTakeFlower(this), 7),
-                new BehaviourItem(new BehaviourVillagerPlay(this, 0.32D), 8),
-                new BehaviourItem(new BehaviourInteract(this, HumanEntity.class, 3.0F, 1.0F), 9),
-                new BehaviourItem(new BehaviourInteract(this, Villager.class, 3.0F, 1.0F), 9),
-                new BehaviourItem(new BehaviourRandomStroll(this, 0.6D), 9),
-                new BehaviourItem(new BehaviourLookAtNearestEntity(this, InsentientEntity.class, 8.0F), 10)
+                new BehaviourItem(0, new BehaviourFloat(this)),
+                new BehaviourItem(1, new BehaviourAvoidEntity(this, Zombie.class, 8.0F, 0.6D, 0.6D)),
+                new BehaviourItem(1, new BehaviourTradeWithPlayer(this)),
+                new BehaviourItem(1, new BehaviourLookAtTradingPlayer(this)),
+                new BehaviourItem(2, new BehaviourMoveIndoors(this)),
+                new BehaviourItem(3, new BehaviourRestrictOpenDoor(this)),
+                new BehaviourItem(4, new BehaviourOpenDoor(this, true)),
+                new BehaviourItem(5, new BehaviourMoveTowardsRestriction(this, 0.6D)),
+                new BehaviourItem(6, new BehaviourMakeLove(this)),
+                new BehaviourItem(7, new BehaviourTakeFlower(this)),
+                new BehaviourItem(8, new BehaviourVillagerPlay(this, 0.32D)),
+                new BehaviourItem(9, new BehaviourInteract(this, HumanEntity.class, 3.0F, 1.0F)),
+                new BehaviourItem(9, new BehaviourInteract(this, Villager.class, 3.0F, 1.0F)),
+                new BehaviourItem(9, new BehaviourRandomStroll(this, 0.6D)),
+                new BehaviourItem(10, new BehaviourLookAtNearestEntity(this, InsentientEntity.class, 8.0F))
         };
     }
 }

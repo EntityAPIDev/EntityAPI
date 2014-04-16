@@ -25,7 +25,7 @@ import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllableCreeper;
-import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.*;
+import org.entityapi.api.entity.mind.behaviour.goals.*;
 
 public class ControllableCreeperBase extends ControllableBaseEntity<Creeper, ControllableCreeperEntity> implements ControllableCreeper {
 
@@ -55,21 +55,21 @@ public class ControllableCreeperBase extends ControllableBaseEntity<Creeper, Con
     @Override
     public BehaviourItem[] getDefaultTargetingBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourFloat(this), 1),
-                new BehaviourItem(new BehaviourSwell(this), 2),
-                new BehaviourItem(new BehaviourAvoidEntity(this, Ocelot.class, 6.0F, 1.0D, 1.2D), 3),
-                new BehaviourItem(new BehaviourMeleeAttack(this, false, 1.0D), 4),
-                new BehaviourItem(new BehaviourRandomStroll(this, 0.8D), 5),
-                new BehaviourItem(new BehaviourLookAtNearestEntity(this, HumanEntity.class, 8F), 6),
-                new BehaviourItem(new BehaviourLookAtRandom(this), 7)
+                new BehaviourItem(1, new BehaviourFloat(this)),
+                new BehaviourItem(2, new BehaviourSwell(this)),
+                new BehaviourItem(3, new BehaviourAvoidEntity(this, Ocelot.class, 6.0F, 1.0D, 1.2D)),
+                new BehaviourItem(4, new BehaviourMeleeAttack(this, false, 1.0D)),
+                new BehaviourItem(5, new BehaviourRandomStroll(this, 0.8D)),
+                new BehaviourItem(6, new BehaviourLookAtNearestEntity(this, HumanEntity.class, 8F)),
+                new BehaviourItem(7, new BehaviourLookAtRandom(this))
         };
     }
 
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourMoveTowardsNearestAttackableTarget(this, HumanEntity.class, 0, true), 1),
-                new BehaviourItem(new BehaviourHurtByTarget(this, false), 2)
+                new BehaviourItem(1, new BehaviourMoveTowardsNearestAttackableTarget(this, HumanEntity.class, 0, true)),
+                new BehaviourItem(2, new BehaviourHurtByTarget(this, false))
         };
     }
 }

@@ -21,7 +21,7 @@ import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.Behaviour;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.mind.behaviour.IBehaviourSelector;
-import org.entityapi.api.entity.mind.behaviour.OneTimeBehaviour;
+import org.entityapi.api.entity.mind.behaviour.OneTimeBehaviourGoal;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,13 +42,13 @@ public class BehaviourSelector implements IBehaviourSelector {
 
     @Override
     public void addBehaviour(Behaviour behaviour, int priority) {
-        this.addBehaviour(behaviour.getDefaultKey(), behaviour, priority);
+        this.addBehaviour(behaviour.getGoal().getDefaultKey(), behaviour, priority);
     }
 
     @Override
     public void addBehaviour(String key, Behaviour behaviour, int priority) {
         key = key.toLowerCase();
-        BehaviourItem behaviourItem = new BehaviourItem(behaviour, priority);
+        BehaviourItem behaviourItem = new BehaviourItem(priority, behaviour);
         if (this.behaviourMap.containsKey(key)) {
             return;
         }
@@ -75,7 +75,7 @@ public class BehaviourSelector implements IBehaviourSelector {
 
             if (behaviour1 == behaviour) {
                 if (this.activeBehaviours.contains(behaviourItem)) {
-                    behaviour1.finish();
+                    behaviour1.getGoal().finish();
                     this.activeBehaviours.remove(behaviourItem);
                 }
 
@@ -96,7 +96,7 @@ public class BehaviourSelector implements IBehaviourSelector {
 
             if (key.equals(entry.getKey())) {
                 if (this.activeBehaviours.contains(behaviourItem)) {
-                    behaviour1.finish();
+                    behaviour1.getGoal().finish();
                     this.activeBehaviours.remove(behaviourItem);
                 }
                 if (this.behaviours.contains(behaviourItem)) {
@@ -116,7 +116,7 @@ public class BehaviourSelector implements IBehaviourSelector {
         Iterator<BehaviourItem> iterator = this.activeBehaviours.iterator();
 
         while (iterator.hasNext()) {
-            iterator.next().getBehaviour().finish();
+            iterator.next().getBehaviour().getGoal().finish();
         }
         this.activeBehaviours.clear();
     }
@@ -145,17 +145,17 @@ public class BehaviourSelector implements IBehaviourSelector {
             while (iterator.hasNext()) {
                 BehaviourItem behaviourItem = iterator.next();
                 if (this.activeBehaviours.contains(behaviourItem)) {
-                    if (this.canUse(behaviourItem) && behaviourItem.getBehaviour().shouldContinue()) {
+                    if (this.canUse(behaviourItem) && behaviourItem.getBehaviour().getGoal().shouldContinue()) {
                         continue;
                     }
-                    behaviourItem.getBehaviour().finish();
+                    behaviourItem.getBehaviour().getGoal().finish();
                     this.activeBehaviours.remove(behaviourItem);
-                    if (behaviourItem.getBehaviour() instanceof OneTimeBehaviour && ((OneTimeBehaviour) behaviourItem.getBehaviour()).isFinished()) {
+                    if (behaviourItem.getBehaviour() instanceof OneTimeBehaviourGoal && ((OneTimeBehaviourGoal) behaviourItem.getBehaviour()).isFinished()) {
                         this.behaviours.remove(behaviourItem);
                     }
                 } else {
-                    if (this.canUse(behaviourItem) && behaviourItem.getBehaviour().shouldStart()) {
-                        behaviourItem.getBehaviour().start();
+                    if (this.canUse(behaviourItem) && behaviourItem.getBehaviour().getGoal().shouldStart()) {
+                        behaviourItem.getBehaviour().getGoal().start();
                         this.activeBehaviours.add(behaviourItem);
                     }
                 }
@@ -168,9 +168,9 @@ public class BehaviourSelector implements IBehaviourSelector {
 
             while (iterator.hasNext()) {
                 BehaviourItem behaviourItem = iterator.next();
-                if (!behaviourItem.getBehaviour().shouldContinue()) {
-                    behaviourItem.getBehaviour().finish();
-                    if (behaviourItem.getBehaviour() instanceof OneTimeBehaviour && ((OneTimeBehaviour) behaviourItem.getBehaviour()).isFinished()) {
+                if (!behaviourItem.getBehaviour().getGoal().shouldContinue()) {
+                    behaviourItem.getBehaviour().getGoal().finish();
+                    if (behaviourItem.getBehaviour() instanceof OneTimeBehaviourGoal && ((OneTimeBehaviourGoal) behaviourItem.getBehaviour()).isFinished()) {
                         this.behaviours.remove(behaviourItem);
                     }
                     iterator.remove();
@@ -182,8 +182,8 @@ public class BehaviourSelector implements IBehaviourSelector {
 
         while (iterator.hasNext()) {
             BehaviourItem behaviourItem = iterator.next();
-            behaviourItem.getBehaviour().tick();
-            if (behaviourItem.getBehaviour() instanceof OneTimeBehaviour && ((OneTimeBehaviour) behaviourItem.getBehaviour()).isFinished()) {
+            behaviourItem.getBehaviour().getGoal().tick();
+            if (behaviourItem.getBehaviour() instanceof OneTimeBehaviourGoal && ((OneTimeBehaviourGoal) behaviourItem.getBehaviour()).isFinished()) {
                 this.behaviours.remove(behaviourItem);
             }
         }
@@ -200,7 +200,7 @@ public class BehaviourSelector implements IBehaviourSelector {
                         return false;
                     }
                     //goal.i() -> isContinuous
-                } else if (!behaviourItem1.getBehaviour().isContinuous() && this.activeBehaviours.contains(behaviourItem1)) {
+                } else if (!behaviourItem1.getBehaviour().getGoal().isContinuous() && this.activeBehaviours.contains(behaviourItem1)) {
                     return false;
                 }
             }
@@ -209,6 +209,6 @@ public class BehaviourSelector implements IBehaviourSelector {
     }
 
     protected boolean areCompatible(BehaviourItem behaviourItem, BehaviourItem behaviourItem1) {
-        return behaviourItem.getBehaviour().getType().isCompatibleWith(behaviourItem1.getBehaviour().getType());
+        return behaviourItem.getBehaviour().getGoal().getType().isCompatibleWith(behaviourItem1.getBehaviour().getGoal().getType());
     }
 }

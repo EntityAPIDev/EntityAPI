@@ -25,7 +25,7 @@ import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllableChicken;
-import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.*;
+import org.entityapi.api.entity.mind.behaviour.goals.*;
 
 public class ControllableChickenBase extends ControllableBaseEntity<Chicken, ControllableChickenEntity> implements ControllableChicken {
 
@@ -51,14 +51,14 @@ public class ControllableChickenBase extends ControllableBaseEntity<Chicken, Con
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourFloat(this), 0),
-                new BehaviourItem(new BehaviourPanic(this, 1.4D), 1),
-                new BehaviourItem(new BehaviourBreed(this, 1.0D), 2),
-                new BehaviourItem(new BehaviourTempt(this, Material.SEEDS, false, 1.0D), 3),
-                new BehaviourItem(new BehaviourFollowParent(this, 1.1D), 4),
-                new BehaviourItem(new BehaviourRandomStroll(this, 1.0D), 5),
-                new BehaviourItem(new BehaviourLookAtNearestEntity(this, HumanEntity.class, 6.0F), 6),
-                new BehaviourItem(new BehaviourLookAtRandom(this), 7)
+                new BehaviourItem(0, new BehaviourFloat(this)),
+                new BehaviourItem(1, new BehaviourPanic(this, 1.4D)),
+                new BehaviourItem(2, new BehaviourBreed(this, 1.0D)),
+                new BehaviourItem(3, new BehaviourTempt(this, Material.SEEDS, false, 1.0D)),
+                new BehaviourItem(4, new BehaviourFollowParent(this, 1.1D)),
+                new BehaviourItem(5, new BehaviourRandomStroll(this, 1.0D)),
+                new BehaviourItem(6, new BehaviourLookAtNearestEntity(this, HumanEntity.class, 6.0F)),
+                new BehaviourItem(7, new BehaviourLookAtRandom(this))
         };
     }
 }

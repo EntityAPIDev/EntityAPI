@@ -26,7 +26,7 @@ import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllableOcelot;
-import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.*;
+import org.entityapi.api.entity.mind.behaviour.goals.*;
 
 public class ControllableOcelotBase extends ControllableBaseEntity<Ocelot, ControllableOcelotEntity> implements ControllableOcelot {
 
@@ -52,24 +52,24 @@ public class ControllableOcelotBase extends ControllableBaseEntity<Ocelot, Contr
     @Override
     public BehaviourItem[] getDefaultTargetingBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourFloat(this), 1),
-                new BehaviourItem(new BehaviourSit(this), 2),
-                new BehaviourItem(new BehaviourTempt(this, Material.RAW_FISH, true, 0.6D), 3),
-                new BehaviourItem(new BehaviourAvoidEntity(this, HumanEntity.class, 16.0F, 0.8D, 1.33D), 4),
-                new BehaviourItem(new BehaviourFollowTamer(this, 10.0F, 5.0F), 5),
-                new BehaviourItem(new BehaviourSitOnBlock(this, 1.33D), 6),
-                new BehaviourItem(new BehaviourLeapAtTarget(this, 0.3F), 7),
-                new BehaviourItem(new BehaviourOcelotAttack(this), 8),
-                new BehaviourItem(new BehaviourBreed(this, 0.8D), 9),
-                new BehaviourItem(new BehaviourRandomStroll(this, 0.8D), 10),
-                new BehaviourItem(new BehaviourLookAtNearestEntity(this, HumanEntity.class, 10.0F), 11),
+                new BehaviourItem(1, new BehaviourFloat(this)),
+                new BehaviourItem(2, new BehaviourSit(this)),
+                new BehaviourItem(3, new BehaviourTempt(this, Material.RAW_FISH, true, 0.6D)),
+                new BehaviourItem(4, new BehaviourAvoidEntity(this, HumanEntity.class, 16.0F, 0.8D, 1.33D)),
+                new BehaviourItem(5, new BehaviourFollowTamer(this, 10.0F, 5.0F)),
+                new BehaviourItem(6, new BehaviourSitOnBlock(this, 1.33D)),
+                new BehaviourItem(7, new BehaviourLeapAtTarget(this, 0.3F)),
+                new BehaviourItem(8, new BehaviourOcelotAttack(this)),
+                new BehaviourItem(9, new BehaviourBreed(this, 0.8D)),
+                new BehaviourItem(10, new BehaviourRandomStroll(this, 0.8D)),
+                new BehaviourItem(11, new BehaviourLookAtNearestEntity(this, HumanEntity.class, 10.0F)),
         };
     }
 
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourRandomTargetNonTamed(this, Chicken.class, 750, false), 1)
+                new BehaviourItem(1, new BehaviourRandomTargetNonTamed(this, Chicken.class, 750, false))
         };
     }
 }

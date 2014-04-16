@@ -25,7 +25,7 @@ import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllablePig;
-import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.*;
+import org.entityapi.api.entity.mind.behaviour.goals.*;
 
 public class ControllablePigBase extends ControllableBaseEntity<Pig, ControllablePigEntity> implements ControllablePig {
 
@@ -50,16 +50,16 @@ public class ControllablePigBase extends ControllableBaseEntity<Pig, Controllabl
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourFloat(this), 0),
-                new BehaviourItem(new BehaviourPanic(this, 1.25D), 1),
-                new BehaviourItem(new BehaviourFollowCarrotStick(this, 0.3F), 2),
-                new BehaviourItem(new BehaviourBreed(this, 1.0D), 3),
-                new BehaviourItem(new BehaviourTempt(this, Material.CARROT, false), 4),
-                new BehaviourItem(new BehaviourTempt(this, Material.CARROT_STICK, false), 4),
-                new BehaviourItem(new BehaviourFollowParent(this, 1.1D), 5),
-                new BehaviourItem(new BehaviourRandomStroll(this, 1.0D), 6),
-                new BehaviourItem(new BehaviourLookAtNearestEntity(this, HumanEntity.class, 6.0F), 7),
-                new BehaviourItem(new BehaviourLookAtRandom(this), 8)
+                new BehaviourItem(0, new BehaviourFloat(this)),
+                new BehaviourItem(1, new BehaviourPanic(this, 1.25D)),
+                new BehaviourItem(2, new BehaviourFollowCarrotStick(this, 0.3F)),
+                new BehaviourItem(3, new BehaviourBreed(this, 1.0D)),
+                new BehaviourItem(4, new BehaviourTempt(this, Material.CARROT, false)),
+                new BehaviourItem(4, new BehaviourTempt(this, Material.CARROT_STICK, false)),
+                new BehaviourItem(5, new BehaviourFollowParent(this, 1.1D)),
+                new BehaviourItem(6, new BehaviourRandomStroll(this, 1.0D)),
+                new BehaviourItem(7, new BehaviourLookAtNearestEntity(this, HumanEntity.class, 6.0F)),
+                new BehaviourItem(8, new BehaviourLookAtRandom(this))
         };
     }
 }

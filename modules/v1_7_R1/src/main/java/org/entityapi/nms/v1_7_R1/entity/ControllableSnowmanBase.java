@@ -25,7 +25,7 @@ import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.entity.type.ControllableSnowman;
 import org.entityapi.api.entity.type.bukkit.InsentientEntity;
-import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.*;
+import org.entityapi.api.entity.mind.behaviour.goals.*;
 
 public class ControllableSnowmanBase extends ControllableBaseEntity<Snowman, ControllableSnowmanEntity> implements ControllableSnowman {
 
@@ -42,17 +42,17 @@ public class ControllableSnowmanBase extends ControllableBaseEntity<Snowman, Con
     @Override
     public BehaviourItem[] getDefaultTargetingBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourRangedAttack(this, 20, 10.0F, 1.25), 1),
-                new BehaviourItem(new BehaviourRandomStroll(this, 1.0D), 2),
-                new BehaviourItem(new BehaviourLookAtNearestEntity(this, HumanEntity.class, 6.0F), 3),
-                new BehaviourItem(new BehaviourLookAtRandom(this), 4),
+                new BehaviourItem(1, new BehaviourRangedAttack(this, 20, 10.0F, 1.25)),
+                new BehaviourItem(2, new BehaviourRandomStroll(this, 1.0D)),
+                new BehaviourItem(3, new BehaviourLookAtNearestEntity(this, HumanEntity.class, 6.0F)),
+                new BehaviourItem(4, new BehaviourLookAtRandom(this)),
         };
     }
 
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(new BehaviourMoveTowardsNearestAttackableTarget(this, InsentientEntity.class, 0, true, false, IMonster.a), 1)
+                new BehaviourItem(1, new BehaviourMoveTowardsNearestAttackableTarget(this, InsentientEntity.class, 0, true, false, IMonster.a))
         };
     }
 }

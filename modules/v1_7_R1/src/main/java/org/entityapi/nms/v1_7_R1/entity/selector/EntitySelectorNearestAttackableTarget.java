@@ -20,15 +20,15 @@ package org.entityapi.nms.v1_7_R1.entity.selector;
 import net.minecraft.server.v1_7_R1.Entity;
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import net.minecraft.server.v1_7_R1.IEntitySelector;
-import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.BehaviourMoveTowardsNearestAttackableTarget;
+import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.BehaviourGoalMoveTowardsNearestAttackableTarget;
 
 public class EntitySelectorNearestAttackableTarget implements IEntitySelector {
 
     final IEntitySelector selector;
 
-    final BehaviourMoveTowardsNearestAttackableTarget behaviour;
+    final BehaviourGoalMoveTowardsNearestAttackableTarget behaviour;
 
-    public EntitySelectorNearestAttackableTarget(BehaviourMoveTowardsNearestAttackableTarget behaviour, IEntitySelector ientityselector) {
+    public EntitySelectorNearestAttackableTarget(BehaviourGoalMoveTowardsNearestAttackableTarget behaviour, IEntitySelector ientityselector) {
         this.behaviour = behaviour;
         this.selector = ientityselector;
     }
