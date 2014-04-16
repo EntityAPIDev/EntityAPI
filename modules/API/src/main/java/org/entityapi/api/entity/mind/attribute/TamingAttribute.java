@@ -26,6 +26,7 @@ import java.util.UUID;
 public class TamingAttribute extends Attribute {
 
     // TODO: What if EntityAPI is being run on a version that doesn't support UUID changes? e.g. 1.7.4
+    // TODO: EntityAPI should only support 1.7.8 and above.
     private UUID tamerUuid;
 
     public TamingAttribute(Mind mind) {

@@ -21,6 +21,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.util.Vector;
 import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.mind.Mind;
@@ -28,7 +29,7 @@ import org.entityapi.api.entity.mind.Mind;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract interface ControllableEntity<T extends LivingEntity> extends Nameable, Attacking {
+public abstract interface ControllableEntity<T extends LivingEntity> extends Nameable, Attacking, InventoryHolder {
 
     // TODO: JavaDucks. Quack
 

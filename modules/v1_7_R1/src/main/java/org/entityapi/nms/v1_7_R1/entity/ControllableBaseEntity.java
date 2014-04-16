@@ -24,6 +24,7 @@ import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_7_R1.CraftSound;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.util.Vector;
 import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.ControllableEntity;
@@ -31,6 +32,7 @@ import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.Mind;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
+import org.entityapi.api.entity.mind.attribute.InventoryAttribute;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.events.ControllableEntityPreSpawnEvent;
 import org.entityapi.api.plugin.EntityAPI;
@@ -102,6 +104,15 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends E
     @Override
     public float getWidth() {
         return this.handle.width;
+    }
+
+    @Override
+    public Inventory getInventory() {
+        InventoryAttribute inventoryAttribute = this.getMind().getAttribute(InventoryAttribute.class);
+        if (inventoryAttribute != null) {
+            return inventoryAttribute.getInventory();
+        }
+        return null;
     }
 
     @Override
