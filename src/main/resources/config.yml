@@ -1,0 +1,10 @@
+# +----------------------------------------------------+
+#                     EntityAPI
+#              ---------------------
+#                Configuration File
+#
+#     Plugin by DSH105, CaptainBern and Frostalf
+# +----------------------------------------------------+
+
+checkForUpdates: true
+autoUpdate: false

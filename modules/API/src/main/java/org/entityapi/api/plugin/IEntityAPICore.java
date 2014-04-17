@@ -17,6 +17,7 @@
 
 package org.entityapi.api.plugin;
 
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -31,6 +32,8 @@ public interface IEntityAPICore extends Plugin {
     public String getVersion();
 
     public Server getAPIServer();
+
+    public FileConfiguration getConfig(ConfigType type);
 
     public EntityManager createManager(Plugin owningPlugin);
 
@@ -59,4 +62,8 @@ public interface IEntityAPICore extends Plugin {
     public boolean callOnCollide(ControllableEntity controllableEntity, Entity entity);
 
     public void callOnDeath(ControllableEntity controllableEntity);
+
+    public enum ConfigType {
+        MAIN;
+    }
 }

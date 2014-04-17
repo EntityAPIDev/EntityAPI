@@ -2,7 +2,20 @@ name: EntityAPI
 authors: [DSH105, Frostalf, CaptainBern]
 version: ${project.version}
 main: org.entityapi.EntityAPICore
-description: Is awesome
+description: A Bukkit API that enables you to easily control your own custom entities
 website: http://entityapi.org
-
-    
+commands:
+    entityapi:
+        description: All commands for EntityAPI
+        permission: entityapi.command
+permissions:
+    entityapi.command:
+        default: op
+    entityapi.update:
+        default: op
+    entityapi.*:
+        default: op
+        description: All EntityAPI permissions
+        children:
+            entityapi.command: true
+            entityapi.update: false
