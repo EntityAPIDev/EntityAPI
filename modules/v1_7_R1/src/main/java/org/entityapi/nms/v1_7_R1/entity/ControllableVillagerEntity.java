@@ -28,8 +28,6 @@ import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
 
-//TODO: Implement an API for trading/merchant stuff
-
 public class ControllableVillagerEntity extends EntityVillager implements ControllableEntityHandle {
 
     private final ControllableEntity controllableEntity;
@@ -186,10 +184,10 @@ public class ControllableVillagerEntity extends EntityVillager implements Contro
     public void makeSound(String s, float f, float f1) {
         if (s.equals("mob.villager.yes")) {
             if (this.controllableEntity != null) {
-                s = this.controllableEntity.getSound(EntitySound.YES);
+                s = this.controllableEntity.getSound(EntitySound.ACCEPT);
             }
         } else if (s.equals("mob.villager.no")) {
-            s = this.controllableEntity.getSound(EntitySound.NO);
+            s = this.controllableEntity.getSound(EntitySound.DENY);
         }
         super.makeSound(s, f, f1);
     }

@@ -23,9 +23,9 @@ import org.bukkit.entity.Snowman;
 import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
+import org.entityapi.api.entity.mind.behaviour.goals.*;
 import org.entityapi.api.entity.type.ControllableSnowman;
 import org.entityapi.api.entity.type.bukkit.InsentientEntity;
-import org.entityapi.api.entity.mind.behaviour.goals.*;
 
 public class ControllableSnowmanBase extends ControllableBaseEntity<Snowman, ControllableSnowmanEntity> implements ControllableSnowman {
 

@@ -18,14 +18,13 @@
 package org.entityapi.nms.v1_7_R1.entity;
 
 import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Skeleton;
 import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
-import org.entityapi.api.entity.type.ControllableSkeleton;
 import org.entityapi.api.entity.mind.behaviour.goals.*;
+import org.entityapi.api.entity.type.ControllableSkeleton;
 
 public class ControllableSkeletonBase extends ControllableBaseEntity<Skeleton, ControllableSkeletonEntity> implements ControllableSkeleton {
 

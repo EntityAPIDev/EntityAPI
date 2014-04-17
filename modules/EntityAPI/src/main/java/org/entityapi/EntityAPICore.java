@@ -19,6 +19,11 @@ package org.entityapi;
 
 import com.google.common.collect.Maps;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -38,12 +43,15 @@ import org.entityapi.api.plugin.Server;
 import org.entityapi.api.reflection.SafeConstructor;
 import org.entityapi.api.utils.PastebinReporter;
 import org.entityapi.api.utils.ReflectionUtil;
+import org.entityapi.api.utils.StringUtil;
+import org.entityapi.metrics.Metrics;
 import org.entityapi.server.CraftBukkitServer;
 import org.entityapi.server.MCPCPlusServer;
 import org.entityapi.server.SpigotServer;
 import org.entityapi.server.UnknownServer;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +77,7 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
     /**
      * Projects id and Pastebin API-KEY
      */
-    private static final String UPDATE_ID = "";    // TODO: insert the project id here
+    private static final int UPDATE_ID = 69021;
     private static final String PASTEBIN_REPORT_KEY = "8759cf9327f8593508789ecaa36cf27b";
 
     /**
@@ -81,6 +89,13 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
      * Plugin files list for checking more than 1 Lib
      */
     private final List<String> plugins = new ArrayList<>();
+
+    /**
+     * Update checker stuff
+     */
+    public boolean updateAvailable = false;
+    public String updateName = "";
+    public boolean updateChecked = false;
 
     @Override
     public void onDisable() {
@@ -100,8 +115,28 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
 
         initServer();
 
-        this.getPlugins();
-        //TODO configuration, Metrics, etc
+        this.checkPlugins();
+
+        this.saveDefaultConfig();
+
+        try {
+            Class.forName(ReflectionUtil.COMPAT_NMS_PATH + ".SpawnUtil");
+        } catch (ClassNotFoundException e) {
+            ConsoleCommandSender console = this.getServer().getConsoleSender();
+            console.sendMessage(ChatColor.RED + "-------------------------------");
+            console.sendMessage(ChatColor.RED + "EntityAPI " + ChatColor.GOLD + this.getDescription().getVersion() + ChatColor.RED + " is not compatible with this version of CraftBukkit");
+            console.sendMessage(ChatColor.RED + "-------------------------------");
+            return;
+        }
+
+        try {
+            Metrics metrics = new Metrics(this);
+            metrics.start();
+        } catch (IOException e) {
+            EntityAPI.LOGGER.severe("Failed to initialise Metrics");
+        }
+
+        this.checkUpdates();
     }
 
     /**
@@ -135,6 +170,51 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
         }
     }
 
+    protected void checkUpdates() {
+        if (this.getConfig().getBoolean("checkForUpdates", true)) {
+            final File file = this.getFile();
+            final Updater.UpdateType updateType = this.getConfig().getBoolean("autoUpdate", false) ? Updater.UpdateType.DEFAULT : Updater.UpdateType.NO_DOWNLOAD;
+            getServer().getScheduler().runTaskAsynchronously(this, new Runnable() {
+                @Override
+                public void run() {
+                    Updater updater = new Updater(EntityAPI.getCore(), UPDATE_ID, file, updateType, false);
+                    updateAvailable = updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE;
+                    if (updateAvailable) {
+                        updateName = updater.getLatestName();
+                        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "An update is available: " + updateName);
+                        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Type /entityapi update to update.");
+                        if (!updateChecked) {
+                            updateChecked = true;
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (label.equalsIgnoreCase("entityapi")) {
+            if (args.length == 0) {
+                sender.sendMessage(ChatColor.GOLD + "EntityAPI v" + this.getDescription().getVersion() + " by " + StringUtil.join(this.getDescription().getAuthors(), ", "));
+                return true;
+            } else if (args.length == 1) {
+                if (args[0].equalsIgnoreCase("update")) {
+                    if (sender.hasPermission("entityapi.update")) {
+                        if (updateChecked) {
+                            new Updater(this, 74914, this.getFile(), Updater.UpdateType.NO_VERSION_CHECK, true);
+                            return true;
+                        } else {
+                            sender.sendMessage(ChatColor.GOLD + "An update is not available.");
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public static EntityAPICore getCore() {
         if (CORE_INSTANCE == null) {
             throw new RuntimeException("The EntityAPICore might have not been initialized properly!");
@@ -150,6 +230,14 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
     @Override
     public String getVersion() {
         return VERSION;
+    }
+
+    @Override
+    public FileConfiguration getConfig(ConfigType type) {
+        switch (type) {
+            default:
+                return this.getConfig();
+        }
     }
 
     /**
@@ -213,7 +301,7 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
     /**
      * Method that checks all plugin file names
      */
-    protected void getPlugins() {
+    protected void checkPlugins() {
         PluginManager pm = this.getServer().getPluginManager();
         File dir = new File(this.getDataFolder().getParent());
         for (File pluginFiles : dir.listFiles()) {

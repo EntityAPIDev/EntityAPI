@@ -24,8 +24,8 @@ import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
-import org.entityapi.api.entity.type.ControllableChicken;
 import org.entityapi.api.entity.mind.behaviour.goals.*;
+import org.entityapi.api.entity.type.ControllableChicken;
 
 public class ControllableChickenBase extends ControllableBaseEntity<Chicken, ControllableChickenEntity> implements ControllableChicken {
 

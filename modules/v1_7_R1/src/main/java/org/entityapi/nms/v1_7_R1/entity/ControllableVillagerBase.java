@@ -24,9 +24,9 @@ import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
+import org.entityapi.api.entity.mind.behaviour.goals.*;
 import org.entityapi.api.entity.type.ControllableVillager;
 import org.entityapi.api.entity.type.bukkit.InsentientEntity;
-import org.entityapi.api.entity.mind.behaviour.goals.*;
 
 public class ControllableVillagerBase extends ControllableBaseEntity<Villager, ControllableVillagerEntity> implements ControllableVillager {
 
@@ -46,8 +46,8 @@ public class ControllableVillagerBase extends ControllableBaseEntity<Villager, C
         this.setSound(EntitySound.IDLE, "idle", "mob.villager.idle");
         this.setSound(EntitySound.HURT, "mob.villager.hit");
         this.setSound(EntitySound.DEATH, "mob.villager.death");
-        this.setSound(EntitySound.YES, "mob.villager.yes");
-        this.setSound(EntitySound.NO, "mob.villager.no");
+        this.setSound(EntitySound.ACCEPT, "mob.villager.yes");
+        this.setSound(EntitySound.DENY, "mob.villager.no");
     }
 
     @Override

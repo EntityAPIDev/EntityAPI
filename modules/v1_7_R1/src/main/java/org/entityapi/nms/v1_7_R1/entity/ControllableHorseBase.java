@@ -23,8 +23,8 @@ import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
-import org.entityapi.api.entity.type.ControllableHorse;
 import org.entityapi.api.entity.mind.behaviour.goals.*;
+import org.entityapi.api.entity.type.ControllableHorse;
 
 public class ControllableHorseBase extends ControllableBaseEntity<Horse, ControllableHorseEntity> implements ControllableHorse {
 
@@ -61,7 +61,7 @@ public class ControllableHorseBase extends ControllableBaseEntity<Horse, Control
     @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
         return new BehaviourItem[]{
-                new BehaviourItem(0 ,new BehaviourFloat(this)),
+                new BehaviourItem(0, new BehaviourFloat(this)),
                 new BehaviourItem(1, new BehaviourPanic(this, 1.2D)),
                 new BehaviourItem(1, new BehaviourTameByRiding(this, 1.2D)),
                 new BehaviourItem(2, new BehaviourBreed(this, 1.0D)),

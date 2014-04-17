@@ -23,9 +23,9 @@ import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
+import org.entityapi.api.entity.mind.behaviour.goals.*;
 import org.entityapi.api.entity.type.ControllableWither;
 import org.entityapi.api.entity.type.bukkit.InsentientEntity;
-import org.entityapi.api.entity.mind.behaviour.goals.*;
 import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorNotUndead;
 
 public class ControllableWitherBase extends ControllableBaseEntity<Wither, ControllableWitherEntity> implements ControllableWither {

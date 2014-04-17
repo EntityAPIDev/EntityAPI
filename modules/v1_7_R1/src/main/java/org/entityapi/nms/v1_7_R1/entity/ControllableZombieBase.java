@@ -24,8 +24,8 @@ import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
-import org.entityapi.api.entity.type.ControllableZombie;
 import org.entityapi.api.entity.mind.behaviour.goals.*;
+import org.entityapi.api.entity.type.ControllableZombie;
 
 public class ControllableZombieBase extends ControllableBaseEntity<Zombie, ControllableZombieEntity> implements ControllableZombie {
 
