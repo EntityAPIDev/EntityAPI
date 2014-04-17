@@ -21,10 +21,8 @@ Behaviour Goals to Implement
 
 **Goal Types:**
 
-* TODO
-    * Eight different goal types (some aren’t compatible with each other)
+* Eight different goal types (some aren’t compatible with each other)
     * (0 - 7), as per below
-* TODO -> More behaviours that are only implemented once
 
 **Already Implemented**:
 

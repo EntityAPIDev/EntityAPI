@@ -17,20 +17,45 @@
 
 package org.entityapi.nms.v1_7_R1.entity;
 
+import net.minecraft.server.v1_7_R1.PathEntity;
+import net.minecraft.server.v1_7_R1.PathPoint;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.ComplexEntityPart;
 import org.bukkit.entity.EnderDragon;
+import org.bukkit.entity.Entity;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.util.Vector;
 import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.type.ControllableEnderDragon;
+import org.entityapi.api.plugin.EntityAPI;
 
 public class ControllableEnderDragonBase extends ControllableBaseEntity<EnderDragon, ControllableEnderDragonEntity> implements ControllableEnderDragon {
 
     private boolean useAppliedTargetPosition;
     private Vector targetPosition;
+    private boolean destroyBlocks;
 
     public ControllableEnderDragonBase(int id, EntityManager manager) {
         super(id, ControllableEntityType.ENDERDRAGON, manager);
+        Bukkit.getPluginManager().registerEvents(new Listener() {
+
+            @EventHandler
+            public void onEntityExplode(EntityExplodeEvent event) {
+                if (!shouldDestroyBlocks()) {
+                    Entity entity = event.getEntity();
+                    if (entity instanceof EnderDragon && entity.equals(getBukkitEntity())) {
+                        event.setCancelled(true);
+                    } else if (entity instanceof ComplexEntityPart && ((ComplexEntityPart) entity).getParent().equals(getBukkitEntity())) {
+                        event.setCancelled(true);
+                    }
+                }
+            }
+
+        }, EntityAPI.getCore());
     }
 
     public ControllableEnderDragonBase(int id, ControllableEnderDragonEntity entityHandle, EntityManager manager) {
@@ -57,6 +82,21 @@ public class ControllableEnderDragonBase extends ControllableBaseEntity<EnderDra
     @Override
     public void setTargetPosition(Vector position) {
         this.targetPosition = position;
+    }
+
+    public void setDestroyBlocks(boolean destroyBlocks) {
+        this.destroyBlocks = destroyBlocks;
+    }
+
+    public boolean shouldDestroyBlocks() {
+        return destroyBlocks;
+    }
+
+    @Override
+    public boolean navigateTo(PathEntity path, double speed) {
+        PathPoint point = path.c();
+        this.setTargetPosition(new Vector(point.a, point.b, point.c));
+        return true;
     }
 
     @Override
