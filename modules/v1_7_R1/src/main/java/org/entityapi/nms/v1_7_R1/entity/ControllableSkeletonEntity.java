@@ -26,9 +26,9 @@ import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityHandle;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
+import org.entityapi.api.entity.mind.behaviour.goals.BehaviourMeleeAttack;
+import org.entityapi.api.entity.mind.behaviour.goals.BehaviourRangedAttack;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.BehaviourMeleeAttack;
-import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals.BehaviourRangedAttack;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
 
 import java.util.Calendar;

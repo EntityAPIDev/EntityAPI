@@ -29,7 +29,7 @@ import java.util.List;
 public class BehaviourGoalLookAtTradingPlayer extends BehaviourGoalLookAtNearestEntity {
 
     public BehaviourGoalLookAtTradingPlayer(ControllableEntity controllableEntity, float minDistance) {
-        super(controllableEntity, HumanEntity.class, minDistance);
+        super(controllableEntity, HumanEntity.class, minDistance, 0.02F);
     }
 
     @Override
