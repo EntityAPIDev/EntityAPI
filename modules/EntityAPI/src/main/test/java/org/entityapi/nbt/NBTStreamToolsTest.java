@@ -15,7 +15,7 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.nbt;
+package org.entityapi.api.nbt;
 
 import org.junit.Test;
 

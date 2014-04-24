@@ -345,4 +345,40 @@ public class CommonReflection {
             return networkManager;
         }
     }
+
+    public static Class<?> getCraftOfflinePlayerClass() {
+        return getCraftBukkitClass("CraftOfflinePlayer");
+    }
+
+    public static Class<?> getNBTBaseClass() {
+        try {
+            return getMinecraftClass("NBTBase");
+        } catch (Exception e) {
+            Class<?> compoundClass = getNBTTagCompoundClass();
+            Class<?> base = compoundClass.getSuperclass();
+
+            if(base == null)
+                throw new RuntimeException("Failed to find the NBTBase class!");
+
+            return base;
+        }
+    }
+
+    public static Class<?> getNBTTagCompoundClass() {
+        try {
+            return getMinecraftClass("NBTTagCompound");
+        } catch (Exception e) {
+            MethodAccessor<Object> getData = ClassTemplate.create(getCraftOfflinePlayerClass()).getMethod("getData");
+            Class<?> returnType = getData.getReturnType();
+
+            if(returnType == null)
+                throw new RuntimeException("Failed to get the NBTTagCompound class!");
+
+            return returnType;
+        }
+    }
+
+    public static Class<?> getNBTReadLimiter() {
+        return getMinecraftClass("NBTReadLimiter");
+    }
 }
