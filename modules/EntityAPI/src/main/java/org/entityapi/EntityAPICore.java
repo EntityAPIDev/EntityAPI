@@ -39,6 +39,7 @@ import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.events.*;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.plugin.IEntityAPICore;
+import org.entityapi.api.plugin.ModuleLogger;
 import org.entityapi.api.plugin.Server;
 import org.entityapi.api.reflection.SafeConstructor;
 import org.entityapi.api.utils.PastebinReporter;
@@ -59,6 +60,12 @@ import java.util.logging.Level;
 
 public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
 
+    /**
+     * Several Loggers
+     */
+    public static final ModuleLogger LOGGER = new ModuleLogger("EntityAPI");
+    public static final ModuleLogger LOGGER_REFLECTION = LOGGER.getModule("Reflection");
+    public static final ModuleLogger LOGGER_DATA_STORE = LOGGER_REFLECTION.getModule("Persistence");
     /**
      * EntityAPI instance
      */
@@ -133,7 +140,7 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
             Metrics metrics = new Metrics(this);
             metrics.start();
         } catch (IOException e) {
-            EntityAPI.LOGGER.severe("Failed to initialise Metrics");
+            LOGGER.severe("Failed to initialise Metrics");
         }
 
         this.checkUpdates();
@@ -158,15 +165,15 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
         }
 
         if (SERVER == null) {
-            EntityAPI.LOGGER.warning("Failed to identify the server brand! The API will not run correctly -> disabling");
+            LOGGER.warning("Failed to identify the server brand! The API will not run correctly -> disabling");
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         } else {
             if (!SERVER.isCompatible()) {
-                EntityAPI.LOGGER.warning("This Server version may not be compatible with EntityAPI!");
+                LOGGER.warning("This Server version may not be compatible with EntityAPI!");
             }
-            EntityAPI.LOGGER.info("Identified server brand: " + SERVER.getName());
-            EntityAPI.LOGGER.info("MC Version: " + SERVER.getMCVersion());
+            LOGGER.info("Identified server brand: " + SERVER.getName());
+            LOGGER.info("MC Version: " + SERVER.getMCVersion());
         }
     }
 

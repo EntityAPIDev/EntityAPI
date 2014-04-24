@@ -116,7 +116,7 @@ public class SimpleEntityManager implements EntityManager {
 
             return context.create();
         } catch (Throwable throwable) {
-            EntityAPI.LOGGER.warning("Failed to create an Entity handle for type: " + entityType.getName());
+            EntityAPICore.LOGGER.warning("Failed to create an Entity handle for type: " + entityType.getName());
             throwable.printStackTrace();
             return null;
         }

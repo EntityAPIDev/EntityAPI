@@ -17,7 +17,7 @@
 
 package org.entityapi.api.reflection;
 
-import org.entityapi.api.plugin.EntityAPI;
+import org.entityapi.EntityAPICore;
 import org.entityapi.api.reflection.utility.CommonReflection;
 
 public class NMSClassTemplate extends ClassTemplate {
@@ -33,7 +33,7 @@ public class NMSClassTemplate extends ClassTemplate {
     protected void setNMSClass(String name) {
         Class clazz = CommonReflection.getMinecraftClass(name);
         if (clazz == null) {
-            EntityAPI.LOGGER_REFLECTION.warning("Failed to find a matching class with name: " + name);
+            EntityAPICore.LOGGER_REFLECTION.warning("Failed to find a matching class with name: " + name);
         }
         setClass(clazz);
     }

@@ -17,7 +17,7 @@
 
 package org.entityapi.api.reflection;
 
-import org.entityapi.api.plugin.EntityAPI;
+import org.entityapi.EntityAPICore;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -36,7 +36,7 @@ public class SafeField<T> implements FieldAccessor<T> {
             Field field = coreClass.getDeclaredField(fieldName);
             setField(field);
         } catch (NoSuchFieldException e) {
-            EntityAPI.LOGGER_REFLECTION.warning("Failed to find a matching field with name: " + fieldName);
+            EntityAPICore.LOGGER_REFLECTION.warning("Failed to find a matching field with name: " + fieldName);
             e.printStackTrace();
         }
     }
@@ -69,7 +69,7 @@ public class SafeField<T> implements FieldAccessor<T> {
             this.field.set(instance, value);
             return true;
         } catch (IllegalAccessException e) {
-            EntityAPI.LOGGER_REFLECTION.warning("Failed to access field: " + toString());
+            EntityAPICore.LOGGER_REFLECTION.warning("Failed to access field: " + toString());
             e.printStackTrace();
         }
         return false;
@@ -83,7 +83,7 @@ public class SafeField<T> implements FieldAccessor<T> {
         try {
             return (T) this.field.get(instance);
         } catch (IllegalAccessException e) {
-            EntityAPI.LOGGER_REFLECTION.warning("Failed to access field: " + toString());
+            EntityAPICore.LOGGER_REFLECTION.warning("Failed to access field: " + toString());
             e.printStackTrace();
         }
         return null;

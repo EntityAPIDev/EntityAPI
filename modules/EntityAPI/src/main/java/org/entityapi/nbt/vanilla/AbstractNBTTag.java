@@ -17,7 +17,7 @@
 
 package org.entityapi.nbt.vanilla;
 
-import org.entityapi.api.plugin.EntityAPI;
+import org.entityapi.EntityAPICore;
 import org.entityapi.api.wrapper.AbstractWrapper;
 import org.entityapi.nbt.NBTBase;
 
@@ -30,7 +30,7 @@ public class AbstractNBTTag<T extends NBTBase> extends AbstractWrapper {
         try {
             this.TAG_TYPE = (Class<T>) handle.getClass();
         } catch (ClassCastException e) {
-            EntityAPI.LOGGER_REFLECTION.warning("Incompatible TAG_TYPE and TAG_HANDLE!");
+            EntityAPICore.LOGGER_REFLECTION.warning("Incompatible TAG_TYPE and TAG_HANDLE!");
         }
         this.TAG_TYPE_HANDLE = handle;
     }

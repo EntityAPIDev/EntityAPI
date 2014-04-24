@@ -18,8 +18,8 @@
 package org.entityapi.server;
 
 import org.bukkit.Bukkit;
+import org.entityapi.EntityAPICore;
 import org.entityapi.api.internal.Constants;
-import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.plugin.Server;
 import org.entityapi.api.reflection.refs.MinecraftServerRef;
 import org.entityapi.api.utils.ReflectionUtil;
@@ -67,7 +67,7 @@ public class CraftBukkitServer implements Server {
         try {
             return Class.forName(name);
         } catch (Exception e) {
-            EntityAPI.LOGGER_REFLECTION.warning("Failed to find matching class for: " + name);
+            EntityAPICore.LOGGER_REFLECTION.warning("Failed to find matching class for: " + name);
             return null;
         }
     }

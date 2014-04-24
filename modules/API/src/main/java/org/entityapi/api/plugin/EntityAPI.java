@@ -26,13 +26,6 @@ public class EntityAPI {
 
     private static IEntityAPICore CORE;
 
-    /**
-     * Several Loggers
-     */
-    public static final ModuleLogger LOGGER = new ModuleLogger("EntityAPI");
-    public static final ModuleLogger LOGGER_REFLECTION = LOGGER.getModule("Reflection");
-    public static final ModuleLogger LOGGER_DATA_STORE = LOGGER_REFLECTION.getModule("Persistence");
-
     public static void setCore(IEntityAPICore core) {
         if (CORE != null) {
             return;

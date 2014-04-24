@@ -17,6 +17,7 @@
 
 package org.entityapi.api.utils;
 
+import org.entityapi.EntityAPICore;
 import org.entityapi.api.plugin.EntityAPI;
 
 import java.lang.reflect.Field;
@@ -49,7 +50,7 @@ public class ReflectionUtil {
         try {
             return Class.forName(name);
         } catch (ClassNotFoundException e) {
-            EntityAPI.LOGGER_REFLECTION.warning("Could not find class: " + name + "!");
+            EntityAPICore.LOGGER_REFLECTION.warning("Could not find class: " + name + "!");
             return null;
         }
     }
@@ -84,7 +85,7 @@ public class ReflectionUtil {
 
             return field;
         } catch (NoSuchFieldException e) {
-            EntityAPI.LOGGER_REFLECTION.warning("No such field: " + fieldName + "!");
+            EntityAPICore.LOGGER_REFLECTION.warning("No such field: " + fieldName + "!");
             return null;
         }
     }
@@ -93,7 +94,7 @@ public class ReflectionUtil {
         try {
             return (T) getField(clazz, fieldName).get(instance);
         } catch (IllegalAccessException e) {
-            EntityAPI.LOGGER_REFLECTION.warning("Failed to access field: " + fieldName + "!");
+            EntityAPICore.LOGGER_REFLECTION.warning("Failed to access field: " + fieldName + "!");
             return null;
         }
     }
@@ -102,7 +103,7 @@ public class ReflectionUtil {
         try {
             getField(clazz, fieldName).set(instance, value);
         } catch (IllegalAccessException e) {
-            EntityAPI.LOGGER_REFLECTION.warning("Could not set new field value for: " + fieldName);
+            EntityAPICore.LOGGER_REFLECTION.warning("Could not set new field value for: " + fieldName);
         }
     }
 
@@ -110,7 +111,7 @@ public class ReflectionUtil {
         try {
             return (T) field.get(instance);
         } catch (IllegalAccessException e) {
-            EntityAPI.LOGGER_REFLECTION.warning("Failed to retrieve field: " + field.getName());
+            EntityAPICore.LOGGER_REFLECTION.warning("Failed to retrieve field: " + field.getName());
             return null;
         }
     }
@@ -123,7 +124,7 @@ public class ReflectionUtil {
         try {
             return clazz.getDeclaredMethod(methodName, params);
         } catch (NoSuchMethodException e) {
-            EntityAPI.LOGGER_REFLECTION.warning("No such method: " + methodName + "!");
+            EntityAPICore.LOGGER_REFLECTION.warning("No such method: " + methodName + "!");
             return null;
         }
     }
@@ -132,10 +133,10 @@ public class ReflectionUtil {
         try {
             return (T) method.invoke(instance, args);
         } catch (IllegalAccessException e) {
-            EntityAPI.LOGGER_REFLECTION.warning("Failed to access method: " + method.getName() + "!");
+            EntityAPICore.LOGGER_REFLECTION.warning("Failed to access method: " + method.getName() + "!");
             return null;
         } catch (InvocationTargetException e) {
-            EntityAPI.LOGGER_REFLECTION.warning("Failed to invoke method: " + method.getName() + "!");
+            EntityAPICore.LOGGER_REFLECTION.warning("Failed to invoke method: " + method.getName() + "!");
             e.printStackTrace();
             return null;
         }

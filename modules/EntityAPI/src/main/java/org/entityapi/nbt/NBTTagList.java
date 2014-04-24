@@ -17,7 +17,7 @@
 
 package org.entityapi.nbt;
 
-import org.entityapi.api.plugin.EntityAPI;
+import org.entityapi.EntityAPICore;
 import org.entityapi.exceptions.NBTReadException;
 import org.entityapi.exceptions.NBTWriteException;
 
@@ -45,7 +45,7 @@ public class NBTTagList extends NBTBase {
         if (this.type == 0) {
             this.type = nbtbase.getTypeId();
         } else if (this.type != nbtbase.getTypeId()) {
-            EntityAPI.LOGGER.warning("Tried adding mismatching data-types to tag-list!");
+            EntityAPICore.LOGGER.warning("Tried adding mismatching data-types to tag-list!");
             return;
         }
 
