@@ -1,18 +1,18 @@
 /*
  * This file is part of EntityAPI.
  *
- * EntityAPI is free software: you can redistribute it and/or modify
+ * HoloAPI is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * EntityAPI is distributed in the hope that it will be useful,
+ * HoloAPI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
+ * along with HoloAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package org.entityapi.api.reflection;
@@ -42,6 +42,7 @@ public class SafeMethod<T> implements MethodAccessor<T> {
             setMethod(method);
         } catch (NoSuchMethodException e) {
             EntityAPI.LOGGER_REFLECTION.warning("Failed to find a matching method with name: " + methodname);
+            e.printStackTrace();
         }
     }
 
@@ -81,5 +82,19 @@ public class SafeMethod<T> implements MethodAccessor<T> {
             }
         }
         return null;
+    }
+
+    @Override
+    public Class<?> getReturnType() {
+        if (this.method == null)
+            throw new RuntimeException("Method handle is NULL!");
+        return this.method.getReturnType();
+    }
+
+    @Override
+    public Class[] getArguments() {
+        if (this.method == null)
+            throw new RuntimeException("Method handle is NULL!");
+        return this.method.getParameterTypes();
     }
 }

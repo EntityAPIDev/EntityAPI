@@ -1,18 +1,18 @@
 /*
  * This file is part of EntityAPI.
  *
- * EntityAPI is free software: you can redistribute it and/or modify
+ * HoloAPI is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * EntityAPI is distributed in the hope that it will be useful,
+ * HoloAPI is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
+ * along with HoloAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package org.entityapi.api.reflection;
@@ -37,6 +37,7 @@ public class SafeField<T> implements FieldAccessor<T> {
             setField(field);
         } catch (NoSuchFieldException e) {
             EntityAPI.LOGGER_REFLECTION.warning("Failed to find a matching field with name: " + fieldName);
+            e.printStackTrace();
         }
     }
 
@@ -51,11 +52,6 @@ public class SafeField<T> implements FieldAccessor<T> {
         }
         this.field = field;
         this.isStatic = Modifier.isStatic(field.getModifiers());
-    }
-
-    @Override
-    public ClassTemplate getType() {
-        return ClassTemplate.create(this.field.getType());
     }
 
     @Override
@@ -74,6 +70,7 @@ public class SafeField<T> implements FieldAccessor<T> {
             return true;
         } catch (IllegalAccessException e) {
             EntityAPI.LOGGER_REFLECTION.warning("Failed to access field: " + toString());
+            e.printStackTrace();
         }
         return false;
     }
@@ -87,6 +84,7 @@ public class SafeField<T> implements FieldAccessor<T> {
             return (T) this.field.get(instance);
         } catch (IllegalAccessException e) {
             EntityAPI.LOGGER_REFLECTION.warning("Failed to access field: " + toString());
+            e.printStackTrace();
         }
         return null;
     }
@@ -105,6 +103,7 @@ public class SafeField<T> implements FieldAccessor<T> {
         return this.field.getName();
     }
 
+    @Override
     public String toString() {
         StringBuilder string = new StringBuilder(75);
         int mod = this.field.getModifiers();
@@ -136,11 +135,14 @@ public class SafeField<T> implements FieldAccessor<T> {
     }
 
     @Override
-    public void setReadOnly(Object target, boolean value) {
-        if (value)
-            set(target, "modifiers", field.getModifiers() | Modifier.FINAL);
-        else
-            set(target, "modifiers", field.getModifiers() & ~Modifier.FINAL);
+    public void setReadOnly(boolean readOnly) {
+        FieldAccessor<Integer> modifierField = new SafeField<Integer>(Field.class, "modifiers");
+
+        if (readOnly) {
+            modifierField.set(getField(), getField().getModifiers() | Modifier.FINAL);
+        } else {
+            modifierField.set(getField(), getField().getModifiers() & ~Modifier.FINAL);
+        }
     }
 
     public static <T> T get(Class<?> clazz, String fieldname) {
