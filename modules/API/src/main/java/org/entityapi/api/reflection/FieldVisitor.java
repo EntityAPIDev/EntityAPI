@@ -16,12 +16,12 @@ public class FieldVisitor<T> {
     protected ClassTemplate<?> template;
 
     /**
-     * The fields of the current Visitor
+     * The fields of the current Visitor.
      */
     protected List<FieldAccessor> data;
 
     /**
-     * A basic Cache system
+     * A basic Cache system.
      */
     protected Map<Class, FieldVisitor> cache;
 
