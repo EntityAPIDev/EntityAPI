@@ -1,4 +1,6 @@
 /*
+ * Copyright (C) EntityAPI Team
+ *
  * This file is part of EntityAPI.
  *
  * EntityAPI is free software: you can redistribute it and/or modify
@@ -22,8 +24,6 @@ import org.junit.Test;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-
-import static junit.framework.Assert.assertEquals;
 
 public class NBTStreamToolsTest {
 

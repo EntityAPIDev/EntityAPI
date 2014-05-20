@@ -1,4 +1,6 @@
 /*
+ * Copyright (C) EntityAPI Team
+ *
  * This file is part of EntityAPI.
  *
  * EntityAPI is free software: you can redistribute it and/or modify
