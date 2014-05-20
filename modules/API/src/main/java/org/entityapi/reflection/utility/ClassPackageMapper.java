@@ -17,7 +17,7 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.reflection.utility;
+package org.entityapi.reflection.utility;
 
 import com.google.common.base.Preconditions;
 

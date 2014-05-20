@@ -17,7 +17,7 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.reflection;
+package org.entityapi.reflection;
 
 import java.lang.reflect.Field;
 

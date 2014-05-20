@@ -19,8 +19,8 @@
 
 package org.entityapi.api.entity.mind.behaviour;
 
-import org.entityapi.api.reflection.APIReflection;
-import org.entityapi.api.reflection.SafeConstructor;
+import org.entityapi.reflection.APIReflection;
+import org.entityapi.reflection.SafeConstructor;
 
 public abstract class Behaviour {
 

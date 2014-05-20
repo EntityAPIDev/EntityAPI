@@ -19,8 +19,8 @@
 
 package org.entityapi.api.entity;
 
-import org.entityapi.api.internal.Constants;
-import org.entityapi.api.reflection.APIReflection;
+import org.entityapi.internal.Constants;
+import org.entityapi.reflection.APIReflection;
 
 import java.util.regex.Pattern;
 

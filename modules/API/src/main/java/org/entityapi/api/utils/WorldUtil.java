@@ -21,7 +21,7 @@ package org.entityapi.api.utils;
 
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.entityapi.api.reflection.refs.CraftWorldRef;
+import org.entityapi.reflection.refs.CraftWorldRef;
 
 public class WorldUtil {
 

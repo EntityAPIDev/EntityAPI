@@ -17,30 +17,30 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.reflection;
+package org.entityapi.reflection;
 
 import org.entityapi.EntityAPICore;
-import org.entityapi.api.reflection.utility.CommonReflection;
+import org.entityapi.reflection.utility.CommonReflection;
 
-public class NMSClassTemplate extends ClassTemplate {
+public class CBClassTemplate extends ClassTemplate<Object> {
 
-    protected NMSClassTemplate() {
-        setNMSClass(getClass().getSimpleName());
+    public CBClassTemplate() {
+        setCBClass(getClass().getSimpleName());
     }
 
-    public NMSClassTemplate(String className) {
-        setNMSClass(className);
+    public CBClassTemplate(String className) {
+        setCBClass(className);
     }
 
-    protected void setNMSClass(String name) {
-        Class clazz = CommonReflection.getMinecraftClass(name);
+    protected void setCBClass(String name) {
+        Class clazz = CommonReflection.getCraftBukkitClass(name);
         if (clazz == null) {
             EntityAPICore.LOGGER_REFLECTION.warning("Failed to find a matching class with name: " + name);
         }
         setClass(clazz);
     }
 
-    public static NMSClassTemplate create(String className) {
-        return new NMSClassTemplate(className);
+    public static CBClassTemplate create(String className) {
+        return new CBClassTemplate(className);
     }
 }

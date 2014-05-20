@@ -17,13 +17,13 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.reflection.utility;
+package org.entityapi.reflection.utility;
 
 import com.google.common.base.Strings;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.entityapi.EntityAPICore;
-import org.entityapi.api.reflection.*;
+import org.entityapi.reflection.*;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

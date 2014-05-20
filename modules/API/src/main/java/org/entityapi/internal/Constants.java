@@ -17,10 +17,10 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.internal;
+package org.entityapi.internal;
 
-import org.entityapi.api.reflection.SafeField;
-import org.entityapi.api.reflection.utility.CommonReflection;
+import org.entityapi.reflection.SafeField;
+import org.entityapi.reflection.utility.CommonReflection;
 
 /**
  * A class which contains several field names etc.

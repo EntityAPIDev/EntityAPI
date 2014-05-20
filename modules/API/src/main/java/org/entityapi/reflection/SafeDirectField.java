@@ -17,13 +17,18 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.reflection;
+package org.entityapi.reflection;
 
-public interface MethodAccessor<T> {
+public abstract class SafeDirectField<T> implements FieldAccessor<T> {
 
-    T invoke(Object instance, Object... args);
+    public boolean isValid() {
+        return true;
+    }
 
-    public Class<?> getReturnType();
-
-    public Class[] getArguments();
+    @Override
+    public T transfer(Object from, Object to) {
+        T old = get(to);
+        set(to, get(from));
+        return old;
+    }
 }

@@ -17,11 +17,11 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.reflection.refs;
+package org.entityapi.reflection.refs;
 
-import org.entityapi.api.reflection.ClassTemplate;
-import org.entityapi.api.reflection.FieldAccessor;
-import org.entityapi.api.reflection.NMSClassTemplate;
+import org.entityapi.reflection.ClassTemplate;
+import org.entityapi.reflection.FieldAccessor;
+import org.entityapi.reflection.NMSClassTemplate;
 
 public class WorldServerRef {
 

@@ -17,10 +17,10 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.reflection.refs;
+package org.entityapi.reflection.refs;
 
 import org.bukkit.World;
-import org.entityapi.api.reflection.*;
+import org.entityapi.reflection.*;
 
 public class CraftWorldRef {
 

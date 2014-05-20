@@ -17,7 +17,7 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.reflection.utility;
+package org.entityapi.reflection.utility;
 
 /**
  * Handles the loading/finding of specific classes. This is mainly to be compatible with third and fourth party mods like MCPC+

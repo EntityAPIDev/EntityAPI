@@ -20,10 +20,10 @@
 package org.entityapi.server;
 
 import org.bukkit.Bukkit;
-import org.entityapi.api.internal.Constants;
+import org.entityapi.internal.Constants;
 import org.entityapi.api.plugin.Server;
-import org.entityapi.api.reflection.APIReflection;
-import org.entityapi.api.reflection.refs.MinecraftServerRef;
+import org.entityapi.reflection.APIReflection;
+import org.entityapi.reflection.refs.MinecraftServerRef;
 
 public class CraftBukkitServer implements Server {
 

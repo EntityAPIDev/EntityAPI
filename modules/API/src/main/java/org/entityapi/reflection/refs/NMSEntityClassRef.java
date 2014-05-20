@@ -17,7 +17,7 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.reflection.refs;
+package org.entityapi.reflection.refs;
 
 import org.bukkit.entity.*;
 import org.entityapi.api.entity.type.bukkit.InsentientEntity;

@@ -32,11 +32,11 @@
  *     and easy to use since we can get the remapped-classnames fairly easy
  *     ( https://github.com/llbit/ow2-asm/blob/master/src/org/objectweb/asm/commons/Remapper.java#L220 )
  */
-package org.entityapi.api.reflection.utility;
+package org.entityapi.reflection.utility;
 
 import org.bukkit.Bukkit;
-import org.entityapi.api.reflection.ClassTemplate;
-import org.entityapi.api.reflection.MethodAccessor;
+import org.entityapi.reflection.ClassTemplate;
+import org.entityapi.reflection.MethodAccessor;
 
 public class RemappedClassHandler extends ClassHandler {
 

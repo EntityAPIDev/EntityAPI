@@ -17,10 +17,10 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.reflection;
+package org.entityapi.reflection;
 
 import org.entityapi.EntityAPICore;
-import org.entityapi.api.reflection.utility.CommonReflection;
+import org.entityapi.reflection.utility.CommonReflection;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;

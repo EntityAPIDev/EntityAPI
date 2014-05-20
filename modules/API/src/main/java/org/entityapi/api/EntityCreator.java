@@ -17,15 +17,14 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi;
+package org.entityapi.api;
 
 import org.bukkit.Location;
-import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.mind.Mind;
 import org.entityapi.api.entity.mind.behaviour.Behaviour;
-import org.entityapi.api.reflection.SafeConstructor;
+import org.entityapi.reflection.SafeConstructor;
 import org.entityapi.exceptions.ControllableEntitySpawnException;
 
 import java.util.HashMap;

@@ -19,7 +19,7 @@
 
 package org.entityapi.api.nbt;
 
-import org.entityapi.api.reflection.MethodAccessor;
+import org.entityapi.reflection.MethodAccessor;
 
 public class NbtFactory {
 

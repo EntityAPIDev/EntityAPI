@@ -17,19 +17,15 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.reflection;
+package org.entityapi.reflection.refs;
 
-import org.entityapi.api.reflection.utility.CommonReflection;
+import org.entityapi.reflection.ClassTemplate;
+import org.entityapi.reflection.MethodAccessor;
+import org.entityapi.reflection.NMSClassTemplate;
 
-public class APIReflection {
+public class NBTBaseRef {
 
-    public static String COMPAT_NMS_PATH = "org.entityapi.nms." + CommonReflection.getVersionTag();
+    public static final ClassTemplate TEMPLATE = NMSClassTemplate.create("NBTBase");
 
-    public static Class getVersionedClass(String classPath) {
-        return CommonReflection.getClass(COMPAT_NMS_PATH + "." + classPath);
-    }
-
-    public static Class getControllableEntityClass(String classIdentifier, boolean nms) {
-        return getVersionedClass("entity.Controllable" + classIdentifier + (nms ? "Entity" : "Base"));
-    }
+    public static final MethodAccessor CREATE_TAG_BY_ID = TEMPLATE.getMethod("createTag", byte.class);
 }
