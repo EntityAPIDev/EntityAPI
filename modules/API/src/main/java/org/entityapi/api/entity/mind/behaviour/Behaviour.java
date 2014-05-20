@@ -19,8 +19,8 @@
 
 package org.entityapi.api.entity.mind.behaviour;
 
+import org.entityapi.api.reflection.APIReflection;
 import org.entityapi.api.reflection.SafeConstructor;
-import org.entityapi.api.utils.ReflectionUtil;
 
 public abstract class Behaviour {
 
@@ -33,7 +33,7 @@ public abstract class Behaviour {
                 classes[i] = args[i].getClass();
             }
         }
-        this.behaviourGoal = new SafeConstructor<BehaviourGoal>(ReflectionUtil.getVersionedClass("entity.mind.behaviour.goals.BehaviourGoal" + this.getKey()), classes).newInstance(args);
+        this.behaviourGoal = new SafeConstructor<BehaviourGoal>(APIReflection.getVersionedClass("entity.mind.behaviour.goals.BehaviourGoal" + this.getKey()), classes).newInstance(args);
     }
 
     public Behaviour(BehaviourGoal behaviourGoal) {

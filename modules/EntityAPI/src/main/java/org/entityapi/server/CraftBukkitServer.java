@@ -22,8 +22,8 @@ package org.entityapi.server;
 import org.bukkit.Bukkit;
 import org.entityapi.api.internal.Constants;
 import org.entityapi.api.plugin.Server;
+import org.entityapi.api.reflection.APIReflection;
 import org.entityapi.api.reflection.refs.MinecraftServerRef;
-import org.entityapi.api.utils.ReflectionUtil;
 
 public class CraftBukkitServer implements Server {
 
@@ -56,7 +56,7 @@ public class CraftBukkitServer implements Server {
     @Override
     public boolean isCompatible() {
         try {
-            Class.forName(ReflectionUtil.COMPAT_NMS_PATH + ".SpawnUtil");
+            Class.forName(APIReflection.COMPAT_NMS_PATH + ".SpawnUtil");
             return true;
         } catch (ClassNotFoundException e) {
             return false;

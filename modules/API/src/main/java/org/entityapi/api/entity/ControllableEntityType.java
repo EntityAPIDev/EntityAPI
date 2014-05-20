@@ -20,7 +20,7 @@
 package org.entityapi.api.entity;
 
 import org.entityapi.api.internal.Constants;
-import org.entityapi.api.utils.ReflectionUtil;
+import org.entityapi.api.reflection.APIReflection;
 
 import java.util.regex.Pattern;
 
@@ -64,8 +64,8 @@ public enum ControllableEntityType {
     private final boolean isNameRequired;
 
     ControllableEntityType(String classPath, String name, int id, boolean isNameRequired) {
-        this.controllableClass = ReflectionUtil.getControllableEntityClass(classPath, false);
-        this.handleClass = ReflectionUtil.getControllableEntityClass(classPath, true);
+        this.controllableClass = APIReflection.getControllableEntityClass(classPath, false);
+        this.handleClass = APIReflection.getControllableEntityClass(classPath, true);
         if (!ControllableEntityHandle.class.isAssignableFrom(handleClass))
             throw new RuntimeException("Handle class needs to implement ControllableEntityHandle!");
 

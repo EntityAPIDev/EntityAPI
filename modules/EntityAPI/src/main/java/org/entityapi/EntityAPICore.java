@@ -43,9 +43,9 @@ import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.plugin.IEntityAPICore;
 import org.entityapi.api.plugin.ModuleLogger;
 import org.entityapi.api.plugin.Server;
+import org.entityapi.api.reflection.APIReflection;
 import org.entityapi.api.reflection.SafeConstructor;
 import org.entityapi.api.utils.PastebinReporter;
-import org.entityapi.api.utils.ReflectionUtil;
 import org.entityapi.api.utils.StringUtil;
 import org.entityapi.metrics.Metrics;
 import org.entityapi.server.CraftBukkitServer;
@@ -63,7 +63,7 @@ import java.util.logging.Level;
 public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
 
     /**
-     * Several Loggers
+     * Several Loggers - TODO: something else to replace these
      */
     public static final ModuleLogger LOGGER = new ModuleLogger("EntityAPI");
     public static final ModuleLogger LOGGER_REFLECTION = LOGGER.getModule("Reflection");
@@ -117,26 +117,29 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
             throw new RuntimeException("Only one instance of the core can run!");
         }
 
-        CORE_INSTANCE = this;
-        EntityAPI.setCore(CORE_INSTANCE);
-        SPAWN_UTIL = new SafeConstructor<ISpawnUtil>(ReflectionUtil.getVersionedClass("SpawnUtil")).newInstance();
-        BASIC_ENTITY_UTIL = new SafeConstructor<IBasicEntityUtil>(ReflectionUtil.getVersionedClass("BasicEntityUtil")).newInstance();
-
-        initServer();
-
-        this.checkPlugins();
-
-        this.saveDefaultConfig();
-
         try {
-            Class.forName(ReflectionUtil.COMPAT_NMS_PATH + ".SpawnUtil");
+            // Check if EntityAPI supports this server version
+            Class.forName(APIReflection.COMPAT_NMS_PATH + ".SpawnUtil");
         } catch (ClassNotFoundException e) {
+            // Nope! Stop here.
             ConsoleCommandSender console = this.getServer().getConsoleSender();
             console.sendMessage(ChatColor.RED + "-------------------------------");
             console.sendMessage(ChatColor.RED + "EntityAPI " + ChatColor.GOLD + this.getDescription().getVersion() + ChatColor.RED + " is not compatible with this version of CraftBukkit");
             console.sendMessage(ChatColor.RED + "-------------------------------");
             return;
         }
+
+        CORE_INSTANCE = this;
+        EntityAPI.setCore(CORE_INSTANCE);
+
+        initServer();
+
+        SPAWN_UTIL = new SafeConstructor<ISpawnUtil>(APIReflection.getVersionedClass("SpawnUtil")).newInstance();
+        BASIC_ENTITY_UTIL = new SafeConstructor<IBasicEntityUtil>(APIReflection.getVersionedClass("BasicEntityUtil")).newInstance();
+
+        this.checkPlugins();
+
+        this.saveDefaultConfig();
 
         try {
             Metrics metrics = new Metrics(this);
@@ -171,11 +174,14 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         } else {
-            if (!SERVER.isCompatible()) {
+            // this is already checked earlier in onEnable
+            /*if (!SERVER.isCompatible()) {
                 LOGGER.warning("This Server version may not be compatible with EntityAPI!");
-            }
-            LOGGER.info("Identified server brand: " + SERVER.getName());
-            LOGGER.info("MC Version: " + SERVER.getMCVersion());
+            }*/
+
+            // logging this isn't really needed
+            //LOGGER.info("Identified server brand: " + SERVER.getName());
+            //LOGGER.info("MC Version: " + SERVER.getMCVersion());
         }
     }
 
