@@ -45,7 +45,7 @@
 
         <repository>
             <id>hawkfalcon-repo</id>
-            <name>Hawkfalcon Repository</name>
+            <name>Hawkfalcon-Repository</name>
             <url>http://ci.hawkfalcon.com/plugin/repository/everything</url>
         </repository>
     </repositories>
