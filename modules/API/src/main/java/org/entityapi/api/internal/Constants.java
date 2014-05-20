@@ -1,4 +1,6 @@
 /*
+ * Copyright (C) EntityAPI Team
+ *
  * This file is part of EntityAPI.
  *
  * EntityAPI is free software: you can redistribute it and/or modify
@@ -18,7 +20,7 @@
 package org.entityapi.api.internal;
 
 import org.entityapi.api.reflection.SafeField;
-import org.entityapi.api.utils.ReflectionUtil;
+import org.entityapi.api.reflection.utility.CommonReflection;
 
 /**
  * A class which contains several field names etc.
@@ -58,7 +60,7 @@ public class Constants {
         }
 
         public String get() {
-            return new SafeField<String>(this.getClass(), ReflectionUtil.getServerVersion()).get(this);
+            return new SafeField<String>(this.getClass(), CommonReflection.getVersionTag()).get(this);
         }
 
         public static enum Names {
@@ -289,7 +291,7 @@ public class Constants {
         }
 
         public String get() {
-            return new SafeField<String>(this.getClass(), ReflectionUtil.getServerVersion()).get(this);
+            return new SafeField<String>(this.getClass(), CommonReflection.getVersionTag()).get(this);
         }
     }
 
@@ -321,7 +323,7 @@ public class Constants {
         }
 
         public String get() {
-            return new SafeField<String>(this.getClass(), ReflectionUtil.getServerVersion()).get(this);
+            return new SafeField<String>(this.getClass(), CommonReflection.getVersionTag()).get(this);
         }
     }
 
@@ -341,7 +343,7 @@ public class Constants {
         }
 
         public String get() {
-            return new SafeField<String>(this.getClass(), ReflectionUtil.getServerVersion()).get(this);
+            return new SafeField<String>(this.getClass(), CommonReflection.getVersionTag()).get(this);
         }
     }
 }

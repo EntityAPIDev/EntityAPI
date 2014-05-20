@@ -1,3 +1,22 @@
+/*
+ * Copyright (C) EntityAPI Team
+ *
+ * This file is part of EntityAPI.
+ *
+ * EntityAPI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * EntityAPI is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package org.entityapi.api.nbt;
 
 import com.google.common.primitives.Primitives;
@@ -30,7 +49,7 @@ public enum NbtTagType {
         NbtTagType[] values = NbtTagType.values();
         LOOKUP = new NbtTagType[values.length];
 
-        for(NbtTagType tagType : values) {
+        for (NbtTagType tagType : values) {
 
             int rawId = tagType.getId();
             Class<?> type = tagType.getType();
@@ -38,7 +57,7 @@ public enum NbtTagType {
             LOOKUP[rawId] = tagType;
             CLASS_LOOKUP.put(type, tagType);
 
-            if(type.isPrimitive())
+            if (type.isPrimitive())
                 CLASS_LOOKUP.put(Primitives.wrap(type), tagType);
         }
 
@@ -69,7 +88,7 @@ public enum NbtTagType {
     }
 
     public static NbtTagType getTypeById(int id) {
-        if(id > LOOKUP.length || id < 0)
+        if (id > LOOKUP.length || id < 0)
             throw new IndexOutOfBoundsException("Invalid ID: " + id);
 
         return LOOKUP[id];
@@ -78,10 +97,10 @@ public enum NbtTagType {
     public static NbtTagType getTypeByClass(Class<?> typeClass) {
         NbtTagType result = CLASS_LOOKUP.get(typeClass);
 
-        if(result != null) {
+        if (result != null) {
             return result;
         } else {
-            for(Object interfaceClass : ClassUtils.getAllSuperclasses(typeClass)) {
+            for (Object interfaceClass : ClassUtils.getAllSuperclasses(typeClass)) {
                 return getTypeByClass(interfaceClass.getClass());
             }
 

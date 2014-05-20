@@ -17,11 +17,19 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.entity.type;
+package org.entityapi.api.reflection;
 
-import org.bukkit.entity.Horse;
-import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.reflection.utility.CommonReflection;
 
-public interface ControllableHorse extends ControllableEntity<Horse> {
+public class APIReflection {
 
+    public static String COMPAT_NMS_PATH = "org.entityapi.nms." + CommonReflection.getVersionTag();
+
+    public static Class getVersionedClass(String classPath) {
+        return CommonReflection.getClass(COMPAT_NMS_PATH + "." + classPath);
+    }
+
+    public static Class getControllableEntityClass(String classIdentifier, boolean nms) {
+        return getVersionedClass("entity.Controllable" + classIdentifier + (nms ? "Entity" : "Base"));
+    }
 }
