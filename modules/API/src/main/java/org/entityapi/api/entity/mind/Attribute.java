@@ -20,6 +20,7 @@
 package org.entityapi.api.entity.mind;
 
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.exceptions.AttributeMindRequiredException;
 
 public abstract class Attribute {
@@ -32,7 +33,7 @@ public abstract class Attribute {
             try {
                 attribute = this.getClass().newInstance();
             } catch (InstantiationException | IllegalAccessException e) {
-                EntityAPICore.LOGGER.severe("Failed to copyTo new Attribute! Ensure that the Attribute#copyTo(Mind) method constructs a new Attribute that can be applied to an entity's mind.");
+                EntityAPI.LOGGER.severe("Failed to copyTo new Attribute! Ensure that the Attribute#copyTo(Mind) method constructs a new Attribute that can be applied to an entity's mind.");
             }
         }
         if (attribute != null) {

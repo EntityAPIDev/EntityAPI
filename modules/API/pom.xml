@@ -44,12 +44,6 @@
             <version>1.7.5-R0.1-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
-
-        <dependency>
-            <groupId>com.captainbern</groupId>
-            <artifactId>Reflection</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
     <build>

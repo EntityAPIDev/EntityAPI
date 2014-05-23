@@ -61,6 +61,6 @@ public class TamingAttribute extends Attribute {
 
     @Override
     public TamingAttribute copyTo(Mind mind) {
-        return new TamingAttribute(this.tamerUuid);
+        return new TamingAttribute(this.tamerIdentification);
     }
 }

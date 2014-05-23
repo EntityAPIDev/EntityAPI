@@ -19,7 +19,7 @@
 
 package org.entityapi.reflection;
 
-import org.entityapi.EntityAPICore;
+import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.reflection.utility.CommonReflection;
 
 import java.lang.reflect.Field;
@@ -90,7 +90,7 @@ public class ClassTemplate<T> {
 
     public static ClassTemplate<?> create(Class<?> type) {
         if (type == null) {
-            EntityAPICore.LOGGER_REFLECTION.warning("Cannot create a ClassTemplate with a null type!");
+            EntityAPI.LOGGER_REFLECTION.warning("Cannot create a ClassTemplate with a null type!");
             return null;
         }
         return new ClassTemplate(type);
@@ -100,7 +100,7 @@ public class ClassTemplate<T> {
         Class clazz = CommonReflection.getClass(className);
 
         if (clazz == null) {
-            EntityAPICore.LOGGER_REFLECTION.warning("Failed to find a matching class with name: " + className);
+            EntityAPI.LOGGER_REFLECTION.warning("Failed to find a matching class with name: " + className);
             return null;
         }
         return new ClassTemplate<Object>(clazz);

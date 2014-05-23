@@ -24,7 +24,16 @@ import org.entityapi.api.EntityManager;
 import org.entityapi.api.IBasicEntityUtil;
 import org.entityapi.api.ISpawnUtil;
 
+import java.util.logging.Logger;
+
 public class EntityAPI {
+
+    /**
+     * Several Loggers
+     */
+    public static final ModuleLogger LOGGER = new ModuleLogger("EntityAPI");
+    public static final ModuleLogger LOGGER_REFLECTION = LOGGER.getModule("Reflection");
+    public static final ModuleLogger LOGGER_DATA_STORE = LOGGER_REFLECTION.getModule("Persistence");
 
     private static IEntityAPICore CORE;
 

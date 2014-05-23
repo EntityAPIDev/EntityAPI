@@ -21,7 +21,7 @@ package org.entityapi.reflection.refs;
 
 import org.bukkit.entity.*;
 import org.entityapi.api.entity.type.bukkit.InsentientEntity;
-import org.entityapi.api.plugin.EntityAPI;
+import org.entityapi.reflection.utility.CommonReflection;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,49 +31,49 @@ public class NMSEntityClassRef {
     private static HashMap<Class<?>, Class<?>> CLASS_MAP = new HashMap<>();
 
     static {
-        CLASS_MAP.put(org.bukkit.entity.Entity.class, EntityAPI.getCore().getAPIServer().getNMSClass("Entity"));
-        CLASS_MAP.put(Ageable.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityAgeable"));
-        CLASS_MAP.put(Animals.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityAnimal"));
-        CLASS_MAP.put(Creature.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityCreature"));
-        CLASS_MAP.put(Flying.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityFlying"));
-        CLASS_MAP.put(LivingEntity.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityLiving"));
-        CLASS_MAP.put(Monster.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityMonster"));
+        CLASS_MAP.put(org.bukkit.entity.Entity.class, CommonReflection.getMinecraftClass("Entity"));
+        CLASS_MAP.put(Ageable.class, CommonReflection.getMinecraftClass("EntityAgeable"));
+        CLASS_MAP.put(Animals.class, CommonReflection.getMinecraftClass("EntityAnimal"));
+        CLASS_MAP.put(Creature.class, CommonReflection.getMinecraftClass("EntityCreature"));
+        CLASS_MAP.put(Flying.class, CommonReflection.getMinecraftClass("EntityFlying"));
+        CLASS_MAP.put(LivingEntity.class, CommonReflection.getMinecraftClass("EntityLiving"));
+        CLASS_MAP.put(Monster.class, CommonReflection.getMinecraftClass("EntityMonster"));
 
-        CLASS_MAP.put(InsentientEntity.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityInsentient"));
+        CLASS_MAP.put(InsentientEntity.class, CommonReflection.getMinecraftClass("EntityInsentient"));
 
-        CLASS_MAP.put(Bat.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityBat"));
-        CLASS_MAP.put(Blaze.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityBlaze"));
-        CLASS_MAP.put(CaveSpider.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityCaveSpider"));
-        CLASS_MAP.put(Chicken.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityChicken"));
-        CLASS_MAP.put(Cow.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityCow"));
-        CLASS_MAP.put(Creeper.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityCreeper"));
-        CLASS_MAP.put(EnderDragon.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityEnderDragon"));
-        CLASS_MAP.put(Enderman.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityEnderman"));
-        CLASS_MAP.put(Ghast.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityGhast"));
-        CLASS_MAP.put(Giant.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityGiant"));
-        CLASS_MAP.put(Golem.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityGolem"));
-        CLASS_MAP.put(Horse.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityHorse"));
-        CLASS_MAP.put(HumanEntity.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityHuman"));
-        CLASS_MAP.put(IronGolem.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityIronGolem"));
-        CLASS_MAP.put(MagmaCube.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityMagmaCube"));
-        CLASS_MAP.put(MushroomCow.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityMushroomCow"));
-        CLASS_MAP.put(Ocelot.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityOcelot"));
-        CLASS_MAP.put(Pig.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityPig"));
-        CLASS_MAP.put(PigZombie.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityPigZombie"));
-        CLASS_MAP.put(Player.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityPlayer"));
-        CLASS_MAP.put(Sheep.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntitySheep"));
-        CLASS_MAP.put(Silverfish.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntitySilverfish"));
-        CLASS_MAP.put(Skeleton.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntitySkeleton"));
-        CLASS_MAP.put(Slime.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntitySlime"));
-        CLASS_MAP.put(Snowman.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntitySnowman"));
-        CLASS_MAP.put(Spider.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntitySpider"));
-        CLASS_MAP.put(Squid.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntitySquid"));
-        CLASS_MAP.put(Villager.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityVillager"));
-        CLASS_MAP.put(WaterMob.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityWaterAnimal"));
-        CLASS_MAP.put(Witch.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityWitch"));
-        CLASS_MAP.put(Wither.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityWither"));
-        CLASS_MAP.put(Wolf.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityWolf"));
-        CLASS_MAP.put(Zombie.class, EntityAPI.getCore().getAPIServer().getNMSClass("EntityZombie"));
+        CLASS_MAP.put(Bat.class, CommonReflection.getMinecraftClass("EntityBat"));
+        CLASS_MAP.put(Blaze.class, CommonReflection.getMinecraftClass("EntityBlaze"));
+        CLASS_MAP.put(CaveSpider.class, CommonReflection.getMinecraftClass("EntityCaveSpider"));
+        CLASS_MAP.put(Chicken.class, CommonReflection.getMinecraftClass("EntityChicken"));
+        CLASS_MAP.put(Cow.class, CommonReflection.getMinecraftClass("EntityCow"));
+        CLASS_MAP.put(Creeper.class, CommonReflection.getMinecraftClass("EntityCreeper"));
+        CLASS_MAP.put(EnderDragon.class, CommonReflection.getMinecraftClass("EntityEnderDragon"));
+        CLASS_MAP.put(Enderman.class, CommonReflection.getMinecraftClass("EntityEnderman"));
+        CLASS_MAP.put(Ghast.class, CommonReflection.getMinecraftClass("EntityGhast"));
+        CLASS_MAP.put(Giant.class, CommonReflection.getMinecraftClass("EntityGiant"));
+        CLASS_MAP.put(Golem.class, CommonReflection.getMinecraftClass("EntityGolem"));
+        CLASS_MAP.put(Horse.class, CommonReflection.getMinecraftClass("EntityHorse"));
+        CLASS_MAP.put(HumanEntity.class, CommonReflection.getMinecraftClass("EntityHuman"));
+        CLASS_MAP.put(IronGolem.class, CommonReflection.getMinecraftClass("EntityIronGolem"));
+        CLASS_MAP.put(MagmaCube.class, CommonReflection.getMinecraftClass("EntityMagmaCube"));
+        CLASS_MAP.put(MushroomCow.class, CommonReflection.getMinecraftClass("EntityMushroomCow"));
+        CLASS_MAP.put(Ocelot.class, CommonReflection.getMinecraftClass("EntityOcelot"));
+        CLASS_MAP.put(Pig.class, CommonReflection.getMinecraftClass("EntityPig"));
+        CLASS_MAP.put(PigZombie.class, CommonReflection.getMinecraftClass("EntityPigZombie"));
+        CLASS_MAP.put(Player.class, CommonReflection.getMinecraftClass("EntityPlayer"));
+        CLASS_MAP.put(Sheep.class, CommonReflection.getMinecraftClass("EntitySheep"));
+        CLASS_MAP.put(Silverfish.class, CommonReflection.getMinecraftClass("EntitySilverfish"));
+        CLASS_MAP.put(Skeleton.class, CommonReflection.getMinecraftClass("EntitySkeleton"));
+        CLASS_MAP.put(Slime.class, CommonReflection.getMinecraftClass("EntitySlime"));
+        CLASS_MAP.put(Snowman.class, CommonReflection.getMinecraftClass("EntitySnowman"));
+        CLASS_MAP.put(Spider.class, CommonReflection.getMinecraftClass("EntitySpider"));
+        CLASS_MAP.put(Squid.class, CommonReflection.getMinecraftClass("EntitySquid"));
+        CLASS_MAP.put(Villager.class, CommonReflection.getMinecraftClass("EntityVillager"));
+        CLASS_MAP.put(WaterMob.class, CommonReflection.getMinecraftClass("EntityWaterAnimal"));
+        CLASS_MAP.put(Witch.class, CommonReflection.getMinecraftClass("EntityWitch"));
+        CLASS_MAP.put(Wither.class, CommonReflection.getMinecraftClass("EntityWither"));
+        CLASS_MAP.put(Wolf.class, CommonReflection.getMinecraftClass("EntityWolf"));
+        CLASS_MAP.put(Zombie.class, CommonReflection.getMinecraftClass("EntityZombie"));
     }
 
     public static Class<?> getNMSClass(Class<? extends org.bukkit.entity.Entity> bukkitClass) {

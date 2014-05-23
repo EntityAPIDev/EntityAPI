@@ -64,12 +64,6 @@ import java.util.logging.Level;
 public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
 
     /**
-     * Several Loggers - TODO: something else to replace these
-     */
-    public static final ModuleLogger LOGGER = new ModuleLogger("EntityAPI");
-    public static final ModuleLogger LOGGER_REFLECTION = LOGGER.getModule("Reflection");
-    public static final ModuleLogger LOGGER_DATA_STORE = LOGGER_REFLECTION.getModule("Persistence");
-    /**
      * EntityAPI instance
      */
     private static EntityAPICore CORE_INSTANCE;
@@ -146,7 +140,7 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
             Metrics metrics = new Metrics(this);
             metrics.start();
         } catch (IOException e) {
-            LOGGER.severe("Failed to initialise Metrics");
+            EntityAPI.LOGGER.severe("Failed to initialise Metrics");
         }
 
         this.checkUpdates();
@@ -171,7 +165,7 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
         }
 
         if (SERVER == null) {
-            LOGGER.warning("Failed to identify the server brand! The API will not run correctly -> disabling");
+            EntityAPI.LOGGER.warning("Failed to identify the server brand! The API will not run correctly -> disabling");
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         } else {

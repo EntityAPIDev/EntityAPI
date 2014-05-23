@@ -22,7 +22,7 @@ package org.entityapi.reflection.utility;
 import com.google.common.base.Strings;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
-import org.entityapi.EntityAPICore;
+import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.reflection.*;
 
 import java.util.regex.Matcher;
@@ -151,7 +151,7 @@ public class CommonReflection {
                         }
                     } catch (Exception e) {
                         if (VERSION_TAG == null)
-                            EntityAPICore.LOGGER_REFLECTION.warning("Version tag is null and it appears the server is modded but does not contain the expected method(s)! HoloAPI may not work correctly!");
+                            EntityAPI.LOGGER_REFLECTION.warning("Version tag is null and it appears the server is modded but does not contain the expected method(s)! EntityAPI may not work correctly!");
                     }
 
                     MINECARFT_PACKAGE = combine(MINECARFT_PACKAGE_PREFIX, VERSION_TAG);

@@ -27,6 +27,7 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.util.Vector;
 import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.mind.Mind;
+import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -121,7 +122,7 @@ public abstract interface ControllableEntity<T extends LivingEntity> extends Nam
 
     public void setPitch(float value);
 
-    public boolean isControllableRiding();
+    public boolean isControllableRidingEnabled();
 
-    public void setControllableRiding(boolean flag);
+    public ControlledRidingAttribute enableControllableRiding(boolean flag);
 }

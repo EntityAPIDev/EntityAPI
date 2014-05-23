@@ -19,7 +19,7 @@
 
 package org.entityapi.reflection;
 
-import org.entityapi.EntityAPICore;
+import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.reflection.utility.CommonReflection;
 
 public class CBClassTemplate extends ClassTemplate<Object> {
@@ -35,7 +35,7 @@ public class CBClassTemplate extends ClassTemplate<Object> {
     protected void setCBClass(String name) {
         Class clazz = CommonReflection.getCraftBukkitClass(name);
         if (clazz == null) {
-            EntityAPICore.LOGGER_REFLECTION.warning("Failed to find a matching class with name: " + name);
+            EntityAPI.LOGGER_REFLECTION.warning("Failed to find a matching class with name: " + name);
         }
         setClass(clazz);
     }

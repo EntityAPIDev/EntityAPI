@@ -20,6 +20,7 @@
 package org.entityapi.nms.v1_7_R1.entity.mind.attribute;
 
 import net.minecraft.server.v1_7_R1.EntityLiving;
+import org.entityapi.api.entity.mind.Attribute;
 import org.entityapi.api.entity.mind.Mind;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.internal.Constants;
@@ -32,8 +33,13 @@ public class ControlledRidingAttributeBase extends ControlledRidingAttribute {
     private boolean jumpingEnabled;
     private boolean canFly;
 
-    public ControlledRidingAttributeBase(Mind mind) {
-        super(mind);
+    public ControlledRidingAttributeBase() {
+    }
+
+    public ControlledRidingAttributeBase(boolean vehicleMotionOverriden, boolean jumpingEnabled, boolean canFly) {
+        this.vehicleMotionOverriden = vehicleMotionOverriden;
+        this.jumpingEnabled = jumpingEnabled;
+        this.canFly = canFly;
     }
 
     public void onRide(float[] motion) {
@@ -90,5 +96,10 @@ public class ControlledRidingAttributeBase extends ControlledRidingAttribute {
 
     public void setVehicleMotionOverriden(boolean flag) {
         this.vehicleMotionOverriden = flag;
+    }
+
+    @Override
+    public ControlledRidingAttributeBase copyTo(Mind mind) {
+        return new ControlledRidingAttributeBase(this.vehicleMotionOverriden, this.jumpingEnabled, this.canFly);
     }
 }
