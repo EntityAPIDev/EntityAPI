@@ -86,8 +86,8 @@ public class Mind {
         this.fixedPitch = fixedPitch;
     }
 
-    public HashMap<String, Attribute> getAttributes() {
-        return attributes;
+    public Map<String, Attribute> getAttributes() {
+        return new HashMap<>(attributes);
     }
 
     public BehaviourSelector getMovementBehaviourSelector() {
@@ -98,7 +98,15 @@ public class Mind {
         return targetSelector;
     }
 
+    public void clearAttributes() {
+        Iterator<Map.Entry<String, Attribute>> i = getAttributes().entrySet().iterator();
+        while (i.hasNext()) {
+            clearAttribute(i.next().getValue());
+        }
+    }
+
     public void addAttribute(Attribute attribute) {
+        attribute.setMind(this);
         this.clearAttribute(attribute);
         this.attributes.put(attribute.getKey(), attribute);
     }
@@ -106,7 +114,9 @@ public class Mind {
     public void clearAttribute(Attribute attribute) {
         Iterator<Map.Entry<String, Attribute>> i = this.attributes.entrySet().iterator();
         while (i.hasNext()) {
-            if (i.next().getKey().equals(attribute.getKey())) {
+            Map.Entry<String, Attribute> entry = i.next();
+            if (entry.getKey().equals(attribute.getKey())) {
+                entry.getValue().setMind(null);
                 i.remove();
             }
         }
@@ -158,6 +168,10 @@ public class Mind {
         }
 
         for (Attribute attribute : this.attributes.values()) {
+            if (!attribute.getMind().equals(this)) {
+                // Make sure the Mind instance is correct
+                attribute.setMind(this);
+            }
             attribute.tick();
         }
 

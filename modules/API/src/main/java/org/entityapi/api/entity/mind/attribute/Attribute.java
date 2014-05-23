@@ -21,16 +21,27 @@ package org.entityapi.api.entity.mind.attribute;
 
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.Mind;
+import org.entityapi.exceptions.AttributeAlreadyInUseException;
+import org.entityapi.exceptions.AttributeMindRequiredException;
 
 public abstract class Attribute {
 
     protected Mind mind;
 
-    public Attribute(Mind mind) {
+    public Attribute() {
+    }
+
+    public void setMind(Mind mind) {
+        if (this.mind != null && mind != null) {
+            throw new AttributeAlreadyInUseException();
+        }
         this.mind = mind;
     }
 
     public Mind getMind() {
+        if (mind == null) {
+            throw new AttributeMindRequiredException();
+        }
         return mind;
     }
 

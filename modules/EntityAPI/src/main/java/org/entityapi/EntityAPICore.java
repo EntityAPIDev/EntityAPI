@@ -38,6 +38,7 @@ import org.entityapi.api.EntityManager;
 import org.entityapi.api.IBasicEntityUtil;
 import org.entityapi.api.ISpawnUtil;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.mind.attribute.*;
 import org.entityapi.api.events.*;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.plugin.IEntityAPICore;
@@ -356,12 +357,22 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
     public void callOnTick(ControllableEntity controllableEntity) {
         ControllableEntityTickEvent tickEvent = new ControllableEntityTickEvent(controllableEntity);
         Bukkit.getServer().getPluginManager().callEvent(tickEvent);
+        TickAttribute tickAttribute = controllableEntity.getMind().getAttribute(TickAttribute.class);
+        if (tickAttribute != null) {
+            tickAttribute.onTick();
+        }
     }
 
     @Override
     public boolean callOnInteract(ControllableEntity controllableEntity, Player entity, boolean rightClick) {
         ControllableEntityInteractEvent interactEvent = new ControllableEntityInteractEvent(controllableEntity, entity, rightClick ? Action.RIGHT_CLICK : Action.LEFT_CLICK);
         Bukkit.getServer().getPluginManager().callEvent(interactEvent);
+        if (!interactEvent.isCancelled()) {
+            InteractAttribute interactAttribute = controllableEntity.getMind().getAttribute(InteractAttribute.class);
+            if (interactAttribute != null) {
+                interactAttribute.onInteract(entity, rightClick);
+            }
+        }
         return !interactEvent.isCancelled();
     }
 
@@ -373,6 +384,10 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
         if (pushEvent.isCancelled()) {
             return new Vector(0, 0, 0);
         }
+        PushAttribute pushAttribute = controllableEntity.getMind().getAttribute(PushAttribute.class);
+        if (pushAttribute != null) {
+            pushAttribute.onPush(pushEvent.getPushVelocity());
+        }
         return pushEvent.getPushVelocity();
     }
 
@@ -380,6 +395,12 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
     public boolean callOnCollide(ControllableEntity controllableEntity, Entity entity) {
         ControllableEntityCollideEvent collideEvent = new ControllableEntityCollideEvent(controllableEntity, entity);
         Bukkit.getServer().getPluginManager().callEvent(collideEvent);
+        if (!collideEvent.isCancelled()) {
+            CollideAttribute collideAttribute = controllableEntity.getMind().getAttribute(CollideAttribute.class);
+            if (collideAttribute != null) {
+                collideAttribute.onCollide(entity);
+            }
+        }
         return !collideEvent.isCancelled();
     }
 
@@ -388,5 +409,9 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
         ControllableEntityDeathEvent deathEvent = new ControllableEntityDeathEvent(controllableEntity);
         Bukkit.getServer().getPluginManager().callEvent(deathEvent);
         controllableEntity.getMind().setControllableEntity(null);
+        DeathAttribute deathAttribute = controllableEntity.getMind().getAttribute(DeathAttribute.class);
+        if (deathAttribute != null) {
+            deathAttribute.onDeath();
+        }
     }
 }
