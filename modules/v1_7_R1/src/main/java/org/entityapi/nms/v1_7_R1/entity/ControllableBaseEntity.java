@@ -464,7 +464,11 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends E
     @Override
     public ControlledRidingAttribute enableControllableRiding(boolean flag) {
         ControlledRidingAttribute controlledRidingAttribute = new ControlledRidingAttributeBase();
-        this.getMind().addAttribute(controlledRidingAttribute);
+        if (flag) {
+            this.getMind().addAttribute(controlledRidingAttribute);
+        } else {
+            this.getMind().clearAttribute(controlledRidingAttribute.getClass());
+        }
         return controlledRidingAttribute;
     }
 }
