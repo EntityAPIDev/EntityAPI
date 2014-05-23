@@ -20,11 +20,9 @@
 package org.entityapi.api.entity.mind.attribute;
 
 import org.bukkit.util.Vector;
+import org.entityapi.api.entity.mind.Attribute;
 
 public abstract class PushAttribute extends Attribute {
-
-    protected PushAttribute() {
-    }
 
     public abstract void onPush(Vector pushVelocity);
 

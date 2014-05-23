@@ -19,10 +19,9 @@
 
 package org.entityapi.api.entity.mind.attribute;
 
-public abstract class DeathAttribute extends Attribute {
+import org.entityapi.api.entity.mind.Attribute;
 
-    protected DeathAttribute() {
-    }
+public abstract class DeathAttribute extends Attribute {
 
     public abstract void onDeath();
 

@@ -21,11 +21,11 @@ package org.entityapi.api.entity.mind.behaviour;
 
 public interface BehaviourGoal {
 
-    public abstract BehaviourType getType();
+    public BehaviourType getType();
 
-    public abstract String getDefaultKey();
+    public String getDefaultKey();
 
-    public abstract boolean shouldStart();
+    public boolean shouldStart();
 
     public boolean shouldContinue();
 

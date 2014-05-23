@@ -19,10 +19,9 @@
 
 package org.entityapi.api.entity.mind.attribute;
 
-public abstract class TickAttribute extends Attribute {
+import org.entityapi.api.entity.mind.Attribute;
 
-    protected TickAttribute() {
-    }
+public abstract class TickAttribute extends Attribute {
 
     public abstract void onTick();
 

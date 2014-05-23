@@ -77,6 +77,14 @@ public class CommonReflection {
     }
 
     /**
+     * Returns the version tag as a numeric value
+     * @return
+     */
+    public static int getNumericVersionTag() {
+        return Integer.valueOf(getVersionTag().replaceAll("[^0-9]", ""));
+    }
+
+    /**
      * Returns the Minecraft package
      *
      * @return

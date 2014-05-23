@@ -20,6 +20,7 @@
 package org.entityapi.api.entity.mind.attribute;
 
 import org.bukkit.entity.Player;
+import org.entityapi.api.entity.mind.Attribute;
 import org.entityapi.api.entity.mind.Mind;
 
 import java.util.ArrayList;
@@ -32,8 +33,8 @@ public class TradingAttribute extends Attribute {
     private String tradeName;
     private List<Player> tradingPlayers = new ArrayList<>();
 
-    public TradingAttribute(Mind mind) {
-        super(mind);
+    public TradingAttribute(String tradeName) {
+        this.tradeName = tradeName;
     }
 
     @Override
@@ -47,5 +48,10 @@ public class TradingAttribute extends Attribute {
 
     public List<Player> getTradingPlayers() {
         return tradingPlayers;
+    }
+
+    @Override
+    public TradingAttribute copyTo(Mind mind) {
+        return new TradingAttribute(this.tradeName);
     }
 }

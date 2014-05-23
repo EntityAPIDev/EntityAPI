@@ -20,11 +20,9 @@
 package org.entityapi.api.entity.mind.attribute;
 
 import org.bukkit.entity.Player;
+import org.entityapi.api.entity.mind.Attribute;
 
 public abstract class InteractAttribute extends Attribute {
-
-    protected InteractAttribute() {
-    }
 
     public abstract void onInteract(Player entity, boolean rightClick);
 

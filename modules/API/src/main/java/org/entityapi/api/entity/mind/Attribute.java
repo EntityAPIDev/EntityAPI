@@ -17,25 +17,39 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.entity.mind.attribute;
+package org.entityapi.api.entity.mind;
 
 import org.entityapi.api.entity.ControllableEntity;
-import org.entityapi.api.entity.mind.Mind;
-import org.entityapi.exceptions.AttributeAlreadyInUseException;
 import org.entityapi.exceptions.AttributeMindRequiredException;
 
 public abstract class Attribute {
 
     protected Mind mind;
 
-    public Attribute() {
+    protected Attribute applyTo(Mind mind) {
+        Attribute attribute = this.copyTo(mind);
+        if (attribute == null) {
+            try {
+                attribute = this.getClass().newInstance();
+            } catch (InstantiationException | IllegalAccessException e) {
+                EntityAPICore.LOGGER.severe("Failed to copyTo new Attribute! Ensure that the Attribute#copyTo(Mind) method constructs a new Attribute that can be applied to an entity's mind.");
+            }
+        }
+        if (attribute != null) {
+            this.mind = mind;
+        }
+        return attribute;
     }
 
-    public void setMind(Mind mind) {
-        if (this.mind != null && mind != null) {
-            throw new AttributeAlreadyInUseException();
-        }
-        this.mind = mind;
+    public abstract Attribute copyTo(Mind mind);
+
+    protected void removeFrom(Mind mind) {
+        this.mind = null;
+        this.onRemove(mind);
+    }
+
+    protected void onRemove(Mind mind) {
+
     }
 
     public Mind getMind() {

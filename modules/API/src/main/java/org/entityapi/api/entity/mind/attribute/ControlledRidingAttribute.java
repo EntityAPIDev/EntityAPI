@@ -19,13 +19,10 @@
 
 package org.entityapi.api.entity.mind.attribute;
 
+import org.entityapi.api.entity.mind.Attribute;
 import org.entityapi.api.entity.mind.Mind;
 
 public abstract class ControlledRidingAttribute extends Attribute {
-
-    protected ControlledRidingAttribute(Mind mind) {
-        super(mind);
-    }
 
     @Override
     public String getKey() {

@@ -19,6 +19,7 @@
 
 package org.entityapi.api.entity.mind.attribute;
 
+import org.entityapi.api.entity.mind.Attribute;
 import org.entityapi.api.entity.mind.Mind;
 
 public class TamedRidingAttribute extends Attribute {
@@ -26,8 +27,9 @@ public class TamedRidingAttribute extends Attribute {
     private int temper;
     private boolean rideable;
 
-    public TamedRidingAttribute(Mind mind) {
-        super(mind);
+    public TamedRidingAttribute(TamedRidingAttribute attribute) {
+        this.temper = attribute.temper;
+        this.rideable = attribute.rideable;
     }
 
     @Override
@@ -50,5 +52,10 @@ public class TamedRidingAttribute extends Attribute {
 
     public boolean isRideable() {
         return rideable;
+    }
+
+    @Override
+    public TamedRidingAttribute copyTo(Mind mind) {
+        return new TamedRidingAttribute(this);
     }
 }

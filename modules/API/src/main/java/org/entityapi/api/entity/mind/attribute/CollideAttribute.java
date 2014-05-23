@@ -20,11 +20,9 @@
 package org.entityapi.api.entity.mind.attribute;
 
 import org.bukkit.entity.Entity;
+import org.entityapi.api.entity.mind.Attribute;
 
 public abstract class CollideAttribute extends Attribute {
-
-    protected CollideAttribute() {
-    }
 
     public abstract void onCollide(Entity entity);
 

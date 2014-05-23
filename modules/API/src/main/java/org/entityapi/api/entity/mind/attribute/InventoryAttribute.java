@@ -21,24 +21,29 @@ package org.entityapi.api.entity.mind.attribute;
 
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
+import org.entityapi.api.entity.mind.Attribute;
 import org.entityapi.api.entity.mind.Mind;
 
 public class InventoryAttribute extends Attribute {
 
     private Inventory inventory;
 
-    public InventoryAttribute(Mind mind) {
-        this(mind, 36);
+    public InventoryAttribute() {
+        this(36);
     }
 
-    public InventoryAttribute(Mind mind, int inventorySize) {
-        super(mind);
+    public InventoryAttribute(int inventorySize) {
         this.inventory = Bukkit.createInventory(getMind().getControllableEntity(), inventorySize);
     }
 
-    public InventoryAttribute(Mind mind, Inventory inventory) {
-        super(mind);
+    protected InventoryAttribute(Inventory inventory) {
         this.inventory = inventory;
+    }
+
+    @Override
+    public InventoryAttribute copyTo(Mind mind) {
+        this.mind = mind;
+        return new InventoryAttribute(this.inventory.getSize());
     }
 
     public Inventory getInventory() {

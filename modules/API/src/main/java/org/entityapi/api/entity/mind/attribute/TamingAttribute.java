@@ -19,29 +19,20 @@
 
 package org.entityapi.api.entity.mind.attribute;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.entityapi.api.entity.mind.Attribute;
 import org.entityapi.api.entity.mind.Mind;
-
-import java.util.UUID;
+import org.entityapi.api.utils.IdentUtils;
 
 public class TamingAttribute extends Attribute {
+    private String tamerIdentification;
 
-    // TODO: What if EntityAPI is being run on a version that doesn't support UUID changes? e.g. 1.7.4
-    // TODO: EntityAPI should only support 1.7.8 and above.
-    private UUID tamerUuid;
-
-    public TamingAttribute(Mind mind) {
-        super(mind);
+    public TamingAttribute(Player player) {
+        this(IdentUtils.getIdentificationForAsString(player));
     }
 
-    public TamingAttribute(Mind mind, UUID tamerUuid) {
-        super(mind);
-        this.tamerUuid = tamerUuid;
-    }
-
-    public TamingAttribute(Mind mind, Player player) {
-        this(mind, player.getUniqueId());
+    private TamingAttribute(String tamerIdentification) {
+        this.tamerIdentification = tamerIdentification;
     }
 
     @Override
@@ -50,21 +41,26 @@ public class TamingAttribute extends Attribute {
     }
 
     public boolean isTamed() {
-        return this.tamerUuid != null;
+        return this.tamerIdentification != null;
     }
 
     public Player getTamer() {
         if (this.isTamed()) {
-            return Bukkit.getPlayer(this.tamerUuid);
+            return IdentUtils.getPlayerOf(tamerIdentification);
         }
         return null;
     }
 
-    public void setTamer(UUID tamerUuid) {
-        this.tamerUuid = tamerUuid;
+    public void setTamer(Player player) {
+        this.setTamer(IdentUtils.getIdentificationForAsString(player));
     }
 
-    public void setTamer(Player player) {
-        this.setTamer(player.getUniqueId());
+    private void setTamer(String tamerIdentification) {
+        this.tamerIdentification = tamerIdentification;
+    }
+
+    @Override
+    public TamingAttribute copyTo(Mind mind) {
+        return new TamingAttribute(this.tamerUuid);
     }
 }

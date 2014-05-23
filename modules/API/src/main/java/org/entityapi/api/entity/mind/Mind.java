@@ -20,7 +20,6 @@
 package org.entityapi.api.entity.mind;
 
 import org.entityapi.api.entity.ControllableEntity;
-import org.entityapi.api.entity.mind.attribute.Attribute;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -101,22 +100,34 @@ public class Mind {
     public void clearAttributes() {
         Iterator<Map.Entry<String, Attribute>> i = getAttributes().entrySet().iterator();
         while (i.hasNext()) {
-            clearAttribute(i.next().getValue());
+            clearAttribute(i.next().getValue().getClass());
         }
     }
 
     public void addAttribute(Attribute attribute) {
-        attribute.setMind(this);
-        this.clearAttribute(attribute);
-        this.attributes.put(attribute.getKey(), attribute);
+        Attribute attr = attribute.applyTo(this);
+        if (attr != null) {
+            this.clearAttribute(attr.getClass());
+            this.attributes.put(attr.getKey(), attr);
+        }
     }
 
-    public void clearAttribute(Attribute attribute) {
+    public void clearAttribute(String key) {
         Iterator<Map.Entry<String, Attribute>> i = this.attributes.entrySet().iterator();
         while (i.hasNext()) {
             Map.Entry<String, Attribute> entry = i.next();
-            if (entry.getKey().equals(attribute.getKey())) {
-                entry.getValue().setMind(null);
+            if (entry.getKey().equals(key)) {
+                i.remove();
+            }
+        }
+    }
+
+    public void clearAttribute(Class<? extends Attribute> type) {
+        Iterator<Map.Entry<String, Attribute>> i = this.attributes.entrySet().iterator();
+        while (i.hasNext()) {
+            Map.Entry<String, Attribute> entry = i.next();
+            if (type.isAssignableFrom(entry.getValue().getClass())) {
+                entry.getValue().removeFrom(null);
                 i.remove();
             }
         }
@@ -168,11 +179,10 @@ public class Mind {
         }
 
         for (Attribute attribute : this.attributes.values()) {
-            if (!attribute.getMind().equals(this)) {
-                // Make sure the Mind instance is correct
-                attribute.setMind(this);
+            // Make sure the Mind instance is correct
+            if (attribute.getMind().equals(this)) {
+                attribute.tick();
             }
-            attribute.tick();
         }
 
         if (this.isStationary()) {

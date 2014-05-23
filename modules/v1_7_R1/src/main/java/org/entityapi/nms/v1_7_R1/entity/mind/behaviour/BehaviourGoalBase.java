@@ -21,10 +21,11 @@ package org.entityapi.nms.v1_7_R1.entity.mind.behaviour;
 
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.mind.behaviour.BehaviourGoal;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
 
-public abstract class BehaviourGoalBase implements org.entityapi.api.entity.mind.behaviour.BehaviourGoal {
+public abstract class BehaviourGoalBase implements BehaviourGoal {
 
     private ControllableEntity controllableEntity;
 
