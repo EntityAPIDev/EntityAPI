@@ -1,6 +1,6 @@
 If you feel that a specific feature or issue is not sufficiently addressed in EntityAPI, feel free to fork the repository and start hacking to your heart's content. We are always open to suggestions and improvements.
 
-If you need any help or want to talk to me, come [join us in IRC - `#entityapi` @ `irc.esper.net`](http://webchat.esper.net/?channels=entityapi&prompt=1).
+If you need any help or want to talk, come [join us in IRC - `#entityapi` @ `irc.esper.net`](http://webchat.esper.net/?channels=entityapi&prompt=1).
 
 ##Getting Started
 To contribute changes to EntityAPI, first off make sure that you have a free [GitHub account](https://github.com/join). If you're familiar with Git and GitHub, skip straight over to my [general expectations](#general-expectations), [coding requirements](#code-requirements) and [Pull Request formatting expectations](#pull-request-formatting).
