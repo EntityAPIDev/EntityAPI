@@ -3,6 +3,8 @@ EntityAPI
 
 A Bukkit API that enables you to easily control your own custom entities
 
+Current code base only supports 1.7.2. We will be updating to the latest Minecraft version once we are satisfied with our API.
+
 Contributing
 ============
 
