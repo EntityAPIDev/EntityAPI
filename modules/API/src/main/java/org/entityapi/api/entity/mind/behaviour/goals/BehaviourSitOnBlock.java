@@ -22,14 +22,15 @@ package org.entityapi.api.entity.mind.behaviour.goals;
 import org.bukkit.entity.Ocelot;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.Behaviour;
+import org.entityapi.api.entity.type.ControllableOcelot;
 
-public class BehaviourSitOnBlock extends Behaviour {
+public class BehaviourSitOnBlock<T extends ControllableOcelot> extends Behaviour<T> {
 
-    public BehaviourSitOnBlock(ControllableEntity<? extends Ocelot> controllableEntity) {
+    public BehaviourSitOnBlock(T controllableEntity) {
         this(controllableEntity, -1);
     }
 
-    public BehaviourSitOnBlock(ControllableEntity<? extends Ocelot> controllableEntity, double navigationSpeed) {
+    public BehaviourSitOnBlock(T controllableEntity, double navigationSpeed) {
         super(controllableEntity, navigationSpeed);
     }
 }

@@ -21,10 +21,7 @@ package org.entityapi.api.plugin;
 
 import org.bukkit.plugin.Plugin;
 import org.entityapi.api.EntityManager;
-import org.entityapi.api.IBasicEntityUtil;
 import org.entityapi.api.ISpawnUtil;
-
-import java.util.logging.Logger;
 
 public class EntityAPI {
 
@@ -103,9 +100,5 @@ public class EntityAPI {
 
     public static ISpawnUtil getSpawnUtil() {
         return CORE.getSpawnUtil();
-    }
-
-    public static IBasicEntityUtil getBasicEntityUtil() {
-        return CORE.getBasicEntityUtil();
     }
 }

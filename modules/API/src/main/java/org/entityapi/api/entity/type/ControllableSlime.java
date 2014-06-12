@@ -21,7 +21,8 @@ package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.Slime;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.type.nms.ControllableSlimeHandle;
 
-public interface ControllableSlime extends ControllableEntity<Slime> {
+public interface ControllableSlime extends ControllableEntity<Slime, ControllableSlimeHandle> {
 
 }

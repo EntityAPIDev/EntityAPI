@@ -24,7 +24,6 @@ import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 import org.entityapi.reflection.refs.NMSEntityClassRef;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
-import org.entityapi.nms.v1_7_R1.entity.ControllableBaseEntity;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourGoalBase;
 import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorViewable;
 
@@ -105,7 +104,7 @@ public class BehaviourGoalAvoidEntity extends BehaviourGoalBase {
 
     @Override
     public void start() {
-        ((ControllableBaseEntity) this.getControllableEntity()).navigateTo(this.path, this.navigationSpeedWhenFar > 0 ? this.navigationSpeedWhenFar : this.getControllableEntity().getSpeed());
+        this.getControllableEntity().getNMSAccessor().navigateTo(this.path, this.navigationSpeedWhenFar > 0 ? this.navigationSpeedWhenFar : this.getControllableEntity().getSpeed());
     }
 
     @Override

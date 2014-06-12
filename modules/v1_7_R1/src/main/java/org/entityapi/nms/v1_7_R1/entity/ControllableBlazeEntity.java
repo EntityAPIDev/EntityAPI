@@ -27,10 +27,11 @@ import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityHandle;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
+import org.entityapi.api.entity.type.nms.ControllableBlazeHandle;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
 
-public class ControllableBlazeEntity extends EntityBlaze implements ControllableEntityHandle {
+public class ControllableBlazeEntity extends EntityBlaze implements ControllableBlazeHandle {
 
     private final ControllableEntity controllableEntity;
 

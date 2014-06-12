@@ -21,7 +21,8 @@ package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.Horse;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.type.nms.ControllableHorseHandle;
 
-public interface ControllableHorse extends ControllableEntity<Horse> {
+public interface ControllableHorse extends ControllableEntity<Horse, ControllableHorseHandle> {
 
 }

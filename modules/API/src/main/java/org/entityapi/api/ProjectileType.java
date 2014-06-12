@@ -33,6 +33,6 @@ public enum ProjectileType {
     THROWN_POTION;
 
     public void shootProjectile(ControllableEntity controllableEntity, LivingEntity target, float strength) {
-        EntityAPI.getBasicEntityUtil().shootProjectile(this, controllableEntity, target, strength);
+        controllableEntity.getNMSAccessor().shootProjectile(this, target, strength);
     }
 }

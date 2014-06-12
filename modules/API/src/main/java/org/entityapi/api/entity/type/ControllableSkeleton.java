@@ -21,7 +21,8 @@ package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.Skeleton;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.type.nms.ControllableSkeletonHandle;
 
-public interface ControllableSkeleton extends ControllableEntity<Skeleton> {
+public interface ControllableSkeleton extends ControllableEntity<Skeleton, ControllableSkeletonHandle> {
 
 }

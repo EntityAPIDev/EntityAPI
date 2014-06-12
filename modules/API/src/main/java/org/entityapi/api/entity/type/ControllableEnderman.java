@@ -21,7 +21,8 @@ package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.Enderman;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.type.nms.ControllableEndermanHandle;
 
-public interface ControllableEnderman extends ControllableEntity<Enderman> {
+public interface ControllableEnderman extends ControllableEntity<Enderman, ControllableEndermanHandle> {
 
 }

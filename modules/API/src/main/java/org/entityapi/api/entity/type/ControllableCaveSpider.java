@@ -21,7 +21,8 @@ package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.CaveSpider;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.type.nms.ControllableCaveSpiderHandle;
 
-public interface ControllableCaveSpider extends ControllableEntity<CaveSpider> {
+public interface ControllableCaveSpider extends ControllableEntity<CaveSpider, ControllableCaveSpiderHandle> {
 
 }

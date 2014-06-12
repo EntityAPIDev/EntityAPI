@@ -21,7 +21,8 @@ package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.Blaze;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.type.nms.ControllableBlazeHandle;
 
-public interface ControllableBlaze extends ControllableEntity<Blaze> {
+public interface ControllableBlaze extends ControllableEntity<Blaze, ControllableBlazeHandle> {
 
 }

@@ -28,7 +28,6 @@ import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 import org.entityapi.api.events.ControllableEntityBreedEvent;
 import org.entityapi.api.events.ControllableEntityPreBreedEvent;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourGoalBase;
 
@@ -36,25 +35,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-public class BehaviourGoalBreed extends BehaviourGoalBase {
+public class BehaviourGoalBreed<T extends ControllableEntity<? extends Animals, ?>> extends BehaviourGoalBase<T, EntityAnimal> {
 
     private EntityAnimal mate;
     private int matingTicks;
     private double navigationSpeed;
 
-    public BehaviourGoalBreed(ControllableEntity<? extends Animals> controllableEntity, double navigationSpeed) {
+    public BehaviourGoalBreed(T controllableEntity, double navigationSpeed) {
         super(controllableEntity);
         this.navigationSpeed = navigationSpeed;
-    }
-
-    @Override
-    public ControllableEntity<? extends Animals> getControllableEntity() {
-        return super.getControllableEntity();
-    }
-
-    @Override
-    public EntityAnimal getHandle() {
-        return (EntityAnimal) BasicEntityUtil.getInstance().getHandle(this.getControllableEntity());
     }
 
     @Override

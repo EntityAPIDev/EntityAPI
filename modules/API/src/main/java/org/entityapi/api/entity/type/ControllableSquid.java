@@ -21,7 +21,8 @@ package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.Squid;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.type.nms.ControllableSquidHandle;
 
-public interface ControllableSquid extends ControllableEntity<Squid> {
+public interface ControllableSquid extends ControllableEntity<Squid, ControllableSquidHandle> {
 
 }

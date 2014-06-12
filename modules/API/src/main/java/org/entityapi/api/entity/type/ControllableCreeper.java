@@ -21,8 +21,9 @@ package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.Creeper;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.type.nms.ControllableCreeperHandle;
 
-public interface ControllableCreeper extends ControllableEntity<Creeper> {
+public interface ControllableCreeper extends ControllableEntity<Creeper, ControllableCreeperHandle> {
 
     public void explode(int modifier);
 }

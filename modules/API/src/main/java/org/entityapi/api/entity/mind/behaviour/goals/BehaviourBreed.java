@@ -23,13 +23,13 @@ import org.bukkit.entity.Animals;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.Behaviour;
 
-public class BehaviourBreed extends Behaviour {
+public class BehaviourBreed<T extends ControllableEntity<? extends Animals, ?>> extends Behaviour<T> {
 
-    public BehaviourBreed(ControllableEntity<? extends Animals> controllableEntity) {
+    public BehaviourBreed(T controllableEntity) {
         this(controllableEntity, -1);
     }
 
-    public BehaviourBreed(ControllableEntity<? extends Animals> controllableEntity, double navigationSpeed) {
+    public BehaviourBreed(T controllableEntity, double navigationSpeed) {
         super(controllableEntity, navigationSpeed);
     }
 }

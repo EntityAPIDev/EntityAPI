@@ -22,27 +22,33 @@ package org.entityapi.api.entity;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.entity.Animals;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.util.Vector;
 import org.entityapi.api.EntityManager;
+import org.entityapi.api.NMSAccessor;
 import org.entityapi.api.entity.mind.Mind;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract interface ControllableEntity<T extends LivingEntity> extends Nameable, Attacking, InventoryHolder {
+public abstract interface ControllableEntity<T extends LivingEntity, S extends ControllableEntityHandle<T>> extends Nameable, Attacking, InventoryHolder {
 
     // TODO: JavaDucks. Quack
 
     public EntityManager getEntityManager();
+
+    public NMSAccessor<T, S> getNMSAccessor();
 
     public abstract int getId();
 
     public Mind getMind();
 
     public abstract T getBukkitEntity();
+
+    public S getHandle();
 
     public abstract ControllableEntityType getEntityType();
 
@@ -87,6 +93,8 @@ public abstract interface ControllableEntity<T extends LivingEntity> extends Nam
     public boolean shouldUpdateAttributes();
 
     public void setTickAttributes(boolean flag);
+
+    boolean isPathfindingSpeedOverriden();
 
     public double getSpeed();
 

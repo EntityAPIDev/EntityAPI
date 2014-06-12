@@ -19,14 +19,14 @@
 
 package org.entityapi.exceptions;
 
-public class ControllableEntitySpawnException extends RuntimeException {
+public class ControllableEntitySpawnException extends ControllableEntityException {
 
     public ControllableEntitySpawnException() {
         super("Failed to spawn ControllableEntity.");
     }
 
-    public ControllableEntitySpawnException(Exception e) {
-        super(e);
+    public ControllableEntitySpawnException(Throwable throwable) {
+        super(throwable);
     }
 
     public ControllableEntitySpawnException(String message) {

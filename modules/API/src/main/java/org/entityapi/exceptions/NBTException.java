@@ -28,7 +28,7 @@ public class NBTException extends RuntimeException {
         super(message);
     }
 
-    public NBTException(Exception exception) {
-        super(exception);
+    public NBTException(Throwable throwable) {
+        super(throwable);
     }
 }

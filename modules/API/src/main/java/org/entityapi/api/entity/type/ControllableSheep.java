@@ -21,7 +21,8 @@ package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.Sheep;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.type.nms.ControllableSheepHandle;
 
-public interface ControllableSheep extends ControllableEntity<Sheep> {
+public interface ControllableSheep extends ControllableEntity<Sheep, ControllableSheepHandle> {
 
 }

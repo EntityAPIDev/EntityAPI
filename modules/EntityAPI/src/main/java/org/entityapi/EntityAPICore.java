@@ -35,14 +35,12 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 import org.entityapi.api.EntityManager;
-import org.entityapi.api.IBasicEntityUtil;
 import org.entityapi.api.ISpawnUtil;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.attribute.*;
 import org.entityapi.api.events.*;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.plugin.IEntityAPICore;
-import org.entityapi.api.plugin.ModuleLogger;
 import org.entityapi.api.plugin.Server;
 import org.entityapi.reflection.APIReflection;
 import org.entityapi.reflection.SafeConstructor;
@@ -69,7 +67,6 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
     private static EntityAPICore CORE_INSTANCE;
 
     private static ISpawnUtil SPAWN_UTIL;
-    private static IBasicEntityUtil BASIC_ENTITY_UTIL;
 
     /**
      * The Server brand
@@ -130,7 +127,6 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
         initServer();
 
         SPAWN_UTIL = new SafeConstructor<ISpawnUtil>(APIReflection.getVersionedClass("SpawnUtil")).newInstance();
-        BASIC_ENTITY_UTIL = new SafeConstructor<IBasicEntityUtil>(APIReflection.getVersionedClass("BasicEntityUtil")).newInstance();
 
         this.checkPlugins();
 
@@ -340,11 +336,6 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
     @Override
     public ISpawnUtil getSpawnUtil() {
         return SPAWN_UTIL;
-    }
-
-    @Override
-    public IBasicEntityUtil getBasicEntityUtil() {
-        return BASIC_ENTITY_UTIL;
     }
 
     @Override

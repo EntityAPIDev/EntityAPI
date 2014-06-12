@@ -23,44 +23,52 @@ import net.minecraft.server.v1_7_R1.EntityLiving;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourGoal;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
-import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
 
-public abstract class BehaviourGoalBase implements BehaviourGoal {
+public abstract class BehaviourGoalBase<T extends ControllableEntity, S extends EntityLiving> implements BehaviourGoal {
 
-    private ControllableEntity controllableEntity;
+    private T controllableEntity;
 
-    public BehaviourGoalBase(ControllableEntity controllableEntity) {
+    public BehaviourGoalBase(T controllableEntity) {
         this.controllableEntity = controllableEntity;
     }
 
-    public ControllableEntity getControllableEntity() {
+    @Override
+    public T getControllableEntity() {
         return controllableEntity;
     }
 
-    public EntityLiving getHandle() {
-        return BasicEntityUtil.getInstance().getHandle(this.getControllableEntity());
+    public S getHandle() {
+        return (S) this.getControllableEntity().getHandle();
     }
 
+    @Override
     public abstract BehaviourType getType();
 
+    @Override
     public abstract String getDefaultKey();
 
+    @Override
     public abstract boolean shouldStart(); //a
 
+    @Override
     public boolean shouldContinue() { //b
         return shouldStart();
     }
 
+    @Override
     public void start() { //c
     }
 
+    @Override
     public void finish() { //d
     }
 
+    @Override
     public boolean isContinuous() {
         return true;
     }
 
+    @Override
     public void tick() {
     } //e
 }

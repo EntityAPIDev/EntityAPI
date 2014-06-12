@@ -28,7 +28,7 @@ public class NBTWriteException extends NBTException {
         super(message);
     }
 
-    public NBTWriteException(Exception exception) {
-        super(exception);
+    public NBTWriteException(Throwable throwable) {
+        super(throwable);
     }
 }

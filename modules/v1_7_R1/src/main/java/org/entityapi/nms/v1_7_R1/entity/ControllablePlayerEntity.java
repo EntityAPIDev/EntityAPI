@@ -23,11 +23,12 @@ import net.minecraft.server.v1_7_R1.*;
 import net.minecraft.util.com.mojang.authlib.GameProfile;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityHandle;
+import org.entityapi.api.entity.type.nms.ControllablePlayerHandle;
 import org.entityapi.nms.v1_7_R1.PlayerNavigation;
 import org.entityapi.nms.v1_7_R1.network.FixedNetworkManager;
 import org.entityapi.nms.v1_7_R1.network.NullPlayerConnection;
 
-public class ControllablePlayerEntity extends EntityPlayer implements ControllableEntityHandle {
+public class ControllablePlayerEntity extends EntityPlayer implements ControllablePlayerHandle {
 
     private Navigation navigation;
 

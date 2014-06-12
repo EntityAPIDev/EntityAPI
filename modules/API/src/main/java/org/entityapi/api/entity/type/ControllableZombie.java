@@ -21,7 +21,8 @@ package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.Zombie;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.type.nms.ControllableZombieHandle;
 
-public interface ControllableZombie extends ControllableEntity<Zombie> {
+public interface ControllableZombie extends ControllableEntity<Zombie, ControllableZombieHandle> {
 
 }

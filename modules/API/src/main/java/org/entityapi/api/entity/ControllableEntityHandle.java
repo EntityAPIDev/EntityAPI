@@ -20,14 +20,15 @@
 package org.entityapi.api.entity;
 
 import org.bukkit.Material;
+import org.bukkit.entity.LivingEntity;
 
 /**
  * Represents the NMS entity
  */
 
-public interface ControllableEntityHandle {
+public interface ControllableEntityHandle<T extends LivingEntity> {
 
-    public ControllableEntity getControllableEntity();
+    public ControllableEntity<T, ?> getControllableEntity();
 
     public Material getDefaultMaterialLoot();
 }

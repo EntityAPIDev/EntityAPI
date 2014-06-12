@@ -22,10 +22,11 @@ package org.entityapi.api.entity.mind.behaviour.goals;
 import org.bukkit.entity.Villager;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.Behaviour;
+import org.entityapi.api.entity.type.ControllableVillager;
 
-public class BehaviourTradeWithPlayer extends Behaviour {
+public class BehaviourTradeWithPlayer<T extends ControllableVillager> extends Behaviour<T> {
 
-    public BehaviourTradeWithPlayer(ControllableEntity<? extends Villager> controllableEntity) {
+    public BehaviourTradeWithPlayer(T controllableEntity) {
         super(controllableEntity);
     }
 }

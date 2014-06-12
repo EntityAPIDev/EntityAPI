@@ -21,8 +21,9 @@ package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.Bat;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.type.nms.ControllableBatHandle;
 
-public interface ControllableBat extends ControllableEntity<Bat> {
+public interface ControllableBat extends ControllableEntity<Bat, ControllableBatHandle> {
 
     public void setHanging(boolean flag);
 

@@ -28,7 +28,7 @@ public class NBTReadException extends NBTException {
         super(message);
     }
 
-    public NBTReadException(Exception exception) {
-        super(exception);
+    public NBTReadException(Throwable throwable) {
+        super(throwable);
     }
 }

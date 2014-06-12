@@ -24,10 +24,10 @@ import org.bukkit.entity.Ocelot;
 import org.bukkit.util.Vector;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
-import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
+import org.entityapi.api.entity.type.ControllableOcelot;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourGoalBase;
 
-public class BehaviourGoalSitOnBlock extends BehaviourGoalBase {
+public class BehaviourGoalSitOnBlock<T extends ControllableOcelot> extends BehaviourGoalBase<T, EntityOcelot> {
 
     private int sitTicks;
     private int actionTicks;
@@ -37,19 +37,9 @@ public class BehaviourGoalSitOnBlock extends BehaviourGoalBase {
     private int targetZ;
     private double navigationSpeed;
 
-    public BehaviourGoalSitOnBlock(ControllableEntity<? extends Ocelot> controllableEntity, double navigationSpeed) {
+    public BehaviourGoalSitOnBlock(T controllableEntity, double navigationSpeed) {
         super(controllableEntity);
         this.navigationSpeed = navigationSpeed;
-    }
-
-    @Override
-    public ControllableEntity<? extends Ocelot> getControllableEntity() {
-        return super.getControllableEntity();
-    }
-
-    @Override
-    public EntityOcelot getHandle() {
-        return (EntityOcelot) BasicEntityUtil.getInstance().getHandle(this.getControllableEntity());
     }
 
     @Override

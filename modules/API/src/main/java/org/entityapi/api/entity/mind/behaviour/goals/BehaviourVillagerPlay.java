@@ -22,14 +22,15 @@ package org.entityapi.api.entity.mind.behaviour.goals;
 import org.bukkit.entity.Villager;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.Behaviour;
+import org.entityapi.api.entity.type.ControllableVillager;
 
-public class BehaviourVillagerPlay extends Behaviour {
+public class BehaviourVillagerPlay<T extends ControllableVillager> extends Behaviour<T> {
 
-    public BehaviourVillagerPlay(ControllableEntity<? extends Villager> controllableEntity) {
+    public BehaviourVillagerPlay(T controllableEntity) {
         this(controllableEntity, -1);
     }
 
-    public BehaviourVillagerPlay(ControllableEntity<? extends Villager> controllableEntity, double navigationSpeed) {
+    public BehaviourVillagerPlay(T controllableEntity, double navigationSpeed) {
         super(controllableEntity, navigationSpeed);
     }
 }

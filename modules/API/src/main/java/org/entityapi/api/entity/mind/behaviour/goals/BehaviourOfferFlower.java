@@ -23,10 +23,11 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.IronGolem;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.Behaviour;
+import org.entityapi.api.entity.type.ControllableIronGolem;
 
-public class BehaviourOfferFlower extends Behaviour {
+public class BehaviourOfferFlower<T extends ControllableIronGolem> extends Behaviour<T> {
 
-    public BehaviourOfferFlower(ControllableEntity<? extends IronGolem> controllableEntity, Class<? extends Entity> classToOffer) {
+    public BehaviourOfferFlower(T controllableEntity, Class<? extends Entity> classToOffer) {
         super(controllableEntity, classToOffer);
     }
 }

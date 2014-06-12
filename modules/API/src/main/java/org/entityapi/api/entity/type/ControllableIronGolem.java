@@ -21,7 +21,8 @@ package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.IronGolem;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.type.nms.ControllableIronGolemHandle;
 
-public interface ControllableIronGolem extends ControllableEntity<IronGolem> {
+public interface ControllableIronGolem extends ControllableEntity<IronGolem, ControllableIronGolemHandle> {
 
 }

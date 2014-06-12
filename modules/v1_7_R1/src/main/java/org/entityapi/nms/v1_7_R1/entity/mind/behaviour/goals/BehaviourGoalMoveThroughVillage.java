@@ -23,7 +23,6 @@ import net.minecraft.server.v1_7_R1.*;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
-import org.entityapi.nms.v1_7_R1.entity.ControllableBaseEntity;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourGoalBase;
 
 import java.util.ArrayList;
@@ -105,7 +104,7 @@ public class BehaviourGoalMoveThroughVillage extends BehaviourGoalBase {
 
     @Override
     public void start() {
-        ((ControllableBaseEntity) this.getControllableEntity()).navigateTo(this.path, this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
+        this.getControllableEntity().getNMSAccessor().navigateTo(this.path, this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
     }
 
     @Override

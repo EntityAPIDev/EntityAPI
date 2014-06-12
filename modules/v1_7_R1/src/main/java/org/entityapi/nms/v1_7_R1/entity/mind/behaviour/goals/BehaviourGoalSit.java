@@ -21,10 +21,10 @@ package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import net.minecraft.server.v1_7_R1.EntityTameableAnimal;
-import org.bukkit.entity.Animals;
+import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.mind.attribute.TamingAttribute;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
-import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourGoalBase;
 
@@ -32,18 +32,8 @@ public class BehaviourGoalSit extends BehaviourGoalBase {
 
     private boolean willSit;
 
-    public BehaviourGoalSit(ControllableEntity<? extends Animals> controllableEntity) {
+    public BehaviourGoalSit(ControllableEntity controllableEntity) {
         super(controllableEntity);
-    }
-
-    @Override
-    public ControllableEntity<? extends Animals> getControllableEntity() {
-        return super.getControllableEntity();
-    }
-
-    @Override
-    public EntityTameableAnimal getHandle() {
-        return (EntityTameableAnimal) BasicEntityUtil.getInstance().getHandle(this.getControllableEntity());
     }
 
     @Override
@@ -56,16 +46,47 @@ public class BehaviourGoalSit extends BehaviourGoalBase {
         return "Sit";
     }
 
+    private boolean isTamed() {
+        if (this.getHandle() instanceof EntityTameableAnimal) {
+            return ((EntityTameableAnimal) this.getHandle()).isTamed();
+        }
+        TamingAttribute tamingAttribute = this.getControllableEntity().getMind().getAttribute(TamingAttribute.class);
+        if (tamingAttribute != null) {
+            return tamingAttribute.isTamed();
+        }
+        return false;
+    }
+
+    private EntityLiving getTamer() {
+        if (this.getHandle() instanceof EntityTameableAnimal) {
+            return ((EntityTameableAnimal) this.getHandle()).getOwner();
+        }
+        TamingAttribute tamingAttribute = this.getControllableEntity().getMind().getAttribute(TamingAttribute.class);
+        if (tamingAttribute != null) {
+            return ((CraftLivingEntity) tamingAttribute.getTamer()).getHandle();
+        }
+        return null;
+    }
+
+    private void setSitting(boolean flag) {
+        if (this.getHandle() instanceof EntityTameableAnimal) {
+            ((EntityTameableAnimal) this.getHandle()).setSitting(true);
+        } else {
+            this.getControllableEntity().setStationary(flag);
+        }
+        this.willSit = flag;
+    }
+
     @Override
     public boolean shouldStart() {
-        if (!this.getHandle().isTamed()) {
-            return this.willSit && this.getHandle().getGoalTarget() == null; // CraftBukkit - Allow sitting for wild animals
+        if (!isTamed()) {
+            return this.willSit && this.getControllableEntity().getTarget() == null; // CraftBukkit - Allow sitting for wild animals
         } else if (this.getHandle().M()) {
             return false;
         } else if (!this.getHandle().onGround) {
             return false;
         } else {
-            EntityLiving owner = this.getHandle().getOwner();
+            EntityLiving owner = this.getTamer();
 
             return owner == null ? true : (this.getHandle().e(owner) < 144.0D && owner.getLastDamager() != null ? false : this.willSit);
         }
@@ -74,16 +95,12 @@ public class BehaviourGoalSit extends BehaviourGoalBase {
     @Override
     public void start() {
         NMSEntityUtil.getNavigation(this.getHandle()).h();
-        this.getHandle().setSitting(true);
+        this.setSitting(true);
     }
 
     @Override
     public void finish() {
-        this.getHandle().setSitting(false);
-    }
-
-    public void setSitting(boolean flag) {
-        this.willSit = flag;
+        this.setSitting(false);
     }
 
     @Override

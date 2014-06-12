@@ -25,32 +25,22 @@ import net.minecraft.server.v1_7_R1.EntityLiving;
 import org.bukkit.entity.IronGolem;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
+import org.entityapi.api.entity.type.ControllableIronGolem;
 import org.entityapi.reflection.refs.NMSEntityClassRef;
-import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourGoalBase;
 
-public class BehaviourGoalOfferFlower extends BehaviourGoalBase {
+public class BehaviourGoalOfferFlower<T extends ControllableIronGolem> extends BehaviourGoalBase<T, EntityIronGolem> {
 
     private Class<? extends Entity> typeToOffer;
     private EntityLiving toOffer;
     private int offerTicks;
 
-    public BehaviourGoalOfferFlower(ControllableEntity<? extends IronGolem> controllableEntity, Class<? extends org.bukkit.entity.Entity> classToOffer) {
+    public BehaviourGoalOfferFlower(T controllableEntity, Class<? extends org.bukkit.entity.Entity> classToOffer) {
         super(controllableEntity);
         this.typeToOffer = (Class<? extends Entity>) NMSEntityClassRef.getNMSClass(classToOffer);
         if (this.typeToOffer == null || !(EntityLiving.class.isAssignableFrom(classToOffer))) {
             throw new IllegalArgumentException("Could not find valid NMS class for " + classToOffer.getSimpleName());
         }
-    }
-
-    @Override
-    public ControllableEntity<? extends IronGolem> getControllableEntity() {
-        return super.getControllableEntity();
-    }
-
-    @Override
-    public EntityIronGolem getHandle() {
-        return (EntityIronGolem) BasicEntityUtil.getInstance().getHandle(this.getControllableEntity());
     }
 
     @Override

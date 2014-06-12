@@ -21,7 +21,8 @@ package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.Wither;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.type.nms.ControllableWitherHandle;
 
-public interface ControllableWither extends ControllableEntity<Wither> {
+public interface ControllableWither extends ControllableEntity<Wither, ControllableWitherHandle> {
 
 }

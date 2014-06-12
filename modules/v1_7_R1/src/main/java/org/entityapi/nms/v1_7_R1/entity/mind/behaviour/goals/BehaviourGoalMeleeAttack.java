@@ -30,7 +30,6 @@ import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 import org.entityapi.reflection.refs.NMSEntityClassRef;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
-import org.entityapi.nms.v1_7_R1.entity.ControllableBaseEntity;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourGoalBase;
 
 public class BehaviourGoalMeleeAttack extends BehaviourGoalBase {
@@ -103,7 +102,7 @@ public class BehaviourGoalMeleeAttack extends BehaviourGoalBase {
 
     @Override
     public void start() {
-        ((ControllableBaseEntity) this.getControllableEntity()).navigateTo(this.pathToAttack, this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
+        this.getControllableEntity().getNMSAccessor().navigateTo(this.pathToAttack, this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
         this.moveTicks = 0;
     }
 
@@ -133,7 +132,7 @@ public class BehaviourGoalMeleeAttack extends BehaviourGoalBase {
                 this.moveTicks += 5;
             }
 
-            if (!((ControllableBaseEntity) this.getControllableEntity()).navigateTo(this.pathToAttack, this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed())) {
+            if (!this.getControllableEntity().getNMSAccessor().navigateTo(this.pathToAttack, this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed())) {
                 this.moveTicks += 15;
             }
         }

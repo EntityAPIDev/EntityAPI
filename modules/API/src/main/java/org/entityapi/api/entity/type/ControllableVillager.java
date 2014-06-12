@@ -21,7 +21,8 @@ package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.Villager;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.type.nms.ControllableVillagerHandle;
 
-public interface ControllableVillager extends ControllableEntity<Villager> {
+public interface ControllableVillager extends ControllableEntity<Villager, ControllableVillagerHandle> {
 
 }

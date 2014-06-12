@@ -21,7 +21,8 @@ package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.Pig;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.type.nms.ControllablePigHandle;
 
-public interface ControllablePig extends ControllableEntity<Pig> {
+public interface ControllablePig extends ControllableEntity<Pig, ControllablePigHandle> {
 
 }

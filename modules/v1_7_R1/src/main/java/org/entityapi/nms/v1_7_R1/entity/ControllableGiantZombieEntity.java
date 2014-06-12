@@ -27,10 +27,11 @@ import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityHandle;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
+import org.entityapi.api.entity.type.nms.ControllableGiantZombieHandle;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
 
-public class ControllableGiantZombieEntity extends EntityGiantZombie implements ControllableEntityHandle {
+public class ControllableGiantZombieEntity extends EntityGiantZombie implements ControllableGiantZombieHandle {
 
     private final ControllableEntity controllableEntity;
 

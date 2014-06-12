@@ -21,7 +21,8 @@ package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.Snowman;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.type.nms.ControllableSnowmanHandle;
 
-public interface ControllableSnowman extends ControllableEntity<Snowman> {
+public interface ControllableSnowman extends ControllableEntity<Snowman, ControllableSnowmanHandle> {
 
 }

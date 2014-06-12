@@ -21,7 +21,8 @@ package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.MushroomCow;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.type.nms.ControllableMushroomCowHandle;
 
-public interface ControllableMushroomCow extends ControllableEntity<MushroomCow> {
+public interface ControllableMushroomCow extends ControllableEntity<MushroomCow, ControllableMushroomCowHandle> {
 
 }

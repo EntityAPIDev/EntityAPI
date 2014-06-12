@@ -21,7 +21,8 @@ package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.Ghast;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.type.nms.ControllableGhastHandle;
 
-public interface ControllableGhast extends ControllableEntity<Ghast> {
+public interface ControllableGhast extends ControllableEntity<Ghast, ControllableGhastHandle> {
 
 }

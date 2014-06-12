@@ -21,7 +21,8 @@ package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.Witch;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.type.nms.ControllableWitchHandle;
 
-public interface ControllableWitch extends ControllableEntity<Witch> {
+public interface ControllableWitch extends ControllableEntity<Witch, ControllableWitchHandle> {
 
 }

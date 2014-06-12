@@ -22,10 +22,11 @@ package org.entityapi.api.entity.mind.behaviour.goals;
 import org.bukkit.entity.Creeper;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.Behaviour;
+import org.entityapi.api.entity.type.ControllableCreeper;
 
-public class BehaviourSwell extends Behaviour {
+public class BehaviourSwell<T extends ControllableCreeper> extends Behaviour<T> {
 
-    public BehaviourSwell(ControllableEntity<? extends Creeper> controllableEntity) {
+    public BehaviourSwell(T controllableEntity) {
         super(controllableEntity);
     }
 }

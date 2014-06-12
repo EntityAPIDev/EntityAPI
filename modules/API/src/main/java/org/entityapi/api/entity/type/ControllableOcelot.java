@@ -21,7 +21,8 @@ package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.Ocelot;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.type.nms.ControllableOcelotHandle;
 
-public interface ControllableOcelot extends ControllableEntity<Ocelot> {
+public interface ControllableOcelot extends ControllableEntity<Ocelot, ControllableOcelotHandle> {
 
 }

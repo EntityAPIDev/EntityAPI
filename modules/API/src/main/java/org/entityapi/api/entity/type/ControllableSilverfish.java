@@ -21,7 +21,8 @@ package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.Silverfish;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.type.nms.ControllableSilverfishHandle;
 
-public interface ControllableSilverfish extends ControllableEntity<Silverfish> {
+public interface ControllableSilverfish extends ControllableEntity<Silverfish, ControllableSilverfishHandle> {
 
 }

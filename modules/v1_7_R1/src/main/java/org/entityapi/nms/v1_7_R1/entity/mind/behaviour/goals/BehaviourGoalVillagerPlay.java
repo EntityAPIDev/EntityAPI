@@ -27,7 +27,7 @@ import org.bukkit.entity.Villager;
 import org.bukkit.util.Vector;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
-import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
+import org.entityapi.api.entity.type.ControllableVillager;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
 import org.entityapi.nms.v1_7_R1.RandomPositionGenerator;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourGoalBase;
@@ -35,25 +35,15 @@ import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourGoalBase;
 import java.util.Iterator;
 import java.util.List;
 
-public class BehaviourGoalVillagerPlay extends BehaviourGoalBase {
+public class BehaviourGoalVillagerPlay<T extends ControllableVillager> extends BehaviourGoalBase<T, EntityVillager> {
 
     private EntityLiving playMate;
     private int playTicks;
     private double navigationSpeed;
 
-    public BehaviourGoalVillagerPlay(ControllableEntity<? extends Villager> controllableEntity, double navigationSpeed) {
+    public BehaviourGoalVillagerPlay(T controllableEntity, double navigationSpeed) {
         super(controllableEntity);
         this.navigationSpeed = navigationSpeed;
-    }
-
-    @Override
-    public ControllableEntity<? extends Villager> getControllableEntity() {
-        return super.getControllableEntity();
-    }
-
-    @Override
-    public EntityVillager getHandle() {
-        return (EntityVillager) BasicEntityUtil.getInstance().getHandle(this.getControllableEntity());
     }
 
     @Override

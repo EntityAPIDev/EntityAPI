@@ -27,10 +27,11 @@ import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityHandle;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
+import org.entityapi.api.entity.type.nms.ControllableMagmaCubeHandle;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
 
-public class ControllableMagmaCubeEntity extends EntityMagmaCube implements ControllableEntityHandle {
+public class ControllableMagmaCubeEntity extends EntityMagmaCube implements ControllableMagmaCubeHandle {
 
     private final ControllableEntity controllableEntity;
 

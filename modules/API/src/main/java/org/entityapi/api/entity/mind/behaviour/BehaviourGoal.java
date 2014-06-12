@@ -19,7 +19,11 @@
 
 package org.entityapi.api.entity.mind.behaviour;
 
-public interface BehaviourGoal {
+import org.entityapi.api.entity.ControllableEntity;
+
+public interface BehaviourGoal<T extends ControllableEntity> {
+
+    public T getControllableEntity();
 
     public BehaviourType getType();
 

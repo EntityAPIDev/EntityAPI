@@ -21,7 +21,8 @@ package org.entityapi.api.entity.type;
 
 import org.bukkit.entity.Player;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.type.nms.ControllablePlayerHandle;
 
-public interface ControllablePlayer extends ControllableEntity<Player> {
+public interface ControllablePlayer extends ControllableEntity<Player, ControllablePlayerHandle> {
 
 }

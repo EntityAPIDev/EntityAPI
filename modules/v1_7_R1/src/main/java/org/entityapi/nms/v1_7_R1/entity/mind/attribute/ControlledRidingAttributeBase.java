@@ -20,12 +20,11 @@
 package org.entityapi.nms.v1_7_R1.entity.mind.attribute;
 
 import net.minecraft.server.v1_7_R1.EntityLiving;
-import org.entityapi.api.entity.mind.Attribute;
 import org.entityapi.api.entity.mind.Mind;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
+import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.internal.Constants;
 import org.entityapi.reflection.SafeField;
-import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
 
 public class ControlledRidingAttributeBase extends ControlledRidingAttribute {
 
@@ -43,7 +42,7 @@ public class ControlledRidingAttributeBase extends ControlledRidingAttribute {
     }
 
     public void onRide(float[] motion) {
-        EntityLiving entity = BasicEntityUtil.getInstance().getHandle(this.getControllableEntity());
+        EntityLiving entity = (EntityLiving) this.getControllableEntity().getHandle();
         if (entity.passenger == null) {
             return;
         }

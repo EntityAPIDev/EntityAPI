@@ -24,31 +24,20 @@ import org.bukkit.entity.Animals;
 import org.bukkit.entity.LivingEntity;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
-import org.entityapi.nms.v1_7_R1.BasicEntityUtil;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourGoalBase;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class BehaviourGoalFollowParent extends BehaviourGoalBase {
+public class BehaviourGoalFollowParent<T extends ControllableEntity<? extends Animals, ?>> extends BehaviourGoalBase<T, EntityAnimal> {
 
     private EntityAnimal parent;
     private int followTicks;
     private double navigationSpeed;
 
-    public BehaviourGoalFollowParent(ControllableEntity<? extends Animals> controllableEntity, double navigationSpeed) {
+    public BehaviourGoalFollowParent(T controllableEntity, double navigationSpeed) {
         super(controllableEntity);
         this.navigationSpeed = navigationSpeed;
-    }
-
-    @Override
-    public ControllableEntity<? extends Animals> getControllableEntity() {
-        return super.getControllableEntity();
-    }
-
-    @Override
-    public EntityAnimal getHandle() {
-        return (EntityAnimal) BasicEntityUtil.getInstance().getHandle(this.getControllableEntity());
     }
 
     @Override

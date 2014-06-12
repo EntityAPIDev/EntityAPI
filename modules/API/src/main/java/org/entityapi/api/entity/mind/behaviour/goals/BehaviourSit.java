@@ -23,9 +23,9 @@ import org.bukkit.entity.Animals;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.Behaviour;
 
-public class BehaviourSit extends Behaviour {
+public class BehaviourSit<T extends ControllableEntity<? extends Animals, ?>> extends Behaviour<T> {
 
-    public BehaviourSit(ControllableEntity<? extends Animals> controllableEntity) {
+    public BehaviourSit(T controllableEntity) {
         super(controllableEntity);
     }
 }
