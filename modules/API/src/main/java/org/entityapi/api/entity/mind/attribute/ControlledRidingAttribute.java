@@ -20,7 +20,6 @@
 package org.entityapi.api.entity.mind.attribute;
 
 import org.entityapi.api.entity.mind.Attribute;
-import org.entityapi.api.entity.mind.Mind;
 
 public abstract class ControlledRidingAttribute extends Attribute {
 

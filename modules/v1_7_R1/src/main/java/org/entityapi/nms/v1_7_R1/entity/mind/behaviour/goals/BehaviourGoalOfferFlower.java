@@ -22,12 +22,10 @@ package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 import net.minecraft.server.v1_7_R1.Entity;
 import net.minecraft.server.v1_7_R1.EntityIronGolem;
 import net.minecraft.server.v1_7_R1.EntityLiving;
-import org.bukkit.entity.IronGolem;
-import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 import org.entityapi.api.entity.type.ControllableIronGolem;
-import org.entityapi.reflection.refs.NMSEntityClassRef;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourGoalBase;
+import org.entityapi.reflection.refs.NMSEntityClassRef;
 
 public class BehaviourGoalOfferFlower<T extends ControllableIronGolem> extends BehaviourGoalBase<T, EntityIronGolem> {
 

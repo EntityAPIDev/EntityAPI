@@ -22,10 +22,10 @@ package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 import net.minecraft.server.v1_7_R1.*;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
-import org.entityapi.reflection.refs.NMSEntityClassRef;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourGoalBase;
 import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorViewable;
+import org.entityapi.reflection.refs.NMSEntityClassRef;
 
 import java.util.List;
 

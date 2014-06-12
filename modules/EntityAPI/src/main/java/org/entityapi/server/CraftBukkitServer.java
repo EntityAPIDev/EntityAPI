@@ -20,8 +20,8 @@
 package org.entityapi.server;
 
 import org.bukkit.Bukkit;
-import org.entityapi.internal.Constants;
 import org.entityapi.api.plugin.Server;
+import org.entityapi.internal.Constants;
 import org.entityapi.reflection.APIReflection;
 import org.entityapi.reflection.refs.MinecraftServerRef;
 

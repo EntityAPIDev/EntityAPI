@@ -23,7 +23,6 @@ import org.bukkit.entity.EnderDragon;
 import org.bukkit.util.Vector;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.type.nms.ControllableEnderDragonHandle;
-import org.entityapi.api.entity.type.nms.ControllableEndermanHandle;
 
 public interface ControllableEnderDragon extends ControllableEntity<EnderDragon, ControllableEnderDragonHandle> {
 

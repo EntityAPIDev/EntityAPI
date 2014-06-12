@@ -25,9 +25,9 @@ import net.minecraft.server.v1_7_R1.EntityLiving;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
-import org.entityapi.reflection.refs.NMSEntityClassRef;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourGoalBase;
+import org.entityapi.reflection.refs.NMSEntityClassRef;
 
 public class BehaviourGoalLookAtNearestEntity extends BehaviourGoalBase {
 

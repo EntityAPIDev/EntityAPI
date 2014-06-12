@@ -27,8 +27,8 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.entityapi.api.ISpawnUtil;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityHandle;
-import org.entityapi.reflection.SafeConstructor;
 import org.entityapi.api.utils.WorldUtil;
+import org.entityapi.reflection.SafeConstructor;
 
 public class SpawnUtil implements ISpawnUtil {
 

@@ -78,6 +78,7 @@ public class CommonReflection {
 
     /**
      * Returns the version tag as a numeric value
+     *
      * @return
      */
     public static int getNumericVersionTag() {

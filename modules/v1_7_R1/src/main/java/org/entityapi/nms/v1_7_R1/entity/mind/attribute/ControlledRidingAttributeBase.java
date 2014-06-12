@@ -22,7 +22,6 @@ package org.entityapi.nms.v1_7_R1.entity.mind.attribute;
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import org.entityapi.api.entity.mind.Mind;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
-import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.internal.Constants;
 import org.entityapi.reflection.SafeField;
 

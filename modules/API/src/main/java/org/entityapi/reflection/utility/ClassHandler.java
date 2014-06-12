@@ -20,7 +20,8 @@
 package org.entityapi.reflection.utility;
 
 /**
- * Handles the loading/finding of specific classes. This is mainly to be compatible with third and fourth party mods like MCPC+
+ * Handles the loading/finding of specific classes. This is mainly to be compatible with third and fourth party mods
+ * like MCPC+
  */
 public abstract class ClassHandler {
 

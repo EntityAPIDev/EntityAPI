@@ -30,8 +30,11 @@ import org.entityapi.api.ProjectileType;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityHandle;
 import org.entityapi.api.entity.impl.ControllableEnderDragonBase;
-import org.entityapi.nms.v1_7_R1.entity.selector.*;
-import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorEquipable;
+import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorContainer;
+import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorHorse;
+import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorLiving;
+import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorMonster;
+import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorNotUndead;
 
 public class NMSAccessorImpl<T extends LivingEntity, S extends ControllableEntityHandle<T>> implements NMSAccessor<T, S> {
 
@@ -95,7 +98,7 @@ public class NMSAccessorImpl<T extends LivingEntity, S extends ControllableEntit
         }
         return handle().getAttributeInstance(GenericAttributes.d).getValue();
     }
-    
+
     @Override
     public void setSpeed(double speed) {
         handle().getAttributeInstance(GenericAttributes.d).setValue(speed);

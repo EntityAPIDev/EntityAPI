@@ -23,8 +23,6 @@ import net.minecraft.server.v1_7_R1.EntityVillager;
 import net.minecraft.server.v1_7_R1.Vec3D;
 import net.minecraft.server.v1_7_R1.Village;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Villager;
-import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 import org.entityapi.api.entity.type.ControllableVillager;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;

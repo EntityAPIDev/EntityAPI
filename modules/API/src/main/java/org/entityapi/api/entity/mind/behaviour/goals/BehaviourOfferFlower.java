@@ -20,8 +20,6 @@
 package org.entityapi.api.entity.mind.behaviour.goals;
 
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.IronGolem;
-import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.Behaviour;
 import org.entityapi.api.entity.type.ControllableIronGolem;
 

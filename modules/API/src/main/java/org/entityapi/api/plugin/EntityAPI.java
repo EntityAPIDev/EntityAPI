@@ -59,7 +59,8 @@ public class EntityAPI {
      * Creates an EntityManager for the given Plugin.
      *
      * @param owningPlugin The plugin the EntityManager should be assigned to.
-     * @param keepInMemory Whether or not the EntityManager should keep every entity in memory. Even when the entity died.
+     * @param keepInMemory Whether or not the EntityManager should keep every entity in memory. Even when the entity
+     *                     died.
      * @return The EntityManager for the given plugin.
      */
     public static EntityManager createEntityManager(Plugin owningPlugin, boolean keepInMemory) {
