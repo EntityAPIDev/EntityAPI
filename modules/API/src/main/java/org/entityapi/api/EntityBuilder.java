@@ -30,7 +30,7 @@ import org.entityapi.reflection.SafeConstructor;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EntityCreator {
+public class EntityBuilder {
 
     private EntityManager ENTITYMANAGER;
     private int ID;
@@ -41,52 +41,52 @@ public class EntityCreator {
     private Mind MIND;
     private HashMap<Behaviour, Integer> BEHAVIOURS;
 
-    public EntityCreator(EntityManager entityManager) {
+    public EntityBuilder(EntityManager entityManager) {
         this.ENTITYMANAGER = entityManager;
         this.BEHAVIOURS = new HashMap<>();
         this.PREPARE = false;
     }
 
-    public EntityCreator withID(int id) {
+    public EntityBuilder withID(int id) {
         this.ID = id;
         return this;
     }
 
-    public EntityCreator withType(ControllableEntityType entityType) {
+    public EntityBuilder withType(ControllableEntityType entityType) {
         this.TYPE = entityType;
         return this;
     }
 
-    public EntityCreator withName(String name) {
+    public EntityBuilder withName(String name) {
         this.NAME = name;
         return this;
     }
 
-    public EntityCreator atLocation(Location location) {
+    public EntityBuilder atLocation(Location location) {
         this.LOCATION = location;
         return this;
     }
 
-    public EntityCreator withMind(Mind mind) {
+    public EntityBuilder withMind(Mind mind) {
         this.MIND = mind;
         return this;
     }
 
-    public EntityCreator withBehaviours(Behaviour... behaviours) {
+    public EntityBuilder withBehaviours(Behaviour... behaviours) {
         for (Behaviour behaviour1 : behaviours) {
             this.BEHAVIOURS.put(behaviour1, 1);
         }
         return this;
     }
 
-    public EntityCreator withBehaviours(HashMap<Behaviour, Integer> prioritisedBehaviours) {
+    public EntityBuilder withBehaviours(HashMap<Behaviour, Integer> prioritisedBehaviours) {
         for (Map.Entry<Behaviour, Integer> entry : prioritisedBehaviours.entrySet()) {
             this.BEHAVIOURS.put(entry.getKey(), entry.getValue());
         }
         return this;
     }
 
-    public EntityCreator withDefaults() {
+    public EntityBuilder withDefaults() {
         this.PREPARE = true;
         return this;
     }
