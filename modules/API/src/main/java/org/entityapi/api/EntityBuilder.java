@@ -19,6 +19,7 @@
 
 package org.entityapi.api;
 
+import com.captainbern.reflection.Reflection;
 import org.bukkit.Location;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityType;
@@ -98,8 +99,7 @@ public class EntityBuilder {
         if (this.LOCATION == null) {
             throw new NullPointerException("Location cannot be null.");
         }
-        SafeConstructor<? extends ControllableEntity> constructor = new SafeConstructor<>(this.TYPE.getControllableClass());
-        ControllableEntity entity = constructor.newInstance(this.ID, this.ENTITYMANAGER);
+        ControllableEntity entity = new Reflection().reflect(this.TYPE.getControllableClass()).getSafeConstructor(Integer.class, EntityManager.class).getAccessor().invoke(this.ID, this.ENTITYMANAGER);
         if (entity != null) {
             if (entity.spawnEntity(this.LOCATION)) {
                 if (this.PREPARE || this.MIND == null) {

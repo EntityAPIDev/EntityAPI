@@ -19,9 +19,9 @@
 
 package org.entityapi.api.plugin;
 
+import com.captainbern.minecraft.reflection.MinecraftReflection;
 import org.bukkit.plugin.Plugin;
 import org.entityapi.api.EntityManager;
-import org.entityapi.api.ISpawnUtil;
 
 public class EntityAPI {
 
@@ -31,6 +31,11 @@ public class EntityAPI {
     public static final ModuleLogger LOGGER = new ModuleLogger("EntityAPI");
     public static final ModuleLogger LOGGER_REFLECTION = LOGGER.getModule("Reflection");
     public static final ModuleLogger LOGGER_DATA_STORE = LOGGER_REFLECTION.getModule("Persistence");
+
+    /**
+     * Some NMS paths for internals
+     */
+    public static String INTERNAL_NMS_PATH = "org.entityapi.nms." + MinecraftReflection.getVersionTag();
 
     private static IEntityAPICore CORE;
 
@@ -97,9 +102,5 @@ public class EntityAPI {
 
     public static EntityManager getManagerFor(String pluginName) {
         return CORE.getManagerFor(pluginName);
-    }
-
-    public static ISpawnUtil getSpawnUtil() {
-        return CORE.getSpawnUtil();
     }
 }

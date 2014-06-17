@@ -19,9 +19,9 @@
 
 package org.entityapi.api.entity.mind.behaviour;
 
+import com.captainbern.reflection.Reflection;
 import org.entityapi.api.entity.ControllableEntity;
-import org.entityapi.reflection.APIReflection;
-import org.entityapi.reflection.SafeConstructor;
+import org.entityapi.api.plugin.EntityAPI;
 
 public abstract class Behaviour<T extends ControllableEntity> {
 
@@ -34,7 +34,7 @@ public abstract class Behaviour<T extends ControllableEntity> {
                 classes[i] = args[i].getClass();
             }
         }
-        this.behaviourGoal = new SafeConstructor<BehaviourGoal>(APIReflection.getVersionedClass("entity.mind.behaviour.goals.BehaviourGoal" + this.getKey()), classes).newInstance(args);
+        this.behaviourGoal = (BehaviourGoal) new Reflection().reflect(EntityAPI.INTERNAL_NMS_PATH + ".entity.mind.behaviour.goals.BehaviourGoal" + this.getKey()).getSafeConstructor(classes).getAccessor().invoke(args);
     }
 
     public Behaviour(BehaviourGoal<T> behaviourGoal) {

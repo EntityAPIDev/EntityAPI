@@ -19,8 +19,8 @@
 
 package org.entityapi.reflection;
 
+import com.captainbern.minecraft.reflection.MinecraftReflection;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.reflection.utility.CommonReflection;
 
 public class CBClassTemplate extends ClassTemplate<Object> {
 
@@ -33,7 +33,7 @@ public class CBClassTemplate extends ClassTemplate<Object> {
     }
 
     protected void setCBClass(String name) {
-        Class clazz = CommonReflection.getCraftBukkitClass(name);
+        Class clazz = MinecraftReflection.getCraftBukkitClass(name);
         if (clazz == null) {
             EntityAPI.LOGGER_REFLECTION.warning("Failed to find a matching class with name: " + name);
         }

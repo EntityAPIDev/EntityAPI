@@ -19,6 +19,7 @@
 
 package org.entityapi.api.entity.impl;
 
+import com.captainbern.reflection.Reflection;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -37,8 +38,7 @@ import org.entityapi.api.entity.mind.attribute.InventoryAttribute;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.events.ControllableEntityPreSpawnEvent;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.exceptions.ControllableEntityException;
-import org.entityapi.reflection.APIReflection;
+import org.entityapi.api.utils.SpawnUtil;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -62,11 +62,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
     protected HashMap<EntitySound, Map<String, String>> sounds = new HashMap<>();
 
     public ControllableBaseEntity(int id, ControllableEntityType entityType, EntityManager manager) {
-        try {
-            this.accessor = (NMSAccessor) APIReflection.getVersionedClass("NMSAccessorImpl").newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
-            throw new ControllableEntityException("Failed to initiate NMS accessor.");
-        }
+        this.accessor = (NMSAccessor) new Reflection().reflect(EntityAPI.INTERNAL_NMS_PATH + ".NMSAccessorImpl").newInstance();
         this.manager = manager;
         this.ID = id;
         this.mind = new Mind();
@@ -136,7 +132,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
         if (spawnEvent.isCancelled()) {
             return false;
         }
-        if (EntityAPI.getSpawnUtil().spawnEntity(this, spawnEvent.getSpawnLocation())) {
+        if (SpawnUtil.spawnEntity(this, spawnEvent.getSpawnLocation())) {
             this.hasSpawned = true;
         }
         return this.hasSpawned;
@@ -426,12 +422,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
 
     @Override
     public ControlledRidingAttribute enableControllableRiding(boolean flag) {
-        ControlledRidingAttribute controlledRidingAttribute;
-        try {
-            controlledRidingAttribute = (ControlledRidingAttribute) APIReflection.getVersionedClass("entity.mind.attribute.ControlledRidingAttributeBase").newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
-            throw new ControllableEntityException();
-        }
+        ControlledRidingAttribute controlledRidingAttribute = (ControlledRidingAttribute) new Reflection().reflect(EntityAPI.INTERNAL_NMS_PATH + ".entity.mind.attribute.ControlledRidingAttributeBase").newInstance();
         if (flag) {
             this.getMind().addAttribute(controlledRidingAttribute);
         } else {

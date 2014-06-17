@@ -35,7 +35,6 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 import org.entityapi.api.EntityManager;
-import org.entityapi.api.ISpawnUtil;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.attribute.*;
 import org.entityapi.api.events.*;
@@ -45,8 +44,6 @@ import org.entityapi.api.plugin.Server;
 import org.entityapi.api.utils.PastebinReporter;
 import org.entityapi.api.utils.StringUtil;
 import org.entityapi.metrics.Metrics;
-import org.entityapi.reflection.APIReflection;
-import org.entityapi.reflection.SafeConstructor;
 import org.entityapi.server.CraftBukkitServer;
 import org.entityapi.server.MCPCPlusServer;
 import org.entityapi.server.SpigotServer;
@@ -65,8 +62,6 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
      * EntityAPI instance
      */
     private static EntityAPICore CORE_INSTANCE;
-
-    private static ISpawnUtil SPAWN_UTIL;
 
     /**
      * The Server brand
@@ -111,7 +106,7 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
 
         try {
             // Check if EntityAPI supports this server version
-            Class.forName(APIReflection.COMPAT_NMS_PATH + ".SpawnUtil");
+            Class.forName(EntityAPI.INTERNAL_NMS_PATH + ".NMSEntityUtil");
         } catch (ClassNotFoundException e) {
             // Nope! Stop here.
             ConsoleCommandSender console = this.getServer().getConsoleSender();
@@ -125,8 +120,6 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
         EntityAPI.setCore(CORE_INSTANCE);
 
         initServer();
-
-        SPAWN_UTIL = new SafeConstructor<ISpawnUtil>(APIReflection.getVersionedClass("SpawnUtil")).newInstance();
 
         this.checkPlugins();
 
@@ -331,11 +324,6 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
 
 
         }
-    }
-
-    @Override
-    public ISpawnUtil getSpawnUtil() {
-        return SPAWN_UTIL;
     }
 
     @Override

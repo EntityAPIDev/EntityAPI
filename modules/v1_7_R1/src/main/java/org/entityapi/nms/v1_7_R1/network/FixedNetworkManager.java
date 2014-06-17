@@ -19,18 +19,18 @@
 
 package org.entityapi.nms.v1_7_R1.network;
 
+import com.captainbern.reflection.Reflection;
+import com.captainbern.reflection.accessor.FieldAccessor;
 import net.minecraft.server.v1_7_R1.NetworkManager;
 import net.minecraft.util.io.netty.channel.Channel;
 import org.entityapi.internal.Constants;
-import org.entityapi.reflection.FieldAccessor;
-import org.entityapi.reflection.SafeField;
 
 import java.net.InetSocketAddress;
 
 public class FixedNetworkManager extends NetworkManager {
 
-    private FieldAccessor<Channel> channelField = new SafeField<Channel>(super.getClass(), Constants.NetworkManager.CHANNEL_FIELD.get());
-    private FieldAccessor<InetSocketAddress> addressField = new SafeField<InetSocketAddress>(super.getClass(), Constants.NetworkManager.ADDRESS_FIELD.get());
+    private FieldAccessor<Channel> channelField = new Reflection().reflect(super.getClass()).getSafeFieldByNameAndType(Constants.NetworkManager.CHANNEL_FIELD.get(), Channel.class).getAccessor();
+    private FieldAccessor<InetSocketAddress> addressField = new Reflection().reflect(super.getClass()).getSafeFieldByNameAndType(Constants.NetworkManager.ADDRESS_FIELD.get(), InetSocketAddress.class).getAccessor();
 
     public FixedNetworkManager() {
         super(false);

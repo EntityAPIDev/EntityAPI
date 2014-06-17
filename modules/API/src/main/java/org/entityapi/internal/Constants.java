@@ -19,8 +19,8 @@
 
 package org.entityapi.internal;
 
-import org.entityapi.reflection.SafeField;
-import org.entityapi.reflection.utility.CommonReflection;
+import com.captainbern.minecraft.reflection.MinecraftReflection;
+import com.captainbern.reflection.Reflection;
 
 /**
  * A class which contains several field names etc.
@@ -60,7 +60,7 @@ public class Constants {
         }
 
         public String get() {
-            return new SafeField<String>(this.getClass(), CommonReflection.getVersionTag()).get(this);
+            return new Reflection().reflect(this.getClass()).getSafeFieldByNameAndType(MinecraftReflection.getVersionTag(), String.class).getAccessor().get(this);
         }
 
         public static enum Names {
@@ -291,7 +291,7 @@ public class Constants {
         }
 
         public String get() {
-            return new SafeField<String>(this.getClass(), CommonReflection.getVersionTag()).get(this);
+            return new Reflection().reflect(this.getClass()).getSafeFieldByNameAndType(MinecraftReflection.getVersionTag(), String.class).getAccessor().get(this);
         }
     }
 
@@ -323,7 +323,7 @@ public class Constants {
         }
 
         public String get() {
-            return new SafeField<String>(this.getClass(), CommonReflection.getVersionTag()).get(this);
+            return new Reflection().reflect(this.getClass()).getSafeFieldByNameAndType(MinecraftReflection.getVersionTag(), String.class).getAccessor().get(this);
         }
     }
 
@@ -343,7 +343,7 @@ public class Constants {
         }
 
         public String get() {
-            return new SafeField<String>(this.getClass(), CommonReflection.getVersionTag()).get(this);
+            return new Reflection().reflect(this.getClass()).getSafeFieldByNameAndType(MinecraftReflection.getVersionTag(), String.class).getAccessor().get(this);
         }
     }
 }

@@ -19,13 +19,13 @@
 
 package org.entityapi.metrics;
 
+import com.captainbern.reflection.Reflection;
+import com.captainbern.reflection.accessor.FieldAccessor;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.SimplePluginManager;
 import org.entityapi.api.utils.LogicUtil;
-import org.entityapi.reflection.FieldAccessor;
-import org.entityapi.reflection.SafeField;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -37,7 +37,7 @@ import java.util.List;
  */
 public class MyDependingPluginsGraph extends Graph {
 
-    private static final FieldAccessor<Collection<Plugin>> pluginsField = new SafeField<>(SimplePluginManager.class, "plugins");
+    private static final FieldAccessor<Collection<Plugin>> pluginsField = (FieldAccessor<Collection<Plugin>>) new Reflection().reflect(SimplePluginManager.class).getSafeFieldByNameAndType("plugins", Collection.class);
 
     public MyDependingPluginsGraph() {
         this("Depending on me");

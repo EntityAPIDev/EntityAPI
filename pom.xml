@@ -38,11 +38,13 @@
     </modules>
 
     <repositories>
+        <!-- Hawk Repo -->
         <repository>
             <id>hawk-repo</id>
             <url>http://ci.hawkfalcon.com/plugin/repository/everything</url>
         </repository>
 
+        <!-- Bukkit -->
         <repository>
             <id>bukkit-repo</id>
             <url>http://repo.bukkit.org/content/groups/public/</url>
@@ -53,6 +55,7 @@
         <defaultGoal>clean package install</defaultGoal>
         <finalName>${project.name}</finalName>
         <sourceDirectory>src/main/java</sourceDirectory>
+
         <resources>
             <resource>
                 <targetPath>.</targetPath>
@@ -63,7 +66,9 @@
                 </includes>
             </resource>
         </resources>
+
         <plugins>
+            <!-- Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -73,12 +78,15 @@
                     <target>1.7</target>
                 </configuration>
             </plugin>
+
+            <!-- Jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.4</version>
             </plugin>
         </plugins>
+
         <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>

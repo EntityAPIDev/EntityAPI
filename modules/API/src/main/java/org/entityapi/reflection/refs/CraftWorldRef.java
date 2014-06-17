@@ -39,7 +39,7 @@ public class CraftWorldRef {
         return WORLD_PROVIDER.get(toNMSWorld(world));
     }
 
-    public static boolean addEntity(World world, Object NMSEntityClazz) {
-        return ADD_ENTITY.invoke(toNMSWorld(world), NMSEntityClazz);
+    public static boolean addEntity(World world, Object nmsEntity) {
+        return ADD_ENTITY.invoke(toNMSWorld(world), nmsEntity);
     }
 }

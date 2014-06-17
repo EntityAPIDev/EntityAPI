@@ -19,8 +19,8 @@
 
 package org.entityapi.reflection;
 
+import com.captainbern.minecraft.reflection.MinecraftReflection;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.reflection.utility.CommonReflection;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -97,7 +97,7 @@ public class ClassTemplate<T> {
     }
 
     public static ClassTemplate<?> create(String className) {
-        Class clazz = CommonReflection.getClass(className);
+        Class clazz = MinecraftReflection.getClass(className);
 
         if (clazz == null) {
             EntityAPI.LOGGER_REFLECTION.warning("Failed to find a matching class with name: " + className);

@@ -20,7 +20,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.entityapi</groupId>
     <artifactId>EntityAPI-v1_7_R1</artifactId>
     <name>EntityAPI for v1_7_R1</name>
     <version>v1_7_R1</version>
@@ -38,6 +37,7 @@
     </parent>
 
     <dependencies>
+        <!-- API Module -->
         <dependency>
             <groupId>org.entityapi</groupId>
             <artifactId>EntityAPI-API</artifactId>
@@ -51,6 +51,7 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Bukkit 1.7.2 -->
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
@@ -58,6 +59,7 @@
             <type>jar</type>
         </dependency>
 
+        <!-- CraftBukkit 1.7.2 -->
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>craftbukkit</artifactId>
@@ -72,6 +74,7 @@
         <finalName>${project.name}</finalName>
 
         <plugins>
+            <!-- Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -82,12 +85,14 @@
                 </configuration>
             </plugin>
 
+            <!-- Jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.4</version>
             </plugin>
 
+            <!-- Clean up -->
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <configuration>

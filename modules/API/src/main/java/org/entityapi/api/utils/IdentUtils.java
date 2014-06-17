@@ -19,25 +19,26 @@
 
 package org.entityapi.api.utils;
 
+import com.captainbern.minecraft.reflection.MinecraftReflection;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.entityapi.reflection.utility.CommonReflection;
 
 import java.util.UUID;
 
 public class IdentUtils {
 
-    public static boolean canReturnUUID() {
+    public static boolean supportsUuid() {
         try {
             Bukkit.class.getDeclaredMethod("getPlayer", UUID.class);
-            return true;
         } catch (NoSuchMethodException e) {
             return false;
         }
+        return Integer.valueOf(MinecraftReflection.getVersionTag().replaceAll("[^0-9]", "")) >= 172;
     }
 
+
     public static Object getIdentificationFor(Player player) {
-        if (CommonReflection.getNumericVersionTag() >= 172 && canReturnUUID()) {
+        if (supportsUuid()) {
             return player.getUniqueId();
         } else {
             return player.getName();
@@ -45,7 +46,7 @@ public class IdentUtils {
     }
 
     public static String getIdentificationForAsString(Player player) {
-        if (CommonReflection.getNumericVersionTag() >= 172 && canReturnUUID()) {
+        if (supportsUuid()) {
             return player.getUniqueId().toString();
         } else {
             return player.getName();
@@ -53,7 +54,7 @@ public class IdentUtils {
     }
 
     public static Player getPlayerOf(Object identification) {
-        if (CommonReflection.getNumericVersionTag() >= 172 && canReturnUUID()) {
+        if (supportsUuid()) {
             if (identification instanceof UUID) {
                 return Bukkit.getPlayer((UUID) identification);
             } else if (identification instanceof String) {

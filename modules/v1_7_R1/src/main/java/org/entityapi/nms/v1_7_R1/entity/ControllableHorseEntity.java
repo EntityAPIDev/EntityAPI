@@ -19,6 +19,9 @@
 
 package org.entityapi.nms.v1_7_R1.entity;
 
+import com.captainbern.reflection.Reflection;
+import com.captainbern.reflection.SafeField;
+import com.captainbern.reflection.matcher.Matchers;
 import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
@@ -29,7 +32,6 @@ import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.entity.type.nms.ControllableHorseHandle;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
-import org.entityapi.reflection.SafeField;
 
 public class ControllableHorseEntity extends EntityHorse implements ControllableHorseHandle {
 
@@ -204,10 +206,11 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
 
             if (this.passenger != null && l != 1 && l != 2) {
                 //++this.bP;
-                SafeField<Integer> field_bP = new SafeField<>(EntityHorse.class, "bP");
-                field_bP.set(this, field_bP.get(this) + 1);
+                // int bP
+                SafeField<Integer> field_bP = (SafeField<Integer>) new Reflection().reflect(EntityHorse.class).getSafeFields(Matchers.withExactType(Integer.class)).get(6);
+                field_bP.getAccessor().set(this, field_bP.getAccessor().get(this) + 1);
 
-                int bP = field_bP.get(this);
+                int bP = field_bP.getAccessor().get(this);
 
                 //if (this.bP > 5 && this.bP % 3 == 0) {
                 if (bP > 5 && bP % 3 == 0) {
@@ -270,9 +273,11 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
     }
 
     private void cQ() {
+        // Possibly just call the method instead...But that won't work with Cauldron :\
         if (!this.world.isStatic) {
-            SafeField<Integer> field_bE = new SafeField<>(EntityHorse.class, "bE");
-            field_bE.set(this, 1);
+            // int bE
+            SafeField<Integer> field_bE = (SafeField<Integer>) new Reflection().reflect(EntityHorse.class).getSafeFields(Matchers.withExactType(Integer.class)).get(1);
+            field_bE.getAccessor().set(this, 1);
 
             // Open the horse's mouth (animation 128)
             this.horseVisual(128, true);
@@ -281,8 +286,9 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
 
     private void cS() {
         if (!this.world.isStatic) {
-            SafeField<Integer> field_bF = new SafeField<>(EntityHorse.class, "bF");
-            field_bF.set(this, 1);
+            // int bF
+            SafeField<Integer> field_bF = (SafeField<Integer>) new Reflection().reflect(EntityHorse.class).getSafeFields(Matchers.withExactType(Integer.class)).get(2);
+            field_bF.getAccessor().set(this, 1);
 
             // Stop looking down (animation 32)
             this.p(true);

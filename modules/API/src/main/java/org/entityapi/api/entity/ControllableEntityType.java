@@ -19,10 +19,9 @@
 
 package org.entityapi.api.entity;
 
+import com.captainbern.reflection.Reflection;
+import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.internal.Constants;
-import org.entityapi.reflection.APIReflection;
-
-import java.util.regex.Pattern;
 
 public enum ControllableEntityType {
 
@@ -60,16 +59,14 @@ public enum ControllableEntityType {
     private final String name;
     private final int id;
     private final Class<? extends ControllableEntity> controllableClass;
-    private final Class handleClass;
+    private final Class<? extends ControllableEntityHandle> handleClass;
     private final boolean isNameRequired;
 
     ControllableEntityType(String classPath, String name, int id, boolean isNameRequired) {
-        this.controllableClass = APIReflection.getControllableEntityClass(classPath, false);
-        this.handleClass = APIReflection.getControllableEntityClass(classPath, true);
+        this.controllableClass = new Reflection().reflect("org.entityapi.api.entity.impl.Controllable" + classPath + "Base").getReflectedClass();
+        this.handleClass = new Reflection().reflect(EntityAPI.INTERNAL_NMS_PATH + ".entity.Controllable" + classPath + "Entity").getReflectedClass();
         if (!ControllableEntityHandle.class.isAssignableFrom(handleClass))
             throw new RuntimeException("Handle class needs to implement ControllableEntityHandle!");
-
-        Pattern p = Pattern.compile("org\\.entityapi\\.[^api]");
         this.name = name;
         this.id = id;
         this.isNameRequired = isNameRequired;
@@ -87,12 +84,12 @@ public enum ControllableEntityType {
         return this.isNameRequired;
     }
 
-    public Class<? extends ControllableEntity> getControllableClass() {
-        return this.controllableClass;
+    public <T extends ControllableEntity> Class<T> getControllableClass() {
+        return (Class<T>) this.controllableClass;
     }
 
-    public Class getHandleClass() {
-        return this.handleClass;
+    public <T extends ControllableEntityHandle> Class<T> getHandleClass() {
+        return (Class<T>) this.handleClass;
     }
 
     public static ControllableEntityType getByControllableClass(Class<? extends ControllableEntity> clazz) {

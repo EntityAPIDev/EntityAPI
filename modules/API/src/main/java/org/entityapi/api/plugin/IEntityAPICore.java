@@ -50,8 +50,6 @@ public interface IEntityAPICore extends Plugin {
 
     public EntityManager getManagerFor(String pluginName);
 
-    public ISpawnUtil getSpawnUtil();
-
     public void callOnTick(ControllableEntity controllableEntity);
 
     public boolean callOnInteract(ControllableEntity controllableEntity, Player entity, boolean rightClick);
