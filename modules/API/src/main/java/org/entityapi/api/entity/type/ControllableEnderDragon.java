@@ -33,4 +33,12 @@ public interface ControllableEnderDragon extends ControllableEntity<EnderDragon,
     public Vector getTargetPosition();
 
     public void setTargetPosition(Vector position);
+
+    public boolean shouldDestroyBlocks();
+
+    public void setDestroyBlocks(boolean flag);
+
+    void setAllowRandomFlying(boolean allowRandomFlying);
+
+    boolean shouldAllowRandomFlying();
 }

@@ -39,6 +39,7 @@ public class ControllableEnderDragonBase extends ControllableBaseEntity<EnderDra
     private boolean useAppliedTargetPosition;
     private Vector targetPosition;
     private boolean destroyBlocks;
+    private boolean allowRandomFlying;
 
     public ControllableEnderDragonBase(int id, EntityManager manager) {
         super(id, ControllableEntityType.ENDERDRAGON, manager);
@@ -86,12 +87,24 @@ public class ControllableEnderDragonBase extends ControllableBaseEntity<EnderDra
         this.setUsingAppliedTargetPosition(true);
     }
 
+    @Override
     public void setDestroyBlocks(boolean destroyBlocks) {
         this.destroyBlocks = destroyBlocks;
     }
 
+    @Override
     public boolean shouldDestroyBlocks() {
         return destroyBlocks;
+    }
+
+    @Override
+    public void setAllowRandomFlying(boolean allowRandomFlying) {
+        this.allowRandomFlying = allowRandomFlying;
+    }
+
+    @Override
+    public boolean shouldAllowRandomFlying() {
+        return allowRandomFlying;
     }
 
     @Override

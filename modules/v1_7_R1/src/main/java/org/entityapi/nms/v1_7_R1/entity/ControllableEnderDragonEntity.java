@@ -32,7 +32,6 @@ import org.entityapi.api.entity.type.nms.ControllableEnderDragonHandle;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
 
-//TODO: controls over stationary flying and destruction of blocks
 public class ControllableEnderDragonEntity extends EntityEnderDragon implements ControllableEnderDragonHandle {
 
     private final ControllableEnderDragon controllableEntity;
@@ -75,15 +74,6 @@ public class ControllableEnderDragonEntity extends EntityEnderDragon implements 
                 this.controllableEntity.getMind().tick();
             }
         }
-        if (this.getTargetPosition() != null) {
-            if (this.controllableEntity instanceof ControllableEnderDragonBase) {
-                if (((ControllableEnderDragonBase) this.controllableEntity).isUsingAppliedTargetPosition()) {
-                    this.h = this.getTargetPosition().getX();
-                    this.i = this.getTargetPosition().getY();
-                    this.j = this.getTargetPosition().getZ();
-                }
-            }
-        }
     }
 
     @Override
@@ -113,6 +103,49 @@ public class ControllableEnderDragonEntity extends EntityEnderDragon implements 
             EntityAPI.getCore().callOnInteract(this.controllableEntity, (Player) damageSource.getEntity(), false);
         }
         return super.damageEntity(damageSource, v);
+    }
+
+    @Override
+    public void e() {
+        if (this.controllableEntity == null) {
+            super.e();
+            return;
+        }
+
+        if (this.controllableEntity.isStationary()) {
+            // https://github.com/Bukkit/mc-dev/blob/0ef88a6cbdeef0cb47bf66fd892b0ce2943e8e69/net/minecraft/server/EntityEnderDragon.java#L84-L89
+            if (this.getHealth() <= 0.0F) {
+                float randX = (this.random.nextFloat() - 0.5F) * 8.0F;
+                float randY = (this.random.nextFloat() - 0.5F) * 4.0F;
+                float randZ = (this.random.nextFloat() - 0.5F) * 8.0F;
+                this.world.addParticle("largeexplode", this.locX + (double) randX, this.locY + 2.0D + (double) randY, this.locZ + (double) randZ, 0.0D, 0.0D, 0.0D);
+            }
+        } else {
+            float[] motion = new float[] {0, 0, 0};
+            ControlledRidingAttribute controlledRidingAttribute = this.controllableEntity.getMind().getAttribute(ControlledRidingAttribute.class);
+            if (controlledRidingAttribute != null) {
+                controlledRidingAttribute.onRide(motion);
+            }
+            this.motY = motion[1];
+            super.e(motion[0], motion[2]);
+            this.controllableEntity.setYaw(this.yaw < 0 ? this.yaw + 180 : this.yaw - 180);
+            return;
+        }
+
+        if (this.controllableEntity.shouldAllowRandomFlying()) {
+            super.e();
+        } else {
+            if (this.getTargetPosition() != null) {
+                if (this.controllableEntity instanceof ControllableEnderDragonBase) {
+                    if (this.controllableEntity.isUsingAppliedTargetPosition()) {
+                        this.h = this.getTargetPosition().getX();
+                        this.i = this.getTargetPosition().getY();
+                        this.j = this.getTargetPosition().getZ();
+                    }
+                }
+            }
+        }
+        super.e();
     }
 
     @Override
