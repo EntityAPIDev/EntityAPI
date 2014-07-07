@@ -23,25 +23,25 @@ import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
+import org.entityapi.api.entity.type.ControllablePigZombie;
 import org.entityapi.api.entity.type.nms.ControllablePigZombieHandle;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
 
 public class ControllablePigZombieEntity extends EntityPigZombie implements ControllablePigZombieHandle {
 
-    private final ControllableEntity controllableEntity;
+    private final ControllablePigZombie controllableEntity;
 
-    public ControllablePigZombieEntity(World world, ControllableEntity controllableEntity) {
+    public ControllablePigZombieEntity(World world, ControllablePigZombie controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
         new PathfinderGoalSelectorRef(this).clearGoals();
     }
 
     @Override
-    public ControllableEntity getControllableEntity() {
+    public ControllablePigZombie getControllableEntity() {
         return this.controllableEntity;
     }
 

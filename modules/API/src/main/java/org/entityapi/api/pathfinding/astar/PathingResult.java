@@ -25,5 +25,5 @@ public enum PathingResult {
     FAILURE,
     UNKNOWN,
     NO_PATH,
-    EXCEED_MAX_ITERATIONS;
+    EXCEED_MAX_ITERATIONS
 }

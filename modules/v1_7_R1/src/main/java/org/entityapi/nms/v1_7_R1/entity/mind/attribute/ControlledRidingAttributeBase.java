@@ -25,7 +25,6 @@ import net.minecraft.server.v1_7_R1.EntityHorse;
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import org.entityapi.api.entity.mind.Mind;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
-import org.entityapi.internal.Constants;
 
 public class ControlledRidingAttributeBase extends ControlledRidingAttribute {
 
@@ -42,6 +41,7 @@ public class ControlledRidingAttributeBase extends ControlledRidingAttribute {
         this.canFly = canFly;
     }
 
+    @Override
     public void onRide(float[] motion) {
         EntityLiving entity = (EntityLiving) this.getControllableEntity().getHandle();
         if (entity.passenger == null) {
@@ -75,26 +75,32 @@ public class ControlledRidingAttributeBase extends ControlledRidingAttribute {
         }
     }
 
+    @Override
     public boolean canFly() {
         return canFly;
     }
 
+    @Override
     public void setCanFly(boolean flag) {
         this.canFly = flag;
     }
 
+    @Override
     public boolean isJumpingEnabled() {
         return jumpingEnabled;
     }
 
+    @Override
     public void setJumpingEnabled(boolean flag) {
         this.jumpingEnabled = flag;
     }
 
+    @Override
     public boolean isVehicleMotionOverriden() {
         return vehicleMotionOverriden;
     }
 
+    @Override
     public void setVehicleMotionOverriden(boolean flag) {
         this.vehicleMotionOverriden = flag;
     }

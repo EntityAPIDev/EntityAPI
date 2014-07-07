@@ -19,12 +19,13 @@
 
 package org.entityapi.nms.v1_7_R1.entity.mind.behaviour;
 
+import net.minecraft.server.v1_7_R1.EntityLiving;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.OneTimeBehaviourGoal;
 
-public abstract class OneTimeBehaviourGoalBase extends BehaviourGoalBase implements OneTimeBehaviourGoal {
+public abstract class OneTimeBehaviourGoalBase<T extends ControllableEntity, S extends EntityLiving> extends BehaviourGoalBase<T, S> implements OneTimeBehaviourGoal<T> {
 
-    protected OneTimeBehaviourGoalBase(ControllableEntity controllableEntity) {
+    protected OneTimeBehaviourGoalBase(T controllableEntity) {
         super(controllableEntity);
     }
 
@@ -33,5 +34,6 @@ public abstract class OneTimeBehaviourGoalBase extends BehaviourGoalBase impleme
         return false;
     }
 
+    @Override
     public abstract boolean isFinished();
 }

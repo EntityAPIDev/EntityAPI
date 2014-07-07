@@ -24,7 +24,7 @@ import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourGoal;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 
-public abstract class BehaviourGoalBase<T extends ControllableEntity, S extends EntityLiving> implements BehaviourGoal {
+public abstract class BehaviourGoalBase<T extends ControllableEntity, S extends EntityLiving> implements BehaviourGoal<T> {
 
     private T controllableEntity;
 

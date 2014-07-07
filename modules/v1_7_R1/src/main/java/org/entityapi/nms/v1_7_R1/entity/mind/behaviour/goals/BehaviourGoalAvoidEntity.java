@@ -46,7 +46,7 @@ public class BehaviourGoalAvoidEntity extends BehaviourGoalBase {
     public BehaviourGoalAvoidEntity(ControllableEntity controllableEntity, Class<? extends org.bukkit.entity.Entity> classToAvoid, float minDistance, double navigationSpeedWhenFar, double navigationSpeedWhenNear) {
         super(controllableEntity);
         this.classToAvoid = (Class<? extends Entity>) NMSEntityClassRef.getNMSClass(classToAvoid);
-        if (this.classToAvoid == null && !(EntityLiving.class.isAssignableFrom(classToAvoid))) {
+        if (this.classToAvoid == null || !(EntityLiving.class.isAssignableFrom(classToAvoid))) {
             throw new IllegalArgumentException("Could not find valid NMS class for " + classToAvoid.getSimpleName());
         }
         this.navigationSpeedWhenFar = navigationSpeedWhenFar;

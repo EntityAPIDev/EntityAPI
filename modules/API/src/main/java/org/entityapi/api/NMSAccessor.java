@@ -34,9 +34,9 @@ public interface NMSAccessor<T extends LivingEntity, S extends ControllableEntit
 
     String getSoundName(Sound sound);
 
-    public float getHeight();
+    float getHeight();
 
-    public float getWidth();
+    float getWidth();
 
     double getSpeed();
 
@@ -66,13 +66,13 @@ public interface NMSAccessor<T extends LivingEntity, S extends ControllableEntit
 
     float getFixedHeadYaw();
 
-    public boolean isAlive();
+    boolean isAlive();
 
-    public void callBaseTick();
+    void callBaseTick();
 
-    public void shootProjectile(ProjectileType projectileType, LivingEntity target, float strength);
+    void shootProjectile(ProjectileType projectileType, LivingEntity target, float strength);
 
     public enum SelectorType {
-        CONTAINER, HORSE, LIVING, MONSTER, NOT_UNDEAD;
+        CONTAINER, HORSE, LIVING, MONSTER, NOT_UNDEAD
     }
 }

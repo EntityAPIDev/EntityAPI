@@ -27,6 +27,7 @@ import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.impl.ControllableEnderDragonBase;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
+import org.entityapi.api.entity.type.ControllableEnderDragon;
 import org.entityapi.api.entity.type.nms.ControllableEnderDragonHandle;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
@@ -34,24 +35,25 @@ import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
 //TODO: controls over stationary flying and destruction of blocks
 public class ControllableEnderDragonEntity extends EntityEnderDragon implements ControllableEnderDragonHandle {
 
-    private final ControllableEntity controllableEntity;
+    private final ControllableEnderDragon controllableEntity;
 
-    public ControllableEnderDragonEntity(World world, ControllableEntity controllableEntity) {
+    public ControllableEnderDragonEntity(World world, ControllableEnderDragon controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
         new PathfinderGoalSelectorRef(this).clearGoals();
     }
 
     @Override
-    public ControllableEntity getControllableEntity() {
+    public ControllableEnderDragon getControllableEntity() {
         return this.controllableEntity;
     }
 
+    @Override
     public Vector getTargetPosition() {
-        if (this.controllableEntity == null && !(this.controllableEntity instanceof ControllableEnderDragonBase)) {
+        if (this.controllableEntity == null) {
             return null;
         }
-        return ((ControllableEnderDragonBase) this.controllableEntity).getTargetPosition();
+        return this.controllableEntity.getTargetPosition();
     }
 
     @Override

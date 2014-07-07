@@ -47,7 +47,7 @@ public class BehaviourGoalMoveTowardsNearestAttackableTarget extends BehaviourGo
     public BehaviourGoalMoveTowardsNearestAttackableTarget(ControllableEntity controllableEntity, Class<? extends org.bukkit.entity.Entity> classToTarget, int chance, boolean checkSenses, boolean useMelee, IEntitySelector selector) {
         super(controllableEntity, checkSenses, useMelee);
         this.classToTarget = (Class<? extends Entity>) NMSEntityClassRef.getNMSClass(classToTarget);
-        if (this.classToTarget == null && !(EntityLiving.class.isAssignableFrom(classToTarget))) {
+        if (this.classToTarget == null || !(EntityLiving.class.isAssignableFrom(classToTarget))) {
             throw new IllegalArgumentException("Could not find valid NMS class for " + classToTarget.getSimpleName());
         }
         this.chance = chance;

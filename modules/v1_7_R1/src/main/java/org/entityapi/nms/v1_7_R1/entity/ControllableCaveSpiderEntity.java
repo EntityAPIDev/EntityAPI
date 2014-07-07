@@ -23,25 +23,25 @@ import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
+import org.entityapi.api.entity.type.ControllableCaveSpider;
 import org.entityapi.api.entity.type.nms.ControllableCaveSpiderHandle;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
 
 public class ControllableCaveSpiderEntity extends EntityCaveSpider implements ControllableCaveSpiderHandle {
 
-    private final ControllableEntity controllableEntity;
+    private final ControllableCaveSpider controllableEntity;
 
-    public ControllableCaveSpiderEntity(World world, ControllableEntity controllableEntity) {
+    public ControllableCaveSpiderEntity(World world, ControllableCaveSpider controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
         new PathfinderGoalSelectorRef(this).clearGoals();
     }
 
     @Override
-    public ControllableEntity getControllableEntity() {
+    public ControllableCaveSpider getControllableEntity() {
         return this.controllableEntity;
     }
 

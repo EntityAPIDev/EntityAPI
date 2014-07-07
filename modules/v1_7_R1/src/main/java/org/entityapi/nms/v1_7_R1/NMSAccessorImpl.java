@@ -147,7 +147,7 @@ public class NMSAccessorImpl<T extends LivingEntity, S extends ControllableEntit
         if (!(path instanceof PathEntity)) {
             throw new IllegalArgumentException("Navigation can only directed by a PathEntity.");
         }
-        if (!(handle() instanceof EntityInsentient) || path == null) {
+        if (!(handle() instanceof EntityInsentient)) {
             return false;
         }
 

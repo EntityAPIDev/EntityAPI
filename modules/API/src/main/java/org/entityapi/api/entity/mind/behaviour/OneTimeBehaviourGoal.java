@@ -19,7 +19,9 @@
 
 package org.entityapi.api.entity.mind.behaviour;
 
-public interface OneTimeBehaviourGoal extends BehaviourGoal {
+import org.entityapi.api.entity.ControllableEntity;
+
+public interface OneTimeBehaviourGoal<T extends ControllableEntity> extends BehaviourGoal<T> {
 
     public boolean isFinished();
 }

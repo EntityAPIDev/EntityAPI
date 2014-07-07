@@ -40,7 +40,7 @@ public class BehaviourGoalLookAtNearestEntity extends BehaviourGoalBase {
     public BehaviourGoalLookAtNearestEntity(ControllableEntity controllableEntity, Class<? extends org.bukkit.entity.Entity> classType, float minDistance, float chance) {
         super(controllableEntity);
         this.entityClass = (Class<? extends Entity>) NMSEntityClassRef.getNMSClass(classType);
-        if (this.entityClass == null && !(EntityLiving.class.isAssignableFrom(entityClass))) {
+        if (this.entityClass == null || !(EntityLiving.class.isAssignableFrom(entityClass))) {
             throw new IllegalArgumentException("Could not find valid NMS class for " + entityClass.getSimpleName());
         }
         this.minDist = minDistance;

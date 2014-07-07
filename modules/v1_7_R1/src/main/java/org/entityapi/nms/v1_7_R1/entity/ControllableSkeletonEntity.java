@@ -24,11 +24,11 @@ import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.entity.mind.behaviour.goals.BehaviourMeleeAttack;
 import org.entityapi.api.entity.mind.behaviour.goals.BehaviourRangedAttack;
+import org.entityapi.api.entity.type.ControllableSkeleton;
 import org.entityapi.api.entity.type.nms.ControllableSkeletonHandle;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
@@ -37,16 +37,16 @@ import java.util.Calendar;
 
 public class ControllableSkeletonEntity extends EntitySkeleton implements ControllableSkeletonHandle {
 
-    private final ControllableEntity controllableEntity;
+    private final ControllableSkeleton controllableEntity;
 
-    public ControllableSkeletonEntity(World world, ControllableEntity controllableEntity) {
+    public ControllableSkeletonEntity(World world, ControllableSkeleton controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
         new PathfinderGoalSelectorRef(this).clearGoals();
     }
 
     @Override
-    public ControllableEntity getControllableEntity() {
+    public ControllableSkeleton getControllableEntity() {
         return this.controllableEntity;
     }
 

@@ -24,25 +24,25 @@ import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.util.Vector;
-import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
+import org.entityapi.api.entity.type.ControllableCreeper;
 import org.entityapi.api.entity.type.nms.ControllableCreeperHandle;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
 
 public class ControllableCreeperEntity extends EntityCreeper implements ControllableCreeperHandle {
 
-    private final ControllableEntity controllableEntity;
+    private final ControllableCreeper controllableEntity;
 
-    public ControllableCreeperEntity(World world, ControllableEntity controllableEntity) {
+    public ControllableCreeperEntity(World world, ControllableCreeper controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
         new PathfinderGoalSelectorRef(this).clearGoals();
     }
 
     @Override
-    public ControllableEntity getControllableEntity() {
+    public ControllableCreeper getControllableEntity() {
         return this.controllableEntity;
     }
 
@@ -168,6 +168,7 @@ public class ControllableCreeperEntity extends EntityCreeper implements Controll
         return this.controllableEntity == null ? "mob.creeper.death" : this.controllableEntity.getSound(EntitySound.DEATH);
     }
 
+    @Override
     public void explode(int modifier) {
         if (!this.world.isStatic) {
             boolean flag = this.world.getGameRules().getBoolean("mobGriefing");
@@ -179,8 +180,6 @@ public class ControllableCreeperEntity extends EntityCreeper implements Controll
             if (!event.isCancelled()) {
                 this.world.createExplosion(this, this.locX, this.locY, this.locZ, event.getRadius() * modifier, event.getFire(), flag);
                 this.die();
-            } else {
-                //this.fuseTicks = 0;
             }
         }
     }

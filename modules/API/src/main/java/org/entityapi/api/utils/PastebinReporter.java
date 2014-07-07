@@ -361,7 +361,7 @@ public class PastebinReporter {
                 builder.append(HEADER);
             }
             for (String line : TEXT) {
-                builder.append(line + NEW_LINE);
+                builder.append(line).append(NEW_LINE);
             }
             return builder.toString();
         }

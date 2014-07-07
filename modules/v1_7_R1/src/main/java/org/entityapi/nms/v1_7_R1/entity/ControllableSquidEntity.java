@@ -23,24 +23,24 @@ import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
+import org.entityapi.api.entity.type.ControllableSquid;
 import org.entityapi.api.entity.type.nms.ControllableSquidHandle;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
 
 public class ControllableSquidEntity extends EntitySquid implements ControllableSquidHandle {
 
-    private final ControllableEntity controllableEntity;
+    private final ControllableSquid controllableEntity;
 
-    public ControllableSquidEntity(World world, ControllableEntity controllableEntity) {
+    public ControllableSquidEntity(World world, ControllableSquid controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
         new PathfinderGoalSelectorRef(this).clearGoals();
     }
 
     @Override
-    public ControllableEntity getControllableEntity() {
+    public ControllableSquid getControllableEntity() {
         return this.controllableEntity;
     }
 

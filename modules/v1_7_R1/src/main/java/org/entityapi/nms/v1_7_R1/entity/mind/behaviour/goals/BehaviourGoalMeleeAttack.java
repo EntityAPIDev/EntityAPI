@@ -48,7 +48,7 @@ public class BehaviourGoalMeleeAttack extends BehaviourGoalBase {
         super(controllableEntity);
         this.ignoreSight = ignoreSight;
         this.typeToAttack = (Class<? extends Entity>) NMSEntityClassRef.getNMSClass(typeToAttack);
-        if (this.typeToAttack == null && !(EntityLiving.class.isAssignableFrom(typeToAttack))) {
+        if (this.typeToAttack == null || !(EntityLiving.class.isAssignableFrom(typeToAttack))) {
             throw new IllegalArgumentException("Could not find valid NMS class for " + typeToAttack.getSimpleName());
         }
         this.navigationSpeed = navigationSpeed;

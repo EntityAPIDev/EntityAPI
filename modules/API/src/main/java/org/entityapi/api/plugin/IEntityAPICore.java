@@ -25,7 +25,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 import org.entityapi.api.EntityManager;
-import org.entityapi.api.ISpawnUtil;
 import org.entityapi.api.entity.ControllableEntity;
 
 public interface IEntityAPICore extends Plugin {
@@ -61,6 +60,6 @@ public interface IEntityAPICore extends Plugin {
     public void callOnDeath(ControllableEntity controllableEntity);
 
     public enum ConfigType {
-        MAIN;
+        MAIN
     }
 }

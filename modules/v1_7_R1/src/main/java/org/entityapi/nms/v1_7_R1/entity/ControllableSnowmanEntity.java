@@ -23,24 +23,24 @@ import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
+import org.entityapi.api.entity.type.ControllableSnowman;
 import org.entityapi.api.entity.type.nms.ControllableSnowmanHandle;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
 
 public class ControllableSnowmanEntity extends EntitySnowman implements ControllableSnowmanHandle {
 
-    private final ControllableEntity controllableEntity;
+    private final ControllableSnowman controllableEntity;
 
-    public ControllableSnowmanEntity(World world, ControllableEntity controllableEntity) {
+    public ControllableSnowmanEntity(World world, ControllableSnowman controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
         new PathfinderGoalSelectorRef(this).clearGoals();
     }
 
     @Override
-    public ControllableEntity getControllableEntity() {
+    public ControllableSnowman getControllableEntity() {
         return this.controllableEntity;
     }
 

@@ -23,25 +23,25 @@ import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
+import org.entityapi.api.entity.type.ControllableEnderman;
 import org.entityapi.api.entity.type.nms.ControllableEndermanHandle;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
 
 public class ControllableEndermanEntity extends EntityEnderman implements ControllableEndermanHandle {
 
-    private final ControllableEntity controllableEntity;
+    private final ControllableEnderman controllableEntity;
 
-    public ControllableEndermanEntity(World world, ControllableEntity controllableEntity) {
+    public ControllableEndermanEntity(World world, ControllableEnderman controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
         new PathfinderGoalSelectorRef(this).clearGoals();
     }
 
     @Override
-    public ControllableEntity getControllableEntity() {
+    public ControllableEnderman getControllableEntity() {
         return this.controllableEntity;
     }
 

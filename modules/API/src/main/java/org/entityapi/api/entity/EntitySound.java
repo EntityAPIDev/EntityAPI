@@ -38,5 +38,5 @@ public enum EntitySound {
     SHAKE,
     SHEAR,
     ACCEPT,
-    DENY;
+    DENY
 }

@@ -73,14 +73,17 @@ public class SimpleEntityManager implements EntityManager {
         }, 1L, 1L);
     }
 
+    @Override
     public Plugin getOwningPlugin() {
         return this.OWNING_PLUGIN;
     }
 
+    @Override
     public boolean isKeepEntitiesInMemory() {
         return this.KEEP_ENTITIES_IN_MEM;
     }
 
+    @Override
     public void setKeepEntitiesInMemory(boolean bool) {
         this.KEEP_ENTITIES_IN_MEM = bool;
     }
@@ -97,10 +100,12 @@ public class SimpleEntityManager implements EntityManager {
         return index;
     }
 
+    @Override
     public ControllableEntity spawnEntity(ControllableEntityType entityType, Location location) {
         return spawnEntity(entityType, location, true);
     }
 
+    @Override
     public ControllableEntity spawnEntity(ControllableEntityType entityType, Location location, boolean prepare) {
         try {
             if (entityType.isNameRequired())
@@ -125,24 +130,24 @@ public class SimpleEntityManager implements EntityManager {
         }
     }
 
+    @Override
     public Collection<ControllableEntity> getEntities() {
         return Collections.unmodifiableCollection(this.ENTITIES.values());
     }
 
+    @Override
     public void despawnAll() {
 
     }
 
+    @Override
     public void despawnAll(DespawnReason despawnReason) {
 
     }
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder(128);
-        builder.append("EntityManager{plugin=" + this.OWNING_PLUGIN.getName() + ",")
-                .append("entities-spawned=" + this.ENTITIES.size() + "}");
-        return builder.toString();
+        return "EntityManager{plugin=" + this.OWNING_PLUGIN.getName() + "," + "entities-spawned=" + this.ENTITIES.size() + "}";
     }
 
     @Override

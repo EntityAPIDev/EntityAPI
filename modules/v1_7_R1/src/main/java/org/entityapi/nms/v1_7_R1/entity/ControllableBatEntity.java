@@ -23,33 +23,35 @@ import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
+import org.entityapi.api.entity.type.ControllableBat;
 import org.entityapi.api.entity.type.nms.ControllableBatHandle;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
 
 public class ControllableBatEntity extends EntityBat implements ControllableBatHandle {
 
-    private final ControllableEntity controllableEntity;
+    private final ControllableBat controllableEntity;
 
-    public ControllableBatEntity(World world, ControllableEntity controllableEntity) {
+    public ControllableBatEntity(World world, ControllableBat controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
         new PathfinderGoalSelectorRef(this).clearGoals();
     }
 
+    @Override
     public void setHanging(boolean flag) {
         this.a(flag);
     }
 
+    @Override
     public boolean isHanging() {
         return super.bN();
     }
 
     @Override
-    public ControllableEntity getControllableEntity() {
+    public ControllableBat getControllableEntity() {
         return this.controllableEntity;
     }
 

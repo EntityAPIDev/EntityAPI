@@ -23,25 +23,25 @@ import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
+import org.entityapi.api.entity.type.ControllableVillager;
 import org.entityapi.api.entity.type.nms.ControllableVillagerHandle;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
 
 public class ControllableVillagerEntity extends EntityVillager implements ControllableVillagerHandle {
 
-    private final ControllableEntity controllableEntity;
+    private final ControllableVillager controllableEntity;
 
-    public ControllableVillagerEntity(World world, ControllableEntity controllableEntity) {
+    public ControllableVillagerEntity(World world, ControllableVillager controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
         new PathfinderGoalSelectorRef(this).clearGoals();
     }
 
     @Override
-    public ControllableEntity getControllableEntity() {
+    public ControllableVillager getControllableEntity() {
         return this.controllableEntity;
     }
 
