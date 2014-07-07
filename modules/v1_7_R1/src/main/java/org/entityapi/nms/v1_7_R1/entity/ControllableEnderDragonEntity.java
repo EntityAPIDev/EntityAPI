@@ -23,7 +23,6 @@ import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.impl.ControllableEnderDragonBase;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
@@ -121,7 +120,7 @@ public class ControllableEnderDragonEntity extends EntityEnderDragon implements 
                 this.world.addParticle("largeexplode", this.locX + (double) randX, this.locY + 2.0D + (double) randY, this.locZ + (double) randZ, 0.0D, 0.0D, 0.0D);
             }
         } else {
-            float[] motion = new float[] {0, 0, 0};
+            float[] motion = new float[]{0, 0, 0};
             ControlledRidingAttribute controlledRidingAttribute = this.controllableEntity.getMind().getAttribute(ControlledRidingAttribute.class);
             if (controlledRidingAttribute != null) {
                 controlledRidingAttribute.onRide(motion);

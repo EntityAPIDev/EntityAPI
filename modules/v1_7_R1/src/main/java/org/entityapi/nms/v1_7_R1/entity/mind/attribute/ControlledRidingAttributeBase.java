@@ -20,11 +20,12 @@
 package org.entityapi.nms.v1_7_R1.entity.mind.attribute;
 
 import com.captainbern.reflection.Reflection;
-import com.captainbern.reflection.matcher.Matchers;
 import net.minecraft.server.v1_7_R1.EntityHorse;
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import org.entityapi.api.entity.mind.Mind;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
+
+import static com.captainbern.reflection.matcher.Matchers.withExactType;
 
 public class ControlledRidingAttributeBase extends ControlledRidingAttribute {
 
@@ -61,7 +62,7 @@ public class ControlledRidingAttributeBase extends ControlledRidingAttribute {
         }
 
         // boolean bD
-        boolean jumping = (Boolean) new Reflection().reflect(EntityHorse.class).getSafeFields(Matchers.withExactType(Boolean.class)).get(2).getAccessor().get(entity);
+        boolean jumping = (Boolean) new Reflection().reflect(EntityHorse.class).getSafeFields(withExactType(Boolean.class)).get(2).getAccessor().get(entity);
         if (this.canFly()) {
             if (jumping) {
                 motion[1] = 0.5F;

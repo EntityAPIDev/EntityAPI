@@ -21,7 +21,6 @@ package org.entityapi.nms.v1_7_R1.entity;
 
 import com.captainbern.reflection.Reflection;
 import com.captainbern.reflection.SafeField;
-import com.captainbern.reflection.matcher.Matchers;
 import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
@@ -32,6 +31,8 @@ import org.entityapi.api.entity.type.ControllableHorse;
 import org.entityapi.api.entity.type.nms.ControllableHorseHandle;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
+
+import static com.captainbern.reflection.matcher.Matchers.withExactType;
 
 public class ControllableHorseEntity extends EntityHorse implements ControllableHorseHandle {
 
@@ -192,66 +193,10 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
         return i == 3 ? this.getSoundFor(EntitySound.DEATH, "mob.horse.zombie.death", "zombie") : (i == 4 ? this.getSoundFor(EntitySound.DEATH, "mob.horse.skeleton.death", "skeleton") : (i != 1 && i != 2 ? this.getSoundFor(EntitySound.DEATH, "mob.horse.death", "normal") : this.getSoundFor(EntitySound.DEATH, "mob.horse.donkey.death", "donkey")));
     }
 
-    // Taken from EntityHorse and modified to suit custom sounds
-    @Override
-    protected void a(int i, int j, int k, Block block) {
-        StepSound stepsound = block.stepSound;
-
-        if (this.world.getType(i, j + 1, k) == Blocks.SNOW) {
-            stepsound = Blocks.SNOW.stepSound;
-        }
-
-        if (!block.getMaterial().isLiquid()) {
-            int l = this.getType();
-
-            if (this.passenger != null && l != 1 && l != 2) {
-                //++this.bP;
-                // int bP
-                SafeField<Integer> field_bP = (SafeField<Integer>) new Reflection().reflect(EntityHorse.class).getSafeFields(Matchers.withExactType(Integer.class)).get(6);
-                field_bP.getAccessor().set(this, field_bP.getAccessor().get(this) + 1);
-
-                int bP = field_bP.getAccessor().get(this);
-
-                //if (this.bP > 5 && this.bP % 3 == 0) {
-                if (bP > 5 && bP % 3 == 0) {
-                    this.makeSound(this.getSoundFor(EntitySound.STEP, "mob.horse.gallop", "withpassenger"), stepsound.getVolume1() * 0.15F, stepsound.getVolume2());
-                    if (l == 0 && this.random.nextInt(10) == 0) {
-                        this.makeSound(this.getSoundFor(EntitySound.BREATHE, "mob.horse.breathe"), stepsound.getVolume1() * 0.6F, stepsound.getVolume2());
-                    }
-                    //} else if (this.bP <= 5) {
-                } else if (bP <= 5) {
-                    this.makeSound(this.getSoundFor(EntitySound.STEP, "mob.horse.wood", "wood"), stepsound.getVolume1() * 0.15F, stepsound.getVolume2());
-                }
-            } else if (stepsound == Block.f) {
-                this.makeSound(this.getSoundFor(EntitySound.STEP, "mob.horse.wood", "wood"), stepsound.getVolume1() * 0.15F, stepsound.getVolume2());
-            } else {
-                this.makeSound(this.getSoundFor(EntitySound.STEP, "mob.horse.soft", "soft"), stepsound.getVolume1() * 0.15F, stepsound.getVolume2());
-            }
-        }
-    }
-
-    // Taken from EntityHorse and modified to suit custom sounds
-    @Override
-    public void a(InventorySubcontainer inventorysubcontainer) {
-        int i = this.cj();
-        boolean flag = this.cs();
-
-        this.cM();
-        if (this.ticksLived > 20) {
-            if (i == 0 && i != this.cj()) {
-                this.makeSound(this.getSoundFor(EntitySound.STEP, "mob.horse.armor", "armor"), 0.5F, 1.0F);
-            } else if (i != this.cj()) {
-                this.makeSound(this.getSoundFor(EntitySound.STEP, "mob.horse.armor", "armor"), 0.5F, 1.0F);
-            }
-
-            if (!flag && this.cs()) {
-                this.makeSound(this.getSoundFor(EntitySound.STEP, "mob.horse.leather", "leatherarmor"), 0.5F, 1.0F);
-            }
-        }
-    }
-
-    // Other stuff
-    // animations, sounds, etc.
+    /*
+     * Other stuff
+     * animations, sounds, etc.
+     */
 
     private String getSoundFor(EntitySound soundType, String def) {
         return this.controllableEntity == null ? def : this.controllableEntity.getSound(soundType);
@@ -264,10 +209,31 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
     // Catch any other sounds that are deep in NMS methods
     @Override
     public void makeSound(String s, float f, float f1) {
-        if (s.equals("mob.horse.jump")) {
-            s = this.getSoundFor(EntitySound.JUMP, "mob.horse.jump");
-        } else if (s.equals("mob.horse.land")) {
-            this.getSoundFor(EntitySound.STEP, "mob.horse.land", "land");
+        switch (s) {
+            case "mob.horse.jump":
+                s = this.getSoundFor(EntitySound.JUMP, s);
+                break;
+            case "mob.horse.land":
+                this.getSoundFor(EntitySound.STEP, s, "land");
+                break;
+            case "mob.horse.breathe":
+                s = this.getSoundFor(EntitySound.STEP, s, "armor");
+                break;
+            case "mob.horse.gallop":
+                s = this.getSoundFor(EntitySound.STEP, s, "gallop");
+                break;
+            case "mob.horse.wood":
+                s = this.getSoundFor(EntitySound.STEP, s, "wood");
+                break;
+            case "mob.horse.soft":
+                s = this.getSoundFor(EntitySound.STEP, s, "soft");
+                break;
+            case "mob.horse.armor":
+                s = this.getSoundFor(EntitySound.STEP, s, "armor");
+                break;
+            case "mob.horse.leather":
+                s = this.getSoundFor(EntitySound.STEP, s, "leatherarmor");
+                break;
         }
         super.makeSound(s, f, f1);
     }
@@ -276,7 +242,7 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
         // Possibly just call the method instead...But that won't work with Cauldron :\
         if (!this.world.isStatic) {
             // int bE
-            SafeField<Integer> field_bE = (SafeField<Integer>) new Reflection().reflect(EntityHorse.class).getSafeFields(Matchers.withExactType(Integer.class)).get(1);
+            SafeField<Integer> field_bE = (SafeField<Integer>) new Reflection().reflect(EntityHorse.class).getSafeFields(withExactType(Integer.class)).get(1);
             field_bE.getAccessor().set(this, 1);
 
             // Open the horse's mouth (animation 128)
@@ -287,20 +253,11 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
     private void cS() {
         if (!this.world.isStatic) {
             // int bF
-            SafeField<Integer> field_bF = (SafeField<Integer>) new Reflection().reflect(EntityHorse.class).getSafeFields(Matchers.withExactType(Integer.class)).get(2);
+            SafeField<Integer> field_bF = (SafeField<Integer>) new Reflection().reflect(EntityHorse.class).getSafeFields(withExactType(Integer.class)).get(2);
             field_bF.getAccessor().set(this, 1);
 
             // Stop looking down (animation 32)
             this.p(true);
-        }
-    }
-
-    private void cM() {
-        if (!this.world.isStatic) {
-            this.n(this.inventoryChest.getItem(0) != null);
-            if (this.cz()) {
-                this.d(this.inventoryChest.getItem(1));
-            }
         }
     }
 
