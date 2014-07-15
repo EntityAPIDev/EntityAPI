@@ -132,6 +132,7 @@
                                 <includes>
                                     <include>org.entityapi:EntityAPI*</include>
                                     <include>com.captainbern:Minecraft-Reflection</include>
+                                    <include>com.dsh105:Commodus</include>
                                 </includes>
                             </artifactSet>
                         </configuration>
