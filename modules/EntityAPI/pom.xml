@@ -64,20 +64,6 @@
             </exclusions>
             <optional>true</optional>
         </dependency>
-
-        <!-- Bukkit -->
-        <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>bukkit</artifactId>
-            <version>1.7.5-R0.1-SNAPSHOT</version>
-        </dependency>
-
-        <!-- JUnit -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -97,16 +83,6 @@
         </resources>
 
         <plugins>
-            <!-- Compiler -->
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
-            </plugin>
-
             <!-- Jar Filler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -155,6 +131,7 @@
                             <artifactSet>
                                 <includes>
                                     <include>org.entityapi:EntityAPI*</include>
+                                    <include>com.captainbern:Minecraft-Reflection</include>
                                 </includes>
                             </artifactSet>
                         </configuration>

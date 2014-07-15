@@ -36,47 +36,12 @@
         <relativePath>../../</relativePath>
     </parent>
 
-    <dependencies>
-        <!-- Bukkit -->
-        <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>bukkit</artifactId>
-            <version>1.7.5-R0.1-SNAPSHOT</version>
-            <type>jar</type>
-        </dependency>
-
-        <!-- CaptainBern's Reflection Framework -->
-        <dependency>
-            <groupId>com.captainbern</groupId>
-            <artifactId>Minecraft-Reflection</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-    </dependencies>
-
     <build>
         <directory>../../target</directory>
         <sourceDirectory>src/main/java/</sourceDirectory>
         <finalName>${project.name}</finalName>
 
         <plugins>
-            <!-- Compiler -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
-            </plugin>
-
-            <!-- Jar -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
-            </plugin>
-
             <!-- Clean up -->
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>

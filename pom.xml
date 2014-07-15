@@ -37,6 +37,30 @@
         <module>modules/EntityAPI</module>
     </modules>
 
+    <dependencies>
+        <!-- Bukkit -->
+        <dependency>
+            <groupId>org.bukkit</groupId>
+            <artifactId>bukkit</artifactId>
+            <version>1.7.5-R0.1-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+
+        <!-- CaptainBern's Reflection Framework -->
+        <dependency>
+            <groupId>com.captainbern</groupId>
+            <artifactId>Minecraft-Reflection</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <!-- JUnit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+        </dependency>
+    </dependencies>
+
     <repositories>
         <!-- Hawk Repo -->
         <repository>
@@ -63,6 +87,7 @@
                 <directory>src/main/resources/</directory>
                 <includes>
                     <include>*.yml</include>
+                    <include>*.xml</include>
                 </includes>
             </resource>
         </resources>
