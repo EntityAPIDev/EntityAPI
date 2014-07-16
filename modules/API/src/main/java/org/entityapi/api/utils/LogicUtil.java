@@ -20,7 +20,6 @@
 package org.entityapi.api.utils;
 
 import com.google.common.collect.BiMap;
-import org.entityapi.api.plugin.ModuleLogger;
 
 import java.lang.reflect.Array;
 import java.util.Collection;
@@ -40,15 +39,6 @@ public class LogicUtil {
 
     public static boolean nullOrEmpty(Collection<?> collection) {
         return collection == null || collection.isEmpty();
-    }
-
-    public static <T> T notNull(T object, String messageWhenNull, ModuleLogger logger) {
-        if (object == null) {
-            logger.warning(messageWhenNull);
-            return null;
-        } else {
-            return object;
-        }
     }
 
     public static <T> T[] createArray(Class<T> type, int length) {
