@@ -97,7 +97,7 @@ public class EntityUtil {
                 try {
 
                     nms = getNmsFromMethod(type);
-                } catch (Exception e) { // We failed, let's if we get more luck with fields...
+                } catch (Exception e) { // We failed, let's see if we can fix it with fields
                     nms = getNmsFromField(type);
                 }
             }

@@ -19,19 +19,8 @@
 
 package org.entityapi.internal;
 
-import com.captainbern.minecraft.reflection.MinecraftReflection;
-import com.captainbern.reflection.Reflection;
-
 /**
- * A class which contains several field names etc.
- * This class is used to identify the fields in NMS classes
- * When a field changes we just have to edit this class and not
- * all classes which access that field/method/class/...
- * <p/>
- * CaptainBern
- * <p/>
- * Enum-ised, but probably not the best way of doing it :\
- * - DSH
+ * No comment.
  */
 
 public class Constants {
