@@ -30,18 +30,30 @@ public class EntityUtil {
     private EntityUtil() {}
 
     public static void addGoal(Object nmsEntityHandle, Object nmsGoalHandle, int priority) {
+        if (ADD_GOAL == null)
+            initializeFields();
+
         ADD_GOAL.invoke(nmsEntityHandle, nmsGoalHandle, priority);
     }
 
     public static List getGoals(Object nmsEntityHandle) {
+        if (GOALS == null)
+            initializeFields();
+
         return GOALS.get(nmsEntityHandle);
     }
 
     public static List getActiveGoals(Object nmsEntityHandle) {
+        if (ACTIVE_GOALS == null)
+            initializeFields();
+
         return ACTIVE_GOALS.get(nmsEntityHandle);
     }
 
     public static void clearGoals(Object nmsEntityHandle) {
+        if (GOALS == null || ACTIVE_GOALS == null)
+            initializeFields();
+
         GOALS.get(nmsEntityHandle).clear();
         ACTIVE_GOALS.get(nmsEntityHandle).clear();
     }
