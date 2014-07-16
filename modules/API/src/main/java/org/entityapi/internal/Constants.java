@@ -179,24 +179,4 @@ public class Constants {
             }
         }
     }
-
-    public static enum PathfinderGoalSelector {
-
-        CLASS_NAME("PathfinderGoalSelector"),
-
-        METHOD_ADD_GOAL("a"), //takes int and nms.PathfinderGoal as params
-
-        LIST_GOALS("b"),
-        LIST_ACTIVE_GOALS("c");
-
-        private String v1_7_R1;
-
-        PathfinderGoalSelector(String v1_7_R1) {
-            this.v1_7_R1 = v1_7_R1;
-        }
-
-        public String get() {
-            return new Reflection().reflect(this.getClass()).getSafeFieldByNameAndType(MinecraftReflection.getVersionTag(), String.class).getAccessor().get(this);
-        }
-    }
 }

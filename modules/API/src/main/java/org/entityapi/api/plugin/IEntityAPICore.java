@@ -31,8 +31,6 @@ public interface IEntityAPICore extends Plugin {
 
     public String getVersion();
 
-    public Server getAPIServer();
-
     public FileConfiguration getConfig(ConfigType type);
 
     public EntityManager createManager(Plugin owningPlugin);

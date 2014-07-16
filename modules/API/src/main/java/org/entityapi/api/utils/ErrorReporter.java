@@ -47,10 +47,8 @@ public class ErrorReporter {
         paste.appendLine("----------System INFO----------")
                 .appendLine("EntityAPI version: " + EntityAPI.getCore().getVersion())
                 .appendLine("Server version: " + Bukkit.getVersion())
-                .appendLine("Server brand: " + EntityAPI.getCore().getAPIServer().getName())
                 .appendLine("Java Version: " + System.getProperty("java.vendor") + " " + System.getProperty("java.version"))
-                .appendLine("OS: " + System.getProperty("os.name") + " v:" + System.getProperty("os.version"))
-                .appendLine("Java Version: " + System.getProperty("java.vendor") + " " + System.getProperty("java.version"));
+                .appendLine("OS: " + System.getProperty("os.name") + " v:" + System.getProperty("os.version")).toString();
     }
 
     protected static void addStacktrace(PastebinReporter.Paste paste, Exception e) {

@@ -26,13 +26,6 @@ import org.entityapi.api.EntityManager;
 public class EntityAPI {
 
     /**
-     * Several Loggers
-     */
-    public static final ModuleLogger LOGGER = new ModuleLogger("EntityAPI");
-    public static final ModuleLogger LOGGER_REFLECTION = LOGGER.getModule("Reflection");
-    public static final ModuleLogger LOGGER_DATA_STORE = LOGGER_REFLECTION.getModule("Persistence");
-
-    /**
      * Some NMS paths for internals
      */
     public static String INTERNAL_NMS_PATH = "org.entityapi.nms." + MinecraftReflection.getVersionTag();

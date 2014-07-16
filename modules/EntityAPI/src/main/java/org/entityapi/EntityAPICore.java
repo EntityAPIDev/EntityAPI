@@ -40,7 +40,6 @@ import org.entityapi.api.entity.mind.attribute.*;
 import org.entityapi.api.events.*;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.plugin.IEntityAPICore;
-import org.entityapi.api.plugin.Server;
 import org.entityapi.api.utils.PastebinReporter;
 import org.entityapi.api.utils.StringUtil;
 import org.entityapi.metrics.Metrics;
@@ -58,11 +57,6 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
      * EntityAPI instance
      */
     private static EntityAPICore CORE_INSTANCE;
-
-    /**
-     * The Server brand
-     */
-    public static Server SERVER;
 
     private static final String VERSION = "${project.version}";
 
@@ -92,6 +86,7 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
     @Override
     public void onDisable() {
         //TODO: nullify everything
+        CORE_INSTANCE = null;
     }
 
     @Override
@@ -123,7 +118,7 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
             Metrics metrics = new Metrics(this);
             metrics.start();
         } catch (IOException e) {
-            EntityAPI.LOGGER.severe("Failed to initialise Metrics");
+            // Swallow
         }
 
         this.checkUpdates();
@@ -179,11 +174,6 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
             throw new RuntimeException("The EntityAPICore might have not been initialized properly!");
         }
         return CORE_INSTANCE;
-    }
-
-    @Override
-    public Server getAPIServer() {
-        return SERVER;
     }
 
     @Override
