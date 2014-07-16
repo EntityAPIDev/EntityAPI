@@ -23,7 +23,7 @@ import net.minecraft.server.v1_7_R1.*;
 import net.minecraft.util.com.mojang.authlib.GameProfile;
 import org.entityapi.api.entity.type.ControllablePlayer;
 import org.entityapi.api.entity.type.nms.ControllablePlayerHandle;
-import org.entityapi.nms.v1_7_R1.PlayerNavigation;
+import org.entityapi.nms.v1_7_R1.player.PlayerNavigation;
 import org.entityapi.nms.v1_7_R1.network.FixedNetworkManager;
 import org.entityapi.nms.v1_7_R1.network.NullPlayerConnection;
 import org.entityapi.nms.v1_7_R1.player.PlayerControllerJump;
@@ -32,10 +32,17 @@ import org.entityapi.nms.v1_7_R1.player.PlayerControllerMove;
 
 public class ControllablePlayerEntity extends EntityPlayer implements ControllablePlayerHandle {
 
-    private Navigation navigation;
-    private ControllerMove moveController;
-    private ControllerLook lookController;
-    private ControllerJump jumpController;
+    protected ControllablePlayer controllablePlayer;
+
+    protected Navigation navigation;
+    protected ControllerMove moveController;
+    protected ControllerLook lookController;
+    protected ControllerJump jumpController;
+
+    public ControllablePlayerEntity(MinecraftServer minecraftServer, WorldServer worldServer, GameProfile gameProfile, PlayerInteractManager playerInteractManager, ControllablePlayer controllablePlayer) {
+        this(minecraftServer, worldServer, gameProfile, playerInteractManager);
+        this.controllablePlayer = controllablePlayer;
+    }
 
     public ControllablePlayerEntity(MinecraftServer minecraftserver, WorldServer worldserver, GameProfile gameprofile, PlayerInteractManager playerinteractmanager) {
         super(minecraftserver, worldserver, gameprofile, playerinteractmanager);
@@ -54,7 +61,7 @@ public class ControllablePlayerEntity extends EntityPlayer implements Controllab
 
     @Override
     public ControllablePlayer getControllableEntity() {
-        return null;
+        return this.controllablePlayer;
     }
 
     @Override

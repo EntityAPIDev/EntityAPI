@@ -21,7 +21,7 @@ package org.entityapi.api.pathfinding.astar;
 
 public enum PathingResult {
 
-    SUCCES,
+    SUCCESS,
     FAILURE,
     UNKNOWN,
     NO_PATH,
