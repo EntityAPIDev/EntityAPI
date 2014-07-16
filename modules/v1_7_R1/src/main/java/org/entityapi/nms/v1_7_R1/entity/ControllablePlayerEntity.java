@@ -26,10 +26,16 @@ import org.entityapi.api.entity.type.nms.ControllablePlayerHandle;
 import org.entityapi.nms.v1_7_R1.PlayerNavigation;
 import org.entityapi.nms.v1_7_R1.network.FixedNetworkManager;
 import org.entityapi.nms.v1_7_R1.network.NullPlayerConnection;
+import org.entityapi.nms.v1_7_R1.player.PlayerControllerJump;
+import org.entityapi.nms.v1_7_R1.player.PlayerControllerLook;
+import org.entityapi.nms.v1_7_R1.player.PlayerControllerMove;
 
 public class ControllablePlayerEntity extends EntityPlayer implements ControllablePlayerHandle {
 
     private Navigation navigation;
+    private ControllerMove moveController;
+    private ControllerLook lookController;
+    private ControllerJump jumpController;
 
     public ControllablePlayerEntity(MinecraftServer minecraftserver, WorldServer worldserver, GameProfile gameprofile, PlayerInteractManager playerinteractmanager) {
         super(minecraftserver, worldserver, gameprofile, playerinteractmanager);
@@ -40,7 +46,10 @@ public class ControllablePlayerEntity extends EntityPlayer implements Controllab
 
         noDamageTicks = 1;
 
-        this.navigation = new PlayerNavigation(this);
+        this.navigation = new PlayerNavigation(this, this.world);
+        this.moveController = new PlayerControllerMove(this);
+        this.lookController = new PlayerControllerLook(this);
+        this.jumpController = new PlayerControllerJump(this);
     }
 
     @Override
@@ -53,7 +62,26 @@ public class ControllablePlayerEntity extends EntityPlayer implements Controllab
         return null;
     }
 
+    public void updateControllers() {
+        getControllerLook().a();
+        getControllerJump().b();
+        getControllerMove().c();
+        getNavigation().f();
+    }
+
     public Navigation getNavigation() {
         return this.navigation;
+    }
+
+    public ControllerMove getControllerMove() {
+        return this.moveController;
+    }
+
+    public ControllerLook getControllerLook() {
+        return this.lookController;
+    }
+
+    public ControllerJump getControllerJump() {
+        return this.jumpController;
     }
 }

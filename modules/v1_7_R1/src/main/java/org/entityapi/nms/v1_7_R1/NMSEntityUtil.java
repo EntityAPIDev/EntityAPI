@@ -66,6 +66,8 @@ public class NMSEntityUtil {
     public static ControllerJump getControllerJump(EntityLiving entityLiving) {
         if (entityLiving instanceof EntityInsentient) {
             return ((EntityInsentient) entityLiving).getControllerJump();
+        } else if (entityLiving instanceof ControllablePlayerEntity) {
+            return ((ControllablePlayerEntity) entityLiving).getControllerJump();
         }
         return null;
     }
@@ -80,6 +82,8 @@ public class NMSEntityUtil {
     public static ControllerMove getControllerMove(EntityLiving entityLiving) {
         if (entityLiving instanceof EntityInsentient) {
             return ((EntityInsentient) entityLiving).getControllerMove();
+        } else if (entityLiving instanceof ControllablePlayerEntity) {
+            return ((ControllablePlayerEntity) entityLiving).getControllerMove();
         }
         return null;
     }
@@ -94,6 +98,8 @@ public class NMSEntityUtil {
     public static ControllerLook getControllerLook(EntityLiving entityLiving) {
         if (entityLiving instanceof EntityInsentient) {
             return ((EntityInsentient) entityLiving).getControllerLook();
+        } else if (entityLiving instanceof ControllablePlayerEntity) {
+            return ((ControllablePlayerEntity) entityLiving).getControllerLook();
         }
         return null;
     }
