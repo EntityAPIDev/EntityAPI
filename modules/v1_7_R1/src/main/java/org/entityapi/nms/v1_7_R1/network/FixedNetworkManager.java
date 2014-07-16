@@ -23,14 +23,13 @@ import com.captainbern.reflection.Reflection;
 import com.captainbern.reflection.accessor.FieldAccessor;
 import net.minecraft.server.v1_7_R1.NetworkManager;
 import net.minecraft.util.io.netty.channel.Channel;
-import org.entityapi.internal.Constants;
 
 import java.net.InetSocketAddress;
 
 public class FixedNetworkManager extends NetworkManager {
 
-    private FieldAccessor<Channel> channelField = new Reflection().reflect(super.getClass()).getSafeFieldByNameAndType(Constants.NetworkManager.CHANNEL_FIELD.get(), Channel.class).getAccessor();
-    private FieldAccessor<InetSocketAddress> addressField = new Reflection().reflect(super.getClass()).getSafeFieldByNameAndType(Constants.NetworkManager.ADDRESS_FIELD.get(), InetSocketAddress.class).getAccessor();
+    private static FieldAccessor<Channel> CHANNEL_FIELD;
+    private static FieldAccessor<InetSocketAddress> ADDRESS_FIELD;
 
     public FixedNetworkManager() {
         super(false);
@@ -38,7 +37,15 @@ public class FixedNetworkManager extends NetworkManager {
     }
 
     protected void swapFields() {
-        channelField.set(this, new NullChannel(null));
-        addressField.set(this, null);
+        if (CHANNEL_FIELD == null) {
+            CHANNEL_FIELD = new Reflection().reflect(NetworkManager.class).getSafeFieldByType(Channel.class).getAccessor();
+        }
+
+        if (ADDRESS_FIELD == null) {
+            ADDRESS_FIELD =  new Reflection().reflect(NetworkManager.class).getSafeFieldByType(InetSocketAddress.class).getAccessor();
+        }
+
+        CHANNEL_FIELD.set(this, new NullChannel(null));
+        ADDRESS_FIELD.set(this, null);
     }
 }

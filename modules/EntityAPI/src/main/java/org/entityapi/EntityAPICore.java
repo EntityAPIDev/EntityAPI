@@ -44,10 +44,6 @@ import org.entityapi.api.plugin.Server;
 import org.entityapi.api.utils.PastebinReporter;
 import org.entityapi.api.utils.StringUtil;
 import org.entityapi.metrics.Metrics;
-import org.entityapi.server.CraftBukkitServer;
-import org.entityapi.server.MCPCPlusServer;
-import org.entityapi.server.SpigotServer;
-import org.entityapi.server.UnknownServer;
 
 import java.io.File;
 import java.io.IOException;
@@ -119,8 +115,6 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
         CORE_INSTANCE = this;
         EntityAPI.setCore(CORE_INSTANCE);
 
-        initServer();
-
         this.checkPlugins();
 
         this.saveDefaultConfig();
@@ -133,40 +127,6 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
         }
 
         this.checkUpdates();
-    }
-
-    /**
-     * Checks the server brand etc. Also some servers brands don't have the version system (eg: MCPC+) so we need
-     * to know that for our reflection.
-     */
-    protected void initServer() {
-        List<Server> servers = new ArrayList<Server>();
-        servers.add(new MCPCPlusServer());
-        servers.add(new SpigotServer());
-        servers.add(new CraftBukkitServer());
-        servers.add(new UnknownServer());
-
-        for (Server server : servers) {
-            if (server.init()) {   //the first server type that returns true on init is a valid server brand.
-                SERVER = server;
-                break;
-            }
-        }
-
-        if (SERVER == null) {
-            EntityAPI.LOGGER.warning("Failed to identify the server brand! The API will not run correctly -> disabling");
-            Bukkit.getPluginManager().disablePlugin(this);
-            return;
-        } else {
-            // this is already checked earlier in onEnable
-            /*if (!SERVER.isCompatible()) {
-                LOGGER.warning("This Server version may not be compatible with EntityAPI!");
-            }*/
-
-            // logging this isn't really needed
-            //LOGGER.info("Identified server brand: " + SERVER.getName());
-            //LOGGER.info("MC Version: " + SERVER.getMCVersion());
-        }
     }
 
     protected void checkUpdates() {

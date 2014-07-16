@@ -36,32 +36,7 @@ import com.captainbern.reflection.Reflection;
 
 public class Constants {
 
-    public static enum EntityTypes {
-
-        CLASS_NAME("EntityTypes"),
-
-        METHOD_REGISTER_ENTITY("a"), //takes class, name and id as param
-        METHOD_GET_ID_OF_ENTITY("a"), //takes an entity as param, returns the id
-        METHOD_GET_CLASS_OF_ID("a"), //takes id as param, returns the entity class
-        METHOD_GET_NAME_OF_ENTITY("b"), //takes entity as param, returns the name
-        METHOD_NAME_OF_ID("b"), //takes id as param, returns the name
-        METHOD_GET_NAME_MAP("b"), //returns a set which contains all entity names
-
-        MAP_NAME_TO_CLASS("c"),
-        MAP_CLASS_TO_NAME("d"),
-        MAP_ID_TO_CLASS("e"),
-        MAP_CLASS_TO_ID("f"),
-        MAP_NAME_TO_ID("g");
-
-        private String v1_7_R1;
-
-        EntityTypes(String v1_7_R1) {
-            this.v1_7_R1 = v1_7_R1;
-        }
-
-        public String get() {
-            return new Reflection().reflect(this.getClass()).getSafeFieldByNameAndType(MinecraftReflection.getVersionTag(), String.class).getAccessor().get(this);
-        }
+    public static class EntityTypes {
 
         public static enum Names {
             ITEM("Item"),
@@ -202,113 +177,6 @@ public class Constants {
             public int getValue() {
                 return value;
             }
-        }
-
-        public static enum ClassNames {
-            ITEM("EntityItem"),
-            XP_ORB("EntityExperienceOrb"),
-            LEASH("EntityLeash"),
-            PANTING("EntityPainting"),
-            ARROW("EntityArrow"),
-            SNOWBALL("EntitySnowball"),
-            FIREBALL("EntityLargeFireball"),
-            SMALL_FIREBALL("EntitySmallFireball"),
-            THROWN_ENDERPEARL("EntityEnderPearl"),
-            EYE_OF_ENDER_SIGNAL("EntityEnderSignal"),
-            THROWN_POTION("EntityPotion"),
-            THROWN_XP_BOTTLE("EntityThrownExpBottle"),
-            ITEMFRAME("EntityItemFrame"),
-            WITHER_SKULL("EntityWitherSkull"),
-            PRIMED_TNT("EntityTNTPrimed"),
-            FALLING_SAND("EntityFallingBlock"),
-            FIREWORKS_ROCKET("EntityFireworks"),
-            BOAT("EntityBoat"),
-            MINECART_RIDEABLE("EntityMinecartRideable"),
-            MINECART_CHEST("EntityMinecartChest"),
-            MINECART_FURNANCE("EntityMinecartFurnace"),
-            MINECART_TNT("EntityMinecartTNT"),
-            MINECART_HOPPER("EntityMinecartHopper"),
-            MINECART_SPAWNER("EntityMinecartFurnace"),
-            MINECART_COMMANDBLOCK("EntityMinecartCommandBlock"),
-            ENTITY_INSENTIENT("EntityInsentient"),
-            ENTITY_MONSTER("IMonster"),
-            ENTITY_CREEPER("EntityCreeper"),
-            ENTITY_SKELETON("EntitySkeleton"),
-            ENTITY_SPIDER("EntitySpider"),
-            ENTITY_GIANT("EntityGiantZombie"),
-            ENTITY_ZOMBIE("EntityZombie"),
-            ENTITY_SLIME("EntitySlime"),
-            ENTITY_GHAST("EntityGhast"),
-            ENTITY_PIG_ZOMBIE("EntityPigZombie"),
-            ENTITY_ENDERMAN("EntityEnderman"),
-            ENTTY_CAVE_SPIDER("EntityCaveSpider"),
-            ENTITY_SILVERFISH("EntitySilverfish"),
-            ENTITY_BLAZE("EntityBlaze"),
-            ENTITY_LAVA_SLIME("EntityMagmaCube"),
-            ENTITY_ENDERDRAGON("EntityEnderDragon"),
-            ENTITY_WITHER("EntityWither"),
-            ENTITY_BAT("EntityBat"),
-            ENTITY_WITCH("EntityWitch"),
-            ENTITY_PIG("EntityPig"),
-            ENTITY_SHEEP("EntitySheep"),
-            ENTITY_COW("EntityCow"),
-            ENTITY_CHICKEN("EntityChicken"),
-            ENTITY_SQUID("EntitySquid"),
-            ENTITY_WOLF("EntityWolf"),
-            ENTITY_MUSHROOM_COW("EntityMushroomCow"),
-            ENTITY_SNOWMAN("EntitySnowman"),
-            ENTITY_OZELOT("EntityOcelot"),
-            ENTITY_IRON_GOLEM("EntityGolem"),
-            ENTITY_HORSE("EntityHorse"),
-            ENTITY_VILLAGER("EntityVillager"),
-            ENTITY_ENDERCRYSTAL("EntityEnderCrystal"),
-            ENTITY_EGG("EntityEgg"),
-            ENITY_FISHING_HOOK("EntityFishingHook"),
-            ENTITY_LIGHTNING("EntityLightning"),
-            ENTITY_WEATHER("EntityWeather"),
-            ENTITY_COMPLEX_PART("EntityComplexPart");
-
-            private String value;
-
-            ClassNames(String value) {
-                this.value = value;
-            }
-
-            public String getValue() {
-                return value;
-            }
-        }
-    }
-
-    public static enum Server {
-
-        CRAFBUKKIT_ROOT("org.bukkit.craftbukkit"),
-        MINECRAFT_ROOT("net.minecraft.server");
-
-        private String value;
-
-        Server(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-    }
-
-    public static enum NetworkManager {
-
-        CHANNEL_FIELD("k"),
-        ADDRESS_FIELD("l");
-
-        private String v1_7_R1;
-
-        NetworkManager(String v1_7_R1) {
-            this.v1_7_R1 = v1_7_R1;
-        }
-
-        public String get() {
-            return new Reflection().reflect(this.getClass()).getSafeFieldByNameAndType(MinecraftReflection.getVersionTag(), String.class).getAccessor().get(this);
         }
     }
 
