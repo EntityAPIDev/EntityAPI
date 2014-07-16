@@ -66,8 +66,8 @@ public class EntityUtil {
                throw new RuntimeException("Failed to initialize the goal-lists!");
             }
 
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to initialize the goal-related fields!");
+        } catch (Exception ಠ_ಠ) {
+            throw new RuntimeException("Failed to initialize the goal-related fields!", ಠ_ಠ);
         }
     }
 
@@ -83,8 +83,8 @@ public class EntityUtil {
 
             return getNms(bukkitHandle);
 
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to get the NMS version for: " + bukkitHandle.getCanonicalName(), e);
+        } catch (Exception ಥ_ಥ) {
+            throw new RuntimeException("Failed to get the NMS version for: " + bukkitHandle.getCanonicalName(), ಥ_ಥ);
         }
     }
 
@@ -105,8 +105,8 @@ public class EntityUtil {
             converterMap.put(type, nms);
 
             return nms;
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to get the NMS class for: " + type.getCanonicalName());
+        } catch (Exception ノಠ益ಠノ) {
+            throw new RuntimeException("Failed to get the NMS class for: " + type.getCanonicalName(), ノಠ益ಠノ);
         }
     }
 

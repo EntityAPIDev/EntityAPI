@@ -25,6 +25,9 @@ public class Path implements Iterable<Path> {
 
     private BlockNode[] nodes;
 
+    public Path() {
+
+    }
 
     @Override
     public Iterator<Path> iterator() {
