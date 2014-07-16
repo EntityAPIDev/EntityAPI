@@ -25,9 +25,9 @@ import net.minecraft.server.v1_7_R1.EntityLiving;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
+import org.entityapi.api.utils.EntityUtil;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourGoalBase;
-import org.entityapi.reflection.refs.NMSEntityClassRef;
 
 public class BehaviourGoalLookAtNearestEntity extends BehaviourGoalBase {
 
@@ -39,7 +39,7 @@ public class BehaviourGoalLookAtNearestEntity extends BehaviourGoalBase {
 
     public BehaviourGoalLookAtNearestEntity(ControllableEntity controllableEntity, Class<? extends org.bukkit.entity.Entity> classType, float minDistance, float chance) {
         super(controllableEntity);
-        this.entityClass = (Class<? extends Entity>) NMSEntityClassRef.getNMSClass(classType);
+        this.entityClass = (Class<? extends Entity>) EntityUtil.getNmsClassFor(classType);
         if (this.entityClass == null || !(EntityLiving.class.isAssignableFrom(entityClass))) {
             throw new IllegalArgumentException("Could not find valid NMS class for " + entityClass.getSimpleName());
         }

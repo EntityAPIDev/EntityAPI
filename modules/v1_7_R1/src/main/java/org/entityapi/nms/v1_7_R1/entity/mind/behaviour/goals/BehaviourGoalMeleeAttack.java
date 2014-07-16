@@ -28,9 +28,9 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
+import org.entityapi.api.utils.EntityUtil;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourGoalBase;
-import org.entityapi.reflection.refs.NMSEntityClassRef;
 
 public class BehaviourGoalMeleeAttack extends BehaviourGoalBase {
 
@@ -47,7 +47,7 @@ public class BehaviourGoalMeleeAttack extends BehaviourGoalBase {
     public BehaviourGoalMeleeAttack(ControllableEntity controllableEntity, Class<? extends org.bukkit.entity.Entity> typeToAttack, boolean ignoreSight, double navigationSpeed) {
         super(controllableEntity);
         this.ignoreSight = ignoreSight;
-        this.typeToAttack = (Class<? extends Entity>) NMSEntityClassRef.getNMSClass(typeToAttack);
+        this.typeToAttack = (Class<? extends Entity>) EntityUtil.getNmsClassFor(typeToAttack);
         if (this.typeToAttack == null || !(EntityLiving.class.isAssignableFrom(typeToAttack))) {
             throw new IllegalArgumentException("Could not find valid NMS class for " + typeToAttack.getSimpleName());
         }

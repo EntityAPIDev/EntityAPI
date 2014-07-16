@@ -7,15 +7,17 @@ import com.captainbern.reflection.SafeField;
 import com.captainbern.reflection.SafeMethod;
 import com.captainbern.reflection.accessor.FieldAccessor;
 import com.captainbern.reflection.accessor.MethodAccessor;
+import com.google.common.primitives.Primitives;
+import org.bukkit.entity.Entity;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.captainbern.reflection.matcher.Matchers.withArguments;
 import static com.captainbern.reflection.matcher.Matchers.withType;
 
 public class EntityUtil {
-
-    // TODO: finish this, DSH105 can you take a look at it?
 
     protected static FieldAccessor<List> GOALS;
     protected static FieldAccessor<List> ACTIVE_GOALS;
@@ -67,5 +69,54 @@ public class EntityUtil {
         } catch (Exception e) {
             throw new RuntimeException("Failed to initialize the goal-related fields!");
         }
+    }
+
+    // Entity conversion
+
+    private static Map<Class<? extends Entity>, Class<?>> converterMap = new HashMap<>();
+
+    public static Object getNmsClassFor(Class<? extends Entity> bukkitHandle) {
+        if (bukkitHandle == null)
+            return null;
+
+        try {
+
+            return getNms(bukkitHandle);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get the NMS version for: " + bukkitHandle.getCanonicalName(), e);
+        }
+    }
+
+    private static Object getNms(Class<? extends Entity> type) {
+        try {
+            Class<?> nms = converterMap.get(type);
+
+            if (nms == null) {
+
+                try {
+
+                    nms = getNmsFromMethod(type);
+                } catch (Exception e) { // We failed, let's if we get more luck with fields...
+                    nms = getNmsFromField(type);
+                }
+            }
+
+            converterMap.put(type, nms);
+
+            return nms;
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get the NMS class for: " + type.getCanonicalName());
+        }
+    }
+
+    protected static Class<?> getNmsFromField(Class<?> type) {
+        final FieldAccessor<Object> accessor = new Reflection().reflect(type).getSafeFieldByName("handle").getAccessor();
+        return accessor.getField().member().getType();
+    }
+
+    protected static Class<?> getNmsFromMethod(Class<?> type) {
+        final MethodAccessor<Object> accessor = new Reflection().reflect(type).getSafeMethod("getHandle").getAccessor();
+        return accessor.getMethod().member().getReturnType();
     }
 }

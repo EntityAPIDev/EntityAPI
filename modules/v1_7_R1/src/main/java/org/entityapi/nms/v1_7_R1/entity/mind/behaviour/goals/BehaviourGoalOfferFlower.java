@@ -24,8 +24,8 @@ import net.minecraft.server.v1_7_R1.EntityIronGolem;
 import net.minecraft.server.v1_7_R1.EntityLiving;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
 import org.entityapi.api.entity.type.ControllableIronGolem;
+import org.entityapi.api.utils.EntityUtil;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourGoalBase;
-import org.entityapi.reflection.refs.NMSEntityClassRef;
 
 public class BehaviourGoalOfferFlower<T extends ControllableIronGolem> extends BehaviourGoalBase<T, EntityIronGolem> {
 
@@ -35,7 +35,7 @@ public class BehaviourGoalOfferFlower<T extends ControllableIronGolem> extends B
 
     public BehaviourGoalOfferFlower(T controllableEntity, Class<? extends org.bukkit.entity.Entity> classToOffer) {
         super(controllableEntity);
-        this.typeToOffer = (Class<? extends Entity>) NMSEntityClassRef.getNMSClass(classToOffer);
+        this.typeToOffer = (Class<? extends Entity>) EntityUtil.getNmsClassFor(classToOffer);
         if (this.typeToOffer == null || !(EntityLiving.class.isAssignableFrom(classToOffer))) {
             throw new IllegalArgumentException("Could not find valid NMS class for " + classToOffer.getSimpleName());
         }

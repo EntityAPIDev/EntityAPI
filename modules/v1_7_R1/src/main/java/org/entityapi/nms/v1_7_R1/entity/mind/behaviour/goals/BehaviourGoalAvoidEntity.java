@@ -22,10 +22,10 @@ package org.entityapi.nms.v1_7_R1.entity.mind.behaviour.goals;
 import net.minecraft.server.v1_7_R1.*;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.behaviour.BehaviourType;
+import org.entityapi.api.utils.EntityUtil;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
 import org.entityapi.nms.v1_7_R1.entity.mind.behaviour.BehaviourGoalBase;
 import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorViewable;
-import org.entityapi.reflection.refs.NMSEntityClassRef;
 
 import java.util.List;
 
@@ -45,7 +45,7 @@ public class BehaviourGoalAvoidEntity extends BehaviourGoalBase {
 
     public BehaviourGoalAvoidEntity(ControllableEntity controllableEntity, Class<? extends org.bukkit.entity.Entity> classToAvoid, float minDistance, double navigationSpeedWhenFar, double navigationSpeedWhenNear) {
         super(controllableEntity);
-        this.classToAvoid = (Class<? extends Entity>) NMSEntityClassRef.getNMSClass(classToAvoid);
+        this.classToAvoid = (Class<? extends Entity>) EntityUtil.getNmsClassFor(classToAvoid);
         if (this.classToAvoid == null || !(EntityLiving.class.isAssignableFrom(classToAvoid))) {
             throw new IllegalArgumentException("Could not find valid NMS class for " + classToAvoid.getSimpleName());
         }
