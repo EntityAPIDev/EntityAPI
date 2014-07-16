@@ -28,7 +28,7 @@ import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.entity.type.ControllableSpider;
 import org.entityapi.api.entity.type.nms.ControllableSpiderHandle;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
+import org.entityapi.api.utils.EntityUtil;
 
 public class ControllableSpiderEntity extends EntitySpider implements ControllableSpiderHandle {
 
@@ -37,7 +37,7 @@ public class ControllableSpiderEntity extends EntitySpider implements Controllab
     public ControllableSpiderEntity(World world, ControllableSpider controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
-        new PathfinderGoalSelectorRef(this).clearGoals();
+        EntityUtil.clearGoals(this);
     }
 
     @Override

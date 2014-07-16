@@ -28,7 +28,7 @@ import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.entity.type.ControllableOcelot;
 import org.entityapi.api.entity.type.nms.ControllableOcelotHandle;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
+import org.entityapi.api.utils.EntityUtil;
 
 public class ControllableOcelotEntity extends EntityOcelot implements ControllableOcelotHandle {
 
@@ -37,7 +37,7 @@ public class ControllableOcelotEntity extends EntityOcelot implements Controllab
     public ControllableOcelotEntity(World world, ControllableOcelot controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
-        new PathfinderGoalSelectorRef(this).clearGoals();
+        EntityUtil.clearGoals(this);
     }
 
     @Override

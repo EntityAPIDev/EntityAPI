@@ -28,7 +28,7 @@ import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.entity.type.ControllableMagmaCube;
 import org.entityapi.api.entity.type.nms.ControllableMagmaCubeHandle;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
+import org.entityapi.api.utils.EntityUtil;
 
 public class ControllableMagmaCubeEntity extends EntityMagmaCube implements ControllableMagmaCubeHandle {
 
@@ -37,7 +37,7 @@ public class ControllableMagmaCubeEntity extends EntityMagmaCube implements Cont
     public ControllableMagmaCubeEntity(World world, ControllableMagmaCube controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
-        new PathfinderGoalSelectorRef(this).clearGoals();
+        EntityUtil.clearGoals(this);
     }
 
     @Override

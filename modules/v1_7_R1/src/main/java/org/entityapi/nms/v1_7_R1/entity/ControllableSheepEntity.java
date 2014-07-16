@@ -28,7 +28,7 @@ import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.entity.type.ControllableSheep;
 import org.entityapi.api.entity.type.nms.ControllableSheepHandle;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
+import org.entityapi.api.utils.EntityUtil;
 
 public class ControllableSheepEntity extends EntitySheep implements ControllableSheepHandle {
 
@@ -37,7 +37,7 @@ public class ControllableSheepEntity extends EntitySheep implements Controllable
     public ControllableSheepEntity(World world, ControllableSheep controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
-        new PathfinderGoalSelectorRef(this).clearGoals();
+        EntityUtil.clearGoals(this);
     }
 
     @Override

@@ -28,7 +28,7 @@ import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.entity.type.ControllablePigZombie;
 import org.entityapi.api.entity.type.nms.ControllablePigZombieHandle;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
+import org.entityapi.api.utils.EntityUtil;
 
 public class ControllablePigZombieEntity extends EntityPigZombie implements ControllablePigZombieHandle {
 
@@ -37,7 +37,7 @@ public class ControllablePigZombieEntity extends EntityPigZombie implements Cont
     public ControllablePigZombieEntity(World world, ControllablePigZombie controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
-        new PathfinderGoalSelectorRef(this).clearGoals();
+        EntityUtil.clearGoals(this);
     }
 
     @Override

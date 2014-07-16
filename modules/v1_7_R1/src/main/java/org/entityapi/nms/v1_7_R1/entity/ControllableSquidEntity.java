@@ -27,7 +27,7 @@ import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.entity.type.ControllableSquid;
 import org.entityapi.api.entity.type.nms.ControllableSquidHandle;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
+import org.entityapi.api.utils.EntityUtil;
 
 public class ControllableSquidEntity extends EntitySquid implements ControllableSquidHandle {
 
@@ -36,7 +36,7 @@ public class ControllableSquidEntity extends EntitySquid implements Controllable
     public ControllableSquidEntity(World world, ControllableSquid controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
-        new PathfinderGoalSelectorRef(this).clearGoals();
+        EntityUtil.clearGoals(this);
     }
 
     @Override

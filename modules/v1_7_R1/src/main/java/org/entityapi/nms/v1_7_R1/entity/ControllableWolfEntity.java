@@ -28,7 +28,7 @@ import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.entity.type.ControllableWolf;
 import org.entityapi.api.entity.type.nms.ControllableWolfHandle;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
+import org.entityapi.api.utils.EntityUtil;
 
 public class ControllableWolfEntity extends EntityWolf implements ControllableWolfHandle {
 
@@ -37,7 +37,7 @@ public class ControllableWolfEntity extends EntityWolf implements ControllableWo
     public ControllableWolfEntity(World world, ControllableWolf controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
-        new PathfinderGoalSelectorRef(this).clearGoals();
+        EntityUtil.clearGoals(this);
     }
 
     @Override

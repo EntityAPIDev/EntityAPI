@@ -31,7 +31,7 @@ import org.entityapi.api.entity.mind.behaviour.goals.BehaviourRangedAttack;
 import org.entityapi.api.entity.type.ControllableSkeleton;
 import org.entityapi.api.entity.type.nms.ControllableSkeletonHandle;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
+import org.entityapi.api.utils.EntityUtil;
 
 import java.util.Calendar;
 
@@ -42,7 +42,7 @@ public class ControllableSkeletonEntity extends EntitySkeleton implements Contro
     public ControllableSkeletonEntity(World world, ControllableSkeleton controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
-        new PathfinderGoalSelectorRef(this).clearGoals();
+        EntityUtil.clearGoals(this);
     }
 
     @Override

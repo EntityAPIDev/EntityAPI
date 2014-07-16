@@ -24,6 +24,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 import org.entityapi.api.entity.ControllableEntityHandle;
 
+import java.util.List;
+
 public interface NMSAccessor<T extends LivingEntity, S extends ControllableEntityHandle<T>> {
 
     Object getMonsterSelector();

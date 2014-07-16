@@ -28,7 +28,7 @@ import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.entity.type.ControllableEnderman;
 import org.entityapi.api.entity.type.nms.ControllableEndermanHandle;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
+import org.entityapi.api.utils.EntityUtil;
 
 public class ControllableEndermanEntity extends EntityEnderman implements ControllableEndermanHandle {
 
@@ -37,7 +37,7 @@ public class ControllableEndermanEntity extends EntityEnderman implements Contro
     public ControllableEndermanEntity(World world, ControllableEnderman controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
-        new PathfinderGoalSelectorRef(this).clearGoals();
+        EntityUtil.clearGoals(this);
     }
 
     @Override

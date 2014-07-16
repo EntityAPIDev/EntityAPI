@@ -36,6 +36,8 @@ import static com.captainbern.reflection.matcher.Matchers.withReturnType;
 
 public class WorldUtil {
 
+    private WorldUtil() {}
+
     public static Object toNMSWorld(World world) {
         return BukkitUnwrapper.getInstance().unwrap(world);
     }

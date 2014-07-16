@@ -27,6 +27,8 @@ public class StringUtil {
 
     private final static String EMPTY = "";
 
+    private StringUtil() {}
+
     /**
      * Join
      */

@@ -28,7 +28,7 @@ import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.entity.type.ControllableGhast;
 import org.entityapi.api.entity.type.nms.ControllableGhastHandle;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
+import org.entityapi.api.utils.EntityUtil;
 
 public class ControllableGhastEntity extends EntityGhast implements ControllableGhastHandle {
 
@@ -37,7 +37,7 @@ public class ControllableGhastEntity extends EntityGhast implements Controllable
     public ControllableGhastEntity(World world, ControllableGhast controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
-        new PathfinderGoalSelectorRef(this).clearGoals();
+        EntityUtil.clearGoals(this);
     }
 
     @Override

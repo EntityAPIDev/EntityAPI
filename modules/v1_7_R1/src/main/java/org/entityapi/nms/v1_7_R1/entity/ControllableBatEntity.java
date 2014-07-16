@@ -28,7 +28,7 @@ import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.entity.type.ControllableBat;
 import org.entityapi.api.entity.type.nms.ControllableBatHandle;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
+import org.entityapi.api.utils.EntityUtil;
 
 public class ControllableBatEntity extends EntityBat implements ControllableBatHandle {
 
@@ -37,7 +37,7 @@ public class ControllableBatEntity extends EntityBat implements ControllableBatH
     public ControllableBatEntity(World world, ControllableBat controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
-        new PathfinderGoalSelectorRef(this).clearGoals();
+        EntityUtil.clearGoals(this);
     }
 
     @Override

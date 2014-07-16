@@ -30,7 +30,7 @@ import org.entityapi.api.entity.ControllableEntityHandle;
 
 public class SpawnUtil {
 
-    protected static MethodAccessor<Boolean> ADD_ENTITY;
+    private SpawnUtil() {}
 
     public static boolean spawnEntity(ControllableEntity controllableEntity, Location spawnLocation) {
         SafeConstructor<ControllableEntityHandle> entityConstructor = new Reflection().reflect(controllableEntity.getEntityType().getHandleClass()).getSafeConstructor(MinecraftReflection.getMinecraftClass("World"), ControllableEntity.class);

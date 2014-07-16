@@ -28,7 +28,7 @@ import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.entity.type.ControllableWitch;
 import org.entityapi.api.entity.type.nms.ControllableWitchHandle;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
+import org.entityapi.api.utils.EntityUtil;
 
 public class ControllableWitchEntity extends EntityWitch implements ControllableWitchHandle {
 
@@ -37,7 +37,7 @@ public class ControllableWitchEntity extends EntityWitch implements Controllable
     public ControllableWitchEntity(World world, ControllableWitch controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
-        new PathfinderGoalSelectorRef(this).clearGoals();
+        EntityUtil.clearGoals(this);
     }
 
     @Override

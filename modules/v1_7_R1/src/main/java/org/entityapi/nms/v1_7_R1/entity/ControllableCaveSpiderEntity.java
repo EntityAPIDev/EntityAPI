@@ -28,7 +28,7 @@ import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.entity.type.ControllableCaveSpider;
 import org.entityapi.api.entity.type.nms.ControllableCaveSpiderHandle;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
+import org.entityapi.api.utils.EntityUtil;
 
 public class ControllableCaveSpiderEntity extends EntityCaveSpider implements ControllableCaveSpiderHandle {
 
@@ -37,7 +37,7 @@ public class ControllableCaveSpiderEntity extends EntityCaveSpider implements Co
     public ControllableCaveSpiderEntity(World world, ControllableCaveSpider controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
-        new PathfinderGoalSelectorRef(this).clearGoals();
+        EntityUtil.clearGoals(this);
     }
 
     @Override

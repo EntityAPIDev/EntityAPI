@@ -30,7 +30,7 @@ import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.entity.type.ControllableHorse;
 import org.entityapi.api.entity.type.nms.ControllableHorseHandle;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
+import org.entityapi.api.utils.EntityUtil;
 
 import static com.captainbern.reflection.matcher.Matchers.withExactType;
 
@@ -41,7 +41,7 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
     public ControllableHorseEntity(World world, ControllableHorse controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
-        new PathfinderGoalSelectorRef(this).clearGoals();
+        EntityUtil.clearGoals(this);
     }
 
     @Override

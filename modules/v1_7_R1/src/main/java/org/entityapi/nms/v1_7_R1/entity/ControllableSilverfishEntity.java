@@ -28,7 +28,7 @@ import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.entity.type.ControllableSilverfish;
 import org.entityapi.api.entity.type.nms.ControllableSilverfishHandle;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.nms.v1_7_R1.reflection.PathfinderGoalSelectorRef;
+import org.entityapi.api.utils.EntityUtil;
 
 public class ControllableSilverfishEntity extends EntitySilverfish implements ControllableSilverfishHandle {
 
@@ -37,7 +37,7 @@ public class ControllableSilverfishEntity extends EntitySilverfish implements Co
     public ControllableSilverfishEntity(World world, ControllableSilverfish controllableEntity) {
         super(world);
         this.controllableEntity = controllableEntity;
-        new PathfinderGoalSelectorRef(this).clearGoals();
+        EntityUtil.clearGoals(this);
     }
 
     @Override

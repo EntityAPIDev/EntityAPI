@@ -28,6 +28,8 @@ import java.util.Map;
 
 public class LogicUtil {
 
+    private LogicUtil() {}
+
     public static String toString(final Object object) {
         return object == null ? "" : object.toString();
     }
