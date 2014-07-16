@@ -28,13 +28,13 @@ public class EntityAPI {
     /**
      * Some NMS paths for internals
      */
-    public static String INTERNAL_NMS_PATH = "org.entityapi.nms." + MinecraftReflection.getVersionTag();
+    public static final String INTERNAL_NMS_PATH = "org.entityapi.nms." + MinecraftReflection.getVersionTag();
 
     private static IEntityAPICore CORE;
 
     public static void setCore(IEntityAPICore core) {
         if (CORE != null) {
-            return;
+            throw new RuntimeException("Core already set!");
         }
         CORE = core;
     }
