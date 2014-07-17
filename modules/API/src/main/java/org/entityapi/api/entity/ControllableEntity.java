@@ -33,105 +33,157 @@ import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract interface ControllableEntity<T extends LivingEntity, S extends ControllableEntityHandle<T>> extends Nameable, Attacking, InventoryHolder {
+/**
+ * Represents a ControllableEntity
+ * <p/>
+ * This acts as a base class for all other entity types to stem off
+ *
+ * @param <T> the Bukkit entity that this ControllableEntity represents
+ * @param <S> the entity handle that this ControllableEntity represents, useful for interacting with NMS entities
+ */
+public interface ControllableEntity<T extends LivingEntity, S extends ControllableEntityHandle<T>> extends Nameable, Attacking, InventoryHolder {
 
-    // TODO: JavaDucks. Quack
+    /**
+     * Gets the EntityManager from which this ControllableEntity was created
+     *
+     * @return the EntityManager for this entity
+     */
+    EntityManager getEntityManager();
 
-    public EntityManager getEntityManager();
+    /**
+     * Returns an accessor for certain NMS methods
+     * <p/>
+     * <strong>Not recommended for public API consumption</strong>
+     *
+     * @return the accessor to be utilised for this entity
+     */
+    NMSAccessor<T, S> getNMSAccessor();
 
-    public NMSAccessor<T, S> getNMSAccessor();
+    /**
+     * Gets the ID of this entity
+     * <p/>
+     * Entity IDs are unique to this entity until it is removed from its corresponding {@link
+     * org.entityapi.api.EntityManager}. Once removed, this entity ID will be recycled and applied to another entity.
+     * It
+     * is therefore important NOT to utilise this ID as a storage mechanism unless the appropriate hooks are in place
+     * for when the stored IDs reference another entity
+     *
+     * @return the ID that corresponds to this entity
+     */
+    int getId();
 
-    public abstract int getId();
+    /**
+     * Gets the mind of this entity
+     * <p/>
+     * The entity mind is the hub for all general entity activity. It makes use of priorities behaviour and attribute
+     * ticking systems, taking into account those changes made through the API.
+     * <p/>
+     * Most activity will take place in the mind, or 'brain', of the entity
+     *
+     * @return the mind of this entity
+     */
+    Mind getMind();
 
-    public Mind getMind();
+    /**
+     * Gets the Bukkit alternative that corresponds to this entity
+     * <p/>
+     * Often, certain functions have not been included in EntityAPI as a Bukkit alternative already exists
+     *
+     * @return the Bukkit entity that represents this ControllableEntity
+     */
+    T getBukkitEntity();
 
-    public abstract T getBukkitEntity();
+    /**
+     * Gets the NMS entity handle for this ControllableEntity
+     * <strong>Not recommended for public API consumption</strong>
+     *
+     * @return the NMS handle for this entity
+     */
+    S getHandle();
 
-    public S getHandle();
+    ControllableEntityType getEntityType();
 
-    public abstract ControllableEntityType getEntityType();
+    float getHeight();
 
-    public float getHeight();
-
-    public float getWidth();
+    float getWidth();
 
     boolean spawn(Location location);
 
-    public void despawn(DespawnReason despawnReason);
+    void despawn(DespawnReason despawnReason);
 
     boolean isSpawned();
 
     @Override
-    public String getName();
+    String getName();
 
     @Override
-    public boolean setName(String name);
+    boolean setName(String name);
 
-    public Map<String, String> getSounds(EntitySound type);
+    Map<String, String> getSounds(EntitySound type);
 
-    public String getSound(EntitySound type);
+    String getSound(EntitySound type);
 
-    public String getSound(EntitySound type, String key);
+    String getSound(EntitySound type, String key);
 
-    public String getCustomSound(EntitySound type, String key);
+    String getCustomSound(EntitySound type, String key);
 
-    public void setSound(EntitySound type, Sound toReplace, Sound replaceWith, boolean addOnFail);
+    void setSound(EntitySound type, Sound toReplace, Sound replaceWith, boolean addOnFail);
 
-    public void setSound(EntitySound type, Sound sound);
+    void setSound(EntitySound type, Sound sound);
 
-    public void setSound(EntitySound type, Sound sound, String key);
+    void setSound(EntitySound type, Sound sound, String key);
 
-    public void setSound(EntitySound type, String sound);
+    void setSound(EntitySound type, String sound);
 
-    public void setSound(EntitySound type, String key, String sound);
+    void setSound(EntitySound type, String key, String sound);
 
-    public void setSound(EntitySound type, HashMap<String, String> soundMap);
+    void setSound(EntitySound type, HashMap<String, String> soundMap);
 
-    public Material getLoot();
+    Material getLoot();
 
-    public void setLoot(Material material);
+    void setLoot(Material material);
 
-    public boolean shouldUpdateAttributes();
+    boolean shouldUpdateAttributes();
 
-    public void setTickAttributes(boolean flag);
+    void setTickAttributes(boolean flag);
 
     boolean isPathfindingSpeedOverriden();
 
-    public double getSpeed();
+    double getSpeed();
 
-    public void setSpeed(double speed);
+    void setSpeed(double speed);
 
-    public void setSpeed(double speed, boolean overridePathfindingSpeed);
+    void setSpeed(double speed, boolean overridePathfindingSpeed);
 
-    public void setPathfindingRange(double range);
+    double getPathfindingRange();
 
-    public double getPathfindingRange();
+    void setPathfindingRange(double range);
 
-    public boolean navigateTo(LivingEntity livingEntity);
+    boolean navigateTo(LivingEntity livingEntity);
 
-    public boolean navigateTo(LivingEntity livingEntity, double speed);
+    boolean navigateTo(LivingEntity livingEntity, double speed);
 
-    public boolean navigateTo(Location to);
+    boolean navigateTo(Location to);
 
-    public boolean navigateTo(Location to, double speed);
+    boolean navigateTo(Location to, double speed);
 
-    public boolean navigateTo(Vector to);
+    boolean navigateTo(Vector to);
 
-    public boolean navigateTo(Vector to, double speed);
+    boolean navigateTo(Vector to, double speed);
 
-    public void setDefaultBehaviours();
+    void setDefaultBehaviours();
 
-    public boolean isStationary();
+    boolean isStationary();
 
-    public void setStationary(boolean flag);
+    void setStationary(boolean flag);
 
-    public void setYaw(float value);
+    void setYaw(float value);
 
-    public void setHeadYaw(float value);
+    void setHeadYaw(float value);
 
-    public void setPitch(float value);
+    void setPitch(float value);
 
-    public boolean isControllableRidingEnabled();
+    boolean isControllableRidingEnabled();
 
-    public ControlledRidingAttribute enableControllableRiding(boolean flag);
+    ControlledRidingAttribute enableControllableRiding(boolean flag);
 }

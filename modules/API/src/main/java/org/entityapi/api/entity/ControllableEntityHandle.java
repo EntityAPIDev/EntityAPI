@@ -28,9 +28,9 @@ import org.bukkit.entity.LivingEntity;
 
 public interface ControllableEntityHandle<T extends LivingEntity> {
 
-    public ControllableEntity<T, ?> getControllableEntity();
+    ControllableEntity<T, ?> getControllableEntity();
 
-    public Material getDefaultMaterialLoot();
+    Material getDefaultMaterialLoot();
 
-    public void setPositionRotation(double x, double y, double z, float yaw, float pitch);
+    void setPositionRotation(double x, double y, double z, float yaw, float pitch);
 }
