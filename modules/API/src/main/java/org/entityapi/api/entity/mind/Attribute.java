@@ -21,6 +21,7 @@ package org.entityapi.api.entity.mind;
 
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.events.ControllableEntityEvent;
+import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.exceptions.AttributeMindRequiredException;
 
 public abstract class Attribute<T extends ControllableEntityEvent> {
@@ -34,6 +35,8 @@ public abstract class Attribute<T extends ControllableEntityEvent> {
         } catch (ArrayIndexOutOfBoundsException ignored) {
 
         }
+
+        EntityAPI.getCore().getServer().getPluginManager().callEvent(event);
 
         return call(event);
     }
