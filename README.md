@@ -7,6 +7,8 @@ Current code base only supports 1.7.2. We will be updating to the latest Minecra
 
 In meanwhile you can listen to this song: https://www.youtube.com/watch?v=u6KkF56Cr90 *cough*
 
+And nope, there's currently no JavaDocs or any sort of documentation on the API...yet...
+
 Contributing
 ============
 
