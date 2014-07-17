@@ -111,9 +111,8 @@ public class Mind {
     }
 
     public void clearAttributes() {
-        Iterator<Map.Entry<String, Attribute>> i = getAttributes().entrySet().iterator();
-        while (i.hasNext()) {
-            clearAttribute(i.next().getValue().getClass());
+        for (Map.Entry<String, Attribute> stringAttributeEntry : getAttributes().entrySet()) {
+            clearAttribute(stringAttributeEntry.getValue().getClass());
         }
     }
 
@@ -191,6 +190,10 @@ public class Mind {
     }
 
     public void tick() {
+        if (!this.controllableEntity.isSpawned()) {
+            return;
+        }
+
         this.fillRequiredDefaults();
 
         if (this.behaviourSelector != null) {

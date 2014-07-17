@@ -120,12 +120,12 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
     }
 
     @Override
-    public boolean spawn(Location location) {
+    public SpawnResult spawn(Location location) {
         if (isSpawned()) {
-            return false;
+            return SpawnResult.ALREADY_SPAWNED;
         }
         this.spawned = SpawnUtil.spawnEntity(this, location);
-        return isSpawned();
+        return isSpawned() ? SpawnResult.SUCCESS : SpawnResult.FAILED;
     }
 
     @Override

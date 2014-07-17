@@ -19,21 +19,9 @@
 
 package org.entityapi.api.entity;
 
-public enum DespawnReason {
+public enum SpawnResult {
 
-    DEATH(0),
-    CHUNK_UNLOAD(1),
-    PLUGIN_DISABLE(2),
-    CUSTOM(3),
-    UNKNOWN(4);
-
-    private final int priority;
-
-    DespawnReason(int priority) {
-        this.priority = priority;
-    }
-
-    public int getPriority() {
-        return this.priority;
-    }
+    SUCCESS,
+    ALREADY_SPAWNED,
+    FAILED
 }
