@@ -31,6 +31,7 @@ import org.entityapi.api.NMSAccessor;
 import org.entityapi.api.entity.*;
 import org.entityapi.api.entity.mind.Mind;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
+import org.entityapi.api.entity.mind.attribute.DespawnAttribute;
 import org.entityapi.api.entity.mind.attribute.InventoryAttribute;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.events.ControllableEntityPreSpawnEvent;
@@ -120,11 +121,18 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
 
     @Override
     public boolean spawn(Location location) {
-        return manager.spawn(this, location);
+        if (isSpawned()) {
+            return false;
+        }
+        this.spawned = SpawnUtil.spawnEntity(this, location);
+        return isSpawned();
     }
 
     @Override
     public void despawn(DespawnReason reason) {
+        this.spawned = false;
+        getBukkitEntity().remove();
+        getMind().getAttribute(DespawnAttribute.class).call(reason);
         manager.despawn(this, reason);
     }
 

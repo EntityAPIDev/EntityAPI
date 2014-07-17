@@ -30,10 +30,10 @@ import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.DespawnReason;
-import org.entityapi.api.entity.mind.attribute.DeathAttribute;
+import org.entityapi.api.entity.mind.attribute.DespawnAttribute;
 import org.entityapi.api.events.ControllableEntityDeathEvent;
+import org.entityapi.api.events.ControllableEntityDespawnEvent;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.api.utils.SpawnUtil;
 import org.entityapi.exceptions.NameRequiredException;
 
 import java.util.*;
@@ -146,7 +146,7 @@ public class SimpleEntityManager implements EntityManager {
 
     @Override
     public boolean spawn(ControllableEntity controllableEntity, Location location) {
-        return controllableEntity.isSpawned() && SpawnUtil.spawnEntity(controllableEntity, location);
+        return controllableEntity.spawn(location);
     }
 
     @Override
@@ -155,9 +155,9 @@ public class SimpleEntityManager implements EntityManager {
     }
 
     @Override
-    public void despawnAll(DespawnReason despawnReason) {
+    public void despawnAll(DespawnReason reason) {
         for (ControllableEntity controllableEntity : getEntities()) {
-            despawn(controllableEntity, despawnReason);
+            despawn(controllableEntity, reason);
         }
     }
 
@@ -167,16 +167,16 @@ public class SimpleEntityManager implements EntityManager {
     }
 
     @Override
-    public void despawn(ControllableEntity controllableEntity, DespawnReason despawnReason) {
-        ControllableEntityDeathEvent deathEvent = new ControllableEntityDeathEvent(controllableEntity, despawnReason);
-        Bukkit.getServer().getPluginManager().callEvent(deathEvent);
-        controllableEntity.getMind().setControllableEntity(null);
-        DeathAttribute deathAttribute = controllableEntity.getMind().getAttribute(DeathAttribute.class);
-        if (deathAttribute != null) {
-            deathAttribute.onDeath();
+    public void despawn(ControllableEntity controllableEntity, DespawnReason reason) {
+        if (controllableEntity.isSpawned()) {
+            controllableEntity.despawn(reason);
         }
-        controllableEntity.getBukkitEntity().remove();
-        this.ENTITIES.remove(GeneralUtil.getKeyAtValue(ENTITIES, controllableEntity));
+        if (!controllableEntity.isSpawned()) {
+            Integer id = GeneralUtil.getKeyAtValue(ENTITIES, controllableEntity);
+            if (id != null) { // May have already been removed
+                this.ENTITIES.remove(id);
+            }
+        }
     }
 
     @Override

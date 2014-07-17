@@ -17,29 +17,22 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.events;
+package org.entityapi.api.entity.mind.attribute.def;
 
-import org.bukkit.event.HandlerList;
-import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.DespawnReason;
+import org.entityapi.api.entity.mind.Attribute;
+import org.entityapi.api.entity.mind.Mind;
+import org.entityapi.api.entity.mind.attribute.DespawnAttribute;
 
-/**
- * Called when a ControllableEntity dies
- */
-public class ControllableEntityDeathEvent extends ControllableEntityDespawnEvent {
+public class DefaultDespawnAttribute extends DespawnAttribute {
 
-    private static final HandlerList handlers = new HandlerList();
+    @Override
+    public void onDespawn(DespawnReason reason) {
 
-    public ControllableEntityDeathEvent(ControllableEntity controllableEntity) {
-        super(controllableEntity, DespawnReason.DEATH);
     }
 
     @Override
-    public HandlerList getHandlers() {
-        return handlers;
-    }
-
-    public static HandlerList getHandlerList() {
-        return handlers;
+    public Attribute copyTo(Mind mind) {
+        return new DefaultDespawnAttribute();
     }
 }

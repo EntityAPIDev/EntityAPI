@@ -19,11 +19,27 @@
 
 package org.entityapi.api.entity.mind.attribute;
 
+import org.entityapi.api.entity.DespawnReason;
 import org.entityapi.api.entity.mind.Attribute;
+import org.entityapi.api.events.ControllableEntityDeathEvent;
+import org.entityapi.api.events.ControllableEntityDespawnEvent;
+import org.entityapi.api.events.ControllableEntityEvent;
 
-public abstract class DeathAttribute extends Attribute {
+public abstract class DespawnAttribute extends Attribute<ControllableEntityDespawnEvent> {
 
-    public abstract void onDeath();
+    @Override
+    protected ControllableEntityDespawnEvent call(ControllableEntityDespawnEvent event) {
+        onDespawn(event.getReason());
+        return event;
+    }
+
+    @Override
+    protected ControllableEntityDespawnEvent getNewEvent(Object... args) {
+        DespawnReason reason = (DespawnReason) args[0];
+        return reason == DespawnReason.DEATH ? new ControllableEntityDeathEvent(getControllableEntity()) : new ControllableEntityDespawnEvent(getControllableEntity(), reason);
+    }
+
+    public abstract void onDespawn(DespawnReason reason);
 
     @Override
     public String getKey() {

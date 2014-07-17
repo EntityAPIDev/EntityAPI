@@ -24,14 +24,21 @@ import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.DespawnReason;
 
 /**
- * Called when a ControllableEntity dies
+ * Called when a ControllableEntity despawns
  */
-public class ControllableEntityDeathEvent extends ControllableEntityDespawnEvent {
+public class ControllableEntityDespawnEvent extends ControllableEntityEvent {
 
     private static final HandlerList handlers = new HandlerList();
 
-    public ControllableEntityDeathEvent(ControllableEntity controllableEntity) {
-        super(controllableEntity, DespawnReason.DEATH);
+    private DespawnReason reason;
+
+    public ControllableEntityDespawnEvent(final ControllableEntity controllableEntity, DespawnReason reason) {
+        super(controllableEntity);
+        this.reason = reason;
+    }
+
+    public DespawnReason getReason() {
+        return reason;
     }
 
     @Override
