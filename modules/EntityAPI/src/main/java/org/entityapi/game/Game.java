@@ -1,7 +1,7 @@
 package org.entityapi.game;
 
 public class Game {
-    
+
     private static EntityRegistry entityRegistry;
 
     public static EntityRegistry getEntityRegistry() {

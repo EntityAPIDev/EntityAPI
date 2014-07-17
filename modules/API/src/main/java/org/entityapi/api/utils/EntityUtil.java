@@ -8,6 +8,7 @@ import com.captainbern.reflection.SafeMethod;
 import com.captainbern.reflection.accessor.FieldAccessor;
 import com.captainbern.reflection.accessor.MethodAccessor;
 import org.bukkit.entity.Entity;
+import org.entityapi.api.entity.type.bukkit.InsentientEntity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -91,6 +92,10 @@ public class EntityUtil {
 
     private static Map<Class<? extends Entity>, Class<?>> converterMap = new HashMap<>();
 
+    static {
+        converterMap.put(InsentientEntity.class, MinecraftReflection.getMinecraftClass("EntityInsentient"));
+    }
+
     public static Object getNmsClassFor(Class<? extends Entity> bukkitHandle) {
         if (bukkitHandle == null) {
             return null;
@@ -117,9 +122,9 @@ public class EntityUtil {
                 } catch (Exception e) { // We failed, let's see if we can fix it with fields
                     nms = getNmsFromField(type);
                 }
-            }
 
-            converterMap.put(type, nms);
+                converterMap.put(type, nms);
+            }
 
             return nms;
         } catch (Exception ノಠ益ಠノ) {
