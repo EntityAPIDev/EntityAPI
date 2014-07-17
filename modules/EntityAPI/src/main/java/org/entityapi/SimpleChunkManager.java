@@ -50,8 +50,6 @@ public class SimpleChunkManager implements ChunkManager {
 
     @EventHandler
     private void onLoad(ChunkLoadEvent event) {
-        // TODO: Handle npc stuff
-
         Chunk loadedChunk = event.getChunk();
         for (EntityChunkData entityChunkData : SPAWN_QUEUE) {
             if (loadedChunk == entityChunkData.getRespawnLocation().getChunk()) {
