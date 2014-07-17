@@ -101,14 +101,51 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
      */
     S getHandle();
 
+    /**
+     * Gets the type of this entity
+     * <p/>
+     * Types can be most appropriately used in a similar fashion to {@link org.bukkit.entity.EntityType}
+     *
+     * @return the type of this entity
+     */
     ControllableEntityType getEntityType();
 
+    /**
+     * Gets the height of this entity's bounding box
+     *
+     * @return the height of the bounding box surrounding this entity
+     */
     float getHeight();
 
+    /**
+     * Gets the width of this entity's bounding box
+     *
+     * @return the width of the bounding box surrounding this entity
+     */
     float getWidth();
 
-    boolean spawn(Location location);
+    /**
+     * Spawns this ControllableEntity at the specified location
+     * <p/>
+     * Returns a {@link org.entityapi.api.entity.SpawnResult} representing the success of spawning this entity
+     *
+     * @param location the Location to spawn this entity at
+     * @return result of spawning this entity at the given location
+     * @see org.entityapi.api.entity.SpawnResult
+     */
+    SpawnResult spawn(Location location);
 
+    /**
+     * Despawns this ControllableEntity
+     * <p/>
+     * Despawning an entity removes it from both the current world and EntityManager until respawned. This entity's
+     * mind, attributes and behaviours will remain intact for later use
+     * <p/>
+     * Plugins should make use of {@link org.entityapi.api.entity.DespawnReason#CUSTOM} unless under specific
+     * circumstances where another reason may be more appropriate
+     *
+     * @param despawnReason the reason this entity was despawned
+     */
     void despawn(DespawnReason despawnReason);
 
     boolean isSpawned();
