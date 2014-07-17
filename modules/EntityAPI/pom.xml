@@ -130,7 +130,7 @@
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <filters>
                                 <filter>
-                                    <artifact>com.dsh105:EntityAPI*</artifact>
+                                    <artifact>org.entityapi:EntityAPI*</artifact>
                                     <includes>
                                         <include>**</include>
                                     </includes>
