@@ -66,11 +66,6 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
     private static final PastebinReporter REPORTER = new PastebinReporter(PASTEBIN_REPORT_KEY);
 
     /**
-     * Plugin files list for checking more than 1 Lib
-     */
-    private final List<String> plugins = new ArrayList<>();
-
-    /**
      * Update checker stuff
      */
     public boolean updateAvailable = false;
@@ -103,8 +98,6 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
 
         CORE_INSTANCE = this;
         EntityAPI.setCore(CORE_INSTANCE);
-
-        this.checkPlugins();
 
         this.saveDefaultConfig();
 
@@ -240,26 +233,6 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
         }
 
         return getCore().MANAGERS.get(pluginName);
-    }
-
-    /**
-     * Method that checks all plugin file names
-     */
-    protected void checkPlugins() {
-        PluginManager pm = this.getServer().getPluginManager();
-        File dir = new File(this.getDataFolder().getParent());
-        for (File pluginFiles : dir.listFiles()) {
-            if (dir.isDirectory()) {
-                continue;
-            }
-            if (pluginFiles.getName().toLowerCase().contains("entityapi")) {
-                plugins.add(pluginFiles.getName());
-            }
-        }
-        if (plugins.size() > 1) {
-            pm.disablePlugin(this);
-            this.getLogger().log(Level.SEVERE, "Warning! You have two EntityAPI Libraries in Plugins Folder! Please remove one!");
-        }
     }
 
     @EventHandler
