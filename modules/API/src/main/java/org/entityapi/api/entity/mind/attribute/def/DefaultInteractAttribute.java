@@ -19,22 +19,21 @@
 
 package org.entityapi.api.entity.mind.attribute.def;
 
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.entityapi.api.entity.mind.Attribute;
 import org.entityapi.api.entity.mind.Mind;
-import org.entityapi.api.entity.mind.attribute.CollideAttribute;
 import org.entityapi.api.entity.mind.attribute.InteractAttribute;
+import org.entityapi.api.events.Action;
 
 public class DefaultInteractAttribute extends InteractAttribute {
 
     @Override
-    public void onInteract(Player entity, boolean rightClick) {
-
+    public Attribute copyTo(Mind mind) {
+        return new DefaultInteractAttribute();
     }
 
     @Override
-    public Attribute copyTo(Mind mind) {
-        return new DefaultInteractAttribute();
+    public boolean onInteract(Player entity, Action rightClick) {
+        return false;
     }
 }
