@@ -40,3 +40,4 @@ Collaborators
 - Frostalf (Author)
 - CaptainBern (Author, Master Yi, All hail the captain.)
 - drtshock (Contributor <3)
+- stuntguy3000 (Contributer and Javadocer)
