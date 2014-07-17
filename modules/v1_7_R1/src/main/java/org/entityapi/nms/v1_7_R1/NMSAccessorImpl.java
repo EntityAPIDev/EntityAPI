@@ -249,6 +249,7 @@ public class NMSAccessorImpl<T extends LivingEntity, S extends ControllableEntit
             }
             handle().makeSound("random.bow", 1.0F, 1.0F / (handle().aI().nextFloat() * 0.4F + 0.8F));
             handle().world.addEntity(entityarrow);
+
         } else if (projectileType == ProjectileType.SNOWBALL) {
             EntitySnowball entitysnowball = new EntitySnowball(handle().world, handle());
             double vecX = targetHandle.locX - handle().locX;
@@ -259,6 +260,7 @@ public class NMSAccessorImpl<T extends LivingEntity, S extends ControllableEntit
             entitysnowball.shoot(vecX, vecY + (double) f1, vecZ, 1.6F, 12.0F);
             handle().makeSound("random.bow", 1.0F, 1.0F / (handle().aI().nextFloat() * 0.4F + 0.8F));
             handle().world.addEntity(entitysnowball);
+
         } else if (projectileType == ProjectileType.FIREBALL) {
             handle().world.a(null, 1008, (int) handle().locX, (int) handle().locY, (int) handle().locZ, 0);
             double vecX = targetHandle.locX - handle().locX;
@@ -270,6 +272,7 @@ public class NMSAccessorImpl<T extends LivingEntity, S extends ControllableEntit
             entitylargefireball.locX = handle().locX + vec3d.c * d8;
             entitylargefireball.locY = handle().locY + (double) (handle().length / 2.0F) + 0.5D;
             entitylargefireball.locZ = handle().locZ + vec3d.e * d8;
+
             handle().world.addEntity(entitylargefireball);
         } else if (projectileType == ProjectileType.SMALL_FIREBALL) {
             double vecX = targetHandle.locX - handle().locX;
@@ -280,6 +283,7 @@ public class NMSAccessorImpl<T extends LivingEntity, S extends ControllableEntit
             EntitySmallFireball entitysmallfireball = new EntitySmallFireball(handle().world, handle(), vecX + handle().aI().nextGaussian() * (double) f1, vecY, vecZ + handle().aI().nextGaussian() * (double) f1);
             entitysmallfireball.locY = handle().locY + (double) (handle().length / 2.0F) + 0.5D;
             handle().world.addEntity(entitysmallfireball);
+
         } else if (projectileType == ProjectileType.THROWN_POTION) {
             EntityPotion entitypotion = new EntityPotion(handle().world, handle(), 32732);
 
@@ -299,6 +303,7 @@ public class NMSAccessorImpl<T extends LivingEntity, S extends ControllableEntit
 
             entitypotion.shoot(d0, d1 + (double) (f1 * 0.2F), d2, 0.75F, 8.0F);
             handle().world.addEntity(entitypotion);
+
         } else if (projectileType == ProjectileType.DEFAULT) {
             if (handle() instanceof IRangedEntity) {
                 ((IRangedEntity) handle()).a(targetHandle, strength);

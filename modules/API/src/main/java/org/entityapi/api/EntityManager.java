@@ -29,6 +29,8 @@ import java.util.Collection;
 
 public interface EntityManager {
 
+    ChunkManager getChunkManager();
+
     public Plugin getOwningPlugin();
 
     public boolean willKeepEntitiesInMemory();
@@ -52,6 +54,8 @@ public interface EntityManager {
     void despawn(ControllableEntity controllableEntity);
 
     void despawn(ControllableEntity controllableEntity, DespawnReason despawnReason);
+
+    boolean spawn(ControllableEntity controllableEntity, Location location);
 
     @Override
     public String toString();

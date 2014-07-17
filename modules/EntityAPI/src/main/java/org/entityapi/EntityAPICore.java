@@ -20,25 +20,18 @@
 package org.entityapi;
 
 import com.google.common.collect.Maps;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.Vector;
 import org.entityapi.api.EntityManager;
-import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.DespawnReason;
-import org.entityapi.api.entity.mind.attribute.*;
-import org.entityapi.api.events.*;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.plugin.IEntityAPICore;
 import org.entityapi.api.utils.PastebinReporter;
@@ -203,11 +196,11 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
     @Override
     public EntityManager createManager(Plugin owningPlugin) {
         EntityAPICore.getCore();
-        return createEntityManager(owningPlugin, false);
+        return createManager(owningPlugin, false);
     }
 
     @Override
-    public EntityManager createEntityManager(Plugin owningPlugin, boolean keepInMemory) {
+    public EntityManager createManager(Plugin owningPlugin, boolean keepInMemory) {
         EntityAPICore.getCore();
 
         EntityManager manager = new SimpleEntityManager(owningPlugin, keepInMemory);

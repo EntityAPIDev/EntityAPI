@@ -35,7 +35,7 @@ public interface IEntityAPICore extends Plugin {
 
     public EntityManager createManager(Plugin owningPlugin);
 
-    public EntityManager createEntityManager(Plugin owningPlugin, boolean keepInMemory);
+    public EntityManager createManager(Plugin owningPlugin, boolean keepInMemory);
 
     public void registerManager(String name, EntityManager manager);
 

@@ -63,8 +63,8 @@ public class EntityAPI {
      *
      * @return The EntityManager for the given plugin.
      */
-    public static EntityManager createEntityManager(Plugin owningPlugin, boolean keepInMemory) {
-        return CORE.createEntityManager(owningPlugin, keepInMemory);
+    public static EntityManager createManager(Plugin owningPlugin, boolean keepInMemory) {
+        return CORE.createManager(owningPlugin, keepInMemory);
     }
 
     /**

@@ -17,22 +17,26 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.entity;
+package org.entityapi.api;
 
-public enum DespawnReason {
+import org.bukkit.Location;
+import org.entityapi.api.entity.ControllableEntity;
 
-    DEATH(0),
-    CHUNK_UNLOAD(1),
-    PLUGIN_DISABLE(2),
-    UNKNOWN(23);
+public class EntityChunkData {
 
-    private final int priority;
+    private ControllableEntity controllableEntity;
+    private Location respawnLocation;
 
-    DespawnReason(int priority) {
-        this.priority = priority;
+    public EntityChunkData(ControllableEntity controllableEntity, Location respawnLocation) {
+        this.controllableEntity = controllableEntity;
+        this.respawnLocation = respawnLocation;
     }
 
-    public int getPriority() {
-        return this.priority;
+    public ControllableEntity getControllableEntity() {
+        return controllableEntity;
+    }
+
+    public Location getRespawnLocation() {
+        return respawnLocation;
     }
 }

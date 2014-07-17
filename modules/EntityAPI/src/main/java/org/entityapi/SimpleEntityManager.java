@@ -24,6 +24,7 @@ import com.google.common.collect.Maps;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.plugin.Plugin;
+import org.entityapi.api.ChunkManager;
 import org.entityapi.api.EntityBuilder;
 import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.ControllableEntity;
@@ -32,6 +33,7 @@ import org.entityapi.api.entity.DespawnReason;
 import org.entityapi.api.entity.mind.attribute.DeathAttribute;
 import org.entityapi.api.events.ControllableEntityDeathEvent;
 import org.entityapi.api.plugin.EntityAPI;
+import org.entityapi.api.utils.SpawnUtil;
 import org.entityapi.exceptions.NameRequiredException;
 
 import java.util.*;
@@ -50,7 +52,7 @@ public class SimpleEntityManager implements EntityManager {
         this.OWNING_PLUGIN = plugin;
         this.KEEP_ENTITIES_IN_MEM = keepEntitiesInMemory;
 
-        this.CHUNK_MANAGER = new ChunkManager(this);
+        this.CHUNK_MANAGER = new SimpleChunkManager(this);
 
         Bukkit.getPluginManager().registerEvents(this.CHUNK_MANAGER, EntityAPI.getCore());
 
@@ -79,6 +81,11 @@ public class SimpleEntityManager implements EntityManager {
     @Override
     public Collection<ControllableEntity> getEntities() {
         return Collections.unmodifiableCollection(this.ENTITIES.values());
+    }
+
+    @Override
+    public ChunkManager getChunkManager() {
+        return CHUNK_MANAGER;
     }
 
     @Override
@@ -134,6 +141,11 @@ public class SimpleEntityManager implements EntityManager {
         } catch (Throwable throwable) {
             throw new RuntimeException("Failed to create an Entity handle for type: " + entityType.getName(), throwable);
         }
+    }
+
+    @Override
+    public boolean spawn(ControllableEntity controllableEntity, Location location) {
+        return controllableEntity.isSpawned() && SpawnUtil.spawnEntity(controllableEntity, location);
     }
 
     @Override

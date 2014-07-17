@@ -39,6 +39,7 @@ public class EntityBuilder {
     private ControllableEntityType TYPE;
     private String NAME;
     private Location LOCATION;
+    private boolean FORCE_SPAWN;
     private boolean PREPARE;
     private Mind MIND;
     private HashMap<Behaviour, Integer> BEHAVIOURS;
@@ -71,6 +72,11 @@ public class EntityBuilder {
         return this;
     }
 
+    public EntityBuilder forceSpawn(boolean flag) {
+        this.FORCE_SPAWN = flag;
+        return this;
+    }
+
     public EntityBuilder withMind(Mind mind) {
         this.MIND = mind;
         return this;
@@ -95,7 +101,7 @@ public class EntityBuilder {
         return this;
     }
 
-    public <T extends ControllableEntity> T create() {
+    public ControllableEntity create() {
         if (this.TYPE == null) {
             throw new NullPointerException("ControllableEntity Type cannot be null.");
         }
@@ -106,10 +112,6 @@ public class EntityBuilder {
         int id = this.ENTITYMANAGER.getNextID();
         ControllableEntity entity = new Reflection().reflect(this.TYPE.getControllableClass()).getSafeConstructor(Integer.class, EntityManager.class).getAccessor().invoke(id, this.ENTITYMANAGER);
         if (entity != null) {
-            if (!SpawnUtil.spawnEntity(entity, this.LOCATION)) {
-                throw new ControllableEntitySpawnException();
-            }
-
             if (this.PREPARE || this.MIND == null) {
                 this.MIND = new Mind();
             }
@@ -124,11 +126,14 @@ public class EntityBuilder {
             if (this.NAME != null) {
                 entity.setName(this.NAME);
             }
-            try {
-                return (T) entity;
-            } catch (ClassCastException e) {
-                throw new ControllableEntitySpawnException(e);
+
+            if (FORCE_SPAWN) {
+                if (!this.LOCATION.getChunk().isLoaded()) {
+                    this.LOCATION.getChunk().load();
+                }
             }
+            ENTITYMANAGER.getChunkManager().queueSpawn(entity, this.LOCATION);
+            return entity;
         }
         return null;
     }

@@ -28,10 +28,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.util.Vector;
 import org.entityapi.api.EntityManager;
 import org.entityapi.api.NMSAccessor;
-import org.entityapi.api.entity.ControllableEntity;
-import org.entityapi.api.entity.ControllableEntityHandle;
-import org.entityapi.api.entity.ControllableEntityType;
-import org.entityapi.api.entity.EntitySound;
+import org.entityapi.api.entity.*;
 import org.entityapi.api.entity.mind.Mind;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.entity.mind.attribute.InventoryAttribute;
@@ -50,6 +47,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
     private final NMSAccessor<T, S> accessor;
     private final int ID;
 
+    private boolean spawned;
     protected Mind mind;
     protected boolean tickAttributes;
     protected boolean overridePathfindingSpeed;
@@ -113,6 +111,21 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
     @Override
     public float getWidth() {
         return accessor.getWidth();
+    }
+
+    @Override
+    public boolean isSpawned() {
+        return spawned;
+    }
+
+    @Override
+    public boolean spawn(Location location) {
+        return manager.spawn(this, location);
+    }
+
+    @Override
+    public void despawn(DespawnReason reason) {
+        manager.despawn(this, reason);
     }
 
     @Override
