@@ -24,7 +24,7 @@ public enum DespawnReason {
     DEATH(0),
     CHUNK_UNLOAD(1),
     PLUGIN_DISABLE(2),
-    UNKNOWN(23);
+    UNKNOWN(3);
 
     private final int priority;
 
