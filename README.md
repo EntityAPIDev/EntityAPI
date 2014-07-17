@@ -9,6 +9,16 @@ In meanwhile you can listen to this song: https://www.youtube.com/watch?v=u6KkF5
 
 And nope, there's currently no JavaDocs or any sort of documentation on the API...yet...
 
+Todo:
+=====
+
+Stuff that needs to be done or is still unfinished (this list may be incomplete):
+- API docs
+- Player entity
+- Pathfinding
+- Game registry
+- Modifications to spawning and despawning to work with NMS entity registration
+
 Contributing
 ============
 
