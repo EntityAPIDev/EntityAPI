@@ -19,16 +19,16 @@
 
 package org.entityapi.api.entity.mind.attribute;
 
+import com.dsh105.commodus.IdentUtil;
 import org.bukkit.entity.Player;
 import org.entityapi.api.entity.mind.Attribute;
 import org.entityapi.api.entity.mind.Mind;
-import org.entityapi.api.utils.IdentUtils;
 
 public class TamingAttribute extends Attribute {
     private String tamerIdentification;
 
     public TamingAttribute(Player player) {
-        this(IdentUtils.getIdentificationForAsString(player));
+        this(IdentUtil.getIdentificationForAsString(player));
     }
 
     private TamingAttribute(String tamerIdentification) {
@@ -46,13 +46,13 @@ public class TamingAttribute extends Attribute {
 
     public Player getTamer() {
         if (this.isTamed()) {
-            return IdentUtils.getPlayerOf(tamerIdentification);
+            return IdentUtil.getPlayerOf(tamerIdentification);
         }
         return null;
     }
 
     public void setTamer(Player player) {
-        this.setTamer(IdentUtils.getIdentificationForAsString(player));
+        this.setTamer(IdentUtil.getIdentificationForAsString(player));
     }
 
     private void setTamer(String tamerIdentification) {
