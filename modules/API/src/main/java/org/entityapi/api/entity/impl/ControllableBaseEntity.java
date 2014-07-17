@@ -48,9 +48,8 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
 
     protected final EntityManager manager;
     private final NMSAccessor<T, S> accessor;
-
-    private boolean hasSpawned;
     private final int ID;
+
     protected Mind mind;
     protected boolean tickAttributes;
     protected boolean overridePathfindingSpeed;
@@ -123,24 +122,6 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
             return inventoryAttribute.getInventory();
         }
         return null;
-    }
-
-    @Override
-    public boolean spawnEntity(Location spawnLocation) {
-        ControllableEntityPreSpawnEvent spawnEvent = new ControllableEntityPreSpawnEvent(this, spawnLocation);
-        EntityAPI.getCore().getServer().getPluginManager().callEvent(spawnEvent);
-        if (spawnEvent.isCancelled()) {
-            return false;
-        }
-        if (SpawnUtil.spawnEntity(this, spawnEvent.getSpawnLocation())) {
-            this.hasSpawned = true;
-        }
-        return this.hasSpawned;
-    }
-
-    @Override
-    public boolean hasSpawned() {
-        return this.hasSpawned;
     }
 
     @Override

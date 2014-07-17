@@ -55,9 +55,7 @@ public abstract interface ControllableEntity<T extends LivingEntity, S extends C
 
     public float getWidth();
 
-    public boolean spawnEntity(Location spawnLocation);
-
-    public boolean hasSpawned();
+    public void despawn(DespawnReason despawnReason);
 
     @Override
     public String getName();

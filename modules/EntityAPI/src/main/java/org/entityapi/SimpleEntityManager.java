@@ -19,6 +19,7 @@
 
 package org.entityapi;
 
+import com.dsh105.commodus.GeneralUtil;
 import com.google.common.collect.Maps;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -28,6 +29,8 @@ import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.DespawnReason;
+import org.entityapi.api.entity.mind.attribute.DeathAttribute;
+import org.entityapi.api.events.ControllableEntityDeathEvent;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.exceptions.NameRequiredException;
 
@@ -60,13 +63,12 @@ public class SimpleEntityManager implements EntityManager {
                     Map.Entry<Integer, ControllableEntity> entry = iterator.next();
 
                     if (entry.getValue().getHandle() == null) {
-                        if (!keepEntitiesInMemory) {
+                        if (!willKeepEntitiesInMemory()) {
                             iterator.remove();
                         }
                     } else {
-                        entry.getValue().getNMSAccessor().callBaseTick();
                         if (!entry.getValue().getNMSAccessor().isAlive()) {
-                            //TODO: despawn
+                            despawn(entry.getValue());
                         }
                     }
                 }
@@ -75,12 +77,17 @@ public class SimpleEntityManager implements EntityManager {
     }
 
     @Override
+    public Collection<ControllableEntity> getEntities() {
+        return Collections.unmodifiableCollection(this.ENTITIES.values());
+    }
+
+    @Override
     public Plugin getOwningPlugin() {
         return this.OWNING_PLUGIN;
     }
 
     @Override
-    public boolean isKeepEntitiesInMemory() {
+    public boolean willKeepEntitiesInMemory() {
         return this.KEEP_ENTITIES_IN_MEM;
     }
 
@@ -89,11 +96,13 @@ public class SimpleEntityManager implements EntityManager {
         this.KEEP_ENTITIES_IN_MEM = bool;
     }
 
-    protected Integer getNextID() {
+    @Override
+    public Integer getNextID() {
         return getNextID(Integer.MIN_VALUE);
     }
 
-    protected Integer getNextID(int index) {
+    @Override
+    public Integer getNextID(int index) {
         Set<Integer> ids = this.ENTITIES.keySet();
         while (ids.contains(index)) {
             index++;
@@ -113,13 +122,9 @@ public class SimpleEntityManager implements EntityManager {
                 throw new NameRequiredException();
             }
 
-            Integer id = getNextID();
-
             EntityBuilder context = new EntityBuilder(this);
 
-            context.withID(id)
-                   .withType(entityType)
-                   .atLocation(location);
+            context.withType(entityType).atLocation(location);
 
             if (prepare) {
                 context.withDefaults();
@@ -132,18 +137,33 @@ public class SimpleEntityManager implements EntityManager {
     }
 
     @Override
-    public Collection<ControllableEntity> getEntities() {
-        return Collections.unmodifiableCollection(this.ENTITIES.values());
-    }
-
-    @Override
     public void despawnAll() {
-
+        despawnAll(DespawnReason.DEATH);
     }
 
     @Override
     public void despawnAll(DespawnReason despawnReason) {
+        for (ControllableEntity controllableEntity : getEntities()) {
+            despawn(controllableEntity, despawnReason);
+        }
+    }
 
+    @Override
+    public void despawn(ControllableEntity controllableEntity) {
+        despawn(controllableEntity, DespawnReason.DEATH);
+    }
+
+    @Override
+    public void despawn(ControllableEntity controllableEntity, DespawnReason despawnReason) {
+        ControllableEntityDeathEvent deathEvent = new ControllableEntityDeathEvent(controllableEntity, despawnReason);
+        Bukkit.getServer().getPluginManager().callEvent(deathEvent);
+        controllableEntity.getMind().setControllableEntity(null);
+        DeathAttribute deathAttribute = controllableEntity.getMind().getAttribute(DeathAttribute.class);
+        if (deathAttribute != null) {
+            deathAttribute.onDeath();
+        }
+        controllableEntity.getBukkitEntity().remove();
+        this.ENTITIES.remove(GeneralUtil.getKeyAtValue(ENTITIES, controllableEntity));
     }
 
     @Override

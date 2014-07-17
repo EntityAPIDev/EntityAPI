@@ -21,6 +21,7 @@ package org.entityapi.api.events;
 
 import org.bukkit.event.HandlerList;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.DespawnReason;
 
 /**
  * Called when a ControllableEntity dies
@@ -29,8 +30,14 @@ public class ControllableEntityDeathEvent extends ControllableEntityEvent {
 
     private static final HandlerList handlers = new HandlerList();
 
-    public ControllableEntityDeathEvent(final ControllableEntity controllableEntity) {
+    private DespawnReason reason;
+
+    public ControllableEntityDeathEvent(final ControllableEntity controllableEntity, DespawnReason reason) {
         super(controllableEntity);
+    }
+
+    public DespawnReason getReason() {
+        return reason;
     }
 
     @Override

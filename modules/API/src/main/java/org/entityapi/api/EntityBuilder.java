@@ -21,10 +21,13 @@ package org.entityapi.api;
 
 import com.captainbern.reflection.Reflection;
 import org.bukkit.Location;
+import org.bukkit.plugin.Plugin;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.mind.Mind;
 import org.entityapi.api.entity.mind.behaviour.Behaviour;
+import org.entityapi.api.plugin.EntityAPI;
+import org.entityapi.api.utils.SpawnUtil;
 import org.entityapi.exceptions.ControllableEntitySpawnException;
 
 import java.util.HashMap;
@@ -33,7 +36,6 @@ import java.util.Map;
 public class EntityBuilder {
 
     private EntityManager ENTITYMANAGER;
-    private int ID;
     private ControllableEntityType TYPE;
     private String NAME;
     private Location LOCATION;
@@ -41,15 +43,17 @@ public class EntityBuilder {
     private Mind MIND;
     private HashMap<Behaviour, Integer> BEHAVIOURS;
 
+    public EntityBuilder(Plugin plugin) {
+        this(EntityAPI.getManagerFor(plugin));
+    }
+
     public EntityBuilder(EntityManager entityManager) {
+        if (entityManager == null) {
+            throw new IllegalArgumentException("EntityManager cannot be NULL!");
+        }
         this.ENTITYMANAGER = entityManager;
         this.BEHAVIOURS = new HashMap<>();
         this.PREPARE = false;
-    }
-
-    public EntityBuilder withID(int id) {
-        this.ID = id;
-        return this;
     }
 
     public EntityBuilder withType(ControllableEntityType entityType) {
@@ -98,30 +102,32 @@ public class EntityBuilder {
         if (this.LOCATION == null) {
             throw new NullPointerException("Location cannot be null.");
         }
-        ControllableEntity entity = new Reflection().reflect(this.TYPE.getControllableClass()).getSafeConstructor(Integer.class, EntityManager.class).getAccessor().invoke(this.ID, this.ENTITYMANAGER);
+
+        int id = this.ENTITYMANAGER.getNextID();
+        ControllableEntity entity = new Reflection().reflect(this.TYPE.getControllableClass()).getSafeConstructor(Integer.class, EntityManager.class).getAccessor().invoke(id, this.ENTITYMANAGER);
         if (entity != null) {
-            if (entity.spawnEntity(this.LOCATION)) {
-                if (this.PREPARE || this.MIND == null) {
-                    this.MIND = new Mind();
-                }
-                this.MIND.setControllableEntity(entity);
-                if (this.PREPARE) {
-                    entity.setDefaultBehaviours();
-                } else {
-                    for (Map.Entry<Behaviour, Integer> entry : this.BEHAVIOURS.entrySet()) {
-                        entity.getMind().getMovementBehaviourSelector().addBehaviour(entry.getKey(), entry.getValue());
-                    }
-                }
-                if (this.NAME != null) {
-                    entity.setName(this.NAME);
-                }
-                try {
-                    return (T) entity;
-                } catch (ClassCastException e) {
-                    throw new ControllableEntitySpawnException(e);
-                }
-            } else {
+            if (!SpawnUtil.spawnEntity(entity, this.LOCATION)) {
                 throw new ControllableEntitySpawnException();
+            }
+
+            if (this.PREPARE || this.MIND == null) {
+                this.MIND = new Mind();
+            }
+            this.MIND.setControllableEntity(entity);
+            if (this.PREPARE) {
+                entity.setDefaultBehaviours();
+            } else {
+                for (Map.Entry<Behaviour, Integer> entry : this.BEHAVIOURS.entrySet()) {
+                    entity.getMind().getMovementBehaviourSelector().addBehaviour(entry.getKey(), entry.getValue());
+                }
+            }
+            if (this.NAME != null) {
+                entity.setName(this.NAME);
+            }
+            try {
+                return (T) entity;
+            } catch (ClassCastException e) {
+                throw new ControllableEntitySpawnException(e);
             }
         }
         return null;

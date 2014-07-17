@@ -26,6 +26,8 @@ import org.bukkit.Location;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityHandle;
+import org.entityapi.api.events.ControllableEntityPreSpawnEvent;
+import org.entityapi.api.plugin.EntityAPI;
 
 public class SpawnUtil {
 
@@ -33,6 +35,12 @@ public class SpawnUtil {
     }
 
     public static boolean spawnEntity(ControllableEntity controllableEntity, Location spawnLocation) {
+        ControllableEntityPreSpawnEvent spawnEvent = new ControllableEntityPreSpawnEvent(controllableEntity, spawnLocation);
+        EntityAPI.getCore().getServer().getPluginManager().callEvent(spawnEvent);
+        return !spawnEvent.isCancelled() && addEntity(controllableEntity, spawnEvent.getSpawnLocation());
+    }
+
+    private static boolean addEntity(ControllableEntity controllableEntity, Location spawnLocation) {
         SafeConstructor<ControllableEntityHandle> entityConstructor = new Reflection().reflect(controllableEntity.getEntityType().getHandleClass()).getSafeConstructor(MinecraftReflection.getMinecraftClass("World"), ControllableEntity.class);
         ControllableEntityHandle controllableEntityHandle = entityConstructor.getAccessor().invoke(WorldUtil.toNMSWorld(spawnLocation.getWorld()), controllableEntity);
         controllableEntityHandle.setPositionRotation(spawnLocation.getX(), spawnLocation.getY(), spawnLocation.getZ(), spawnLocation.getYaw(), spawnLocation.getPitch());

@@ -31,9 +31,13 @@ public interface EntityManager {
 
     public Plugin getOwningPlugin();
 
-    public boolean isKeepEntitiesInMemory();
+    public boolean willKeepEntitiesInMemory();
 
     public void setKeepEntitiesInMemory(boolean bool);
+
+    Integer getNextID();
+
+    Integer getNextID(int index);
 
     public ControllableEntity spawnEntity(ControllableEntityType entityType, Location location);
 
@@ -44,6 +48,10 @@ public interface EntityManager {
     public void despawnAll();
 
     public void despawnAll(DespawnReason despawnReason);
+
+    void despawn(ControllableEntity controllableEntity);
+
+    void despawn(ControllableEntity controllableEntity, DespawnReason despawnReason);
 
     @Override
     public String toString();
