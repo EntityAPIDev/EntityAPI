@@ -18,6 +18,7 @@ Stuff that needs to be done or is still unfinished (this list may be incomplete)
 - Pathfinding
 - Game registry
 - Modifications to spawning and despawning to work with NMS entity registration
+- Entity serialization
 
 Contributing
 ============
