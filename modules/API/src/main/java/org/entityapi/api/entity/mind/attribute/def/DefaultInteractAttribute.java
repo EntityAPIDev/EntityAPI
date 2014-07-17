@@ -17,32 +17,24 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.entity.mind.attribute;
+package org.entityapi.api.entity.mind.attribute.def;
 
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.entityapi.api.entity.mind.Attribute;
-import org.entityapi.api.events.Action;
-import org.entityapi.api.events.ControllableEntityInteractEvent;
+import org.entityapi.api.entity.mind.Mind;
+import org.entityapi.api.entity.mind.attribute.CollideAttribute;
+import org.entityapi.api.entity.mind.attribute.InteractAttribute;
 
-public abstract class InteractAttribute extends Attribute<ControllableEntityInteractEvent> {
+public class DefaultInteractAttribute extends InteractAttribute {
 
     @Override
-    protected ControllableEntityInteractEvent call(ControllableEntityInteractEvent event) {
-        if (!event.isCancelled()) {
-            event.setCancelled(!onInteract(event.getPlayer(), event.getAction()));
-        }
-        return event;
+    public void onInteract(Player entity, boolean rightClick) {
+
     }
 
     @Override
-    protected ControllableEntityInteractEvent getNewEvent(Object... args) {
-        return new ControllableEntityInteractEvent(getControllableEntity(), (Player) args[0], (Action) args[1]);
-    }
-
-    public abstract boolean onInteract(Player entity, Action rightClick);
-
-    @Override
-    public String getKey() {
-        return "Interact";
+    public Attribute copyTo(Mind mind) {
+        return new DefaultInteractAttribute();
     }
 }

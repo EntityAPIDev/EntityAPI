@@ -17,33 +17,22 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.entity.mind.attribute;
+package org.entityapi.api.entity.mind.attribute.def;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.entityapi.api.entity.mind.Attribute;
-import org.entityapi.api.events.ControllableEntityCollideEvent;
-import org.entityapi.api.events.ControllableEntityEvent;
+import org.entityapi.api.entity.mind.Mind;
+import org.entityapi.api.entity.mind.attribute.CollideAttribute;
 
-public abstract class CollideAttribute extends Attribute<ControllableEntityCollideEvent> {
+public class DefaultCollideAttribute extends CollideAttribute {
 
     @Override
-    protected ControllableEntityCollideEvent getNewEvent(Object... args) {
-        return new ControllableEntityCollideEvent(getControllableEntity(), (Entity) args[0]);
+    public void onCollide(Entity entity) {
+
     }
 
     @Override
-    protected ControllableEntityCollideEvent call(ControllableEntityCollideEvent event) {
-        if (!event.isCancelled()) {
-            onCollide(event.getCollidedWith());
-        }
-        return event;
-    }
-
-    public abstract void onCollide(Entity entity);
-
-    @Override
-    public String getKey() {
-        return "Collide";
+    public Attribute copyTo(Mind mind) {
+        return new DefaultCollideAttribute();
     }
 }

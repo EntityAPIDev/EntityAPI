@@ -20,11 +20,31 @@
 package org.entityapi.api.entity.mind;
 
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.events.ControllableEntityEvent;
 import org.entityapi.exceptions.AttributeMindRequiredException;
 
-public abstract class Attribute {
+public abstract class Attribute<T extends ControllableEntityEvent> {
 
     protected Mind mind;
+
+    public T call(Object... args) {
+        T event = null;
+        try {
+            event = getNewEvent(args);
+        } catch (ArrayIndexOutOfBoundsException ignored) {
+
+        }
+
+        return call(event);
+    }
+
+    protected T call(T event) {
+        return event;
+    }
+
+    protected T getNewEvent(Object... args) {
+        return null;
+    }
 
     protected Attribute applyTo(Mind mind) {
         Attribute attribute = this.copyTo(mind);

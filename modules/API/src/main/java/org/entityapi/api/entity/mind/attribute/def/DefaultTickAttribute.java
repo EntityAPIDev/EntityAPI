@@ -17,28 +17,21 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.entity.mind.attribute;
+package org.entityapi.api.entity.mind.attribute.def;
 
 import org.entityapi.api.entity.mind.Attribute;
-import org.entityapi.api.events.ControllableEntityTickEvent;
+import org.entityapi.api.entity.mind.Mind;
+import org.entityapi.api.entity.mind.attribute.TickAttribute;
 
-public abstract class TickAttribute extends Attribute<ControllableEntityTickEvent> {
+public class DefaultTickAttribute extends TickAttribute {
 
     @Override
-    protected ControllableEntityTickEvent call(ControllableEntityTickEvent event) {
-        onTick();
-        return super.call(event);
+    public void onTick() {
+
     }
 
     @Override
-    protected ControllableEntityTickEvent getNewEvent(Object... args) {
-        return new ControllableEntityTickEvent(getControllableEntity());
-    }
-
-    public abstract void onTick();
-
-    @Override
-    public String getKey() {
-        return "Tick";
+    public Attribute copyTo(Mind mind) {
+        return new DefaultTickAttribute();
     }
 }

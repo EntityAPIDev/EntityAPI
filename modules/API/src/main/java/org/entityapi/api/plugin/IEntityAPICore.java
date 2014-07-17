@@ -47,16 +47,6 @@ public interface IEntityAPICore extends Plugin {
 
     public EntityManager getManagerFor(String pluginName);
 
-    public void callOnTick(ControllableEntity controllableEntity);
-
-    public boolean callOnInteract(ControllableEntity controllableEntity, Player entity, boolean rightClick);
-
-    public Vector callOnPush(ControllableEntity controllableEntity, double x, double y, double z);
-
-    public boolean callOnCollide(ControllableEntity controllableEntity, Entity entity);
-
-    public void callOnDeath(ControllableEntity controllableEntity);
-
     public enum ConfigType {
         MAIN
     }

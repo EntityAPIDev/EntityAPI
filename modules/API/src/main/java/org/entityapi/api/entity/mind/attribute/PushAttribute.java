@@ -21,8 +21,23 @@ package org.entityapi.api.entity.mind.attribute;
 
 import org.bukkit.util.Vector;
 import org.entityapi.api.entity.mind.Attribute;
+import org.entityapi.api.events.ControllableEntityPushEvent;
 
-public abstract class PushAttribute extends Attribute {
+public abstract class PushAttribute extends Attribute<ControllableEntityPushEvent> {
+
+    @Override
+    protected ControllableEntityPushEvent call(ControllableEntityPushEvent event) {
+        if (event.isCancelled()) {
+            event.setPushVelocity(new Vector(0, 0, 0));
+        }
+        onPush(event.getPushVelocity());
+        return event;
+    }
+
+    @Override
+    protected ControllableEntityPushEvent getNewEvent(Object... args) {
+        return super.getNewEvent(args);
+    }
 
     public abstract void onPush(Vector pushVelocity);
 

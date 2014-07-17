@@ -17,28 +17,22 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.entity.mind.attribute;
+package org.entityapi.api.entity.mind.attribute.def;
 
+import org.bukkit.util.Vector;
 import org.entityapi.api.entity.mind.Attribute;
-import org.entityapi.api.events.ControllableEntityTickEvent;
+import org.entityapi.api.entity.mind.Mind;
+import org.entityapi.api.entity.mind.attribute.PushAttribute;
 
-public abstract class TickAttribute extends Attribute<ControllableEntityTickEvent> {
+public class DefaultPushAttribute extends PushAttribute {
 
     @Override
-    protected ControllableEntityTickEvent call(ControllableEntityTickEvent event) {
-        onTick();
-        return super.call(event);
+    public void onPush(Vector pushVelocity) {
+
     }
 
     @Override
-    protected ControllableEntityTickEvent getNewEvent(Object... args) {
-        return new ControllableEntityTickEvent(getControllableEntity());
-    }
-
-    public abstract void onTick();
-
-    @Override
-    public String getKey() {
-        return "Tick";
+    public Attribute copyTo(Mind mind) {
+        return new DefaultPushAttribute();
     }
 }

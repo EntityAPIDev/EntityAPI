@@ -19,13 +19,26 @@
 
 package org.entityapi.api.entity.mind;
 
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+import org.bukkit.util.*;
+import org.bukkit.util.Vector;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.mind.attribute.*;
+import org.entityapi.api.entity.mind.attribute.def.*;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class Mind {
+
+    private static Map<Class<? extends Attribute>, Attribute> REQUIRED_DEFAULTS = new HashMap<>();
+
+    static {
+        REQUIRED_DEFAULTS.put(CollideAttribute.class, new DefaultCollideAttribute());
+        REQUIRED_DEFAULTS.put(InteractAttribute.class, new DefaultInteractAttribute());
+        REQUIRED_DEFAULTS.put(PushAttribute.class, new DefaultPushAttribute());
+        REQUIRED_DEFAULTS.put(TickAttribute.class, new DefaultTickAttribute());
+    }
 
     protected ControllableEntity controllableEntity;
     protected HashMap<String, Attribute> attributes = new HashMap<>();
@@ -169,7 +182,17 @@ public class Mind {
         return false;
     }
 
+    private void fillRequiredDefaults() {
+        for (Map.Entry<Class<? extends Attribute>, Attribute> entry : REQUIRED_DEFAULTS.entrySet()) {
+            if (!hasAttribute(entry.getKey())) {
+                addAttribute(entry.getValue());
+            }
+        }
+    }
+
     public void tick() {
+        this.fillRequiredDefaults();
+
         if (this.behaviourSelector != null) {
             this.behaviourSelector.updateBehaviours();
         }

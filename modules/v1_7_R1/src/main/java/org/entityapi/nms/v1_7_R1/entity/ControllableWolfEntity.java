@@ -23,8 +23,9 @@ import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
+import org.entityapi.api.entity.DespawnReason;
 import org.entityapi.api.entity.EntitySound;
-import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
+import org.entityapi.api.entity.mind.attribute.*;
 import org.entityapi.api.entity.type.ControllableWolf;
 import org.entityapi.api.entity.type.nms.ControllableWolfHandle;
 import org.entityapi.api.plugin.EntityAPI;
@@ -78,7 +79,7 @@ public class ControllableWolfEntity extends EntityWolf implements ControllableWo
     public void h() {
         super.h();
         if (this.controllableEntity != null) {
-            EntityAPI.getCore().callOnTick(this.controllableEntity);
+            this.controllableEntity.getMind().getAttribute(TickAttribute.class).call();
             if (this.controllableEntity.shouldUpdateAttributes()) {
                 this.controllableEntity.getMind().tick();
             }
@@ -92,7 +93,7 @@ public class ControllableWolfEntity extends EntityWolf implements ControllableWo
             return;
         }
 
-        if (EntityAPI.getCore().callOnCollide(this.controllableEntity, entity.getBukkitEntity())) {
+        if (!this.controllableEntity.getMind().getAttribute(CollideAttribute.class).call(entity.getBukkitEntity()).isCancelled()) {
             super.collide(entity);
         }
     }
@@ -103,13 +104,13 @@ public class ControllableWolfEntity extends EntityWolf implements ControllableWo
             return super.c(entity);
         }
 
-        return EntityAPI.getCore().callOnInteract(this.controllableEntity, (Player) entity.getBukkitEntity(), true);
+        return !this.controllableEntity.getMind().getAttribute(InteractAttribute.class).call(entity.getBukkitEntity(), true).isCancelled();
     }
 
     @Override
     public boolean damageEntity(DamageSource damageSource, float v) {
         if (this.controllableEntity != null && damageSource.getEntity() != null && damageSource.getEntity().getBukkitEntity() instanceof Player) {
-            EntityAPI.getCore().callOnInteract(this.controllableEntity, (Player) damageSource.getEntity(), false);
+            return !this.controllableEntity.getMind().getAttribute(InteractAttribute.class).call(damageSource.getEntity().getBukkitEntity(), false).isCancelled();
         }
         return super.damageEntity(damageSource, v);
     }
@@ -130,7 +131,7 @@ public class ControllableWolfEntity extends EntityWolf implements ControllableWo
     @Override
     public void g(double x, double y, double z) {
         if (this.controllableEntity != null) {
-            Vector velocity = EntityAPI.getCore().callOnPush(this.controllableEntity, x, y, z);
+            Vector velocity = this.controllableEntity.getMind().getAttribute(PushAttribute.class).call(x, y, z).getPushVelocity();
             x = velocity.getX();
             y = velocity.getY();
             z = velocity.getZ();
@@ -141,7 +142,7 @@ public class ControllableWolfEntity extends EntityWolf implements ControllableWo
     @Override
     public void die(DamageSource damagesource) {
         if (this.controllableEntity != null) {
-            EntityAPI.getCore().callOnDeath(this.controllableEntity);
+            this.controllableEntity.getEntityManager().despawn(this.controllableEntity, DespawnReason.DEATH);
         }
         super.die(damagesource);
     }

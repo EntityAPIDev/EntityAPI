@@ -36,6 +36,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.ControllableEntity;
+import org.entityapi.api.entity.DespawnReason;
 import org.entityapi.api.entity.mind.attribute.*;
 import org.entityapi.api.events.*;
 import org.entityapi.api.plugin.EntityAPI;
@@ -272,70 +273,7 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
     protected void onPluginDisable(PluginDisableEvent event) {
         if (hasEntityManager(event.getPlugin())) {
             EntityManager entityManager = getManagerFor(event.getPlugin());
-
-
-        }
-    }
-
-    @Override
-    public void callOnTick(ControllableEntity controllableEntity) {
-        ControllableEntityTickEvent tickEvent = new ControllableEntityTickEvent(controllableEntity);
-        Bukkit.getServer().getPluginManager().callEvent(tickEvent);
-        TickAttribute tickAttribute = controllableEntity.getMind().getAttribute(TickAttribute.class);
-        if (tickAttribute != null) {
-            tickAttribute.onTick();
-        }
-    }
-
-    @Override
-    public boolean callOnInteract(ControllableEntity controllableEntity, Player entity, boolean rightClick) {
-        ControllableEntityInteractEvent interactEvent = new ControllableEntityInteractEvent(controllableEntity, entity, rightClick ? Action.RIGHT_CLICK : Action.LEFT_CLICK);
-        Bukkit.getServer().getPluginManager().callEvent(interactEvent);
-        if (!interactEvent.isCancelled()) {
-            InteractAttribute interactAttribute = controllableEntity.getMind().getAttribute(InteractAttribute.class);
-            if (interactAttribute != null) {
-                interactAttribute.onInteract(entity, rightClick);
-            }
-        }
-        return !interactEvent.isCancelled();
-    }
-
-    @Override
-    public Vector callOnPush(ControllableEntity controllableEntity, double x, double y, double z) {
-        ControllableEntityPushEvent pushEvent = new ControllableEntityPushEvent(controllableEntity, new Vector(x, y, z));
-        pushEvent.setCancelled(controllableEntity.isStationary());
-        Bukkit.getServer().getPluginManager().callEvent(pushEvent);
-        if (pushEvent.isCancelled()) {
-            return new Vector(0, 0, 0);
-        }
-        PushAttribute pushAttribute = controllableEntity.getMind().getAttribute(PushAttribute.class);
-        if (pushAttribute != null) {
-            pushAttribute.onPush(pushEvent.getPushVelocity());
-        }
-        return pushEvent.getPushVelocity();
-    }
-
-    @Override
-    public boolean callOnCollide(ControllableEntity controllableEntity, Entity entity) {
-        ControllableEntityCollideEvent collideEvent = new ControllableEntityCollideEvent(controllableEntity, entity);
-        Bukkit.getServer().getPluginManager().callEvent(collideEvent);
-        if (!collideEvent.isCancelled()) {
-            CollideAttribute collideAttribute = controllableEntity.getMind().getAttribute(CollideAttribute.class);
-            if (collideAttribute != null) {
-                collideAttribute.onCollide(entity);
-            }
-        }
-        return !collideEvent.isCancelled();
-    }
-
-    @Override
-    public void callOnDeath(ControllableEntity controllableEntity) {
-        ControllableEntityDeathEvent deathEvent = new ControllableEntityDeathEvent(controllableEntity);
-        Bukkit.getServer().getPluginManager().callEvent(deathEvent);
-        controllableEntity.getMind().setControllableEntity(null);
-        DeathAttribute deathAttribute = controllableEntity.getMind().getAttribute(DeathAttribute.class);
-        if (deathAttribute != null) {
-            deathAttribute.onDeath();
+            entityManager.despawnAll(DespawnReason.PLUGIN_DISABLE);
         }
     }
 }
