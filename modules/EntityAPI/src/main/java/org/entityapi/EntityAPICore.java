@@ -241,8 +241,9 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
     public EntityManager getManagerFor(String pluginName) {
         EntityAPICore.getCore();
 
-        if (!hasEntityManager(pluginName))
+        if (!hasEntityManager(pluginName)) {
             return null;
+        }
 
         return getCore().MANAGERS.get(pluginName);
     }

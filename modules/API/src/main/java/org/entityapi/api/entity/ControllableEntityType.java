@@ -65,8 +65,9 @@ public enum ControllableEntityType {
     ControllableEntityType(String classPath, String name, int id, boolean isNameRequired) {
         this.controllableClass = new Reflection().reflect("org.entityapi.api.entity.impl.Controllable" + classPath + "Base").getReflectedClass();
         this.handleClass = new Reflection().reflect(EntityAPI.INTERNAL_NMS_PATH + ".entity.Controllable" + classPath + "Entity").getReflectedClass();
-        if (!ControllableEntityHandle.class.isAssignableFrom(handleClass))
+        if (!ControllableEntityHandle.class.isAssignableFrom(handleClass)) {
             throw new RuntimeException("Handle class needs to implement ControllableEntityHandle!");
+        }
         this.name = name;
         this.id = id;
         this.isNameRequired = isNameRequired;
@@ -94,16 +95,18 @@ public enum ControllableEntityType {
 
     public static ControllableEntityType getByControllableClass(Class<? extends ControllableEntity> clazz) {
         for (ControllableEntityType type : values()) {
-            if (type.getHandleClass().equals(clazz))
+            if (type.getHandleClass().equals(clazz)) {
                 return type;
+            }
         }
         return null;
     }
 
     public static ControllableEntityType getByEntityClass(Class clazz) {
         for (ControllableEntityType type : values()) {
-            if (type.getControllableClass().equals(clazz) || type.getControllableClass().getSuperclass().equals(clazz) || type.getControllableClass().isAssignableFrom(clazz))
+            if (type.getControllableClass().equals(clazz) || type.getControllableClass().getSuperclass().equals(clazz) || type.getControllableClass().isAssignableFrom(clazz)) {
                 return type;
+            }
         }
         return null;
     }

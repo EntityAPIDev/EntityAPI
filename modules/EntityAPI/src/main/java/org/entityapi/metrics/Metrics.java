@@ -144,6 +144,7 @@ public class Metrics {
      * website. Plotters can be added to the graph object returned.
      *
      * @param name The name of the graph
+     *
      * @return Graph object created. Will never return NULL under normal circumstances unless bad parameters are given
      */
     public Graph createGraph(final String name) {
@@ -476,6 +477,7 @@ public class Metrics {
      * GZip compress a string of bytes
      *
      * @param input
+     *
      * @return
      */
     public static byte[] gzip(String input) {
@@ -519,6 +521,7 @@ public class Metrics {
      * @param json
      * @param key
      * @param value
+     *
      * @throws java.io.UnsupportedEncodingException
      */
     private static void appendJSONPair(StringBuilder json, String key, String value) throws UnsupportedEncodingException {
@@ -551,6 +554,7 @@ public class Metrics {
      * Escape a string to create a valid JSON string
      *
      * @param text
+     *
      * @return
      */
     private static String escapeJSON(String text) {
@@ -597,6 +601,7 @@ public class Metrics {
      * Encode text as UTF-8
      *
      * @param text the text to encode
+     *
      * @return the encoded text, as UTF-8
      */
     private static String urlEncode(final String text) throws UnsupportedEncodingException {
@@ -754,6 +759,7 @@ public class Metrics {
      * null is returned.
      *
      * @param plugin to initialize Metrics for
+     *
      * @return the Metrics instance created, or null if this failed
      */
     public static Metrics initialize(Plugin plugin) {

@@ -7,7 +7,6 @@ import com.captainbern.reflection.SafeField;
 import com.captainbern.reflection.SafeMethod;
 import com.captainbern.reflection.accessor.FieldAccessor;
 import com.captainbern.reflection.accessor.MethodAccessor;
-import com.google.common.primitives.Primitives;
 import org.bukkit.entity.Entity;
 
 import java.util.HashMap;
@@ -27,32 +26,37 @@ public class EntityUtil {
     /**
      * Util classes shouldn't have a public or protected constructor
      */
-    private EntityUtil() {}
+    private EntityUtil() {
+    }
 
     public static void addGoal(Object nmsEntityHandle, Object nmsGoalHandle, int priority) {
-        if (ADD_GOAL == null)
+        if (ADD_GOAL == null) {
             initializeFields();
+        }
 
         ADD_GOAL.invoke(nmsEntityHandle, nmsGoalHandle, priority);
     }
 
     public static List getGoals(Object nmsEntityHandle) {
-        if (GOALS == null)
+        if (GOALS == null) {
             initializeFields();
+        }
 
         return GOALS.get(nmsEntityHandle);
     }
 
     public static List getActiveGoals(Object nmsEntityHandle) {
-        if (ACTIVE_GOALS == null)
+        if (ACTIVE_GOALS == null) {
             initializeFields();
+        }
 
         return ACTIVE_GOALS.get(nmsEntityHandle);
     }
 
     public static void clearGoals(Object nmsEntityHandle) {
-        if (GOALS == null || ACTIVE_GOALS == null)
+        if (GOALS == null || ACTIVE_GOALS == null) {
             initializeFields();
+        }
 
         GOALS.get(nmsEntityHandle).clear();
         ACTIVE_GOALS.get(nmsEntityHandle).clear();
@@ -75,7 +79,7 @@ public class EntityUtil {
                 GOALS = fieldCandidates.get(0).getAccessor();
                 ACTIVE_GOALS = fieldCandidates.get(0).getAccessor();
             } else {
-               throw new RuntimeException("Failed to initialize the goal-lists!");
+                throw new RuntimeException("Failed to initialize the goal-lists!");
             }
 
         } catch (Exception ಠ_ಠ) {
@@ -88,8 +92,9 @@ public class EntityUtil {
     private static Map<Class<? extends Entity>, Class<?>> converterMap = new HashMap<>();
 
     public static Object getNmsClassFor(Class<? extends Entity> bukkitHandle) {
-        if (bukkitHandle == null)
+        if (bukkitHandle == null) {
             return null;
+        }
 
         try {
 

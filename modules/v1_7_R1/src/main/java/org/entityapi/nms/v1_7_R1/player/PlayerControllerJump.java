@@ -10,7 +10,8 @@ public class PlayerControllerJump extends ControllerJump {
     private boolean b;
 
     public PlayerControllerJump(EntityLiving entity) {
-        super(new EntityInsentient(null) {});
+        super(new EntityInsentient(null) {
+        });
         this.a = entity;
     }
 

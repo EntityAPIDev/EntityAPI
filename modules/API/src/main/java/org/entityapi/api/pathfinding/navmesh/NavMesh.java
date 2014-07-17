@@ -7,7 +7,8 @@ public class NavMesh {
 
     private List<Space> spaces = new ArrayList<>();
 
-    public NavMesh() {}
+    public NavMesh() {
+    }
 
     public NavMesh(List<Space> spaces) {
         this.spaces.addAll(spaces);

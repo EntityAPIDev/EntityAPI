@@ -32,6 +32,7 @@ public class PastebinReporter {
      * A list of all possible syntax' supported by Pastebin.
      */
     public static class ReportFormat {
+
         public static final ReportFormat FOUR_CS = new ReportFormat("4cs");
         public static final ReportFormat SIX_FIVE_ZERO_TWO_ACME_Cross_Assembler = new ReportFormat("6502acme");
         public static final ReportFormat SIX_FIVE_ZERO_TWO_Kick_Assembler = new ReportFormat("6502kickass");
@@ -292,6 +293,7 @@ public class PastebinReporter {
      * The Paste, this will be the file submitted to pastebin.
      */
     public static class Paste {
+
         private final Paste INSTANCE;
 
         private String HEADER;
@@ -376,8 +378,9 @@ public class PastebinReporter {
     }
 
     public String post(String name, Paste paste, ReportFormat format, ExpireDate expireDate) {
-        if (name == null)
+        if (name == null) {
             name = "";
+        }
 
         String report_url = "";
 

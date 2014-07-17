@@ -23,12 +23,12 @@ import net.minecraft.server.v1_7_R1.*;
 import net.minecraft.util.com.mojang.authlib.GameProfile;
 import org.entityapi.api.entity.type.ControllablePlayer;
 import org.entityapi.api.entity.type.nms.ControllablePlayerHandle;
-import org.entityapi.nms.v1_7_R1.player.PlayerNavigation;
 import org.entityapi.nms.v1_7_R1.network.FixedNetworkManager;
 import org.entityapi.nms.v1_7_R1.network.NullPlayerConnection;
 import org.entityapi.nms.v1_7_R1.player.PlayerControllerJump;
 import org.entityapi.nms.v1_7_R1.player.PlayerControllerLook;
 import org.entityapi.nms.v1_7_R1.player.PlayerControllerMove;
+import org.entityapi.nms.v1_7_R1.player.PlayerNavigation;
 
 public class ControllablePlayerEntity extends EntityPlayer implements ControllablePlayerHandle {
 

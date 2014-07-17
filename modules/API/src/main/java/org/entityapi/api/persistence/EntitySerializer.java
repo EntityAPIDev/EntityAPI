@@ -20,4 +20,5 @@
 package org.entityapi.api.persistence;
 
 public class EntitySerializer {
+
 }

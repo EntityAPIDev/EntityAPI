@@ -22,7 +22,6 @@ package org.entityapi.api.utils;
 import com.captainbern.minecraft.reflection.MinecraftReflection;
 import com.captainbern.reflection.Reflection;
 import com.captainbern.reflection.SafeConstructor;
-import com.captainbern.reflection.accessor.MethodAccessor;
 import org.bukkit.Location;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.entityapi.api.entity.ControllableEntity;
@@ -30,7 +29,8 @@ import org.entityapi.api.entity.ControllableEntityHandle;
 
 public class SpawnUtil {
 
-    private SpawnUtil() {}
+    private SpawnUtil() {
+    }
 
     public static boolean spawnEntity(ControllableEntity controllableEntity, Location spawnLocation) {
         SafeConstructor<ControllableEntityHandle> entityConstructor = new Reflection().reflect(controllableEntity.getEntityType().getHandleClass()).getSafeConstructor(MinecraftReflection.getMinecraftClass("World"), ControllableEntity.class);

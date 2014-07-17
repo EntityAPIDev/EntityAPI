@@ -14,7 +14,8 @@ public class PlayerControllerLook extends ControllerLook {
     private double g;
 
     public PlayerControllerLook(EntityLiving entityLiving) {
-        super(new EntityInsentient(null) {});
+        super(new EntityInsentient(null) {
+        });
         this.a = entityLiving;
     }
 

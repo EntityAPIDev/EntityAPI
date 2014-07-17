@@ -36,7 +36,8 @@ import static com.captainbern.reflection.matcher.Matchers.withReturnType;
 
 public class WorldUtil {
 
-    private WorldUtil() {}
+    private WorldUtil() {
+    }
 
     public static Object toNMSWorld(World world) {
         return BukkitUnwrapper.getInstance().unwrap(world);
@@ -66,13 +67,15 @@ public class WorldUtil {
      * @param b1     The first point
      * @param b2     The second point
      * @param checkY Shall it calculate the distance with the Y value included?
+     *
      * @return The manhattan distance between 2 given points
      */
     public static int getManhattanDistance(Location b1, Location b2, boolean checkY) {
         int d = Math.abs(b1.getBlockX() - b2.getBlockX());
         d += Math.abs(b1.getBlockZ() - b2.getBlockZ());
-        if (checkY)
+        if (checkY) {
             d += Math.abs(b1.getBlockY() - b2.getBlockY());
+        }
         return d;
     }
 
@@ -82,12 +85,14 @@ public class WorldUtil {
      * @param b1     The first point
      * @param b2     The second point
      * @param checkY Shall it calculate the distance with the Y value included?
+     *
      * @return The Euclidean distance between 2 given points.
      */
     public static double getEuclideanDistance(Location b1, Location b2, boolean checkY) {
         double d = Math.sqrt(Math.pow(b1.getX() - b2.getX(), 2) + Math.pow(b1.getZ() - b2.getZ(), 2));
-        if (checkY)
+        if (checkY) {
             d += Math.sqrt(Math.pow(b1.getY() - b2.getY(), 2));
+        }
         return d;
     }
 }

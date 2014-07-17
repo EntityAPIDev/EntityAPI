@@ -60,8 +60,9 @@ public class SimpleEntityManager implements EntityManager {
                     Map.Entry<Integer, ControllableEntity> entry = iterator.next();
 
                     if (entry.getValue().getHandle() == null) {
-                        if (!keepEntitiesInMemory)
+                        if (!keepEntitiesInMemory) {
                             iterator.remove();
+                        }
                     } else {
                         entry.getValue().getNMSAccessor().callBaseTick();
                         if (!entry.getValue().getNMSAccessor().isAlive()) {
@@ -108,19 +109,21 @@ public class SimpleEntityManager implements EntityManager {
     @Override
     public ControllableEntity spawnEntity(ControllableEntityType entityType, Location location, boolean prepare) {
         try {
-            if (entityType.isNameRequired())
+            if (entityType.isNameRequired()) {
                 throw new NameRequiredException();
+            }
 
             Integer id = getNextID();
 
             EntityBuilder context = new EntityBuilder(this);
 
             context.withID(id)
-                    .withType(entityType)
-                    .atLocation(location);
+                   .withType(entityType)
+                   .atLocation(location);
 
-            if (prepare)
+            if (prepare) {
                 context.withDefaults();
+            }
 
             return context.create();
         } catch (Throwable throwable) {

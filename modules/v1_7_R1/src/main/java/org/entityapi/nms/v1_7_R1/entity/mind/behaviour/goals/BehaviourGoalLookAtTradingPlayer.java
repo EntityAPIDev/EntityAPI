@@ -45,7 +45,9 @@ public class BehaviourGoalLookAtTradingPlayer extends BehaviourGoalLookAtNearest
             if (((EntityVillager) this.getHandle()).ca()) {
                 this.target = ((EntityVillager) this.getHandle()).b();
                 return true;
-            } else return false;
+            } else {
+                return false;
+            }
         } else {
             TradingAttribute tradingAttribute = this.getControllableEntity().getMind().getAttribute(TradingAttribute.class);
             if (tradingAttribute != null) {

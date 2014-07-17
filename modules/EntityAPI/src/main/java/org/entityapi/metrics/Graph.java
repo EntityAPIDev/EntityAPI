@@ -29,6 +29,7 @@ import java.util.Map;
  * Represents a custom graph on the website
  */
 public class Graph {
+
     /**
      * The graph's name, alphanumeric and spaces only :) If it does not comply to the above when submitted, it is
      * rejected

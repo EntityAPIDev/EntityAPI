@@ -80,6 +80,7 @@ public enum BehaviourType {
      * Checks if a behaviour is compatible with another
      *
      * @param type behaviour to check compatibility against
+     *
      * @return true if the two behaviours are compatible
      */
     public boolean isCompatibleWith(BehaviourType type) {

@@ -1,6 +1,5 @@
 package org.entityapi.api.persistence;
 
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.entityapi.api.entity.ControllableEntityHandle;
 import org.entityapi.api.entity.impl.ControllableBaseEntity;

@@ -21,7 +21,6 @@ package org.entityapi.nms.v1_7_R1.player;
 
 import net.minecraft.server.v1_7_R1.*;
 import org.entityapi.nms.v1_7_R1.NMSEntityUtil;
-import org.entityapi.nms.v1_7_R1.entity.ControllablePlayerEntity;
 
 public class PlayerNavigation extends Navigation {
 

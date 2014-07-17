@@ -25,6 +25,7 @@ import org.entityapi.api.entity.mind.Attribute;
 import org.entityapi.api.entity.mind.Mind;
 
 public class TamingAttribute extends Attribute {
+
     private String tamerIdentification;
 
     public TamingAttribute(Player player) {

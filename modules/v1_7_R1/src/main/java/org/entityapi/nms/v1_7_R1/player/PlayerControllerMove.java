@@ -13,7 +13,8 @@ public class PlayerControllerMove extends ControllerMove {
     private boolean f;
 
     public PlayerControllerMove(EntityLiving entityLiving) {
-        super(new EntityInsentient(null) {}); // Hax
+        super(new EntityInsentient(null) {
+        }); // Hax
         this.a = entityLiving;
         this.b = entityLiving.locX;
         this.c = entityLiving.locY;

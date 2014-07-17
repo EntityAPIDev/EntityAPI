@@ -19,8 +19,6 @@
 
 package org.entityapi.nms.v1_7_R1;
 
-import com.captainbern.reflection.accessor.FieldAccessor;
-import com.captainbern.reflection.accessor.MethodAccessor;
 import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_7_R1.CraftSound;
@@ -37,8 +35,6 @@ import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorHorse;
 import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorLiving;
 import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorMonster;
 import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorNotUndead;
-
-import java.util.List;
 
 public class NMSAccessorImpl<T extends LivingEntity, S extends ControllableEntityHandle<T>> implements NMSAccessor<T, S> {
 

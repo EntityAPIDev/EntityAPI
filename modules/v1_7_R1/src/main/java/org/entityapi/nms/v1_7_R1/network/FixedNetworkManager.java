@@ -42,7 +42,7 @@ public class FixedNetworkManager extends NetworkManager {
         }
 
         if (ADDRESS_FIELD == null) {
-            ADDRESS_FIELD =  new Reflection().reflect(NetworkManager.class).getSafeFieldByType(InetSocketAddress.class).getAccessor();
+            ADDRESS_FIELD = new Reflection().reflect(NetworkManager.class).getSafeFieldByType(InetSocketAddress.class).getAccessor();
         }
 
         CHANNEL_FIELD.set(this, new NullChannel(null));
