@@ -34,6 +34,6 @@ public class DefaultInteractAttribute extends InteractAttribute {
 
     @Override
     public boolean onInteract(Player entity, Action rightClick) {
-        return false;
+        return true;
     }
 }
