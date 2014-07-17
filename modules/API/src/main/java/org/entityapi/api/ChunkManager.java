@@ -24,7 +24,13 @@ import org.bukkit.Location;
 import org.bukkit.event.Listener;
 import org.entityapi.api.entity.ControllableEntity;
 
+import java.util.Collection;
+
 public interface ChunkManager extends Listener {
+
+    Collection<ControllableEntity> getQueuedEntities();
+
+    Collection<Integer> getQueuedEntityIds();
 
     boolean canSpawn(Location location);
 

@@ -111,6 +111,7 @@ public class SimpleEntityManager implements EntityManager {
     @Override
     public Integer getNextID(int index) {
         Set<Integer> ids = this.ENTITIES.keySet();
+        Collections.addAll(ids, getChunkManager().getQueuedEntityIds().toArray(new Integer[0]));
         while (ids.contains(index)) {
             index++;
         }

@@ -37,6 +37,9 @@ import org.entityapi.api.entity.ControllableEntityHandle;
 import org.entityapi.api.entity.DespawnReason;
 import org.entityapi.exceptions.ControllableEntitySpawnException;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class SimpleChunkManager implements ChunkManager {
@@ -85,6 +88,24 @@ public class SimpleChunkManager implements ChunkManager {
         }
 
         this.SPAWN_QUEUE.add(new EntityChunkData(entity, location));
+    }
+
+    @Override
+    public Collection<ControllableEntity> getQueuedEntities() {
+        List<ControllableEntity> controllableEntities = new ArrayList<>();
+        for (EntityChunkData entityChunkData : SPAWN_QUEUE) {
+            controllableEntities.add(entityChunkData.getControllableEntity());
+        }
+        return Collections.unmodifiableCollection(controllableEntities);
+    }
+
+    @Override
+    public Collection<Integer> getQueuedEntityIds() {
+        List<Integer> entityIds = new ArrayList<>();
+        for (ControllableEntity controllableEntity : getQueuedEntities()) {
+            entityIds.add(controllableEntity.getId());
+        }
+        return Collections.unmodifiableCollection(entityIds);
     }
 
     @Override
