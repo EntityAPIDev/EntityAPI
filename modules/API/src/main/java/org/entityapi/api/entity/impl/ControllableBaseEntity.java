@@ -159,7 +159,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
             return false;
         }
         this.getBukkitEntity().setCustomName(name);
-        this.getBukkitEntity().setCustomNameVisible(name == null ? false : true);
+        this.getBukkitEntity().setCustomNameVisible(name != null);
         return true;
     }
 
