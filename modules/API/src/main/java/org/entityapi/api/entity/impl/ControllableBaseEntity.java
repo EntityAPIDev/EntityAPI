@@ -31,6 +31,7 @@ import org.entityapi.api.NMSAccessor;
 import org.entityapi.api.entity.*;
 import org.entityapi.api.entity.mind.Mind;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
+import org.entityapi.api.entity.mind.attribute.DespawnAttribute;
 import org.entityapi.api.entity.mind.attribute.InventoryAttribute;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.events.ControllableEntityPreSpawnEvent;
@@ -119,12 +120,19 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
     }
 
     @Override
-    public boolean spawn(Location location) {
-        return manager.spawn(this, location);
+    public SpawnResult spawn(Location location) {
+        if (isSpawned()) {
+            return SpawnResult.ALREADY_SPAWNED;
+        }
+        this.spawned = SpawnUtil.spawnEntity(this, location);
+        return isSpawned() ? SpawnResult.SUCCESS : SpawnResult.FAILED;
     }
 
     @Override
     public void despawn(DespawnReason reason) {
+        this.spawned = false;
+        getBukkitEntity().remove();
+        getMind().getAttribute(DespawnAttribute.class).call(reason);
         manager.despawn(this, reason);
     }
 
@@ -151,7 +159,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
             return false;
         }
         this.getBukkitEntity().setCustomName(name);
-        this.getBukkitEntity().setCustomNameVisible(name == null ? false : true);
+        this.getBukkitEntity().setCustomNameVisible(name != null);
         return true;
     }
 

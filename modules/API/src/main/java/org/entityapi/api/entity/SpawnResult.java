@@ -17,16 +17,11 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.entity.mind.attribute;
+package org.entityapi.api.entity;
 
-import org.entityapi.api.entity.mind.Attribute;
+public enum SpawnResult {
 
-public abstract class DeathAttribute extends Attribute {
-
-    public abstract void onDeath();
-
-    @Override
-    public String getKey() {
-        return "Death";
-    }
+    SUCCESS,
+    ALREADY_SPAWNED,
+    FAILED
 }

@@ -17,23 +17,22 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.api.entity;
+package org.entityapi.api.entity.mind.attribute.def;
 
-public enum DespawnReason {
+import org.entityapi.api.entity.DespawnReason;
+import org.entityapi.api.entity.mind.Attribute;
+import org.entityapi.api.entity.mind.Mind;
+import org.entityapi.api.entity.mind.attribute.DespawnAttribute;
 
-    DEATH(0),
-    CHUNK_UNLOAD(1),
-    PLUGIN_DISABLE(2),
-    CUSTOM(3),
-    UNKNOWN(4);
+public class DefaultDespawnAttribute extends DespawnAttribute {
 
-    private final int priority;
+    @Override
+    public void onDespawn(DespawnReason reason) {
 
-    DespawnReason(int priority) {
-        this.priority = priority;
     }
 
-    public int getPriority() {
-        return this.priority;
+    @Override
+    public Attribute copyTo(Mind mind) {
+        return new DefaultDespawnAttribute();
     }
 }
