@@ -35,7 +35,7 @@ public class ControllableGiantZombieBase extends ControllableBaseEntity<Giant, C
     public ControllableGiantZombieBase(int id, ControllableGiantZombieHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultMaterialLoot();
+        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

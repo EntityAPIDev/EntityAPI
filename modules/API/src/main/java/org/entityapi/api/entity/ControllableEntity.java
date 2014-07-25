@@ -29,6 +29,7 @@ import org.entityapi.api.EntityManager;
 import org.entityapi.api.NMSAccessor;
 import org.entityapi.api.entity.mind.Mind;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
+import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -148,6 +149,19 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
      */
     void despawn(DespawnReason despawnReason);
 
+    /**
+     * Returns whether this ControllableEntity is currently spawned
+     * <p/>
+     * This will return true if the entity has despawned, possibly due to one of the following reasons:
+     * <ul>
+     * <li>This entity dies from external sources</li>
+     * <li>This entity is despawned using the {@link #despawn(DespawnReason)} method</li>
+     * <li>The chunk this entity is positioned in despawns. In this case, the entity will be automatically respanwned
+     * when the chunk is loaded again</li>
+     * </ul>
+     *
+     * @return true if this entity is currently living and spawned in a world
+     */
     boolean isSpawned();
 
     @Override
@@ -208,6 +222,13 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
 
     boolean navigateTo(Vector to, double speed);
 
+    /**
+     * Resets the behavioural features of this entity back to default
+     * <p/>
+     * Any existing behaviours will be cleared from this entity's mind, with the default behaviours being applied. The
+     * default behaviours for an entity can be accessed using {@link #getDefaultMovementBehaviours()} and {@link
+     * #getDefaultTargetingBehaviours()}
+     */
     void setDefaultBehaviours();
 
     /**

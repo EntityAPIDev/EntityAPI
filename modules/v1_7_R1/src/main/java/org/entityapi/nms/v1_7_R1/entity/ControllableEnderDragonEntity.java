@@ -55,7 +55,7 @@ public class ControllableEnderDragonEntity extends EntityEnderDragon implements 
     }
 
     @Override
-    public org.bukkit.Material getDefaultMaterialLoot() {
+    public org.bukkit.Material getDefaultLoot() {
         return CraftMagicNumbers.getMaterial(this.getLoot());
     }
 
@@ -127,7 +127,7 @@ public class ControllableEnderDragonEntity extends EntityEnderDragon implements 
             }
             this.motY = motion[1];
             super.e(motion[0], motion[2]);
-            this.controllableEntity.setYaw(this.yaw < 0 ? this.yaw + 180 : this.yaw - 180);
+            this.controllableEntity.getNMSAccessor().setYaw(this.yaw < 0 ? this.yaw + 180 : this.yaw - 180);
             return;
         }
 

@@ -38,7 +38,7 @@ public class ControllableCaveSpiderBase extends ControllableBaseEntity<CaveSpide
     public ControllableCaveSpiderBase(int id, ControllableCaveSpiderHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultMaterialLoot();
+        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

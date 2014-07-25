@@ -154,7 +154,7 @@ public class ControllableEndermanEntity extends EntityEnderman implements Contro
     }
 
     @Override
-    public org.bukkit.Material getDefaultMaterialLoot() {
+    public org.bukkit.Material getDefaultLoot() {
         return CraftMagicNumbers.getMaterial(this.getLoot());
     }
 

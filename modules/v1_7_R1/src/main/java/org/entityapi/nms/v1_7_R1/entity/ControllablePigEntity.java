@@ -148,7 +148,7 @@ public class ControllablePigEntity extends EntityPig implements ControllablePigH
     }
 
     @Override
-    public org.bukkit.Material getDefaultMaterialLoot() {
+    public org.bukkit.Material getDefaultLoot() {
         return CraftMagicNumbers.getMaterial(this.getLoot());
     }
 

@@ -148,7 +148,7 @@ public class ControllableMagmaCubeEntity extends EntityMagmaCube implements Cont
     }
 
     @Override
-    public org.bukkit.Material getDefaultMaterialLoot() {
+    public org.bukkit.Material getDefaultLoot() {
         return CraftMagicNumbers.getMaterial(this.getLoot());
     }
 

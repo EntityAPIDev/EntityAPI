@@ -148,7 +148,7 @@ public class ControllableSheepEntity extends EntitySheep implements Controllable
     }
 
     @Override
-    public org.bukkit.Material getDefaultMaterialLoot() {
+    public org.bukkit.Material getDefaultLoot() {
         return CraftMagicNumbers.getMaterial(this.getLoot());
     }
 

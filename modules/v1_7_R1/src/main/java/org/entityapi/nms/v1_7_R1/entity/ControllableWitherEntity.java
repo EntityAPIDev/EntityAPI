@@ -148,7 +148,7 @@ public class ControllableWitherEntity extends EntityWither implements Controllab
     }
 
     @Override
-    public org.bukkit.Material getDefaultMaterialLoot() {
+    public org.bukkit.Material getDefaultLoot() {
         return CraftMagicNumbers.getMaterial(this.getLoot());
     }
 

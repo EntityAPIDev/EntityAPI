@@ -148,7 +148,7 @@ public class ControllableMushroomCowEntity extends EntityMushroomCow implements 
     }
 
     @Override
-    public org.bukkit.Material getDefaultMaterialLoot() {
+    public org.bukkit.Material getDefaultLoot() {
         return CraftMagicNumbers.getMaterial(this.getLoot());
     }
 

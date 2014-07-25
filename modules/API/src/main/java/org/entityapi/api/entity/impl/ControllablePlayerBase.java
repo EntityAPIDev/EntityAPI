@@ -34,6 +34,6 @@ public class ControllablePlayerBase extends ControllableBaseEntity<Player, Contr
     public ControllablePlayerBase(int id, ControllablePlayerHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultMaterialLoot();
+        this.loot = entityHandle.getDefaultLoot();
     }
 }

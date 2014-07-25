@@ -38,7 +38,7 @@ public class ControllableWitchBase extends ControllableBaseEntity<Witch, Control
     public ControllableWitchBase(int id, ControllableWitchHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultMaterialLoot();
+        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

@@ -39,7 +39,7 @@ public class ControllableMushroomCowBase extends ControllableBaseEntity<Mushroom
     public ControllableMushroomCowBase(int id, ControllableMushroomCowHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultMaterialLoot();
+        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

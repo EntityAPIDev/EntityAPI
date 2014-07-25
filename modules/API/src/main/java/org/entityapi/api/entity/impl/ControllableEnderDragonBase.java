@@ -63,7 +63,7 @@ public class ControllableEnderDragonBase extends ControllableBaseEntity<EnderDra
     public ControllableEnderDragonBase(int id, ControllableEnderDragonHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultMaterialLoot();
+        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

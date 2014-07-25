@@ -40,7 +40,7 @@ public class ControllableWolfBase extends ControllableBaseEntity<Wolf, Controlla
     public ControllableWolfBase(int id, ControllableWolfHandle entityHandle, EntityManager entityManager) {
         this(id, entityManager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultMaterialLoot();
+        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override
