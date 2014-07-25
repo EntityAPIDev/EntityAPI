@@ -373,10 +373,12 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
         }
     }
 
+    @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
         return new BehaviourItem[0];
     }
 
+    @Override
     public BehaviourItem[] getDefaultTargetingBehaviours() {
         return new BehaviourItem[0];
     }

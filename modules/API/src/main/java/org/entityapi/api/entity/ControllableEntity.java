@@ -211,8 +211,10 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
     void setDefaultBehaviours();
 
     boolean isStationary();
+    BehaviourItem[] getDefaultMovementBehaviours();
 
     void setStationary(boolean flag);
+    BehaviourItem[] getDefaultTargetingBehaviours();
 
     void setYaw(float value);
 
