@@ -391,29 +391,24 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
     @Override
     public void setStationary(boolean flag) {
         this.getMind().setStationary(flag);
-        this.getMind().setFixedYaw(this.getBukkitEntity().getLocation().getYaw());
-        this.getMind().setFixedHeadYaw(accessor.getFixedHeadYaw());
-        this.getMind().setFixedPitch(this.getBukkitEntity().getLocation().getPitch());
     }
 
     @Override
-    public void setYaw(float value) {
+    public void setFixedYaw(float value) {
         if (this.getMind().isStationary()) {
             this.getMind().setFixedYaw(value);
         }
-        accessor.setYaw(value);
     }
 
     @Override
-    public void setHeadYaw(float value) {
+    public void setFixedHeadYaw(float value) {
         if (this.getMind().isStationary()) {
             this.getMind().setFixedHeadYaw(value);
         }
-        accessor.setHeadYaw(value);
     }
 
     @Override
-    public void setPitch(float value) {
+    public void setFixedPitch(float value) {
         if (this.getMind().isStationary()) {
             this.getMind().setFixedPitch(value);
         }

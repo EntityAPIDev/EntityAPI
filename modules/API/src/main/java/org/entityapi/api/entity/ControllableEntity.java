@@ -210,17 +210,90 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
 
     void setDefaultBehaviours();
 
-    boolean isStationary();
+    /**
+     * Gets the default movement based behaviours prescribed to this entity
+     *
+     * @return the default movement behaviours for this entity, or an empty array if none exist
+     */
     BehaviourItem[] getDefaultMovementBehaviours();
 
-    void setStationary(boolean flag);
+    /**
+     * Gets the default targeting based behaviours prescribed to this entity
+     *
+     * @return the default targeting behaviours for this entity, or an empty array if none exist
+     */
     BehaviourItem[] getDefaultTargetingBehaviours();
 
-    void setYaw(float value);
+    /**
+     * Gets whether this entity is currently in a stationary state
+     * <p/>
+     * All movement for a stationary entity will be prevented. Any pitch and yaw rotations will remain fixed while an
+     * entity is stationary.
+     *
+     * @return true if this entity is currently stationary
+     */
+    boolean isStationary();
 
-    void setHeadYaw(float value);
+    /**
+     * Sets the whether or not this entity is stationary (not moving)
+     * <p/>
+     * All movement for a stationary entity will be prevented. Any pitch and yaw rotations will remain fixed while an
+     * entity is stationary.
+     * <p/>
+     * Current pitch and yaw rotations will be applied upon being set to a stationary status
+     *
+     * @param flag true if this entity is to be stationary
+     */
+    void setStationary(boolean flag);
 
-    void setPitch(float value);
+    /**
+     * Sets the yaw of this entity's location as a fixed value, measured in degrees.
+     * <ul>
+     * <li>A yaw of 0 or 360 represents the positive z direction.
+     * <li>A yaw of 180 represents the negative z direction.
+     * <li>A yaw of 90 represents the negative x direction.
+     * <li>A yaw of 270 represents the positive x direction.
+     * </ul>
+     * Increasing yaw values are the equivalent of turning to your
+     * right-facing, increasing the scale of the next respective axis, and
+     * decreasing the scale of the previous axis.
+     *
+     * @param value the new yaw rotation
+     * @see Location#setYaw(float)
+     */
+    void setFixedYaw(float value);
 
+    /**
+     * Sets the head yaw of this entity's location as a fixed value, measured in degrees.
+     * <ul>
+     * <li>A yaw of 0 or 360 represents the positive z direction.
+     * <li>A yaw of 180 represents the negative z direction.
+     * <li>A yaw of 90 represents the negative x direction.
+     * <li>A yaw of 270 represents the positive x direction.
+     * </ul>
+     * Increasing yaw values are the equivalent of turning to your
+     * right-facing, increasing the scale of the next respective axis, and
+     * decreasing the scale of the previous axis.
+     *
+     * @param value the new head yaw rotation
+     * @see Location#setYaw(float)
+     */
+    void setFixedHeadYaw(float value);
 
+    /**
+     * Sets the pitch of this entity's location as a fixed value, measured in degrees.
+     * <ul>
+     * <li>A pitch of 0 represents level forward facing.
+     * <li>A pitch of 90 represents downward facing, or negative y
+     * direction.
+     * <li>A pitch of -90 represents upward facing, or positive y direction.
+     * <ul>
+     * Increasing pitch values the equivalent of looking down.
+     * <strong>Note: A fixed pitch value will only apply to a stationary entity</strong>
+     *
+     * @param value the new pitch rotation
+     * @see Location#setPitch(float) (float)
+     * @see #setStationary(boolean)
+     */
+    void setFixedPitch(float value);
 }

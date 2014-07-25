@@ -72,6 +72,9 @@ public class Mind {
 
     public void setStationary(boolean stationary) {
         this.stationary = stationary;
+        setFixedYaw(getControllableEntity().getBukkitEntity().getLocation().getYaw());
+        setFixedHeadYaw(getControllableEntity().getNMSAccessor().getFixedHeadYaw());
+        setFixedPitch(getControllableEntity().getBukkitEntity().getLocation().getPitch());
     }
 
     public double getFixedYaw() {
@@ -212,9 +215,9 @@ public class Mind {
         }
 
         if (this.isStationary()) {
-            this.getControllableEntity().setPitch(this.fixedPitch);
-            this.getControllableEntity().setYaw(this.fixedYaw);
-            this.getControllableEntity().setHeadYaw(this.fixedHeadYaw);
+            this.getControllableEntity().getNMSAccessor().setPitch(this.fixedPitch);
+            this.getControllableEntity().getNMSAccessor().setYaw(this.fixedYaw);
+            this.getControllableEntity().getNMSAccessor().setHeadYaw(this.fixedHeadYaw);
         }
     }
 }
