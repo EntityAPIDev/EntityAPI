@@ -417,22 +417,5 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
         if (this.getMind().isStationary()) {
             this.getMind().setFixedPitch(value);
         }
-        accessor.setPitch(value);
-    }
-
-    @Override
-    public boolean isControllableRidingEnabled() {
-        return this.getMind().hasAttribute(ControlledRidingAttribute.class);
-    }
-
-    @Override
-    public ControlledRidingAttribute enableControllableRiding(boolean flag) {
-        ControlledRidingAttribute controlledRidingAttribute = (ControlledRidingAttribute) new Reflection().reflect(EntityAPI.INTERNAL_NMS_PATH + ".entity.mind.attribute.ControlledRidingAttributeBase").newInstance();
-        if (flag) {
-            this.getMind().addAttribute(controlledRidingAttribute);
-        } else {
-            this.getMind().clearAttribute(controlledRidingAttribute.getClass());
-        }
-        return controlledRidingAttribute;
     }
 }

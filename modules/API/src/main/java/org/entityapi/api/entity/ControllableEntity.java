@@ -222,7 +222,5 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
 
     void setPitch(float value);
 
-    boolean isControllableRidingEnabled();
 
-    ControlledRidingAttribute enableControllableRiding(boolean flag);
 }

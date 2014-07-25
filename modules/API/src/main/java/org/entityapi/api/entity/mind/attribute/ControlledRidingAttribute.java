@@ -19,8 +19,17 @@
 
 package org.entityapi.api.entity.mind.attribute;
 
+import org.bukkit.entity.LivingEntity;
 import org.entityapi.api.entity.mind.Attribute;
 
+/**
+ * Controllable riding refers to when the following conditions are met:
+ * <ul>
+ * <li>A living entity is riding this entity</li>
+ * <li>The passenger's motor controls are transmitted to the vehicle entity's movement</li>
+ * <li>This means that for player passengers, normal movement controls (WASD, space bar) can be used to control the entity</li>
+ * </ul>
+ */
 public abstract class ControlledRidingAttribute extends Attribute {
 
     @Override
@@ -29,6 +38,10 @@ public abstract class ControlledRidingAttribute extends Attribute {
     }
 
     public abstract void onRide(float[] motion);
+
+    public boolean canControl(LivingEntity entity) {
+        return true;
+    }
 
     public abstract boolean canFly();
 
