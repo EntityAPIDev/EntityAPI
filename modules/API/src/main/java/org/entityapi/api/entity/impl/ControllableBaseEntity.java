@@ -363,6 +363,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
 
     @Override
     public void setDefaultBehaviours() {
+        this.getMind().getMovementBehaviourSelector().clearBehaviours();
         for (BehaviourItem behaviourItem : this.getDefaultMovementBehaviours()) {
             this.getMind().getMovementBehaviourSelector().addBehaviour(behaviourItem.getBehaviour(), behaviourItem.getPriority());
         }
