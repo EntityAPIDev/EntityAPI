@@ -38,7 +38,7 @@ public interface ControllableEntityHandle<T extends LivingEntity> {
 
     /**
      * Gets the default loot dropped when this entity is killed
-     * <p/>
+     * <p>
      * <strong>Not intended for public API consumption</strong>
      *
      * @return the default loot for this entity

@@ -21,7 +21,7 @@ package org.entityapi.api.entity;
 
 /**
  * Represents an entity that can be named
- * <p/>
+ * <p>
  * Name visibility will be modified according to whether the entity currently has a name set
  */
 public interface Nameable {
@@ -35,9 +35,9 @@ public interface Nameable {
 
     /**
      * Sets the name of this entity
-     * <p/>
+     * <p>
      * Setting to {@code null} will remove cause the name tag to be removed.
-     * <p/>
+     * <p>
      * Note that {@link org.bukkit.entity.LivingEntity#setCustomName(String)} can also be used on a ControllableEntity
      *
      * @param name the new name to apply to this entity

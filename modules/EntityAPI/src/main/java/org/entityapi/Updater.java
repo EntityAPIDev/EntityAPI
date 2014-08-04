@@ -41,7 +41,7 @@ import java.util.zip.ZipFile;
 
 /**
  * Check dev.bukkit.org to find updates for a given plugin, and download the updates if needed.
- * <p/>
+ * <p>
  * <b>VERY, VERY IMPORTANT</b>: Because there are no standards for adding auto-update toggles in your plugin's config,
  * this system provides NO CHECK WITH YOUR CONFIG to make sure the user has allowed auto-updating.
  * <br>
@@ -50,7 +50,7 @@ import java.util.zip.ZipFile;
  * <br>
  * If you fail to include this option in your config, your plugin will be <b>REJECTED</b> when you attempt to submit it
  * to dev.bukkit.org.
- * <p/>
+ * <p>
  * An example of a good configuration option would be something similar to 'auto-update: true' - if this value is set
  * to
  * false you may NOT run the auto-updater.
