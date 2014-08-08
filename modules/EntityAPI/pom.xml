@@ -149,7 +149,6 @@
                                      <shadedPattern>org.entityapi.libs.dsh105</shadedPattern>
                                  </relocation>
                                  <relocation>
-                                 <relocation>
                                      <pattern>com.captainbern*</pattern>
                                      <shadedPattern>org.entityapi.libs.captainbern</shadedPattern>
                                  </relocation>
