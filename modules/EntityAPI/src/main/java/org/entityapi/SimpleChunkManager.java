@@ -35,6 +35,7 @@ import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityHandle;
 import org.entityapi.api.entity.DespawnReason;
+import org.entityapi.api.entity.SpawnResult;
 import org.entityapi.exceptions.ControllableEntitySpawnException;
 
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class SimpleChunkManager implements ChunkManager {
         Chunk loadedChunk = event.getChunk();
         for (EntityChunkData entityChunkData : SPAWN_QUEUE) {
             if (loadedChunk == entityChunkData.getRespawnLocation().getChunk()) {
-                if (!entityChunkData.getControllableEntity().spawn(entityChunkData.getRespawnLocation())) {
+                if (entityChunkData.getControllableEntity().spawn(entityChunkData.getRespawnLocation()) == SpawnResult.FAILED) {
                     throw new ControllableEntitySpawnException();
                 }
             }
