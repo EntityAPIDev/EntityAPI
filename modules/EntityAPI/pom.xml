@@ -143,6 +143,17 @@
                                     <include>com.dsh105:Commodus</include>
                                 </includes>
                             </artifactSet>
+                            <relocations>
+                                 <relocation>
+                                     <pattern>com.dsh105*</pattern>
+                                     <shadedPattern>org.entityapi.libs.dsh105</shadedPattern>
+                                 </relocation>
+                                 <relocation>
+                                 <relocation>
+                                     <pattern>com.captainbern*</pattern>
+                                     <shadedPattern>org.entityapi.libs.captainbern</shadedPattern>
+                                 </relocation>
+                             </relocations>
                         </configuration>
                     </execution>
                 </executions>
