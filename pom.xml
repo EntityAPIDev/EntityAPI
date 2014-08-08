@@ -49,7 +49,7 @@
         <dependency>
             <groupId>com.dsh105</groupId>
             <artifactId>Commodus</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <version>1.0.2-SNAPSHOT</version>
         </dependency>
 
         <!-- CaptainBern's Reflection Framework -->
@@ -68,6 +68,12 @@
     </dependencies>
 
     <repositories>
+        <!-- DSH Repo -->
+        <repository>
+            <id>dsh-repo</id>
+            <url>http://repo.dsh105.com/</url>
+        </repository>
+    
         <!-- Hawk Repo -->
         <repository>
             <id>hawk-repo</id>
