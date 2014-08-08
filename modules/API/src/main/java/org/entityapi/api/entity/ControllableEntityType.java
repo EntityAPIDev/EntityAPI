@@ -39,7 +39,7 @@ public enum ControllableEntityType {
     HORSE("Horse", Constants.EntityTypes.Names.ENTITY_HORSE.getValue(), Constants.EntityTypes.Ids.ENTITY_HORSE.getValue(), false),
     IRON_GOLEM("IronGolem", Constants.EntityTypes.Names.ENTITY_IRON_GOLEM.getValue(), Constants.EntityTypes.Ids.ENTITY_IRON_GOLEM.getValue(), false),
     LAVA_SLIME("MagmaCube", Constants.EntityTypes.Names.ENTITY_LAVA_SLIME.getValue(), Constants.EntityTypes.Ids.ENTITY_LAVA_SLIME.getValue(), false),
-    MUSHROOMCOW("MuchroomCow", Constants.EntityTypes.Names.ENTITY_MUSHROOM_COW.getValue(), Constants.EntityTypes.Ids.ENTITY_MUSHROOM_COW.getValue(), false),
+    MUSHROOMCOW("MushroomCow", Constants.EntityTypes.Names.ENTITY_MUSHROOM_COW.getValue(), Constants.EntityTypes.Ids.ENTITY_MUSHROOM_COW.getValue(), false),
     OZELOT("Ocelot", Constants.EntityTypes.Names.ENTITY_OZELOT.getValue(), Constants.EntityTypes.Ids.ENTITY_OZELOT.getValue(), false),
     PIG("Pig", Constants.EntityTypes.Names.ENTITY_PIG.getValue(), Constants.EntityTypes.Ids.ENTITY_PIG.getValue(), false),
     PIG_ZOMBIE("PigZombie", Constants.EntityTypes.Names.ENTITY_PIG_ZOMBIE.getValue(), Constants.EntityTypes.Ids.ENTITY_PIG_ZOMBIE.getValue(), false),
