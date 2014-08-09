@@ -60,7 +60,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
     protected HashMap<EntitySound, Map<String, String>> sounds = new HashMap<>();
 
     public ControllableBaseEntity(int id, ControllableEntityType entityType, EntityManager manager) {
-        this.accessor = (NMSAccessor) new Reflection().reflect(EntityAPI.INTERNAL_NMS_PATH + ".NMSAccessorImpl").newInstance();
+        this.accessor = (NMSAccessor) new Reflection().reflect(EntityAPI.INTERNAL_NMS_PATH + ".NMSAccessorImpl").newInstance(this);
         this.manager = manager;
         this.ID = id;
         this.mind = new Mind();
