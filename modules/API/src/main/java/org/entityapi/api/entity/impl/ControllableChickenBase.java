@@ -39,7 +39,7 @@ public class ControllableChickenBase extends ControllableBaseEntity<Chicken, Con
     public ControllableChickenBase(int id, ControllableChickenHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultMaterialLoot();
+        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

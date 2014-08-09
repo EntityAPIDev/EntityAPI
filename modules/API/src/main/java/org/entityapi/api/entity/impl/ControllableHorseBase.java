@@ -38,7 +38,7 @@ public class ControllableHorseBase extends ControllableBaseEntity<Horse, Control
     public ControllableHorseBase(int id, ControllableHorseHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultMaterialLoot();
+        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

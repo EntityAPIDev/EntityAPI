@@ -29,13 +29,14 @@ import org.entityapi.api.EntityManager;
 import org.entityapi.api.NMSAccessor;
 import org.entityapi.api.entity.mind.Mind;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
+import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Represents a ControllableEntity
- * <p/>
+ * <p>
  * This acts as a base class for all other entity types to stem off
  *
  * @param <T> the Bukkit entity that this ControllableEntity represents
@@ -52,7 +53,7 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
 
     /**
      * Returns an accessor for certain NMS methods
-     * <p/>
+     * <p>
      * <strong>Not recommended for public API consumption</strong>
      *
      * @return the accessor to be utilised for this entity
@@ -61,7 +62,7 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
 
     /**
      * Gets the ID of this entity
-     * <p/>
+     * <p>
      * Entity IDs are unique to this entity until it is removed from its corresponding {@link
      * org.entityapi.api.EntityManager}. Once removed, this entity ID will be recycled and applied to another entity.
      * It
@@ -74,10 +75,10 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
 
     /**
      * Gets the mind of this entity
-     * <p/>
+     * <p>
      * The entity mind is the hub for all general entity activity. It makes use of priorities behaviour and attribute
      * ticking systems, taking into account those changes made through the API.
-     * <p/>
+     * <p>
      * Most activity will take place in the mind, or 'brain', of the entity
      *
      * @return the mind of this entity
@@ -86,7 +87,7 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
 
     /**
      * Gets the Bukkit alternative that corresponds to this entity
-     * <p/>
+     * <p>
      * Often, certain functions have not been included in EntityAPI as a Bukkit alternative already exists
      *
      * @return the Bukkit entity that represents this ControllableEntity
@@ -103,7 +104,7 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
 
     /**
      * Gets the type of this entity
-     * <p/>
+     * <p>
      * Types can be most appropriately used in a similar fashion to {@link org.bukkit.entity.EntityType}
      *
      * @return the type of this entity
@@ -126,7 +127,7 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
 
     /**
      * Spawns this ControllableEntity at the specified location
-     * <p/>
+     * <p>
      * Returns a {@link org.entityapi.api.entity.SpawnResult} representing the success of spawning this entity
      *
      * @param location the Location to spawn this entity at
@@ -137,10 +138,10 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
 
     /**
      * Despawns this ControllableEntity
-     * <p/>
+     * <p>
      * Despawning an entity removes it from both the current world and EntityManager until respawned. This entity's
      * mind, attributes and behaviours will remain intact for later use
-     * <p/>
+     * <p>
      * Plugins should make use of {@link org.entityapi.api.entity.DespawnReason#CUSTOM} unless under specific
      * circumstances where another reason may be more appropriate
      *
@@ -148,6 +149,19 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
      */
     void despawn(DespawnReason despawnReason);
 
+    /**
+     * Returns whether this ControllableEntity is currently spawned
+     * <p>
+     * This will return true if the entity has despawned, possibly due to one of the following reasons:
+     * <ul>
+     * <li>This entity dies from external sources</li>
+     * <li>This entity is despawned using the {@link #despawn(DespawnReason)} method</li>
+     * <li>The chunk this entity is positioned in despawns. In this case, the entity will be automatically respanwned
+     * when the chunk is loaded again</li>
+     * </ul>
+     *
+     * @return true if this entity is currently living and spawned in a world
+     */
     boolean isSpawned();
 
     @Override
@@ -208,19 +222,99 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
 
     boolean navigateTo(Vector to, double speed);
 
+    /**
+     * Resets the behavioural features of this entity back to default
+     * <p>
+     * Any existing behaviours will be cleared from this entity's mind, with the default behaviours being applied. The
+     * default behaviours for an entity can be accessed using {@link #getDefaultMovementBehaviours()} and {@link
+     * #getDefaultTargetingBehaviours()}
+     */
     void setDefaultBehaviours();
 
+    /**
+     * Gets the default movement based behaviours prescribed to this entity
+     *
+     * @return the default movement behaviours for this entity, or an empty array if none exist
+     */
+    BehaviourItem[] getDefaultMovementBehaviours();
+
+    /**
+     * Gets the default targeting based behaviours prescribed to this entity
+     *
+     * @return the default targeting behaviours for this entity, or an empty array if none exist
+     */
+    BehaviourItem[] getDefaultTargetingBehaviours();
+
+    /**
+     * Gets whether this entity is currently in a stationary state
+     * <p>
+     * All movement for a stationary entity will be prevented. Any pitch and yaw rotations will remain fixed while an
+     * entity is stationary.
+     *
+     * @return true if this entity is currently stationary
+     */
     boolean isStationary();
 
+    /**
+     * Sets the whether or not this entity is stationary (not moving)
+     * <p>
+     * All movement for a stationary entity will be prevented. Any pitch and yaw rotations will remain fixed while an
+     * entity is stationary.
+     * <p>
+     * Current pitch and yaw rotations will be applied upon being set to a stationary status
+     *
+     * @param flag true if this entity is to be stationary
+     */
     void setStationary(boolean flag);
 
-    void setYaw(float value);
+    /**
+     * Sets the yaw of this entity's location as a fixed value, measured in degrees.
+     * <ul>
+     * <li>A yaw of 0 or 360 represents the positive z direction.
+     * <li>A yaw of 180 represents the negative z direction.
+     * <li>A yaw of 90 represents the negative x direction.
+     * <li>A yaw of 270 represents the positive x direction.
+     * </ul>
+     * Increasing yaw values are the equivalent of turning to your
+     * right-facing, increasing the scale of the next respective axis, and
+     * decreasing the scale of the previous axis.
+     *
+     * @param value the new yaw rotation
+     * @see Location#setYaw(float)
+     */
+    void setFixedYaw(float value);
 
-    void setHeadYaw(float value);
+    /**
+     * Sets the head yaw of this entity's location as a fixed value, measured in degrees.
+     * <ul>
+     * <li>A yaw of 0 or 360 represents the positive z direction.
+     * <li>A yaw of 180 represents the negative z direction.
+     * <li>A yaw of 90 represents the negative x direction.
+     * <li>A yaw of 270 represents the positive x direction.
+     * </ul>
+     * Increasing yaw values are the equivalent of turning to your
+     * right-facing, increasing the scale of the next respective axis, and
+     * decreasing the scale of the previous axis.
+     *
+     * @param value the new head yaw rotation
+     * @see Location#setYaw(float)
+     */
+    void setFixedHeadYaw(float value);
 
-    void setPitch(float value);
-
-    boolean isControllableRidingEnabled();
-
-    ControlledRidingAttribute enableControllableRiding(boolean flag);
+    /**
+     * Sets the pitch of this entity's location as a fixed value, measured in degrees.
+     * <ul>
+     * <li>A pitch of 0 represents level forward facing.
+     * <li>A pitch of 90 represents downward facing, or negative y
+     * direction.
+     * <li>A pitch of -90 represents upward facing, or positive y direction.
+     * <ul>
+     * Increasing pitch values the equivalent of looking down.
+     * <strong>Note: A fixed pitch value will only apply to a stationary entity</strong>
+     *
+     * @param value the new pitch rotation
+     * @see Location#setPitch(float) (float)
+     * @see #setStationary(boolean)
+     */
+    void setFixedPitch(float value);
 }

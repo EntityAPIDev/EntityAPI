@@ -41,7 +41,7 @@ public class ControllableIronGolemBase extends ControllableBaseEntity<IronGolem,
     public ControllableIronGolemBase(int id, ControllableIronGolemHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultMaterialLoot();
+        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

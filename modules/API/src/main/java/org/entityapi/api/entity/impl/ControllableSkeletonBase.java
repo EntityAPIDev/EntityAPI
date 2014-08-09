@@ -38,7 +38,7 @@ public class ControllableSkeletonBase extends ControllableBaseEntity<Skeleton, C
     public ControllableSkeletonBase(int id, ControllableSkeletonHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultMaterialLoot();
+        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

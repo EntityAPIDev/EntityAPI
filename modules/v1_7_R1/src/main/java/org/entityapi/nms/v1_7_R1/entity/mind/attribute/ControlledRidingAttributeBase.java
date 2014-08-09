@@ -22,6 +22,7 @@ package org.entityapi.nms.v1_7_R1.entity.mind.attribute;
 import com.captainbern.reflection.Reflection;
 import net.minecraft.server.v1_7_R1.EntityHorse;
 import net.minecraft.server.v1_7_R1.EntityLiving;
+import org.bukkit.entity.LivingEntity;
 import org.entityapi.api.entity.mind.Mind;
 import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 
@@ -46,6 +47,10 @@ public class ControlledRidingAttributeBase extends ControlledRidingAttribute {
     public void onRide(float[] motion) {
         EntityLiving entity = (EntityLiving) this.getControllableEntity().getHandle();
         if (entity.passenger == null) {
+            return;
+        }
+
+        if (!canControl((LivingEntity) entity.getBukkitEntity())) {
             return;
         }
 

@@ -35,7 +35,7 @@ public class ControllableEndermanBase extends ControllableBaseEntity<Enderman, C
     public ControllableEndermanBase(int id, ControllableEndermanHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultMaterialLoot();
+        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

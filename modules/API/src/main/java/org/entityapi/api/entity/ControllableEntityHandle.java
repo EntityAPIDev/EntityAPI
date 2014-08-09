@@ -23,14 +23,36 @@ import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 
 /**
- * Represents the NMS entity
+ * Represents the NMS handle for a {@link org.entityapi.api.entity.ControllableEntity}
+ *
+ * @param <T> Bukkit entity represented by this ControllableEntity handle
  */
-
 public interface ControllableEntityHandle<T extends LivingEntity> {
 
+    /**
+     * Gets the ControllableEntity that this handle is representing
+     *
+     * @return the ControllableEntity for this entity
+     */
     ControllableEntity<T, ?> getControllableEntity();
 
-    Material getDefaultMaterialLoot();
+    /**
+     * Gets the default loot dropped when this entity is killed
+     * <p>
+     * <strong>Not intended for public API consumption</strong>
+     *
+     * @return the default loot for this entity
+     */
+    Material getDefaultLoot();
 
+    /**
+     * Modifies the position of this entity
+     *
+     * @param x     x-coordinate of the new position
+     * @param y     y-coordinate of the new position
+     * @param z     z-coordinate of the new position
+     * @param yaw   yaw rotation of the new position
+     * @param pitch pitch rotation of the new position
+     */
     void setPositionRotation(double x, double y, double z, float yaw, float pitch);
 }

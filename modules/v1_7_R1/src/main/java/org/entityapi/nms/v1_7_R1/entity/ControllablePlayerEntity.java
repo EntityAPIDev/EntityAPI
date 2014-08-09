@@ -65,7 +65,7 @@ public class ControllablePlayerEntity extends EntityPlayer implements Controllab
     }
 
     @Override
-    public org.bukkit.Material getDefaultMaterialLoot() {
+    public org.bukkit.Material getDefaultLoot() {
         return null;
     }
 

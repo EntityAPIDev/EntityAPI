@@ -363,6 +363,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
 
     @Override
     public void setDefaultBehaviours() {
+        this.getMind().getMovementBehaviourSelector().clearBehaviours();
         for (BehaviourItem behaviourItem : this.getDefaultMovementBehaviours()) {
             this.getMind().getMovementBehaviourSelector().addBehaviour(behaviourItem.getBehaviour(), behaviourItem.getPriority());
         }
@@ -372,10 +373,12 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
         }
     }
 
+    @Override
     public BehaviourItem[] getDefaultMovementBehaviours() {
         return new BehaviourItem[0];
     }
 
+    @Override
     public BehaviourItem[] getDefaultTargetingBehaviours() {
         return new BehaviourItem[0];
     }
@@ -388,48 +391,26 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
     @Override
     public void setStationary(boolean flag) {
         this.getMind().setStationary(flag);
-        this.getMind().setFixedYaw(this.getBukkitEntity().getLocation().getYaw());
-        this.getMind().setFixedHeadYaw(accessor.getFixedHeadYaw());
-        this.getMind().setFixedPitch(this.getBukkitEntity().getLocation().getPitch());
     }
 
     @Override
-    public void setYaw(float value) {
+    public void setFixedYaw(float value) {
         if (this.getMind().isStationary()) {
             this.getMind().setFixedYaw(value);
         }
-        accessor.setYaw(value);
     }
 
     @Override
-    public void setHeadYaw(float value) {
+    public void setFixedHeadYaw(float value) {
         if (this.getMind().isStationary()) {
             this.getMind().setFixedHeadYaw(value);
         }
-        accessor.setHeadYaw(value);
     }
 
     @Override
-    public void setPitch(float value) {
+    public void setFixedPitch(float value) {
         if (this.getMind().isStationary()) {
             this.getMind().setFixedPitch(value);
         }
-        accessor.setPitch(value);
-    }
-
-    @Override
-    public boolean isControllableRidingEnabled() {
-        return this.getMind().hasAttribute(ControlledRidingAttribute.class);
-    }
-
-    @Override
-    public ControlledRidingAttribute enableControllableRiding(boolean flag) {
-        ControlledRidingAttribute controlledRidingAttribute = (ControlledRidingAttribute) new Reflection().reflect(EntityAPI.INTERNAL_NMS_PATH + ".entity.mind.attribute.ControlledRidingAttributeBase").newInstance();
-        if (flag) {
-            this.getMind().addAttribute(controlledRidingAttribute);
-        } else {
-            this.getMind().clearAttribute(controlledRidingAttribute.getClass());
-        }
-        return controlledRidingAttribute;
     }
 }

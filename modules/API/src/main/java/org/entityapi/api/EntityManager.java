@@ -24,10 +24,13 @@ import org.bukkit.plugin.Plugin;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.DespawnReason;
+import org.entityapi.api.entity.SpawnResult;
 
 import java.util.Collection;
 
 public interface EntityManager {
+
+    public Collection<ControllableEntity> getEntities();
 
     ChunkManager getChunkManager();
 
@@ -45,7 +48,7 @@ public interface EntityManager {
 
     public ControllableEntity spawnEntity(ControllableEntityType entityType, Location location, boolean prepare);
 
-    public Collection<ControllableEntity> getEntities();
+    SpawnResult spawn(ControllableEntity controllableEntity, Location location);
 
     public void despawnAll();
 
@@ -54,8 +57,6 @@ public interface EntityManager {
     void despawn(ControllableEntity controllableEntity);
 
     void despawn(ControllableEntity controllableEntity, DespawnReason despawnReason);
-
-    boolean spawn(ControllableEntity controllableEntity, Location location);
 
     @Override
     public String toString();

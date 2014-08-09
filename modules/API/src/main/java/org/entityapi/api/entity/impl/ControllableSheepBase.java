@@ -39,7 +39,7 @@ public class ControllableSheepBase extends ControllableBaseEntity<Sheep, Control
     public ControllableSheepBase(int id, ControllableSheepHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultMaterialLoot();
+        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

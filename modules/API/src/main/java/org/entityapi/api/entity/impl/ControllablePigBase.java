@@ -39,7 +39,7 @@ public class ControllablePigBase extends ControllableBaseEntity<Pig, Controllabl
     public ControllablePigBase(int id, ControllablePigHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultMaterialLoot();
+        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

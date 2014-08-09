@@ -30,6 +30,7 @@ import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.DespawnReason;
+import org.entityapi.api.entity.SpawnResult;
 import org.entityapi.api.entity.mind.attribute.DespawnAttribute;
 import org.entityapi.api.events.ControllableEntityDeathEvent;
 import org.entityapi.api.events.ControllableEntityDespawnEvent;
@@ -145,7 +146,7 @@ public class SimpleEntityManager implements EntityManager {
     }
 
     @Override
-    public boolean spawn(ControllableEntity controllableEntity, Location location) {
+    public SpawnResult spawn(ControllableEntity controllableEntity, Location location) {
         return controllableEntity.spawn(location);
     }
 
