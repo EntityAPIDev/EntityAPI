@@ -110,7 +110,7 @@ public class EntityBuilder {
         }
 
         int id = this.ENTITYMANAGER.getNextID();
-        ControllableEntity entity = new Reflection().reflect(this.TYPE.getControllableClass()).getSafeConstructor(Integer.class, EntityManager.class).getAccessor().invoke(id, this.ENTITYMANAGER);
+        ControllableEntity entity = new Reflection().reflect(this.TYPE.getControllableClass()).getSafeConstructor(int.class, EntityManager.class).getAccessor().invoke(id, this.ENTITYMANAGER);
         if (entity != null) {
             if (this.PREPARE || this.MIND == null) {
                 this.MIND = new Mind();
