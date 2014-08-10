@@ -58,11 +58,13 @@ public enum ControllableEntityType {
 
     private final String name;
     private final int id;
-    private final Class<? extends ControllableEntity> controllableClass;
+    private final Class<? extends ControllableEntity> controllableInterface;
+    private final Class<? extends ControllableEntityBase> controllableClass;
     private final Class<? extends ControllableEntityHandle> handleClass;
     private final boolean isNameRequired;
 
     ControllableEntityType(String classPath, String name, int id, boolean isNameRequired) {
+        this.controllableInterface = new Reflection().reflect("org.entityapi.api.entity.type.Controllable" + classPath).getReflectedClass();
         this.controllableClass = new Reflection().reflect("org.entityapi.api.entity.impl.Controllable" + classPath + "Base").getReflectedClass();
         this.handleClass = new Reflection().reflect(EntityAPI.INTERNAL_NMS_PATH + ".entity.Controllable" + classPath + "Entity").getReflectedClass();
         if (!ControllableEntityHandle.class.isAssignableFrom(handleClass)) {
@@ -85,7 +87,11 @@ public enum ControllableEntityType {
         return this.isNameRequired;
     }
 
-    public <T extends ControllableEntity> Class<T> getControllableClass() {
+public <T extends ControllableEntity> Class<T> getControllableClass() {
+        return (Class<T>) this.controllableInterface;
+    }
+
+    public <T extends ControllableEntityBase> Class<T> getControllableClass() {
         return (Class<T>) this.controllableClass;
     }
 
