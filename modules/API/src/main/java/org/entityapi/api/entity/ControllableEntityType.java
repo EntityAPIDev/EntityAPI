@@ -60,7 +60,7 @@ public enum ControllableEntityType {
     private final String name;
     private final int id;
     private final Class<? extends ControllableEntity> controllableInterface;
-    private final Class<? extends ControllableEntityBase> controllableClass;
+    private final Class<? extends ControllableEntity> controllableClass;
     private final Class<? extends ControllableEntityHandle> handleClass;
     private final boolean isNameRequired;
 
@@ -92,7 +92,7 @@ public enum ControllableEntityType {
         return (Class<T>) this.controllableInterface;
     }
 
-    public <T extends ControllableEntityBase> Class<T> getControllableClass() {
+    public <T extends ControllableEntity> Class<T> getControllableClass() {
         return (Class<T>) this.controllableClass;
     }
 
