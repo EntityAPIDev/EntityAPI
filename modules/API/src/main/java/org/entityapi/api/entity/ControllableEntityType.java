@@ -87,7 +87,7 @@ public enum ControllableEntityType {
         return this.isNameRequired;
     }
 
-public <T extends ControllableEntity> Class<T> getControllableClass() {
+    public <T extends ControllableEntity> Class<T> getControllableInterface() {
         return (Class<T>) this.controllableInterface;
     }
 
