@@ -41,7 +41,7 @@ public class SpawnUtil {
     }
 
     private static boolean addEntity(ControllableEntity controllableEntity, Location spawnLocation) {
-        SafeConstructor<ControllableEntityHandle> entityConstructor = new Reflection().reflect(controllableEntity.getEntityType().getHandleClass()).getSafeConstructor(MinecraftReflection.getMinecraftClass("World"), ControllableEntity.class);
+        SafeConstructor<ControllableEntityHandle> entityConstructor = new Reflection().reflect(controllableEntity.getEntityType().getHandleClass()).getSafeConstructor(MinecraftReflection.getMinecraftClass("World"), controllableEntity.getEntityType().getControllableInterface());
         ControllableEntityHandle controllableEntityHandle = entityConstructor.getAccessor().invoke(WorldUtil.toNMSWorld(spawnLocation.getWorld()), controllableEntity);
         controllableEntityHandle.setPositionRotation(spawnLocation.getX(), spawnLocation.getY(), spawnLocation.getZ(), spawnLocation.getYaw(), spawnLocation.getPitch());
 
