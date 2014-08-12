@@ -20,6 +20,7 @@
 package org.entityapi.api;
 
 import org.bukkit.Location;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.plugin.Plugin;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityType;
@@ -31,6 +32,10 @@ import java.util.Collection;
 public interface EntityManager {
 
     public Collection<ControllableEntity> getEntities();
+
+    Collection<ControllableEntity> getEntitiesByType(ControllableEntityType entityType);
+
+    <T extends LivingEntity> Collection<ControllableEntity<T, ?>> getEntitiesByType(Class<T> classRestriction);
 
     ChunkManager getChunkManager();
 

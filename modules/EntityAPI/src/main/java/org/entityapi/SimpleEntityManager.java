@@ -23,6 +23,7 @@ import com.dsh105.commodus.GeneralUtil;
 import com.google.common.collect.Maps;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.plugin.Plugin;
 import org.entityapi.api.ChunkManager;
 import org.entityapi.api.EntityBuilder;
@@ -82,6 +83,29 @@ public class SimpleEntityManager implements EntityManager {
     @Override
     public Collection<ControllableEntity> getEntities() {
         return Collections.unmodifiableCollection(this.ENTITIES.values());
+    }
+
+    // TODO: probably should cache this
+    @Override
+    public Collection<ControllableEntity> getEntitiesByType(ControllableEntityType entityType) {
+        List<ControllableEntity> entities = new ArrayList<>();
+        for (ControllableEntity entity : getEntities()) {
+            if (entityType == entity.getEntityType()) {
+                entities.add(entity);
+            }
+        }
+        return Collections.unmodifiableCollection(entities);
+    }
+
+    @Override
+    public <T extends LivingEntity> Collection<ControllableEntity<T, ?>> getEntitiesByType(Class<T> classRestriction) {
+        List<ControllableEntity<T, ?>> entities = new ArrayList<>();
+        for (ControllableEntity entity : getEntities()) {
+            if (classRestriction.isAssignableFrom(entity.getBukkitEntity().getClass())) {
+                entities.add(entity);
+            }
+        }
+        return Collections.unmodifiableCollection(entities);
     }
 
     @Override
