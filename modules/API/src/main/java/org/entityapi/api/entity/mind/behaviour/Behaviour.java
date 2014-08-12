@@ -46,6 +46,6 @@ public abstract class Behaviour<T extends ControllableEntity> {
     }
 
     protected String getKey() {
-        return this.getClass().getSimpleName().split("Goal")[1];
+        return this.getClass().getSimpleName().split("Behaviour")[1]; // TODO: FIXME: perhaps return the (simple) name of this class instead ?
     }
 }

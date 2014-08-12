@@ -24,6 +24,8 @@ public class EntityUtil {
 
     protected static MethodAccessor<Void> ADD_GOAL;
 
+    protected static FieldAccessor<Object> GOAL_SELECTOR;
+
     /**
      * Util classes shouldn't have a public or protected constructor
      */
@@ -39,28 +41,28 @@ public class EntityUtil {
     }
 
     public static List getGoals(Object nmsEntityHandle) {
-        if (GOALS == null) {
+        if (GOALS == null || GOAL_SELECTOR == null) {
             initializeFields();
         }
 
-        return GOALS.get(nmsEntityHandle);
+        return GOALS.get(GOAL_SELECTOR.get(nmsEntityHandle));
     }
 
     public static List getActiveGoals(Object nmsEntityHandle) {
-        if (ACTIVE_GOALS == null) {
+        if (ACTIVE_GOALS == null || GOAL_SELECTOR == null) {
             initializeFields();
         }
 
-        return ACTIVE_GOALS.get(nmsEntityHandle);
+        return ACTIVE_GOALS.get(GOAL_SELECTOR.get(nmsEntityHandle));
     }
 
     public static void clearGoals(Object nmsEntityHandle) {
-        if (GOALS == null || ACTIVE_GOALS == null) {
+        if (GOALS == null || ACTIVE_GOALS == null || GOAL_SELECTOR == null) {
             initializeFields();
         }
 
-        GOALS.get(nmsEntityHandle).clear();
-        ACTIVE_GOALS.get(nmsEntityHandle).clear();
+        GOALS.get(GOAL_SELECTOR.get(nmsEntityHandle)).clear();
+        ACTIVE_GOALS.get(GOAL_SELECTOR.get(nmsEntityHandle)).clear();
     }
 
     protected static void initializeFields() {
@@ -68,7 +70,7 @@ public class EntityUtil {
 
             ClassTemplate goalTemplate = new Reflection().reflect(MinecraftReflection.getMinecraftClass("PathfinderGoalSelector"));
 
-            List<SafeMethod<Void>> methodCandidates = goalTemplate.getSafeMethods(withArguments(int.class, goalTemplate.getReflectedClass()));
+            List<SafeMethod<Void>> methodCandidates = goalTemplate.getSafeMethods(withArguments(int.class, MinecraftReflection.getMinecraftClass("PathfinderGoal")));
             if (methodCandidates.size() > 0) {
                 ADD_GOAL = methodCandidates.get(0).getAccessor();
             } else {
@@ -81,6 +83,16 @@ public class EntityUtil {
                 ACTIVE_GOALS = fieldCandidates.get(0).getAccessor();
             } else {
                 throw new RuntimeException("Failed to initialize the goal-lists!");
+            }
+
+            // The GoalSelector
+            ClassTemplate entityTemplate = new Reflection().reflect(MinecraftReflection.getMinecraftClass("EntityInsentient"));
+            List<SafeField<Object>> candidates = entityTemplate.getSafeFields(withType(goalTemplate.getReflectedClass()));
+
+            if (candidates.size() > 0) {
+                GOAL_SELECTOR = candidates.get(0).getAccessor(); // the normal selector is the first one
+            } else {
+                throw new RuntimeException("Failed to initialize the GoalSelector field for the entities");
             }
 
         } catch (Exception ಠ_ಠ) {
