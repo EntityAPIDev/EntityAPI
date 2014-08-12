@@ -29,7 +29,7 @@ import org.entityapi.api.entity.type.nms.ControllableSilverfishHandle;
 public class ControllableSilverfishBase extends ControllableBaseEntity<Silverfish, ControllableSilverfishHandle> implements ControllableSilverfish {
 
     public ControllableSilverfishBase(int id, EntityManager manager) {
-        super(id, ControllableEntityType.SLIME, manager);
+        super(id, ControllableEntityType.SILVERFISH, manager);
     }
 
     public ControllableSilverfishBase(int id, ControllableSilverfishHandle entityHandle, EntityManager manager) {

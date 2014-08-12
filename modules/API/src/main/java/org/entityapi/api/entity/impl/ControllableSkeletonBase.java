@@ -32,7 +32,7 @@ import org.entityapi.api.entity.type.nms.ControllableSkeletonHandle;
 public class ControllableSkeletonBase extends ControllableBaseEntity<Skeleton, ControllableSkeletonHandle> implements ControllableSkeleton {
 
     public ControllableSkeletonBase(int id, EntityManager manager) {
-        super(id, ControllableEntityType.SLIME, manager);
+        super(id, ControllableEntityType.SKELETON, manager);
     }
 
     public ControllableSkeletonBase(int id, ControllableSkeletonHandle entityHandle, EntityManager manager) {

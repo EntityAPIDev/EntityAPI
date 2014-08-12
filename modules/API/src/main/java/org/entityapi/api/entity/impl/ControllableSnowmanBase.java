@@ -32,7 +32,7 @@ import org.entityapi.api.entity.type.nms.ControllableSnowmanHandle;
 public class ControllableSnowmanBase extends ControllableBaseEntity<Snowman, ControllableSnowmanHandle> implements ControllableSnowman {
 
     public ControllableSnowmanBase(int id, EntityManager manager) {
-        super(id, ControllableEntityType.SLIME, manager);
+        super(id, ControllableEntityType.SNOWMAN, manager);
     }
 
     public ControllableSnowmanBase(int id, ControllableSnowmanHandle entityHandle, EntityManager manager) {

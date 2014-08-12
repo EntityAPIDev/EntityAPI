@@ -33,7 +33,7 @@ import org.entityapi.api.entity.type.nms.ControllableSheepHandle;
 public class ControllableSheepBase extends ControllableBaseEntity<Sheep, ControllableSheepHandle> implements ControllableSheep {
 
     public ControllableSheepBase(int id, EntityManager manager) {
-        super(id, ControllableEntityType.SLIME, manager);
+        super(id, ControllableEntityType.SHEEP, manager);
     }
 
     public ControllableSheepBase(int id, ControllableSheepHandle entityHandle, EntityManager manager) {
