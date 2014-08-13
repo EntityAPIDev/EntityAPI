@@ -5,7 +5,7 @@ A Bukkit API that enables you to easily control your own custom entities
 
 Current code base only supports 1.7.2. We will be updating to the latest Minecraft version once we are satisfied with our API.
 
-In meanwhile you can listen to this song: https://www.youtube.com/watch?v=u6KkF56Cr90 *cough*
+In meanwhile you can listen to this song: https://www.youtube.com/watch?v=2fngvQS_PmQ *cough*
 
 And nope, there's currently no JavaDocs or any sort of documentation on the API...yet...
 
