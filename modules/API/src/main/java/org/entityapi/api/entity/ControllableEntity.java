@@ -308,7 +308,7 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
      * <li>A pitch of 90 represents downward facing, or negative y
      * direction.
      * <li>A pitch of -90 represents upward facing, or positive y direction.
-     * <ul>
+     * </ul>
      * Increasing pitch values the equivalent of looking down.
      * <strong>Note: A fixed pitch value will only apply to a stationary entity</strong>
      *
