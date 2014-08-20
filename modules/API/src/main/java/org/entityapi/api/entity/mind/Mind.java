@@ -28,6 +28,7 @@ import org.entityapi.api.entity.mind.attribute.*;
 import org.entityapi.api.entity.mind.attribute.def.*;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Mind {
 
@@ -35,7 +36,7 @@ public class Mind {
 
     static {
         if (REQUIRED_DEFAULTS == null) {
-            REQUIRED_DEFAULTS = new HashMap<>();
+            REQUIRED_DEFAULTS = new ConcurrentHashMap<>();
             REQUIRED_DEFAULTS.put(CollideAttribute.class, new DefaultCollideAttribute());
             REQUIRED_DEFAULTS.put(InteractAttribute.class, new DefaultInteractAttribute());
             REQUIRED_DEFAULTS.put(PushAttribute.class, new DefaultPushAttribute());
@@ -45,6 +46,7 @@ public class Mind {
 
     protected ControllableEntity controllableEntity;
     protected HashMap<String, Attribute> attributes = new HashMap<>();
+    protected final HashMap<String, Attribute> defaultAttributes = new HashMap<>();
 
     protected BehaviourSelector behaviourSelector;
     protected BehaviourSelector targetSelector;
@@ -55,7 +57,6 @@ public class Mind {
     protected float fixedPitch;
 
     public Mind() {
-        this.fillRequiredDefaults();
     }
 
     public void setControllableEntity(ControllableEntity controllableEntity) {
@@ -158,6 +159,12 @@ public class Mind {
                 return (T) entry.getValue();
             }
         }
+        for (Map.Entry<Class<? extends Attribute>, Attribute> entry : REQUIRED_DEFAULTS.entrySet()) {
+            if (type.isAssignableFrom(entry.getKey())) {
+                addAttribute(entry.getValue());
+                return (T) getAttribute(entry.getKey());
+            }
+        }
         return null;
     }
 
@@ -188,20 +195,14 @@ public class Mind {
         return false;
     }
 
-    private void fillRequiredDefaults() {
-        for (Map.Entry<Class<? extends Attribute>, Attribute> entry : REQUIRED_DEFAULTS.entrySet()) {
-            if (!hasAttribute(entry.getKey())) {
-                addAttribute(entry.getValue());
-            }
-        }
-    }
-
     public void tick() {
+        for (Class<? extends Attribute> attributeClass : REQUIRED_DEFAULTS.keySet()) {
+            getAttribute(attributeClass);
+        }
+
         if (!this.controllableEntity.isSpawned()) {
             return;
         }
-
-        this.fillRequiredDefaults();
 
         if (this.behaviourSelector != null) {
             this.behaviourSelector.updateBehaviours();
