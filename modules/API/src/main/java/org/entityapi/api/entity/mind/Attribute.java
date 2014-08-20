@@ -59,7 +59,7 @@ public abstract class Attribute<T extends ControllableEntityEvent> {
             }
         }
         if (attribute != null) {
-            this.mind = mind;
+            attribute.mind = mind;
         }
         return attribute;
     }
@@ -72,7 +72,6 @@ public abstract class Attribute<T extends ControllableEntityEvent> {
     }
 
     protected void onRemove(Mind mind) {
-
     }
 
     public Mind getMind() {
