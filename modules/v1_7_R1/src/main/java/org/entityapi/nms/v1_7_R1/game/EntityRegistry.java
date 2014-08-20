@@ -26,6 +26,7 @@ import com.captainbern.reflection.SafeField;
 import com.captainbern.reflection.SafeMethod;
 import com.captainbern.reflection.accessor.FieldAccessor;
 import com.captainbern.reflection.accessor.MethodAccessor;
+import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.game.EntityRegistrationEntry;
 import org.entityapi.game.IEntityRegistry;
 
@@ -62,6 +63,19 @@ public class EntityRegistry extends IEntityRegistry {
 
         NAME_TO_CLASS.getStatic().remove(entityRegistrationEntry.getName());
         ID_TO_CLASS.getStatic().remove(entityRegistrationEntry.getId());
+    }
+
+    @Override
+    public EntityRegistrationEntry getDefaultEntryFor(ControllableEntityType entityType) {
+        if (NAME_TO_CLASS == null || ID_TO_CLASS == null)
+            initializeFields();
+
+        Class<?> nameToClass = (Class<?>) NAME_TO_CLASS.getStatic().get(entityType.getName());
+        Class<?> idToClass = (Class<?>) ID_TO_CLASS.getStatic().get(entityType.getId());
+
+        // TODO: somehow check + fix if anything appears to be broken
+
+        return new EntityRegistrationEntry(entityType.getName(), entityType.getId(), nameToClass);
     }
 
     protected static void initializeFields() {
