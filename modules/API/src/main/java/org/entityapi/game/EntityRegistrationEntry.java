@@ -1,5 +1,7 @@
 package org.entityapi.game;
 
+import org.entityapi.api.entity.ControllableEntityType;
+
 public class EntityRegistrationEntry {
 
     private final String name;
@@ -22,5 +24,9 @@ public class EntityRegistrationEntry {
 
     public Class<?> getEntityClass() {
         return this.entityClass;
+    }
+
+    public static EntityRegistrationEntry createFor(ControllableEntityType entityType) {
+        return new EntityRegistrationEntry(entityType.getName(), entityType.getId(), entityType.getHandleClass());
     }
 }
