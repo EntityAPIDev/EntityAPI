@@ -46,7 +46,6 @@ public class Mind {
 
     protected ControllableEntity controllableEntity;
     protected HashMap<String, Attribute> attributes = new HashMap<>();
-    protected final HashMap<String, Attribute> defaultAttributes = new HashMap<>();
 
     protected BehaviourSelector behaviourSelector;
     protected BehaviourSelector targetSelector;
