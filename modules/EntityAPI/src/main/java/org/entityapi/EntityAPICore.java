@@ -98,6 +98,8 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
             return;
         }
 
+        this.initializeGameComponents();
+
         CORE_INSTANCE = this;
         EntityAPI.setCore(CORE_INSTANCE);
 
