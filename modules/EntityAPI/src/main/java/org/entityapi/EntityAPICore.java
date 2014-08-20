@@ -119,7 +119,6 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
         try {
 
             Class<? extends IEntityRegistry> entityRegistry = Class.forName(EntityAPI.INTERNAL_NMS_PATH + ".game.EntityRegistry").asSubclass(IEntityRegistry.class);
-
             GameRegistry.registerPermanently(IEntityRegistry.class, new Reflection().reflect(entityRegistry).getSafeConstructor().getAccessor().invoke());
 
         } catch (Exception e) {

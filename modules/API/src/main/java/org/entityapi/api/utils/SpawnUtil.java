@@ -28,6 +28,9 @@ import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityHandle;
 import org.entityapi.api.events.ControllableEntityPreSpawnEvent;
 import org.entityapi.api.plugin.EntityAPI;
+import org.entityapi.game.EntityRegistrationEntry;
+import org.entityapi.game.GameRegistry;
+import org.entityapi.game.IEntityRegistry;
 
 public class SpawnUtil {
 
@@ -49,6 +52,17 @@ public class SpawnUtil {
             spawnLocation.getChunk().load();
         }
 
-        return WorldUtil.addEntity(spawnLocation.getWorld(), controllableEntityHandle, CreatureSpawnEvent.SpawnReason.CUSTOM);
+        EntityRegistrationEntry oldEntry = GameRegistry.get(IEntityRegistry.class).getDefaultEntryFor(controllableEntity.getEntityType());
+        GameRegistry.get(IEntityRegistry.class).register(new EntityRegistrationEntry(
+                controllableEntity.getEntityType().getName(),
+                controllableEntity.getEntityType().getId(),
+                controllableEntity.getEntityType().getHandleClass()
+        ));
+
+        boolean spawned = WorldUtil.addEntity(spawnLocation.getWorld(), controllableEntityHandle, CreatureSpawnEvent.SpawnReason.CUSTOM);
+
+        GameRegistry.get(IEntityRegistry.class).register(oldEntry);
+
+        return spawned;
     }
 }

@@ -30,11 +30,9 @@ import org.entityapi.api.EntityManager;
 import org.entityapi.api.NMSAccessor;
 import org.entityapi.api.entity.*;
 import org.entityapi.api.entity.mind.Mind;
-import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.entity.mind.attribute.DespawnAttribute;
 import org.entityapi.api.entity.mind.attribute.InventoryAttribute;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
-import org.entityapi.api.events.ControllableEntityPreSpawnEvent;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.utils.SpawnUtil;
 
@@ -195,16 +193,17 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
     @Override
     public String getCustomSound(EntitySound type, String key) {
         if (!key.equals("")) {
-            String customWithKey = this.getSound(type, "custom." + key);
-            if (customWithKey != null) {
-                return customWithKey;
-            }
+            // FIXME
+         //   String customWithKey = this.getSound(type, "custom." + key);
+         //   if (customWithKey != null) {
+         //       return customWithKey;
+         //   }
         }
-        String custom = this.getSound(type, "custom");
-        if (custom != null) {
-            return custom;
-        }
-        return "";
+       // String custom = this.getSound(type, "custom");
+       // if (custom != null) {
+       //     return custom;
+       // }
+       return "";
     }
 
     @Override

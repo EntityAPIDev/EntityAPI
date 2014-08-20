@@ -19,10 +19,22 @@
 
 package org.entityapi.api.entity.mind;
 
+import com.captainbern.reflection.ClassTemplate;
+import com.captainbern.reflection.Reflection;
+import com.captainbern.reflection.SafeConstructor;
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.events.ControllableEntityEvent;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.exceptions.AttributeMindRequiredException;
+
+import javax.annotation.Nullable;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.Arrays;
+import java.util.Collection;
 
 public abstract class Attribute<T extends ControllableEntityEvent> {
 
@@ -36,7 +48,8 @@ public abstract class Attribute<T extends ControllableEntityEvent> {
 
         }
 
-        EntityAPI.getCore().getServer().getPluginManager().callEvent(event);
+        if (event != null) // FIXME
+            EntityAPI.getCore().getServer().getPluginManager().callEvent(event);
 
         return call(event);
     }
@@ -46,6 +59,50 @@ public abstract class Attribute<T extends ControllableEntityEvent> {
     }
 
     protected T getNewEvent(Object... args) {
+        Type paramType = this.getClass().getGenericSuperclass();
+        Class<?> paramClass = (Class<?>) paramType;
+
+        Type paramEventType = paramClass.getGenericSuperclass();
+        Class<T> event = (Class<T>) ((ParameterizedType) paramEventType).getActualTypeArguments()[0];
+
+        ClassTemplate<T> template = new Reflection().reflect(event);
+        Collection<Class> arguments = Collections2.transform(Arrays.asList(args), new Function<Object, Class>() {
+            @Override
+            public Class apply(@Nullable Object o) {
+                if (o instanceof Class)
+                    return (Class) o;
+                else
+                    return o.getClass();
+            }
+        });
+
+        try {
+
+            SafeConstructor<T> eventConstructor = template.getSafeConstructor(arguments.toArray(new Class[args.length]));
+
+            if (eventConstructor != null)
+                return eventConstructor.getAccessor().invoke(args);
+
+        } catch (Exception e) { // TODO: Should we be throwing exceptions?
+            if (args.length > 0) {
+                StringBuilder argBuilder = new StringBuilder(16 * args.length);
+                boolean isFirst = true;
+                for (Class<?> arg : arguments) {
+                    if (isFirst) {
+                        argBuilder.append(arg.getCanonicalName());
+                        isFirst = false;
+                    } else {
+                        argBuilder.append(", " + arg.getCanonicalName());
+                    }
+                }
+
+                throw new RuntimeException("Failed to get the right constructor! (Event class: " + event.getCanonicalName() +
+                        "\nArguments: " + argBuilder.toString());
+            } else {
+                throw new RuntimeException("Failed to get the right constructor! (Event class: " + event.getCanonicalName() + ")");
+            }
+        }
+
         return null;
     }
 

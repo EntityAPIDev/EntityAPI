@@ -23,6 +23,7 @@ import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
+import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.DespawnReason;
 import org.entityapi.api.entity.EntitySound;
 import org.entityapi.api.entity.mind.attribute.*;
@@ -131,7 +132,7 @@ public class ControllableCowEntity extends EntityCow implements ControllableCowH
     @Override
     public void g(double x, double y, double z) {
         if (this.controllableEntity != null) {
-            Vector velocity = this.controllableEntity.getMind().getAttribute(PushAttribute.class).call(x, y, z).getPushVelocity();
+            Vector velocity = this.controllableEntity.getMind().getAttribute(PushAttribute.class).call(this.controllableEntity, new Vector(x, y, z)).getPushVelocity();
             x = velocity.getX();
             y = velocity.getY();
             z = velocity.getZ();
