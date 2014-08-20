@@ -26,6 +26,7 @@ import com.captainbern.reflection.SafeField;
 import com.captainbern.reflection.SafeMethod;
 import com.captainbern.reflection.accessor.FieldAccessor;
 import com.captainbern.reflection.accessor.MethodAccessor;
+import org.bukkit.entity.EntityType;
 import org.entityapi.game.EntityRegistrationEntry;
 import org.entityapi.game.IEntityRegistry;
 
@@ -62,6 +63,12 @@ public class EntityRegistry extends IEntityRegistry {
 
         NAME_TO_CLASS.getStatic().remove(entityRegistrationEntry.getName());
         ID_TO_CLASS.getStatic().remove(entityRegistrationEntry.getId());
+    }
+
+    @Override
+    public EntityRegistrationEntry createRegistrationEntryFor(EntityType entityType) {
+        // TODO
+        return null;
     }
 
     protected static void initializeFields() {
