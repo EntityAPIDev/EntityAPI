@@ -30,7 +30,6 @@ import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.exceptions.AttributeMindRequiredException;
 
 import javax.annotation.Nullable;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
