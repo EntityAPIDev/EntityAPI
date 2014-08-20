@@ -32,7 +32,6 @@ import org.entityapi.game.IEntityRegistry;
 import java.util.List;
 import java.util.Map;
 
-import static com.captainbern.reflection.matcher.Matchers.combine;
 import static com.captainbern.reflection.matcher.Matchers.withArguments;
 import static com.captainbern.reflection.matcher.Matchers.withType;
 
