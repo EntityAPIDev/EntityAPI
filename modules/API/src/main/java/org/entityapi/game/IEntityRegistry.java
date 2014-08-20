@@ -1,8 +1,8 @@
 package org.entityapi.game;
 
-public interface IEntityRegistry {
+public abstract class IEntityRegistry {
 
-    public Class<?> registerEntity(int id, String name, Class<?> entity);
+    public abstract void register(EntityRegistrationEntry entityRegistrationEntry);
 
-    public Class<?> getEntity(int id, String name);
+    public abstract void unregister(EntityRegistrationEntry entityRegistrationEntry);
 }

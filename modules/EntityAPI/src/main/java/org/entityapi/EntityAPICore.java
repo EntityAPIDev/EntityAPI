@@ -19,6 +19,7 @@
 
 package org.entityapi;
 
+import com.captainbern.reflection.Reflection;
 import com.google.common.collect.Maps;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -35,6 +36,8 @@ import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.plugin.IEntityAPICore;
 import org.entityapi.api.utils.PastebinReporter;
 import org.entityapi.api.utils.StringUtil;
+import org.entityapi.game.GameRegistry;
+import org.entityapi.game.IEntityRegistry;
 import org.entityapi.metrics.Metrics;
 
 import java.io.File;
@@ -71,6 +74,9 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
     @Override
     public void onDisable() {
         //TODO: nullify everything
+
+        GameRegistry.clear();
+
         CORE_INSTANCE = null;
     }
 
@@ -105,6 +111,21 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
         }
 
         this.checkUpdates();
+    }
+
+    private void initializeGameComponents() {
+        try {
+
+            Class<? extends IEntityRegistry> entityRegistry = Class.forName(EntityAPI.INTERNAL_NMS_PATH + ".game.EntityRegistry").asSubclass(IEntityRegistry.class);
+
+            GameRegistry.registerPermanently(IEntityRegistry.class, new Reflection().reflect(entityRegistry).getSafeConstructor().getAccessor().invoke());
+
+        } catch (Exception e) {
+            ConsoleCommandSender console = this.getServer().getConsoleSender();
+            console.sendMessage(ChatColor.RED + "-------------------------------");
+            console.sendMessage(ChatColor.RED + "Failed to initialize the game components!");
+            console.sendMessage(ChatColor.RED + "-------------------------------");
+        }
     }
 
     protected void checkUpdates() {
