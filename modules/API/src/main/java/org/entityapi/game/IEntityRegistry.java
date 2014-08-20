@@ -1,6 +1,6 @@
 package org.entityapi.game;
 
-import org.bukkit.entity.EntityType;
+import org.entityapi.api.entity.ControllableEntityType;
 
 public abstract class IEntityRegistry {
 
@@ -8,5 +8,5 @@ public abstract class IEntityRegistry {
 
     public abstract void unregister(EntityRegistrationEntry entityRegistrationEntry);
 
-    public abstract EntityRegistrationEntry createRegistrationEntryFor(EntityType entityType);
+    public abstract EntityRegistrationEntry createRegistrationEntryFor(ControllableEntityType entityType);
 }

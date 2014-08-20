@@ -26,7 +26,7 @@ import com.captainbern.reflection.SafeField;
 import com.captainbern.reflection.SafeMethod;
 import com.captainbern.reflection.accessor.FieldAccessor;
 import com.captainbern.reflection.accessor.MethodAccessor;
-import org.bukkit.entity.EntityType;
+import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.game.EntityRegistrationEntry;
 import org.entityapi.game.IEntityRegistry;
 
@@ -66,7 +66,7 @@ public class EntityRegistry extends IEntityRegistry {
     }
 
     @Override
-    public EntityRegistrationEntry createRegistrationEntryFor(EntityType entityType) {
+    public EntityRegistrationEntry createRegistrationEntryFor(ControllableEntityType entityType) {
         // TODO
         return null;
     }
