@@ -31,13 +31,16 @@ import java.util.*;
 
 public class Mind {
 
-    private static Map<Class<? extends Attribute>, Attribute> REQUIRED_DEFAULTS = new HashMap<>();
+    private static Map<Class<? extends Attribute>, Attribute> REQUIRED_DEFAULTS;
 
     static {
-        REQUIRED_DEFAULTS.put(CollideAttribute.class, new DefaultCollideAttribute());
-        REQUIRED_DEFAULTS.put(InteractAttribute.class, new DefaultInteractAttribute());
-        REQUIRED_DEFAULTS.put(PushAttribute.class, new DefaultPushAttribute());
-        REQUIRED_DEFAULTS.put(TickAttribute.class, new DefaultTickAttribute());
+        if (REQUIRED_DEFAULTS == null) {
+            REQUIRED_DEFAULTS = new HashMap<>();
+            REQUIRED_DEFAULTS.put(CollideAttribute.class, new DefaultCollideAttribute());
+            REQUIRED_DEFAULTS.put(InteractAttribute.class, new DefaultInteractAttribute());
+            REQUIRED_DEFAULTS.put(PushAttribute.class, new DefaultPushAttribute());
+            REQUIRED_DEFAULTS.put(TickAttribute.class, new DefaultTickAttribute());
+        }
     }
 
     protected ControllableEntity controllableEntity;
@@ -52,6 +55,7 @@ public class Mind {
     protected float fixedPitch;
 
     public Mind() {
+        this.fillRequiredDefaults();
     }
 
     public void setControllableEntity(ControllableEntity controllableEntity) {
