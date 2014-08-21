@@ -83,7 +83,7 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
     public void h() {
         super.h();
         if (this.controllableEntity != null) {
-            this.controllableEntity.getMind().getAttribute(TickAttribute.class).call();
+            this.controllableEntity.getMind().getAttribute(TickAttribute.class).call(this.controllableEntity);
             if (this.controllableEntity.shouldUpdateAttributes()) {
                 this.controllableEntity.getMind().tick();
             }
@@ -97,7 +97,7 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
             return;
         }
 
-        if (!this.controllableEntity.getMind().getAttribute(CollideAttribute.class).call(entity.getBukkitEntity()).isCancelled()) {
+        if (!this.controllableEntity.getMind().getAttribute(CollideAttribute.class).call(this.controllableEntity, entity.getBukkitEntity()).isCancelled()) {
             super.collide(entity);
         }
     }
@@ -108,13 +108,13 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
             return super.c(entity);
         }
 
-        return !this.controllableEntity.getMind().getAttribute(InteractAttribute.class).call(entity.getBukkitEntity(), true).isCancelled();
+        return !this.controllableEntity.getMind().getAttribute(InteractAttribute.class).call(this.controllableEntity, entity.getBukkitEntity(), true).isCancelled();
     }
 
     @Override
     public boolean damageEntity(DamageSource damageSource, float v) {
         if (this.controllableEntity != null && damageSource.getEntity() != null && damageSource.getEntity().getBukkitEntity() instanceof Player) {
-            return !this.controllableEntity.getMind().getAttribute(InteractAttribute.class).call(damageSource.getEntity().getBukkitEntity(), false).isCancelled();
+            return !this.controllableEntity.getMind().getAttribute(InteractAttribute.class).call(this.controllableEntity, damageSource.getEntity().getBukkitEntity(), false).isCancelled();
         }
         return super.damageEntity(damageSource, v);
     }
@@ -135,7 +135,7 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
     @Override
     public void g(double x, double y, double z) {
         if (this.controllableEntity != null) {
-            Vector velocity = this.controllableEntity.getMind().getAttribute(PushAttribute.class).call(x, y, z).getPushVelocity();
+            Vector velocity = this.controllableEntity.getMind().getAttribute(PushAttribute.class).call(this.controllableEntity, new Vector(x, y, z)).getPushVelocity();
             x = velocity.getX();
             y = velocity.getY();
             z = velocity.getZ();

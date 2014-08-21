@@ -130,7 +130,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
     public void despawn(DespawnReason reason) {
         this.spawned = false;
         getBukkitEntity().remove();
-        getMind().getAttribute(DespawnAttribute.class).call(reason);
+        getMind().getAttribute(DespawnAttribute.class).call(this, reason);
         manager.despawn(this, reason);
     }
 
