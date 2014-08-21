@@ -26,6 +26,7 @@ import org.bukkit.util.Vector;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.DespawnReason;
 import org.entityapi.api.entity.EntitySound;
+import org.entityapi.api.entity.impl.ControllableCowBase;
 import org.entityapi.api.entity.mind.attribute.*;
 import org.entityapi.api.entity.type.ControllableCow;
 import org.entityapi.api.entity.type.nms.ControllableCowHandle;

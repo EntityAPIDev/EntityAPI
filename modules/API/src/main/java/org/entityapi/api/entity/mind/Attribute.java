@@ -35,6 +35,8 @@ import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collection;
 
+import static com.captainbern.reflection.matcher.Matchers.*;
+
 public abstract class Attribute<T extends ControllableEntityEvent> {
 
     protected Mind mind;
@@ -77,7 +79,7 @@ public abstract class Attribute<T extends ControllableEntityEvent> {
 
         try {
 
-            SafeConstructor<T> eventConstructor = template.getSafeConstructor(arguments.toArray(new Class[args.length]));
+            SafeConstructor<T> eventConstructor = template.getSafeConstructor(withConstructorArguments(arguments.toArray(new Class[args.length])));
 
             if (eventConstructor != null)
                 return eventConstructor.getAccessor().invoke(args);
