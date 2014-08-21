@@ -16,9 +16,15 @@ Stuff that needs to be done or is still unfinished (this list may be incomplete)
 - API docs
 - Player entity
 - Pathfinding
-- Game registry
-- Modifications to spawning and despawning to work with NMS entity registration
+- Game registry - DONE
+- Modifications to spawning and despawning to work with NMS entity registration - DONE
 - Entity serialization
+
+ToFix
+=====
+
+Stuff that needs to be fixed
+- When an entity is being killed, an NPE is thrown. http://puu.sh/b1TFy/12b0c6d5a5.txt
 
 Contributing
 ============
