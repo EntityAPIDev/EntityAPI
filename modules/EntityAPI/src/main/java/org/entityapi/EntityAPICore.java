@@ -34,7 +34,6 @@ import org.entityapi.api.EntityManager;
 import org.entityapi.api.entity.DespawnReason;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.plugin.IEntityAPICore;
-import org.entityapi.api.utils.PastebinReporter;
 import org.entityapi.api.utils.StringUtil;
 import org.entityapi.game.GameRegistry;
 import org.entityapi.game.IEntityRegistry;
@@ -54,15 +53,9 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
     private static final String VERSION = "${project.version}";
 
     /**
-     * Projects id and Pastebin API-KEY
+     * Projects id
      */
     private static final int UPDATE_ID = 69021;
-    private static final String PASTEBIN_REPORT_KEY = "8759cf9327f8593508789ecaa36cf27b";
-
-    /**
-     * Pastebin reporter
-     */
-    private static final PastebinReporter REPORTER = new PastebinReporter(PASTEBIN_REPORT_KEY);
 
     /**
      * Update checker stuff

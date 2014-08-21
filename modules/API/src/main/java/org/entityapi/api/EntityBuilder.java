@@ -27,9 +27,6 @@ import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.mind.Mind;
 import org.entityapi.api.entity.mind.behaviour.Behaviour;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.api.utils.SpawnUtil;
-import org.entityapi.exceptions.ControllableEntitySpawnException;
-
 import java.util.HashMap;
 import java.util.Map;
 

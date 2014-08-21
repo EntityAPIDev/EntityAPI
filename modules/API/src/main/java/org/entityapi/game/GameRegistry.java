@@ -26,6 +26,12 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * A Class used for quick access with Classes that make use of NMS.
+ *
+ * It allows one to register a specific Class-instance, which can later on be retrieved easier.
+ * (Note: Please refrain from using this in your plugin)
+ */
 public class GameRegistry {
 
     private static final Map<Class<? extends Object>, Object> registry = Maps.newHashMap();
@@ -45,7 +51,6 @@ public class GameRegistry {
     public static <O> O get(Class<O> type) {
         return type.cast(registry.get(type));
     }
-
     public static <T> void remove(Class<T> type) {
         registry.remove(type);
     }
