@@ -81,7 +81,7 @@ public class ControllableCowEntity extends EntityCow implements ControllableCowH
     public void h() {
         super.h();
         if (this.controllableEntity != null) {
-            this.controllableEntity.getMind().getAttribute(TickAttribute.class).call();
+            this.controllableEntity.getMind().getAttribute(TickAttribute.class).call(this.controllableEntity);
             if (this.controllableEntity.shouldUpdateAttributes()) {
                 this.controllableEntity.getMind().tick();
             }
@@ -95,7 +95,7 @@ public class ControllableCowEntity extends EntityCow implements ControllableCowH
             return;
         }
 
-        if (!this.controllableEntity.getMind().getAttribute(CollideAttribute.class).call(entity.getBukkitEntity()).isCancelled()) {
+        if (!this.controllableEntity.getMind().getAttribute(CollideAttribute.class).call(this.controllableEntity, entity.getBukkitEntity()).isCancelled()) {
             super.collide(entity);
         }
     }
@@ -106,13 +106,13 @@ public class ControllableCowEntity extends EntityCow implements ControllableCowH
             return super.c(entity);
         }
 
-        return !this.controllableEntity.getMind().getAttribute(InteractAttribute.class).call(entity.getBukkitEntity(), true).isCancelled();
+        return !this.controllableEntity.getMind().getAttribute(InteractAttribute.class).call(this.controllableEntity, entity.getBukkitEntity(), true).isCancelled();
     }
 
     @Override
     public boolean damageEntity(DamageSource damageSource, float v) {
         if (this.controllableEntity != null && damageSource.getEntity() != null && damageSource.getEntity().getBukkitEntity() instanceof Player) {
-            return !this.controllableEntity.getMind().getAttribute(InteractAttribute.class).call(damageSource.getEntity().getBukkitEntity(), false).isCancelled();
+            return !this.controllableEntity.getMind().getAttribute(InteractAttribute.class).call(this.controllableEntity, damageSource.getEntity().getBukkitEntity(), false).isCancelled();
         }
         return super.damageEntity(damageSource, v);
     }
