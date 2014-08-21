@@ -27,6 +27,7 @@ import org.entityapi.api.entity.DespawnReason;
 import org.entityapi.api.entity.mind.attribute.*;
 import org.entityapi.api.entity.type.ControllableSquid;
 import org.entityapi.api.entity.type.nms.ControllableSquidHandle;
+import org.entityapi.api.events.Action;
 import org.entityapi.api.utils.EntityUtil;
 
 public class ControllableSquidEntity extends EntitySquid implements ControllableSquidHandle {
@@ -108,7 +109,7 @@ public class ControllableSquidEntity extends EntitySquid implements Controllable
     @Override
     public boolean damageEntity(DamageSource damageSource, float v) {
         if (this.controllableEntity != null && damageSource.getEntity() != null && damageSource.getEntity().getBukkitEntity() instanceof Player) {
-            return !this.controllableEntity.getMind().getAttribute(InteractAttribute.class).call(this.controllableEntity, damageSource.getEntity().getBukkitEntity(), false).isCancelled();
+            return !this.controllableEntity.getMind().getAttribute(InteractAttribute.class).call(this.controllableEntity, damageSource.getEntity().getBukkitEntity(), Action.LEFT_CLICK).isCancelled();
         }
         return super.damageEntity(damageSource, v);
     }

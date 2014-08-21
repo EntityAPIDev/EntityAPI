@@ -29,6 +29,7 @@ import org.entityapi.api.entity.mind.attribute.CollideAttribute;
 import org.entityapi.api.entity.mind.attribute.*;
 import org.entityapi.api.entity.type.ControllableIronGolem;
 import org.entityapi.api.entity.type.nms.ControllableIronGolemHandle;
+import org.entityapi.api.events.Action;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.utils.EntityUtil;
 
@@ -111,7 +112,7 @@ public class ControllableIronGolemEntity extends EntityIronGolem implements Cont
     @Override
     public boolean damageEntity(DamageSource damageSource, float v) {
         if (this.controllableEntity != null && damageSource.getEntity() != null && damageSource.getEntity().getBukkitEntity() instanceof Player) {
-            return !this.controllableEntity.getMind().getAttribute(InteractAttribute.class).call(this.controllableEntity, damageSource.getEntity().getBukkitEntity(), false).isCancelled();
+            return !this.controllableEntity.getMind().getAttribute(InteractAttribute.class).call(this.controllableEntity, damageSource.getEntity().getBukkitEntity(), Action.LEFT_CLICK).isCancelled();
         }
         return super.damageEntity(damageSource, v);
     }

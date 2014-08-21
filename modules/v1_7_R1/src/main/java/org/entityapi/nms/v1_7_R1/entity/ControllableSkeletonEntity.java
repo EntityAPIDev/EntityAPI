@@ -31,6 +31,7 @@ import org.entityapi.api.entity.mind.behaviour.goals.BehaviourMeleeAttack;
 import org.entityapi.api.entity.mind.behaviour.goals.BehaviourRangedAttack;
 import org.entityapi.api.entity.type.ControllableSkeleton;
 import org.entityapi.api.entity.type.nms.ControllableSkeletonHandle;
+import org.entityapi.api.events.Action;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.utils.EntityUtil;
 
@@ -115,7 +116,7 @@ public class ControllableSkeletonEntity extends EntitySkeleton implements Contro
     @Override
     public boolean damageEntity(DamageSource damageSource, float v) {
         if (this.controllableEntity != null && damageSource.getEntity() != null && damageSource.getEntity().getBukkitEntity() instanceof Player) {
-            return !this.controllableEntity.getMind().getAttribute(InteractAttribute.class).call(this.controllableEntity, damageSource.getEntity().getBukkitEntity(), false).isCancelled();
+            return !this.controllableEntity.getMind().getAttribute(InteractAttribute.class).call(this.controllableEntity, damageSource.getEntity().getBukkitEntity(), Action.LEFT_CLICK).isCancelled();
         }
         return super.damageEntity(damageSource, v);
     }
