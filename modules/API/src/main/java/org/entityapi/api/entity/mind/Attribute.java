@@ -83,7 +83,7 @@ public abstract class Attribute<T extends ControllableEntityEvent> {
             List<SafeConstructor<T>> candidates = template.getSafeConstructors(new AbstractMatcher<Constructor>() {
                 @Override
                 public boolean matches(Constructor constructor) {
-                    if (constructor.getParameterCount() != args.length)
+                    if (constructor.getParameterTypes().length != args.length)
                         return false;
 
                     Class[] args = constructor.getParameterTypes();
