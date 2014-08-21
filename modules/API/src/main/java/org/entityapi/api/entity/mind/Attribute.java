@@ -22,6 +22,7 @@ package org.entityapi.api.entity.mind;
 import com.captainbern.reflection.ClassTemplate;
 import com.captainbern.reflection.Reflection;
 import com.captainbern.reflection.SafeConstructor;
+import com.captainbern.reflection.matcher.AbstractMatcher;
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import org.entityapi.api.entity.ControllableEntity;
@@ -30,12 +31,12 @@ import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.exceptions.AttributeMindRequiredException;
 
 import javax.annotation.Nullable;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collection;
-
-import static com.captainbern.reflection.matcher.Matchers.*;
+import java.util.List;
 
 public abstract class Attribute<T extends ControllableEntityEvent> {
 
@@ -59,7 +60,7 @@ public abstract class Attribute<T extends ControllableEntityEvent> {
         return event;
     }
 
-    protected T getNewEvent(Object... args) {
+    protected T getNewEvent(final Object... args) {
         Type paramType = this.getClass().getGenericSuperclass();
         Class<?> paramClass = (Class<?>) paramType;
 
@@ -67,7 +68,7 @@ public abstract class Attribute<T extends ControllableEntityEvent> {
         Class<T> event = (Class<T>) ((ParameterizedType) paramEventType).getActualTypeArguments()[0];
 
         ClassTemplate<T> template = new Reflection().reflect(event);
-        Collection<Class> arguments = Collections2.transform(Arrays.asList(args), new Function<Object, Class>() {
+        final Class[] arguments = Collections2.transform(Arrays.asList(args), new Function<Object, Class>() {
             @Override
             public Class apply(@Nullable Object o) {
                 if (o instanceof Class)
@@ -75,11 +76,31 @@ public abstract class Attribute<T extends ControllableEntityEvent> {
                 else
                     return o.getClass();
             }
-        });
+        }).toArray(new Class[args.length]);
 
         try {
 
-            SafeConstructor<T> eventConstructor = template.getSafeConstructor(withConstructorArguments(arguments.toArray(new Class[args.length])));
+            List<SafeConstructor<T>> candidates = template.getSafeConstructors(new AbstractMatcher<Constructor>() {
+                @Override
+                public boolean matches(Constructor constructor) {
+                    if (constructor.getParameterCount() != args.length)
+                        return false;
+
+                    Class[] args = constructor.getParameterTypes();
+                    for (int i = 0; i < args.length; i++) {
+                        if (!args[i].isAssignableFrom(arguments[i]))
+                            return false;
+                    }
+                    return true;
+                }
+            });
+
+            SafeConstructor<T> eventConstructor;
+            if (candidates.size() > 0) {
+                eventConstructor = candidates.get(0);
+            } else {
+                throw new IllegalStateException(); // Will throw a "proper" exception
+            }
 
             if (eventConstructor != null)
                 return eventConstructor.getAccessor().invoke(args);
