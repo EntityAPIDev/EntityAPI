@@ -36,7 +36,7 @@ public abstract class InteractAttribute extends Attribute<ControllableEntityInte
 
     @Override
     protected ControllableEntityInteractEvent getNewEvent(Object... args) {
-        return new ControllableEntityInteractEvent(getControllableEntity(), (Player) args[0], (Action) args[1]);
+        return new ControllableEntityInteractEvent(getControllableEntity(), (Player) args[1], (Action) args[2]);
     }
 
     public abstract boolean onInteract(Player entity, Action rightClick);

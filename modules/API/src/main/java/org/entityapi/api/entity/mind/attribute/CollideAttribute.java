@@ -29,7 +29,7 @@ public abstract class CollideAttribute extends Attribute<ControllableEntityColli
 
     @Override
     protected ControllableEntityCollideEvent getNewEvent(Object... args) {
-        return new ControllableEntityCollideEvent(getControllableEntity(), (Entity) args[0]);
+        return new ControllableEntityCollideEvent(getControllableEntity(), (Entity) args[1]);
     }
 
     @Override

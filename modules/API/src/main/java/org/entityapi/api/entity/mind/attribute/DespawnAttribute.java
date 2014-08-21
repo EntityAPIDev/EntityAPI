@@ -35,7 +35,7 @@ public abstract class DespawnAttribute extends Attribute<ControllableEntityDespa
 
     @Override
     protected ControllableEntityDespawnEvent getNewEvent(Object... args) {
-        DespawnReason reason = (DespawnReason) args[0];
+        DespawnReason reason = (DespawnReason) args[1];
         return reason == DespawnReason.DEATH ? new ControllableEntityDeathEvent(getControllableEntity()) : new ControllableEntityDespawnEvent(getControllableEntity(), reason);
     }
 
