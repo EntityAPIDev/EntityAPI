@@ -105,7 +105,7 @@ public class ControllableWitchEntity extends EntityWitch implements Controllable
             return super.c(entity);
         }
 
-        return !this.controllableEntity.getMind().getAttribute(InteractAttribute.class).call(this.controllableEntity, entity.getBukkitEntity(), true).isCancelled();
+        return !this.controllableEntity.getMind().getAttribute(InteractAttribute.class).call(this.controllableEntity, entity.getBukkitEntity(), Action.RIGHT_CLICK).isCancelled();
     }
 
     @Override
