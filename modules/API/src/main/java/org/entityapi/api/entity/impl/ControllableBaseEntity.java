@@ -181,28 +181,30 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
         if (custom != null && !custom.equals("")) {
             return custom;
         }
-        for (Map.Entry<String, String> entry : this.sounds.get(type).entrySet()) {
-            if (entry.getKey().equals(key)) {
-                return entry.getValue();
-            }
+        return requestSound(type, key);
+    }
+
+    private String requestSound(EntitySound type, String key) {
+        Map<String, String> sounds = this.sounds.get(type);
+        if (sounds == null) {
+            return "";
         }
-        // Minecraft will treat this as 'no sound'
-        return "";
+        String sound = sounds.get(key);
+        return sound != null ? sound : "";
     }
 
     @Override
     public String getCustomSound(EntitySound type, String key) {
-        if (!key.equals("")) {
-            // FIXME
-         //   String customWithKey = this.getSound(type, "custom." + key);
-         //   if (customWithKey != null) {
-         //       return customWithKey;
-         //   }
-        }
-       // String custom = this.getSound(type, "custom");
-       // if (custom != null) {
-       //     return custom;
-       // }
+       if (!key.equals("")) {
+           String customWithKey = this.requestSound(type, "custom." + key);
+           if (customWithKey != null) {
+               return customWithKey;
+           }
+       }
+       String custom = this.requestSound(type, "custom");
+       if (custom != null) {
+            return custom;
+       }
        return "";
     }
 
