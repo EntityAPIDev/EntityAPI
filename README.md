@@ -19,6 +19,7 @@ Stuff that needs to be done or is still unfinished (this list may be incomplete)
 - Game registry - DONE
 - Modifications to spawning and despawning to work with NMS entity registration - DONE
 - Entity serialization
+- Fix/rewrite the Main/Core components of the plugin part. I don't really like the utils either.
 
 ToFix
 =====

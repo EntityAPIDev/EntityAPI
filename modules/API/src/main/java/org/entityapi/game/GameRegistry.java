@@ -51,6 +51,7 @@ public class GameRegistry {
     public static <O> O get(Class<O> type) {
         return type.cast(registry.get(type));
     }
+
     public static <T> void remove(Class<T> type) {
         registry.remove(type);
     }
