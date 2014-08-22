@@ -23,18 +23,14 @@ import com.captainbern.reflection.ClassTemplate;
 import com.captainbern.reflection.Reflection;
 import com.captainbern.reflection.SafeConstructor;
 import com.captainbern.reflection.matcher.AbstractMatcher;
-import com.google.common.base.Function;
-import com.google.common.collect.Collections2;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.events.ControllableEntityEvent;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.exceptions.AttributeMindRequiredException;
 
-import javax.annotation.Nullable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.Arrays;
 import java.util.List;
 
 public abstract class Attribute<T extends ControllableEntityEvent> {
@@ -59,6 +55,7 @@ public abstract class Attribute<T extends ControllableEntityEvent> {
         return event;
     }
 
+    @SuppressWarnings("unchecked")
     protected T getNewEvent(final Object... args) {
         Type paramType = this.getClass().getGenericSuperclass();
         Class<?> paramClass = (Class<?>) paramType;
@@ -67,15 +64,6 @@ public abstract class Attribute<T extends ControllableEntityEvent> {
         Class<T> event = (Class<T>) ((ParameterizedType) paramEventType).getActualTypeArguments()[0];
 
         ClassTemplate<T> template = new Reflection().reflect(event);
-        final Class[] arguments = Collections2.transform(Arrays.asList(args), new Function<Object, Class>() {
-            @Override
-            public Class apply(@Nullable Object o) {
-                if (o instanceof Class)
-                    return (Class) o;
-                else
-                    return o.getClass();
-            }
-        }).toArray(new Class[args.length]);
 
         try {
 
@@ -85,46 +73,34 @@ public abstract class Attribute<T extends ControllableEntityEvent> {
                     if (constructor.getParameterTypes().length != args.length)
                         return false;
 
-                    Class[] args = constructor.getParameterTypes();
-                    for (int i = 0; i < args.length; i++) {
-                        if (!args[i].isAssignableFrom(arguments[i]))
+                    Class<?>[] argTypes = constructor.getParameterTypes();
+                    for (int i = 0; i < argTypes.length; i++) {
+                        if (!argTypes[i].isAssignableFrom(args[i].getClass()))
                             return false;
                     }
                     return true;
                 }
             });
 
-            SafeConstructor<T> eventConstructor;
             if (candidates.size() > 0) {
-                eventConstructor = candidates.get(0);
+                return candidates.get(0).getAccessor().invoke(args);
             } else {
                 throw new IllegalStateException(); // Will throw a "proper" exception
             }
 
-            if (eventConstructor != null)
-                return eventConstructor.getAccessor().invoke(args);
-
         } catch (Exception e) { // TODO: Should we be throwing exceptions?
             if (args.length > 0) {
-                StringBuilder argBuilder = new StringBuilder(16 * args.length);
-                boolean isFirst = true;
-                for (Class<?> arg : arguments) {
-                    if (isFirst) {
-                        argBuilder.append(arg.getCanonicalName());
-                        isFirst = false;
-                    } else {
-                        argBuilder.append(", " + arg.getCanonicalName());
-                    }
+                String argBuilder = args[0].getClass().getCanonicalName();
+                for (int i = 1; i < args.length; i++) {
+                    argBuilder += ", " + args[i].getClass().getCanonicalName();
                 }
 
                 throw new RuntimeException("Failed to get the right constructor! (Event class: " + event.getCanonicalName() +
-                        "\nArguments: " + argBuilder.toString());
+                        "\nArguments: " + argBuilder);
             } else {
                 throw new RuntimeException("Failed to get the right constructor! (Event class: " + event.getCanonicalName() + ")");
             }
         }
-
-        return null;
     }
 
     protected Attribute applyTo(Mind mind) {
