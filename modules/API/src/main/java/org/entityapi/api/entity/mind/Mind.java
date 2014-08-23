@@ -41,6 +41,7 @@ public class Mind {
             REQUIRED_DEFAULTS.put(InteractAttribute.class, new DefaultInteractAttribute());
             REQUIRED_DEFAULTS.put(PushAttribute.class, new DefaultPushAttribute());
             REQUIRED_DEFAULTS.put(TickAttribute.class, new DefaultTickAttribute());
+            REQUIRED_DEFAULTS.put(DespawnAttribute.class, new DefaultDespawnAttribute());
         }
     }
 
