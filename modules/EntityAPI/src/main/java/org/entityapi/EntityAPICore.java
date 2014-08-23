@@ -37,6 +37,7 @@ import org.entityapi.api.plugin.IEntityAPICore;
 import org.entityapi.api.utils.StringUtil;
 import org.entityapi.game.GameRegistry;
 import org.entityapi.game.IEntityRegistry;
+import org.entityapi.game.IEntitySpawnHandler;
 import org.entityapi.metrics.Metrics;
 
 import java.io.File;
@@ -113,6 +114,9 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
 
             Class<? extends IEntityRegistry> entityRegistry = Class.forName(EntityAPI.INTERNAL_NMS_PATH + ".game.EntityRegistry").asSubclass(IEntityRegistry.class);
             GameRegistry.registerPermanently(IEntityRegistry.class, new Reflection().reflect(entityRegistry).getSafeConstructor().getAccessor().invoke());
+
+            Class<? extends IEntitySpawnHandler> spawnHandler = Class.forName(EntityAPI.INTERNAL_NMS_PATH + ".game.EntitySpawnHandler").asSubclass(IEntitySpawnHandler.class);
+            GameRegistry.register(IEntitySpawnHandler.class, new Reflection().reflect(spawnHandler).getSafeConstructor().getAccessor().invoke());
 
         } catch (Exception e) {
             ConsoleCommandSender console = this.getServer().getConsoleSender();

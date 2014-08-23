@@ -23,15 +23,12 @@ import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.DespawnReason;
 import org.entityapi.api.entity.EntitySound;
-import org.entityapi.api.entity.impl.ControllableCowBase;
 import org.entityapi.api.entity.mind.attribute.*;
 import org.entityapi.api.entity.type.ControllableCow;
 import org.entityapi.api.entity.type.nms.ControllableCowHandle;
 import org.entityapi.api.events.Action;
-import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.utils.EntityUtil;
 
 public class ControllableCowEntity extends EntityCow implements ControllableCowHandle {

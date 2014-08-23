@@ -19,12 +19,16 @@
 
 package org.entityapi.api.entity.impl;
 
+import com.captainbern.minecraft.reflection.MinecraftReflection;
 import com.captainbern.reflection.Reflection;
+import com.captainbern.reflection.SafeConstructor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.util.Vector;
 import org.entityapi.api.EntityManager;
 import org.entityapi.api.NMSAccessor;
@@ -34,7 +38,8 @@ import org.entityapi.api.entity.mind.attribute.DespawnAttribute;
 import org.entityapi.api.entity.mind.attribute.InventoryAttribute;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 import org.entityapi.api.plugin.EntityAPI;
-import org.entityapi.api.utils.SpawnUtil;
+import org.entityapi.game.GameRegistry;
+import org.entityapi.game.IEntitySpawnHandler;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -114,7 +119,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
 
     @Override
     public boolean isSpawned() {
-        return spawned;
+        return spawned && this.handle != null;
     }
 
     @Override
@@ -122,16 +127,32 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
         if (isSpawned()) {
             return SpawnResult.ALREADY_SPAWNED;
         }
-        this.spawned = SpawnUtil.spawnEntity(this, location);
+
+        this.handle = GameRegistry.get(IEntitySpawnHandler.class).createHandle(this, location);
+        this.spawned = true;
+
+        LivingEntity entity = this.getBukkitEntity();
+        if (entity != null) {
+            entity.setMetadata("entityapi", new FixedMetadataValue(EntityAPI.getCore(), true)); // Perhaps make this a key somewhere
+            entity.setRemoveWhenFarAway(false);
+        }
+
+        //return spawned;
         return isSpawned() ? SpawnResult.SUCCESS : SpawnResult.FAILED;
     }
 
     @Override
     public void despawn(DespawnReason reason) {
+        // FIXME: Actually use the DespawnReason
+
         this.spawned = false;
-        getBukkitEntity().remove();
+
+        if (this.getBukkitEntity() != null)
+            this.getBukkitEntity().remove();
+
+        this.handle = null;
+
         getMind().getAttribute(DespawnAttribute.class).call(this, reason);
-        manager.despawn(this, reason);
     }
 
     @Override
@@ -195,17 +216,17 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
 
     @Override
     public String getCustomSound(EntitySound type, String key) {
-       if (!key.equals("")) {
-           String customWithKey = this.requestSound(type, "custom." + key);
-           if (customWithKey != null) {
-               return customWithKey;
-           }
-       }
-       String custom = this.requestSound(type, "custom");
-       if (custom != null) {
+        if (!key.equals("")) {
+            String customWithKey = this.requestSound(type, "custom." + key);
+            if (customWithKey != null) {
+                return customWithKey;
+            }
+        }
+        String custom = this.requestSound(type, "custom");
+        if (custom != null) {
             return custom;
-       }
-       return "";
+        }
+        return "";
     }
 
     @Override
