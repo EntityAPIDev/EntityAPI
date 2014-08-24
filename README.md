@@ -28,6 +28,7 @@ Stuff that needs to be fixed
 - When an entity is being killed, an NPE is thrown. http://puu.sh/b1TFy/12b0c6d5a5.txt - FIXED
 - EnderDragon http://puu.sh/b3odd/f0ea4c068e.txt
 - Horse http://puu.sh/b3olx/8774eea6c3.txt
+- Default attributes (when using EntityManager#spawnEntity(type, location, true); it will crash)
 
 Contributing
 ============
