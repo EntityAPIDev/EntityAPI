@@ -151,7 +151,6 @@ public class SimpleEntityManager implements EntityManager {
     @Override
     public ControllableEntity spawnEntity(ControllableEntityType entityType, Location location, boolean prepare) {
         try {
-            // TODO: add entity to entity-map
             if (entityType.isNameRequired()) {
                 throw new NameRequiredException();
             }
@@ -165,6 +164,8 @@ public class SimpleEntityManager implements EntityManager {
             }
 
             ControllableEntity entity = context.create();
+
+            this.ENTITIES.put(entity.getId(), entity);
 
             return entity;
         } catch (Throwable throwable) {

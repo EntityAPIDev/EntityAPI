@@ -19,14 +19,12 @@
 
 package org.entityapi.api.entity.impl;
 
-import com.captainbern.minecraft.reflection.MinecraftReflection;
 import com.captainbern.reflection.Reflection;
-import com.captainbern.reflection.SafeConstructor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.util.Vector;
@@ -51,7 +49,6 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
     private final NMSAccessor<T, S> accessor;
     private final int ID;
 
-    private boolean spawned;
     protected Mind mind;
     protected boolean tickAttributes;
     protected boolean overridePathfindingSpeed;
@@ -119,7 +116,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
 
     @Override
     public boolean isSpawned() {
-        return spawned && this.handle != null;
+        return this.handle != null;
     }
 
     @Override
@@ -129,7 +126,6 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
         }
 
         this.handle = GameRegistry.get(IEntitySpawnHandler.class).createHandle(this, location);
-        this.spawned = true;
 
         LivingEntity entity = this.getBukkitEntity();
         if (entity != null) {
@@ -145,14 +141,14 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
     public void despawn(DespawnReason reason) {
         // FIXME: Actually use the DespawnReason
 
-        this.spawned = false;
-
         if (this.getBukkitEntity() != null)
             this.getBukkitEntity().remove();
 
         this.handle = null;
 
         getMind().getAttribute(DespawnAttribute.class).call(this, reason);
+
+        this.manager.despawn(this);
     }
 
     @Override
@@ -368,6 +364,22 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
     @Override
     public boolean navigateTo(Vector to, double speed) {
         return accessor.navigateTo(to, speed);
+    }
+
+    @Override
+    public void lookAt(Location location) {
+        if (!this.isSpawned())
+            return;
+
+        this.accessor.lookAt(location);
+    }
+
+    @Override
+    public void lookAt(Entity entity) {
+        if (!this.isSpawned())
+            return;
+
+        this.accessor.lookAt(entity);
     }
 
     @Override

@@ -22,6 +22,7 @@ package org.entityapi.api.entity;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.util.Vector;
@@ -221,6 +222,10 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
     boolean navigateTo(Vector to);
 
     boolean navigateTo(Vector to, double speed);
+
+    void lookAt(Location location);
+
+    void lookAt(Entity entity);
 
     /**
      * Resets the behavioural features of this entity back to default

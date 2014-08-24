@@ -19,7 +19,9 @@
 
 package org.entityapi.api;
 
+import org.bukkit.Location;
 import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 import org.entityapi.api.entity.ControllableEntityHandle;
@@ -53,6 +55,10 @@ public interface NMSAccessor<T extends LivingEntity, S extends ControllableEntit
     boolean navigateTo(Object path, double speed);
 
     boolean navigateTo(Object path);
+
+    void lookAt(Location location);
+
+    void lookAt(Entity entity);
 
     LivingEntity getTarget();
 
