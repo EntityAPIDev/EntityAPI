@@ -17,20 +17,7 @@
  * along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.entityapi.game;
+package org.entityapi.api.mojang;
 
-import org.bukkit.Location;
-import org.bukkit.entity.LivingEntity;
-import org.entityapi.api.entity.ControllableEntity;
-import org.entityapi.api.entity.ControllableEntityHandle;
-import org.entityapi.api.entity.type.ControllablePlayer;
-import org.entityapi.api.entity.type.nms.ControllablePlayerHandle;
-
-import java.util.UUID;
-
-public interface IEntitySpawnHandler {
-
-    public <T extends ControllableEntityHandle<? extends LivingEntity>> T createEntityHandle(ControllableEntity entity, Location location);
-
-    public ControllablePlayerHandle createPlayerHandle(ControllablePlayer player, Location location, String name, UUID uuid);
+public class UUIDRepository {
 }

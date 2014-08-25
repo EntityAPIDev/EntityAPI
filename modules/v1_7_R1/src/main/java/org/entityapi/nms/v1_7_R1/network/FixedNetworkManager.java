@@ -24,12 +24,12 @@ import com.captainbern.reflection.accessor.FieldAccessor;
 import net.minecraft.server.v1_7_R1.NetworkManager;
 import net.minecraft.util.io.netty.channel.Channel;
 
-import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 
 public class FixedNetworkManager extends NetworkManager {
 
     private static FieldAccessor<Channel> CHANNEL_FIELD;
-    private static FieldAccessor<InetSocketAddress> ADDRESS_FIELD;
+    private static FieldAccessor<SocketAddress> ADDRESS_FIELD;
 
     public FixedNetworkManager() {
         super(false);
@@ -42,10 +42,10 @@ public class FixedNetworkManager extends NetworkManager {
         }
 
         if (ADDRESS_FIELD == null) {
-            ADDRESS_FIELD = new Reflection().reflect(NetworkManager.class).getSafeFieldByType(InetSocketAddress.class).getAccessor();
+            ADDRESS_FIELD = new Reflection().reflect(NetworkManager.class).getSafeFieldByType(SocketAddress.class).getAccessor();
         }
 
         CHANNEL_FIELD.set(this, new NullChannel(null));
-        ADDRESS_FIELD.set(this, null);
+        ADDRESS_FIELD.set(this, new SocketAddress() {});
     }
 }

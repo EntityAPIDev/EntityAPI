@@ -27,19 +27,20 @@ import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.mind.Mind;
 import org.entityapi.api.entity.mind.behaviour.Behaviour;
 import org.entityapi.api.plugin.EntityAPI;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class EntityBuilder {
 
-    private EntityManager ENTITYMANAGER;
-    private ControllableEntityType TYPE;
-    private String NAME;
-    private Location LOCATION;
-    private boolean FORCE_SPAWN;
-    private boolean PREPARE;
-    private Mind MIND;
-    private HashMap<Behaviour, Integer> BEHAVIOURS;
+    private EntityManager entityManager;
+    private ControllableEntityType type;
+    private String name;
+    private Location location;
+    private boolean forceSpawn;
+    private boolean prepare;
+    private Mind mind;
+    private HashMap<Behaviour, Integer> behaviours;
 
     public EntityBuilder(Plugin plugin) {
         this(EntityAPI.getManagerFor(plugin));
@@ -49,87 +50,101 @@ public class EntityBuilder {
         if (entityManager == null) {
             throw new IllegalArgumentException("EntityManager cannot be NULL!");
         }
-        this.ENTITYMANAGER = entityManager;
-        this.BEHAVIOURS = new HashMap<>();
-        this.PREPARE = false;
+        this.entityManager = entityManager;
+        this.behaviours = new HashMap<>();
+        this.prepare = false;
     }
 
     public EntityBuilder withType(ControllableEntityType entityType) {
-        this.TYPE = entityType;
+        this.type = entityType;
         return this;
     }
 
     public EntityBuilder withName(String name) {
-        this.NAME = name;
+        this.name = name;
         return this;
     }
 
     public EntityBuilder atLocation(Location location) {
-        this.LOCATION = location;
+        this.location = location;
         return this;
     }
 
     public EntityBuilder forceSpawn(boolean flag) {
-        this.FORCE_SPAWN = flag;
+        this.forceSpawn = flag;
         return this;
     }
 
     public EntityBuilder withMind(Mind mind) {
-        this.MIND = mind;
+        this.mind = mind;
         return this;
     }
 
     public EntityBuilder withBehaviours(Behaviour... behaviours) {
         for (Behaviour behaviour1 : behaviours) {
-            this.BEHAVIOURS.put(behaviour1, 1);
+            this.behaviours.put(behaviour1, 1);
         }
         return this;
     }
 
     public EntityBuilder withBehaviours(HashMap<Behaviour, Integer> prioritisedBehaviours) {
         for (Map.Entry<Behaviour, Integer> entry : prioritisedBehaviours.entrySet()) {
-            this.BEHAVIOURS.put(entry.getKey(), entry.getValue());
+            this.behaviours.put(entry.getKey(), entry.getValue());
         }
         return this;
     }
 
     public EntityBuilder withDefaults() {
-        this.PREPARE = true;
+        this.prepare = true;
         return this;
     }
 
     public ControllableEntity create() {
-        if (this.TYPE == null) {
+        if (this.type == null)
             throw new NullPointerException("ControllableEntity Type cannot be null.");
-        }
-        if (this.LOCATION == null) {
+
+        if (this.location == null)
             throw new NullPointerException("Location cannot be null.");
+
+        if (this.type.isNameRequired() && this.name.isEmpty())
+            throw new IllegalStateException("Entity: " + this.type.toString() + " requires a name!");
+
+        int id = this.entityManager.getNextID();
+        ControllableEntity entity;
+
+        if (this.type.isNameRequired()) {
+
+            // Fix the name, in case it's too long
+            if (this.name.length() > 16)
+                this.name = name.substring(0, 16);
+
+            entity = new Reflection().reflect(this.type.getControllableClass()).getSafeConstructor(int.class, String.class, EntityManager.class).getAccessor().invoke(id, this.name, this.entityManager);
+        } else {
+             entity = new Reflection().reflect(this.type.getControllableClass()).getSafeConstructor(int.class, EntityManager.class).getAccessor().invoke(id, this.entityManager);
         }
 
-        int id = this.ENTITYMANAGER.getNextID();
-        ControllableEntity entity = new Reflection().reflect(this.TYPE.getControllableClass()).getSafeConstructor(int.class, EntityManager.class).getAccessor().invoke(id, this.ENTITYMANAGER);
         if (entity != null) {
-            if (this.PREPARE || this.MIND == null) {
-                this.MIND = new Mind();
+            if (this.prepare || this.mind == null) {
+                this.mind = new Mind();
             }
-            this.MIND.setControllableEntity(entity);
-            if (this.PREPARE) {
+            this.mind.setControllableEntity(entity);
+            if (this.prepare) {
                 entity.setDefaultBehaviours();
             } else {
-                for (Map.Entry<Behaviour, Integer> entry : this.BEHAVIOURS.entrySet()) {
+                for (Map.Entry<Behaviour, Integer> entry : this.behaviours.entrySet()) {
                     entity.getMind().getMovementBehaviourSelector().addBehaviour(entry.getKey(), entry.getValue());
                 }
             }
-            if (this.NAME != null) {
-                entity.setName(this.NAME);
+            if (this.name != null) {
+                entity.setName(this.name);
             }
 
-            if (FORCE_SPAWN) {
-                if (!this.LOCATION.getChunk().isLoaded()) {
-                    this.LOCATION.getChunk().load();
+            if (forceSpawn) {
+                if (!this.location.getChunk().isLoaded()) {
+                    this.location.getChunk().load();
                 }
             }
-            ENTITYMANAGER.getChunkManager().queueSpawn(entity, this.LOCATION);
+            entityManager.getChunkManager().queueSpawn(entity, this.location);
             return entity;
         }
 

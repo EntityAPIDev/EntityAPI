@@ -24,4 +24,6 @@ import org.entityapi.api.entity.ControllableEntityHandle;
 
 public interface ControllablePlayerHandle extends ControllableEntityHandle<Player> {
 
+    public void updateSpawn();
+
 }

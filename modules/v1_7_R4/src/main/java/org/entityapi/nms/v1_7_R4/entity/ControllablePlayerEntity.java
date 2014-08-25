@@ -19,7 +19,6 @@
 
 package org.entityapi.nms.v1_7_R1.entity;
 
-import net.minecraft.server.v1_7_R1.*;
 import net.minecraft.util.com.mojang.authlib.GameProfile;
 import org.entityapi.api.entity.type.ControllablePlayer;
 import org.entityapi.api.entity.type.nms.ControllablePlayerHandle;

@@ -19,15 +19,13 @@
 
 package org.entityapi.api.entity.mind;
 
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-import org.bukkit.util.*;
-import org.bukkit.util.Vector;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.mind.attribute.*;
 import org.entityapi.api.entity.mind.attribute.def.*;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Mind {

@@ -19,8 +19,6 @@
 
 package org.entityapi.nms.v1_7_R1.network;
 
-import net.minecraft.server.v1_7_R1.*;
-
 public class NullPlayerConnection extends PlayerConnection {
 
     public NullPlayerConnection(MinecraftServer minecraftserver, NetworkManager networkmanager, EntityPlayer entityplayer) {

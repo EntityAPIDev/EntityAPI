@@ -19,13 +19,11 @@
 
 package org.entityapi.nms.v1_7_R1.entity;
 
-import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 import org.entityapi.api.entity.DespawnReason;
 import org.entityapi.api.entity.EntitySound;
-import org.entityapi.api.entity.mind.attribute.*;
 import org.entityapi.api.entity.type.ControllablePig;
 import org.entityapi.api.entity.type.nms.ControllablePigHandle;
 import org.entityapi.api.events.Action;

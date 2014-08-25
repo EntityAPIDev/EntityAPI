@@ -29,7 +29,6 @@ import org.entityapi.api.entity.mind.attribute.*;
 import org.entityapi.api.entity.type.ControllableWolf;
 import org.entityapi.api.entity.type.nms.ControllableWolfHandle;
 import org.entityapi.api.events.Action;
-import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.utils.EntityUtil;
 
 public class ControllableWolfEntity extends EntityWolf implements ControllableWolfHandle {

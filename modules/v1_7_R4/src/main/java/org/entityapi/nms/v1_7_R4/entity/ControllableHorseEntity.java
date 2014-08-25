@@ -21,17 +21,14 @@ package org.entityapi.nms.v1_7_R1.entity;
 
 import com.captainbern.reflection.Reflection;
 import com.captainbern.reflection.SafeField;
-import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 import org.entityapi.api.entity.DespawnReason;
 import org.entityapi.api.entity.EntitySound;
-import org.entityapi.api.entity.mind.attribute.*;
 import org.entityapi.api.entity.type.ControllableHorse;
 import org.entityapi.api.entity.type.nms.ControllableHorseHandle;
 import org.entityapi.api.events.Action;
-import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.utils.EntityUtil;
 
 import static com.captainbern.reflection.matcher.Matchers.withExactType;

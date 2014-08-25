@@ -19,46 +19,11 @@
 
 package org.entityapi.api.utils;
 
-import com.captainbern.minecraft.conversion.BukkitUnwrapper;
-import com.captainbern.minecraft.reflection.MinecraftReflection;
-import com.captainbern.reflection.ClassTemplate;
-import com.captainbern.reflection.Reflection;
-import com.captainbern.reflection.SafeMethod;
-import com.captainbern.reflection.accessor.MethodAccessor;
 import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.event.entity.CreatureSpawnEvent;
-
-import java.util.List;
-
-import static com.captainbern.reflection.matcher.Matchers.withArguments;
-import static com.captainbern.reflection.matcher.Matchers.withReturnType;
 
 public class WorldUtil {
 
     private WorldUtil() {
-    }
-
-    public static Object toNMSWorld(World world) {
-        return BukkitUnwrapper.getInstance().unwrap(world);
-    }
-
-    protected static MethodAccessor<Boolean> ADD_ENTITY;
-
-    public static boolean addEntity(World world, Object entityHandle, CreatureSpawnEvent.SpawnReason reason) {
-        if (ADD_ENTITY == null) {
-            ClassTemplate worldTemplate = new Reflection().reflect(MinecraftReflection.getMinecraftClass("World"));
-
-            List<SafeMethod<Boolean>> candidates = worldTemplate.getSafeMethods(withReturnType(boolean.class), withArguments(MinecraftReflection.getEntityClass(), CreatureSpawnEvent.SpawnReason.class));
-
-            if (candidates.size() > 0) {
-                ADD_ENTITY = candidates.get(0).getAccessor();
-            } else {
-                throw new RuntimeException("Failed to get the addEntity method!");
-            }
-        }
-
-        return ADD_ENTITY.invoke(toNMSWorld(world), entityHandle, reason);
     }
 
     /**

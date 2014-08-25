@@ -19,8 +19,6 @@
 
 package org.entityapi.nms.v1_7_R1.entity.selector;
 
-import net.minecraft.server.v1_7_R1.*;
-
 public class EntitySelectorEquipable implements IEntitySelector {
 
     private final ItemStack c;

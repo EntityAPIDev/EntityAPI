@@ -19,7 +19,6 @@
 
 package org.entityapi.nms.v1_7_R1;
 
-import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
 import org.entityapi.nms.v1_7_R1.entity.ControllablePlayerEntity;

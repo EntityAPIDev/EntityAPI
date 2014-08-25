@@ -26,6 +26,11 @@ import org.entityapi.api.EntityManager;
 public class EntityAPI {
 
     /**
+     * 'key' used to identify entities as an EntityAPI "NPC" without using the API.
+     */
+    public static final String ENTITY_METADATA_MARKER = "EntityAPI";
+
+    /**
      * Some NMS paths for internals
      */
     public static final String INTERNAL_NMS_PATH = "org.entityapi.nms." + MinecraftReflection.getVersionTag();

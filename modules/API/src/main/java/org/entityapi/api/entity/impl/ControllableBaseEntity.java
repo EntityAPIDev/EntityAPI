@@ -125,11 +125,11 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
             return SpawnResult.ALREADY_SPAWNED;
         }
 
-        this.handle = GameRegistry.get(IEntitySpawnHandler.class).createHandle(this, location);
+        this.handle = GameRegistry.get(IEntitySpawnHandler.class).createEntityHandle(this, location);
 
         LivingEntity entity = this.getBukkitEntity();
         if (entity != null) {
-            entity.setMetadata("entityapi", new FixedMetadataValue(EntityAPI.getCore(), true)); // Perhaps make this a key somewhere
+            entity.setMetadata(EntityAPI.ENTITY_METADATA_MARKER, new FixedMetadataValue(EntityAPI.getCore(), true)); // Perhaps make this a key somewhere
             entity.setRemoveWhenFarAway(false);
         }
 

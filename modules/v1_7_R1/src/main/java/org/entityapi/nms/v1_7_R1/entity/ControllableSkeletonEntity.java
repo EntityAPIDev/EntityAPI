@@ -32,7 +32,6 @@ import org.entityapi.api.entity.mind.behaviour.goals.BehaviourRangedAttack;
 import org.entityapi.api.entity.type.ControllableSkeleton;
 import org.entityapi.api.entity.type.nms.ControllableSkeletonHandle;
 import org.entityapi.api.events.Action;
-import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.utils.EntityUtil;
 
 import java.util.Calendar;

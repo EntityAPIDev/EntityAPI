@@ -31,7 +31,6 @@ import org.entityapi.api.entity.mind.attribute.*;
 import org.entityapi.api.entity.type.ControllableHorse;
 import org.entityapi.api.entity.type.nms.ControllableHorseHandle;
 import org.entityapi.api.events.Action;
-import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.utils.EntityUtil;
 
 import static com.captainbern.reflection.matcher.Matchers.withExactType;

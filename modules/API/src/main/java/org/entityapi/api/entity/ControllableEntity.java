@@ -29,7 +29,6 @@ import org.bukkit.util.Vector;
 import org.entityapi.api.EntityManager;
 import org.entityapi.api.NMSAccessor;
 import org.entityapi.api.entity.mind.Mind;
-import org.entityapi.api.entity.mind.attribute.ControlledRidingAttribute;
 import org.entityapi.api.entity.mind.behaviour.BehaviourItem;
 
 import java.util.HashMap;

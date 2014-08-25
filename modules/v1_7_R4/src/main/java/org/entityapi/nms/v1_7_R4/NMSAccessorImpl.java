@@ -19,25 +19,20 @@
 
 package org.entityapi.nms.v1_7_R1;
 
-import net.minecraft.server.v1_7_R1.*;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_7_R1.CraftSound;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
-import org.bukkit.entity.*;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 import org.entityapi.api.NMSAccessor;
 import org.entityapi.api.ProjectileType;
 import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityHandle;
 import org.entityapi.api.entity.impl.ControllableEnderDragonBase;
-import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorContainer;
-import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorHorse;
-import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorLiving;
-import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorMonster;
-import org.entityapi.nms.v1_7_R1.entity.selector.EntitySelectorNotUndead;
+import org.entityapi.nms.v1_7_R1.entity.selector.*;
 // TODO: Add checks to see if the handle isn't null, if so -> return;
 public class NMSAccessorImpl<T extends LivingEntity, S extends ControllableEntityHandle<T>> implements NMSAccessor<T, S> {
 

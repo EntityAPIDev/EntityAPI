@@ -29,7 +29,6 @@ import org.entityapi.api.entity.mind.attribute.*;
 import org.entityapi.api.entity.type.ControllableZombie;
 import org.entityapi.api.entity.type.nms.ControllableZombieHandle;
 import org.entityapi.api.events.Action;
-import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.utils.EntityUtil;
 
 public class ControllableZombieEntity extends EntityZombie implements ControllableZombieHandle {

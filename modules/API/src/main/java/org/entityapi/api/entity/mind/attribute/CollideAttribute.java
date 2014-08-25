@@ -19,11 +19,9 @@
 
 package org.entityapi.api.entity.mind.attribute;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.entityapi.api.entity.mind.Attribute;
 import org.entityapi.api.events.ControllableEntityCollideEvent;
-import org.entityapi.api.events.ControllableEntityEvent;
 
 public abstract class CollideAttribute extends Attribute<ControllableEntityCollideEvent> {
 

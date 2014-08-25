@@ -19,8 +19,6 @@
 
 package org.entityapi.nms.v1_7_R1.network;
 
-import net.minecraft.util.io.netty.channel.*;
-
 import java.net.SocketAddress;
 
 public class NullChannel extends AbstractChannel {

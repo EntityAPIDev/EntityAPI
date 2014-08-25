@@ -23,7 +23,6 @@ import org.entityapi.api.entity.DespawnReason;
 import org.entityapi.api.entity.mind.Attribute;
 import org.entityapi.api.events.ControllableEntityDeathEvent;
 import org.entityapi.api.events.ControllableEntityDespawnEvent;
-import org.entityapi.api.events.ControllableEntityEvent;
 
 public abstract class DespawnAttribute extends Attribute<ControllableEntityDespawnEvent> {
 

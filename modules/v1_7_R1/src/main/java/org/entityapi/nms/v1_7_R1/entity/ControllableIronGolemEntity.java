@@ -25,12 +25,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 import org.entityapi.api.entity.DespawnReason;
 import org.entityapi.api.entity.EntitySound;
-import org.entityapi.api.entity.mind.attribute.CollideAttribute;
 import org.entityapi.api.entity.mind.attribute.*;
 import org.entityapi.api.entity.type.ControllableIronGolem;
 import org.entityapi.api.entity.type.nms.ControllableIronGolemHandle;
 import org.entityapi.api.events.Action;
-import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.utils.EntityUtil;
 
 public class ControllableIronGolemEntity extends EntityIronGolem implements ControllableIronGolemHandle {

@@ -40,7 +40,8 @@ public class PlayerNavigation extends Navigation {
     private boolean m;
 
     public PlayerNavigation(EntityLiving entityLiving, World world) {
-        super(null, world);
+        super(new EntityInsentient(null) {
+        }, world);
         this.a = entityLiving;
         this.b = world;
         this.e = entityLiving.getAttributeInstance(GenericAttributes.b);

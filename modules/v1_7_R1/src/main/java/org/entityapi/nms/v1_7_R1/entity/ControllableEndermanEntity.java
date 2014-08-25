@@ -29,7 +29,6 @@ import org.entityapi.api.entity.mind.attribute.*;
 import org.entityapi.api.entity.type.ControllableEnderman;
 import org.entityapi.api.entity.type.nms.ControllableEndermanHandle;
 import org.entityapi.api.events.Action;
-import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.utils.EntityUtil;
 
 public class ControllableEndermanEntity extends EntityEnderman implements ControllableEndermanHandle {

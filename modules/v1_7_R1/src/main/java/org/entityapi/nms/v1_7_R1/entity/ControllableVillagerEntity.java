@@ -29,7 +29,6 @@ import org.entityapi.api.entity.mind.attribute.*;
 import org.entityapi.api.entity.type.ControllableVillager;
 import org.entityapi.api.entity.type.nms.ControllableVillagerHandle;
 import org.entityapi.api.events.Action;
-import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.utils.EntityUtil;
 
 public class ControllableVillagerEntity extends EntityVillager implements ControllableVillagerHandle {

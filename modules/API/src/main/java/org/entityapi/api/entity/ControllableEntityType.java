@@ -20,7 +20,6 @@
 package org.entityapi.api.entity;
 
 import com.captainbern.reflection.Reflection;
-import org.entityapi.api.entity.impl.ControllableBaseEntity;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.internal.Constants;
 

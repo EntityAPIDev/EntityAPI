@@ -32,9 +32,6 @@ import org.entityapi.api.entity.ControllableEntity;
 import org.entityapi.api.entity.ControllableEntityType;
 import org.entityapi.api.entity.DespawnReason;
 import org.entityapi.api.entity.SpawnResult;
-import org.entityapi.api.entity.mind.attribute.DespawnAttribute;
-import org.entityapi.api.events.ControllableEntityDeathEvent;
-import org.entityapi.api.events.ControllableEntityDespawnEvent;
 import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.exceptions.NameRequiredException;
 

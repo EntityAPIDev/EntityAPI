@@ -30,7 +30,6 @@ import org.entityapi.api.entity.mind.attribute.*;
 import org.entityapi.api.entity.type.ControllableCreeper;
 import org.entityapi.api.entity.type.nms.ControllableCreeperHandle;
 import org.entityapi.api.events.Action;
-import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.api.utils.EntityUtil;
 
 public class ControllableCreeperEntity extends EntityCreeper implements ControllableCreeperHandle {

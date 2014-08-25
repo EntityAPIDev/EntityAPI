@@ -20,12 +20,8 @@
 package org.entityapi.api.plugin;
 
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.util.Vector;
 import org.entityapi.api.EntityManager;
-import org.entityapi.api.entity.ControllableEntity;
 
 public interface IEntityAPICore extends Plugin {
 
