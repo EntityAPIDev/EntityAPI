@@ -144,6 +144,16 @@ public class SimpleEntityManager implements EntityManager {
     }
 
     @Override
+    public ControllableEntity spawnEntity(EntityBuilder builder) {
+        ControllableEntity entity = builder.create();
+
+        if (entity != null)
+            ENTITIES.put(entity.getId(), entity);
+
+        return entity;
+    }
+
+    @Override
     public ControllableEntity spawnEntity(ControllableEntityType entityType, Location location) {
         return spawnEntity(entityType, location, true);
     }
@@ -151,9 +161,8 @@ public class SimpleEntityManager implements EntityManager {
     @Override
     public ControllableEntity spawnEntity(ControllableEntityType entityType, Location location, boolean prepare) {
         try {
-            if (entityType.isNameRequired()) {
+            if (entityType.isNameRequired())
                 throw new NameRequiredException();
-            }
 
             EntityBuilder context = new EntityBuilder(this);
 
@@ -171,6 +180,16 @@ public class SimpleEntityManager implements EntityManager {
         } catch (Throwable throwable) {
             throw new RuntimeException("Failed to create an Entity handle for type: " + entityType.getName(), throwable);
         }
+    }
+
+    @Override
+    public ControllableEntity spawnEntity(UUID uuid, Location location) {
+        return null;
+    }
+
+    @Override
+    public ControllableEntity spawnEntity(String name, Location location) {
+        return null;
     }
 
     @Override

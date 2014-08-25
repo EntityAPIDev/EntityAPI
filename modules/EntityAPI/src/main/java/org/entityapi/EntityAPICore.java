@@ -128,23 +128,27 @@ public class EntityAPICore extends JavaPlugin implements IEntityAPICore {
 
     protected void checkUpdates() {
         if (this.getConfig().getBoolean("checkForUpdates", true)) {
-            final File file = this.getFile();
-            final Updater.UpdateType updateType = this.getConfig().getBoolean("autoUpdate", false) ? Updater.UpdateType.DEFAULT : Updater.UpdateType.NO_DOWNLOAD;
-            getServer().getScheduler().runTaskAsynchronously(this, new Runnable() {
-                @Override
-                public void run() {
-                    Updater updater = new Updater(EntityAPI.getCore(), UPDATE_ID, file, updateType, false);
-                    updateAvailable = updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE;
-                    if (updateAvailable) {
-                        updateName = updater.getLatestName();
-                        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "An update is available: " + updateName);
-                        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Type /entityapi update to update.");
-                        if (!updateChecked) {
-                            updateChecked = true;
+            try {
+                final File file = this.getFile();
+                final Updater.UpdateType updateType = this.getConfig().getBoolean("autoUpdate", false) ? Updater.UpdateType.DEFAULT : Updater.UpdateType.NO_DOWNLOAD;
+                getServer().getScheduler().runTaskAsynchronously(this, new Runnable() {
+                    @Override
+                    public void run() {
+                        Updater updater = new Updater(EntityAPI.getCore(), UPDATE_ID, file, updateType, false);
+                        updateAvailable = updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE;
+                        if (updateAvailable) {
+                            updateName = updater.getLatestName();
+                            getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "An update is available: " + updateName);
+                            getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "Type /entityapi update to update.");
+                            if (!updateChecked) {
+                                updateChecked = true;
+                            }
                         }
                     }
-                }
-            });
+                });
+            } catch (Exception e) {
+                getLogger().warning("Failed to check for updates!");
+            }
         }
     }
 

@@ -36,7 +36,7 @@ import java.util.Map;
 import static com.captainbern.reflection.matcher.Matchers.withArguments;
 import static com.captainbern.reflection.matcher.Matchers.withType;
 
-public class EntityRegistry extends IEntityRegistry {
+public class EntityRegistry implements IEntityRegistry {
 
     private static FieldAccessor<Map> NAME_TO_CLASS = null;
     private static FieldAccessor<Map> ID_TO_CLASS = null;

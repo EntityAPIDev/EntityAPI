@@ -132,6 +132,7 @@ public class EntityBuilder {
             ENTITYMANAGER.getChunkManager().queueSpawn(entity, this.LOCATION);
             return entity;
         }
+
         return null;
     }
 }

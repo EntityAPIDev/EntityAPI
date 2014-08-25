@@ -28,6 +28,7 @@ import org.entityapi.api.entity.DespawnReason;
 import org.entityapi.api.entity.SpawnResult;
 
 import java.util.Collection;
+import java.util.UUID;
 
 public interface EntityManager {
 
@@ -49,9 +50,16 @@ public interface EntityManager {
 
     Integer getNextID(int index);
 
+    public ControllableEntity spawnEntity(EntityBuilder builder);
+
     public ControllableEntity spawnEntity(ControllableEntityType entityType, Location location);
 
     public ControllableEntity spawnEntity(ControllableEntityType entityType, Location location, boolean prepare);
+
+    public ControllableEntity spawnEntity(UUID uuid, Location location);
+
+    @Deprecated
+    public ControllableEntity spawnEntity(String name, Location location);
 
     SpawnResult spawn(ControllableEntity controllableEntity, Location location);
 

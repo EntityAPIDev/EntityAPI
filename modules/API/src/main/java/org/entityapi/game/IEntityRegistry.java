@@ -21,11 +21,11 @@ package org.entityapi.game;
 
 import org.entityapi.api.entity.ControllableEntityType;
 
-public abstract class IEntityRegistry {
+public interface IEntityRegistry {
 
-    public abstract void register(EntityRegistrationEntry entityRegistrationEntry);
+    public void register(EntityRegistrationEntry entityRegistrationEntry);
 
-    public abstract void unregister(EntityRegistrationEntry entityRegistrationEntry);
+    public void unregister(EntityRegistrationEntry entityRegistrationEntry);
 
-    public abstract EntityRegistrationEntry getDefaultEntryFor(ControllableEntityType entityType);
+    public EntityRegistrationEntry getDefaultEntryFor(ControllableEntityType entityType);
 }

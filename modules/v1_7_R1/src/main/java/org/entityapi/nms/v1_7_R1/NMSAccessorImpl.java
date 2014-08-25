@@ -146,16 +146,6 @@ public class NMSAccessorImpl<T extends LivingEntity, S extends ControllableEntit
     }
 
     @Override
-    public void lookAt(Location location) {
-        NMSEntityUtil.getControllerLook(this.handle()).a(location.getX(), location.getY(), location.getZ(), 10, NMSEntityUtil.getMaxHeadRotation(this.handle()));
-    }
-
-    @Override
-    public void lookAt(Entity entity) {
-        NMSEntityUtil.getControllerLook(this.handle()).a(((CraftEntity) entity).getHandle(), 10, NMSEntityUtil.getMaxHeadRotation(this.handle()));
-    }
-
-    @Override
     public boolean navigateTo(Object path, double speed) {
         if (!(path instanceof PathEntity)) {
             throw new IllegalArgumentException("Navigation can only directed by a PathEntity.");
@@ -174,6 +164,16 @@ public class NMSAccessorImpl<T extends LivingEntity, S extends ControllableEntit
             speed = this.getSpeed();
         }
         return ((EntityInsentient) handle()).getNavigation().a((PathEntity) path, speed);
+    }
+
+    @Override
+    public void lookAt(Location location) {
+        NMSEntityUtil.getControllerLook(this.handle()).a(location.getX(), location.getY(), location.getZ(), 10, NMSEntityUtil.getMaxHeadRotation(this.handle()));
+    }
+
+    @Override
+    public void lookAt(Entity entity) {
+        NMSEntityUtil.getControllerLook(this.handle()).a(((CraftEntity) entity).getHandle(), 10, NMSEntityUtil.getMaxHeadRotation(this.handle()));
     }
 
     @Override

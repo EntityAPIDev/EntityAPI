@@ -2,9 +2,12 @@ package org.entityapi.nms.v1_7_R1.game;
 
 import com.captainbern.reflection.Reflection;
 import com.captainbern.reflection.SafeConstructor;
+import net.minecraft.server.v1_7_R1.Entity;
 import net.minecraft.server.v1_7_R1.World;
 import net.minecraft.server.v1_7_R1.WorldServer;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.BlockFace;
 import org.bukkit.craftbukkit.v1_7_R1.CraftWorld;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -15,7 +18,7 @@ import org.entityapi.game.GameRegistry;
 import org.entityapi.game.IEntityRegistry;
 import org.entityapi.game.IEntitySpawnHandler;
 
-public class EntitySpawnHandler extends IEntitySpawnHandler {
+public class EntitySpawnHandler implements IEntitySpawnHandler {
 
     @Override
     public <T extends ControllableEntityHandle<? extends LivingEntity>> T createHandle(ControllableEntity entity, Location location) {
@@ -35,6 +38,11 @@ public class EntitySpawnHandler extends IEntitySpawnHandler {
         worldServer.addEntity((net.minecraft.server.v1_7_R1.Entity) handle, CreatureSpawnEvent.SpawnReason.CUSTOM);
 
         GameRegistry.get(IEntityRegistry.class).register(oldEntry);
+
+        Material beneath = location.getBlock().getRelative(BlockFace.DOWN).getType();
+        if (beneath.isBlock()) { // What lies beneath
+            ((Entity) handle).onGround = true;
+        }
 
         return handle;
     }
