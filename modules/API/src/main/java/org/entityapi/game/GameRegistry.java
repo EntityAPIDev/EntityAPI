@@ -34,8 +34,8 @@ import java.util.Set;
  */
 public class GameRegistry {
 
-    private static final Map<Class<? extends Object>, Object> registry = Maps.newHashMap();
-    private static final Set<Class<? extends Object>> permStore = Sets.newSetFromMap(Maps.<Class<? extends Object>, Boolean>newConcurrentMap());
+    private static final Map<Class<?>, Object> registry = Maps.newHashMap();
+    private static final Set<Class<?>> permStore = Sets.newSetFromMap(Maps.<Class<? extends Object>, Boolean>newConcurrentMap());
 
     public static <T, O extends T> O register(Class<T> type, O object) {
         registry.put(type, object);
