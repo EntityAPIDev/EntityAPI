@@ -47,7 +47,6 @@ public class ControllablePlayerBase extends ControllableBaseEntity<Player, Contr
 
         if (entityHandle != null) {
             this.handle = entityHandle;
-            this.loot = entityHandle.getDefaultLoot();
         }
     }
 

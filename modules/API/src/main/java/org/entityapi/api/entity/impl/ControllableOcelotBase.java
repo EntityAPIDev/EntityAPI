@@ -40,7 +40,6 @@ public class ControllableOcelotBase extends ControllableBaseEntity<Ocelot, Contr
     public ControllableOcelotBase(int id, ControllableOcelotHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

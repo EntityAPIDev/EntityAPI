@@ -35,7 +35,6 @@ public class ControllableSilverfishBase extends ControllableBaseEntity<Silverfis
     public ControllableSilverfishBase(int id, ControllableSilverfishHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

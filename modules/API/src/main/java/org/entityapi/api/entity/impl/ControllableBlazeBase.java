@@ -41,7 +41,6 @@ public class ControllableBlazeBase extends ControllableBaseEntity<Blaze, Control
     public ControllableBlazeBase(int id, ControllableBlazeHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

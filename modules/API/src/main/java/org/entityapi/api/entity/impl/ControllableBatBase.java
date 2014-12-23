@@ -35,7 +35,6 @@ public class ControllableBatBase extends ControllableBaseEntity<Bat, Controllabl
     public ControllableBatBase(int id, ControllableBatHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

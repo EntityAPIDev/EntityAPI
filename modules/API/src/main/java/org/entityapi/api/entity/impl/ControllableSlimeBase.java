@@ -35,7 +35,6 @@ public class ControllableSlimeBase extends ControllableBaseEntity<Slime, Control
     public ControllableSlimeBase(int id, ControllableSlimeHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

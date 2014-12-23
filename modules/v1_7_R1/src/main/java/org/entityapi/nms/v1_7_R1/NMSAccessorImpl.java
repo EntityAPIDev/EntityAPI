@@ -132,11 +132,8 @@ public class NMSAccessorImpl<T extends LivingEntity, S extends ControllableEntit
     }
 
     @Override
-    public boolean navigateTo(Vector to, double speed) {
-        if (to == null) {
-            return false;
-        }
-        PathEntity path = handle().world.a(handle(), MathHelper.floor(to.getX()), MathHelper.f(to.getY()), MathHelper.floor(to.getZ()), (float) this.getPathfindingRange(), true, false, false, true);
+    public boolean navigateTo(double x, double y, double z, double speed) {
+        PathEntity path = handle().world.a(handle(), MathHelper.floor(x), MathHelper.floor(y), MathHelper.floor(z), (float) this.getPathfindingRange(), true, false, false, true);
         return this.navigateTo(path, speed);
     }
 
@@ -160,7 +157,7 @@ public class NMSAccessorImpl<T extends LivingEntity, S extends ControllableEntit
             return true;
         }
 
-        if (this.controllableEntity.isPathfindingSpeedOverriden()) {
+        if (this.controllableEntity.isPathfindingSpeedOverridden()) {
             speed = this.getSpeed();
         }
         return ((EntityInsentient) handle()).getNavigation().a((PathEntity) path, speed);

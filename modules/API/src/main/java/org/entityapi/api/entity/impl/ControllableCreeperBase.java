@@ -39,7 +39,6 @@ public class ControllableCreeperBase extends ControllableBaseEntity<Creeper, Con
     public ControllableCreeperBase(int id, ControllableCreeperHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

@@ -39,7 +39,6 @@ public class ControllableZombieBase extends ControllableBaseEntity<Zombie, Contr
     public ControllableZombieBase(int id, ControllableZombieHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

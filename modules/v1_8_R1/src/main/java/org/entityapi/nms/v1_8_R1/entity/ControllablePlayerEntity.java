@@ -19,7 +19,6 @@
 
 package org.entityapi.nms.v1_8_R1.entity;
 
-import net.minecraft.server.v1_8_R1.*;
 import net.minecraft.util.com.mojang.authlib.GameProfile;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
@@ -104,12 +103,6 @@ public class ControllablePlayerEntity extends EntityPlayer implements Controllab
     }
 
     @Override
-    public org.bukkit.Material getDefaultLoot() {
-        return null;
-    }
-
-
-    @Override
     public void move(double d0, double d1, double d2) {
         if (this.controllableEntity != null && this.controllableEntity.isStationary()) {
             return;
@@ -133,9 +126,7 @@ public class ControllablePlayerEntity extends EntityPlayer implements Controllab
 
         if (this.controllableEntity != null) {
             this.controllableEntity.getMind().getAttribute(TickAttribute.class).call(this.controllableEntity);
-            if (this.controllableEntity.shouldUpdateAttributes()) {
-                this.controllableEntity.getMind().tick();
-            }
+            this.controllableEntity.getMind().tick();
         }
     }
 

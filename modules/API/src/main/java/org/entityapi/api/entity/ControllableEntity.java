@@ -329,15 +329,11 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
      */
     void setSound(EntitySound type, HashMap<String, Sound> soundMap);
 
-    Material getLoot();
+    boolean shouldTickMind();
 
-    void setLoot(Material material);
+    void setTickMind(boolean flag);
 
-    boolean shouldUpdateAttributes();
-
-    void setTickAttributes(boolean flag);
-
-    boolean isPathfindingSpeedOverriden();
+    boolean isPathfindingSpeedOverridden();
 
     double getSpeed();
 
@@ -357,9 +353,9 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
 
     boolean navigateTo(Location to, double speed);
 
-    boolean navigateTo(Vector to);
+    boolean navigateTo(double x, double y, double z);
 
-    boolean navigateTo(Vector to, double speed);
+    boolean navigateTo(double x, double y, double z, double speed);
 
     void lookAt(Location location);
 

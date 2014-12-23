@@ -40,7 +40,6 @@ public class ControllableWitherBase extends ControllableBaseEntity<Wither, Contr
     public ControllableWitherBase(int id, ControllableWitherHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

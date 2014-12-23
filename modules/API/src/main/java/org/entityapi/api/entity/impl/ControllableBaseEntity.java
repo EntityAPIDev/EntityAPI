@@ -279,27 +279,17 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
     }
 
     @Override
-    public Material getLoot() {
-        return loot;
-    }
-
-    @Override
-    public void setLoot(Material material) {
-        this.loot = material;
-    }
-
-    @Override
-    public boolean shouldUpdateAttributes() {
+    public boolean shouldTickMind() {
         return tickAttributes;
     }
 
     @Override
-    public void setTickAttributes(boolean flag) {
+    public void setTickMind(boolean flag) {
         this.tickAttributes = flag;
     }
 
     @Override
-    public boolean isPathfindingSpeedOverriden() {
+    public boolean isPathfindingSpeedOverridden() {
         return overridePathfindingSpeed;
     }
 
@@ -341,7 +331,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
 
     @Override
     public boolean navigateTo(Location to) {
-        return this.navigateTo(to.toVector());
+        return this.navigateTo(to.getX(), to.getY(), to.getZ());
     }
 
     @Override
@@ -350,13 +340,13 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
     }
 
     @Override
-    public boolean navigateTo(Vector to) {
-        return this.navigateTo(to, this.getSpeed());
+    public boolean navigateTo(double x, double y, double z) {
+        return this.navigateTo(x, y, z, this.getSpeed());
     }
 
     @Override
-    public boolean navigateTo(Vector to, double speed) {
-        return accessor.navigateTo(to, speed);
+    public boolean navigateTo(double x, double y, double z, double speed) {
+        return accessor.navigateTo(x, y, z, speed);
     }
 
     @Override

@@ -80,9 +80,7 @@ public class ControllableVillagerEntity extends EntityVillager implements Contro
         super.h();
         if (this.controllableEntity != null) {
             this.controllableEntity.getMind().getAttribute(TickAttribute.class).call(this.controllableEntity);
-            if (this.controllableEntity.shouldUpdateAttributes()) {
-                this.controllableEntity.getMind().tick();
-            }
+            this.controllableEntity.getMind().tick();
         }
     }
 
@@ -150,17 +148,6 @@ public class ControllableVillagerEntity extends EntityVillager implements Contro
     @Override
     public EntityAgeable createChild(EntityAgeable entityAgeable) {
         return this.b(entityAgeable);
-    }
-
-    @Override
-    public org.bukkit.Material getDefaultLoot() {
-        return CraftMagicNumbers.getMaterial(this.getLoot());
-    }
-
-    @Override
-    protected Item getLoot() {
-        org.bukkit.Material lootMaterial = this.controllableEntity.getLoot();
-        return this.controllableEntity == null ? super.getLoot() : lootMaterial == null ? super.getLoot() : CraftMagicNumbers.getItem(lootMaterial);
     }
 
     @Override

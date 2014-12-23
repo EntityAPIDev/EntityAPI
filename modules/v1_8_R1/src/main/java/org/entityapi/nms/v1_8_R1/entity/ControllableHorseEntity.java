@@ -21,8 +21,6 @@ package org.entityapi.nms.v1_8_R1.entity;
 
 import com.captainbern.reflection.Reflection;
 import com.captainbern.reflection.SafeField;
-import net.minecraft.server.v1_8_R1.*;
-import org.bukkit.craftbukkit.v1_8_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 import org.entityapi.api.entity.DespawnReason;
@@ -84,9 +82,7 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
         super.h();
         if (this.controllableEntity != null) {
             this.controllableEntity.getMind().getAttribute(TickAttribute.class).call(this.controllableEntity);
-            if (this.controllableEntity.shouldUpdateAttributes()) {
-                this.controllableEntity.getMind().tick();
-            }
+            this.controllableEntity.getMind().tick();
         }
     }
 
@@ -149,17 +145,6 @@ public class ControllableHorseEntity extends EntityHorse implements Controllable
             this.controllableEntity.getEntityManager().despawn(this.controllableEntity, DespawnReason.DEATH);
         }
         super.die(damagesource);
-    }
-
-    @Override
-    public org.bukkit.Material getDefaultLoot() {
-        return CraftMagicNumbers.getMaterial(this.getLoot());
-    }
-
-    @Override
-    protected Item getLoot() {
-        org.bukkit.Material lootMaterial = this.controllableEntity.getLoot();
-        return this.controllableEntity == null ? super.getLoot() : lootMaterial == null ? super.getLoot() : CraftMagicNumbers.getItem(lootMaterial);
     }
 
     @Override

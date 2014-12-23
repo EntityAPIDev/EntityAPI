@@ -194,6 +194,10 @@ public class Mind {
     }
 
     public void tick() {
+        if (!this.controllableEntity.shouldTickMind()) {
+            return;
+        }
+
         for (Class<? extends Attribute> attributeClass : REQUIRED_DEFAULTS.keySet()) {
             getAttribute(attributeClass);
         }

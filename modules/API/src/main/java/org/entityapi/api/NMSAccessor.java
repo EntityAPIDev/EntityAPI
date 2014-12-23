@@ -50,7 +50,7 @@ public interface NMSAccessor<T extends LivingEntity, S extends ControllableEntit
 
     boolean navigateTo(LivingEntity livingEntity, double speed);
 
-    boolean navigateTo(Vector to, double speed);
+    boolean navigateTo(double x, double y, double z, double speed);
 
     boolean navigateTo(Object path, double speed);
 

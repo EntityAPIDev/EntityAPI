@@ -19,8 +19,6 @@
 
 package org.entityapi.nms.v1_8_R1.entity;
 
-import net.minecraft.server.v1_8_R1.*;
-import org.bukkit.craftbukkit.v1_8_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 import org.entityapi.api.entity.DespawnReason;
@@ -56,11 +54,6 @@ public class ControllableEnderDragonEntity extends EntityEnderDragon implements 
     }
 
     @Override
-    public org.bukkit.Material getDefaultLoot() {
-        return CraftMagicNumbers.getMaterial(this.getLoot());
-    }
-
-    @Override
     protected boolean bk() {
         return true;
     }
@@ -70,9 +63,7 @@ public class ControllableEnderDragonEntity extends EntityEnderDragon implements 
         super.h();
         if (this.controllableEntity != null) {
             this.controllableEntity.getMind().getAttribute(TickAttribute.class).call(this.controllableEntity);
-            if (this.controllableEntity.shouldUpdateAttributes()) {
-                this.controllableEntity.getMind().tick();
-            }
+            this.controllableEntity.getMind().tick();
         }
     }
 
@@ -178,12 +169,6 @@ public class ControllableEnderDragonEntity extends EntityEnderDragon implements 
             this.controllableEntity.getEntityManager().despawn(this.controllableEntity, DespawnReason.DEATH);
         }
         super.die(damagesource);
-    }
-
-    @Override
-    protected Item getLoot() {
-        org.bukkit.Material lootMaterial = this.controllableEntity.getLoot();
-        return this.controllableEntity == null ? super.getLoot() : lootMaterial == null ? super.getLoot() : CraftMagicNumbers.getItem(lootMaterial);
     }
 
     @Override

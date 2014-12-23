@@ -40,7 +40,6 @@ public class ControllableVillagerBase extends ControllableBaseEntity<Villager, C
     public ControllableVillagerBase(int id, ControllableVillagerHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

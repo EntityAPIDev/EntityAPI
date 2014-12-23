@@ -35,7 +35,6 @@ public class ControllableGhastBase extends ControllableBaseEntity<Ghast, Control
     public ControllableGhastBase(int id, ControllableGhastHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

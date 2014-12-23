@@ -19,8 +19,6 @@
 
 package org.entityapi.nms.v1_8_R1.entity;
 
-import net.minecraft.server.v1_8_R1.*;
-import org.bukkit.craftbukkit.v1_8_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
@@ -85,9 +83,7 @@ public class ControllableSkeletonEntity extends EntitySkeleton implements Contro
         super.h();
         if (this.controllableEntity != null) {
             this.controllableEntity.getMind().getAttribute(TickAttribute.class).call(this.controllableEntity);
-            if (this.controllableEntity.shouldUpdateAttributes()) {
-                this.controllableEntity.getMind().tick();
-            }
+            this.controllableEntity.getMind().tick();
         }
     }
 
@@ -150,17 +146,6 @@ public class ControllableSkeletonEntity extends EntitySkeleton implements Contro
             this.controllableEntity.getEntityManager().despawn(this.controllableEntity, DespawnReason.DEATH);
         }
         super.die(damagesource);
-    }
-
-    @Override
-    public org.bukkit.Material getDefaultLoot() {
-        return CraftMagicNumbers.getMaterial(this.getLoot());
-    }
-
-    @Override
-    protected Item getLoot() {
-        org.bukkit.Material lootMaterial = this.controllableEntity.getLoot();
-        return this.controllableEntity == null ? super.getLoot() : lootMaterial == null ? super.getLoot() : CraftMagicNumbers.getItem(lootMaterial);
     }
 
     @Override

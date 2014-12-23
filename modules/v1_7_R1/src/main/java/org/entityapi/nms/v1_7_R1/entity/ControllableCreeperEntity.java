@@ -81,9 +81,7 @@ public class ControllableCreeperEntity extends EntityCreeper implements Controll
         super.h();
         if (this.controllableEntity != null) {
             this.controllableEntity.getMind().getAttribute(TickAttribute.class).call(this.controllableEntity);
-            if (this.controllableEntity.shouldUpdateAttributes()) {
-                this.controllableEntity.getMind().tick();
-            }
+            this.controllableEntity.getMind().tick();
         }
     }
 
@@ -146,17 +144,6 @@ public class ControllableCreeperEntity extends EntityCreeper implements Controll
             this.controllableEntity.getEntityManager().despawn(this.controllableEntity, DespawnReason.DEATH);
         }
         super.die(damagesource);
-    }
-
-    @Override
-    public org.bukkit.Material getDefaultLoot() {
-        return CraftMagicNumbers.getMaterial(this.getLoot());
-    }
-
-    @Override
-    protected Item getLoot() {
-        org.bukkit.Material lootMaterial = this.controllableEntity.getLoot();
-        return this.controllableEntity == null ? super.getLoot() : lootMaterial == null ? super.getLoot() : CraftMagicNumbers.getItem(lootMaterial);
     }
 
     @Override

@@ -34,6 +34,5 @@ public class ControllableSquidBase extends ControllableBaseEntity<Squid, Control
     public ControllableSquidBase(int id, ControllableSquidHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultLoot();
     }
 }

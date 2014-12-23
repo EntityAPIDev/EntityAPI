@@ -39,7 +39,6 @@ public class ControllablePigZombieBase extends ControllableBaseEntity<PigZombie,
     public ControllablePigZombieBase(int id, ControllablePigZombieHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

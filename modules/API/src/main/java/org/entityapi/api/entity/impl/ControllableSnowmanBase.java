@@ -38,7 +38,6 @@ public class ControllableSnowmanBase extends ControllableBaseEntity<Snowman, Con
     public ControllableSnowmanBase(int id, ControllableSnowmanHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override

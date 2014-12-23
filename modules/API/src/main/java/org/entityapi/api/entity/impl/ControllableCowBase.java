@@ -39,7 +39,6 @@ public class ControllableCowBase extends ControllableBaseEntity<Cow, Controllabl
     public ControllableCowBase(int id, ControllableCowHandle entityHandle, EntityManager manager) {
         this(id, manager);
         this.handle = entityHandle;
-        this.loot = entityHandle.getDefaultLoot();
     }
 
     @Override
