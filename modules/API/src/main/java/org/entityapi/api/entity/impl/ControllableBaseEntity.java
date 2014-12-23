@@ -331,12 +331,12 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
 
     @Override
     public boolean navigateTo(Location to) {
-        return this.navigateTo(to.getX(), to.getY(), to.getZ());
+        return this.navigateTo(to, this.getSpeed());
     }
 
     @Override
     public boolean navigateTo(Location to, double speed) {
-        return this.navigateTo(to.toVector(), speed);
+        return this.navigateTo(to.getX(), to.getY(), to.getZ(), speed);
     }
 
     @Override
