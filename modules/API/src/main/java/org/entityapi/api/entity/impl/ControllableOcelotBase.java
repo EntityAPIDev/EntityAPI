@@ -34,7 +34,7 @@ import org.entityapi.api.entity.type.nms.ControllableOcelotHandle;
 public class ControllableOcelotBase extends ControllableBaseEntity<Ocelot, ControllableOcelotHandle> implements ControllableOcelot {
 
     public ControllableOcelotBase(int id, EntityManager manager) {
-        super(id, ControllableEntityType.OZELOT, manager);
+        super(id, ControllableEntityType.OCELOT, manager);
     }
 
     public ControllableOcelotBase(int id, ControllableOcelotHandle entityHandle, EntityManager manager) {

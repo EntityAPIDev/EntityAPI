@@ -312,9 +312,9 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
      * are stored.
      *
      * @param type  Type of sound to apply
-     * @param sound   The key to apply the sound to. Refer to the documentation provided with the underlying entity type
+     * @param sound The key to apply the sound to. Refer to the documentation provided with the underlying entity type
      *              for a list of applicable keys.
-     * @param key Custom sound to apply to this entity
+     * @param key   Custom sound to apply to this entity
      */
     void setSound(EntitySound type, String sound, String key);
 
@@ -329,36 +329,137 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
      */
     void setSound(EntitySound type, HashMap<String, Sound> soundMap);
 
+    /**
+     * Sets whether this entity's {@link org.entityapi.api.entity.mind.Mind} should be ticked.
+     *
+     * @return True if this entity's Mind should be ticket, false if not
+     */
     boolean shouldTickMind();
 
+    /**
+     * Setting this to false will halt all AI processes and temporarily disable any {@link
+     * org.entityapi.api.entity.mind.behaviour.Behaviour}s from functioning
+     *
+     * @param flag True if this entity's mind should be ticked, false if not
+     */
     void setTickMind(boolean flag);
 
+    /**
+     * Gets whether the pathfinding speed for this entity is currently being overridden
+     *
+     * @return True if pathfinding speed is overridden
+     */
     boolean isPathfindingSpeedOverridden();
 
+    /**
+     * Gets the navigation speed of this entity.
+     *
+     * @return Navigation speed of this entity
+     */
     double getSpeed();
 
+    /**
+     * Sets the navigation speed of this entity.
+     *
+     * @param speed New navigation speed
+     */
     void setSpeed(double speed);
 
+    /**
+     * Sets the navigation speed of this entity.
+     *
+     * @param speed                    New navigation speed
+     * @param overridePathfindingSpeed If true, all pathfinding will run at {@code speed}
+     */
     void setSpeed(double speed, boolean overridePathfindingSpeed);
 
+    /**
+     * Gets the range of this entity's pathfinding
+     *
+     * @return Range of this entity's pathfinding
+     */
     double getPathfindingRange();
 
+    /**
+     * Sets the range of this entity's pathfinding.
+     *
+     * @param range New pathfinding range
+     */
     void setPathfindingRange(double range);
 
+    /**
+     * Indicates to the entity that it is to navigate to a given LivingEntity. Navigation will be conducted at the speed
+     * returned by {@link #getSpeed()} (which can be set via {@link #setSpeed(double)}
+     *
+     * @param livingEntity Target entity for this entity to navigate to
+     * @return True if the navigation was successful, false if otherwise
+     */
     boolean navigateTo(LivingEntity livingEntity);
 
+    /**
+     * Indicates to this entity that it is to navigate to a given LivingEntity at a certain speed.
+     *
+     * @param livingEntity Target entity for this entity to navigate to
+     * @param speed        Speed to navigate at
+     * @return True if the navigation was successful, false if otherwise
+     */
     boolean navigateTo(LivingEntity livingEntity, double speed);
 
+    /**
+     * Indicates to this entity that it is to navigate to the coordinates of the given {@link org.bukkit.Location} in
+     * the current world. The world of the given Location is ignored. Navigation will be conducted at the speed returned
+     * by {@link #getSpeed()} (which can be set via {@link #setSpeed(double)}
+     *
+     * @param to Position to navigate to
+     * @return True if the navigation was successful, false if otherwise
+     */
     boolean navigateTo(Location to);
 
+    /**
+     * Indicates to this entity that it is to navigate to the coordinates of the given {@link org.bukkit.Location} in
+     * the current world at a certain speed. The world of the given Location is ignored.
+     *
+     * @param to    Position to navigate to
+     * @param speed Speed to navigate at
+     * @return True if the navigation was successful, false if otherwise
+     */
     boolean navigateTo(Location to, double speed);
 
+    /**
+     * Indicates to this entity that it is to navigate to the given coordinates in the current world.Navigation will be
+     * conducted at the speed returned by {@link #getSpeed()} (which can be set via {@link #setSpeed(double)}
+     *
+     * @param x X-coordinate to navigate to
+     * @param y Y-coordinate to navigate to
+     * @param z Z-coordinate to navigate to
+     * @return True if the navigation was successful, false if otherwise
+     */
     boolean navigateTo(double x, double y, double z);
 
+    /**
+     * Indicates to this entity that it is to navigate to the given coordinates in the current world at a certain
+     * speed.
+     *
+     * @param x     X-coordinate to navigate to
+     * @param y     Y-coordinate to navigate to
+     * @param z     Z-coordinate to navigate to
+     * @param speed Speed to navigate at
+     * @return True if the navigation was successful, false if otherwise
+     */
     boolean navigateTo(double x, double y, double z, double speed);
 
+    /**
+     * Forces this entity to look towards a specific location
+     *
+     * @param location Location to look towards
+     */
     void lookAt(Location location);
 
+    /**
+     * Forces this entity to look towards a specific entity
+     *
+     * @param entity Entity to look at
+     */
     void lookAt(Entity entity);
 
     /**
