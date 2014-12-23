@@ -36,131 +36,132 @@ import java.util.Map;
 
 /**
  * Represents a ControllableEntity
- * <p>
- * This acts as a base class for all other entity types to stem off
+ * <p/>
+ * This acts as a base class for all other entity types to stem off.
+ * <p/>
+ * Most existing methods available in the entity portion of the Bukkit API will not be provided/proxied by EntityAPI.
  *
- * @param <T> the Bukkit entity that this ControllableEntity represents
- * @param <S> the entity handle that this ControllableEntity represents, useful for interacting with NMS entities
+ * @param <T> The Bukkit entity that this ControllableEntity represents
+ * @param <S> The entity handle that this ControllableEntity represents, useful for interacting with NMS entities
  */
 public interface ControllableEntity<T extends LivingEntity, S extends ControllableEntityHandle<T>> extends Nameable, Attacking, InventoryHolder {
 
     /**
      * Gets the EntityManager from which this ControllableEntity was created
      *
-     * @return the EntityManager for this entity
+     * @return The EntityManager for this entity
      */
     EntityManager getEntityManager();
 
     /**
      * Returns an accessor for certain NMS methods
-     * <p>
+     * <p/>
      * <strong>Not recommended for public API consumption</strong>
      *
-     * @return the accessor to be utilised for this entity
+     * @return The accessor to be utilised for this entity
      */
     NMSAccessor<T, S> getNMSAccessor();
 
     /**
      * Gets the ID of this entity
-     * <p>
+     * <p/>
      * Entity IDs are unique to this entity until it is removed from its corresponding {@link
-     * org.entityapi.api.EntityManager}. Once removed, this entity ID will be recycled and applied to another entity.
-     * It
+     * org.entityapi.api.EntityManager}. Once removed, this entity ID will be recycled and applied to another entity. It
      * is therefore important NOT to utilise this ID as a storage mechanism unless the appropriate hooks are in place
      * for when the stored IDs reference another entity
      *
-     * @return the ID that corresponds to this entity
+     * @return The ID that corresponds to this entity
      */
     int getId();
 
     /**
      * Gets the mind of this entity
-     * <p>
+     * <p/>
      * The entity mind is the hub for all general entity activity. It makes use of priorities behaviour and attribute
      * ticking systems, taking into account those changes made through the API.
-     * <p>
+     * <p/>
      * Most activity will take place in the mind, or 'brain', of the entity
      *
-     * @return the mind of this entity
+     * @return The mind of this entity
      */
     Mind getMind();
 
     /**
      * Gets the Bukkit alternative that corresponds to this entity
-     * <p>
+     * <p/>
      * Often, certain functions have not been included in EntityAPI as a Bukkit alternative already exists
      *
-     * @return the Bukkit entity that represents this ControllableEntity
+     * @return The Bukkit entity that represents this ControllableEntity
      */
     T getBukkitEntity();
 
     /**
-     * Gets the NMS entity handle for this ControllableEntity
-     * <strong>Not recommended for public API consumption</strong>
+     * Gets the NMS entity handle for this ControllableEntity <strong>Not recommended for public API
+     * consumption</strong>
      *
-     * @return the NMS handle for this entity
+     * @return The NMS handle for this entity
      */
     S getHandle();
 
     /**
      * Gets the type of this entity
-     * <p>
+     * <p/>
      * Types can be most appropriately used in a similar fashion to {@link org.bukkit.entity.EntityType}
      *
-     * @return the type of this entity
+     * @return The type of this entity
      */
     ControllableEntityType getEntityType();
 
     /**
      * Gets the height of this entity's bounding box
      *
-     * @return the height of the bounding box surrounding this entity
+     * @return The height of the bounding box surrounding this entity
      */
     float getHeight();
 
     /**
      * Gets the width of this entity's bounding box
      *
-     * @return the width of the bounding box surrounding this entity
+     * @return The width of the bounding box surrounding this entity
      */
     float getWidth();
 
     /**
      * Spawns this ControllableEntity at the specified location
-     * <p>
+     * <p/>
      * Returns a {@link org.entityapi.api.entity.SpawnResult} representing the success of spawning this entity
      *
-     * @param location the Location to spawn this entity at
-     * @return result of spawning this entity at the given location
+     * @param location The Location to spawn this entity at
+     * @return Result of spawning this entity at the given location
      * @see org.entityapi.api.entity.SpawnResult
      */
     SpawnResult spawn(Location location);
 
     /**
      * Despawns this ControllableEntity
-     * <p>
+     * <p/>
      * Despawning an entity removes it from both the current world and EntityManager until respawned. This entity's
      * mind, attributes and behaviours will remain intact for later use
-     * <p>
+     * <p/>
      * Plugins should make use of {@link org.entityapi.api.entity.DespawnReason#CUSTOM} unless under specific
      * circumstances where another reason may be more appropriate
      *
-     * @param despawnReason the reason this entity was despawned
+     * @param despawnReason The reason this entity was despawned
      */
     void despawn(DespawnReason despawnReason);
 
     /**
      * Returns whether this ControllableEntity is currently spawned
-     * <p>
+     * <p/>
      * This will return true if the entity has despawned, possibly due to one of the following reasons:
      * <ul>
-     * <li>This entity dies from external sources</li>
-     * <li>This entity is despawned using the {@link #despawn(DespawnReason)} method</li>
-     * <li>The chunk this entity is positioned in despawns. In this case, the entity will be automatically respanwned
-     * when the chunk is loaded again</li>
+     *     <li>This entity dies from external sources</li>
+     *     <li>This entity is despawned using the {@link #despawn(DespawnReason)} method</li>
+     *     <li>The chunk this entity is positioned in despawns. In this case, the entity will be automatically
+     *     respawned when the chunk is loaded again</li>
      * </ul>
      *
-     * @return true if this entity is currently living and spawned in a world
+     * @return True if this entity is currently living and spawned in a world
      */
     boolean isSpawned();
 
@@ -170,25 +171,163 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
     @Override
     boolean setName(String name);
 
+    /**
+     * Gets the sounds that are currently applied to this entity for a given {@link
+     * org.entityapi.api.entity.EntitySound}. This sound will only be utilised if the underlying entity makes use of the
+     * given EntitySound.
+     * <p/>
+     * Entities will not have sounds that are applicable to all EntitySound types. It is important that you refer to the
+     * documentation for the underlying entity class before making modifying any entity sounds.
+     * <p/>
+     * Depending on the entity type, an entity may have multiple sounds applicable to a certain EntitySound. For
+     * example, a wolf has four different sounds mapped under the {@link EntitySound#IDLE} type:
+     * <ul>
+     *     <li>"growl" - "mob.wolf.growl"</li>
+     *     <li>"whine" - "mob.wolf.whine"</li>
+     *     <li>"panting" - "mob.wolf.panting"</li>
+     *     <li>"bark" - "mob.wolf.bark"</li>
+     * </ul>
+     *
+     * <p/>
+     * Each of these sounds is accessed internally through use of a predefined key, in this
+     * case on of the four above. This method returns a map of key-value pairings for each sound key that is applicable
+     * to the underlying entity type. In the case of a wolf entity, this map would contain four entries, as listed
+     * above.
+     * <p/>
+     * Custom sounds are always used for an entity in preference to any default sounds that may already exist.
+     *
+     * @param type Type of sound to retrieve
+     * @return A map of all key-value sound pairings applicable to the given sound {@code type}
+     */
     Map<String, String> getSounds(EntitySound type);
 
+    /**
+     * Retrieves the sound tied to the given {@link org.entityapi.api.entity.EntitySound} type.
+     * <p/>
+     * Please refer to the documentation attached to {@link #getSounds(EntitySound)} for more information on how sounds
+     * are stored.
+     *
+     * @param type Type of sound to retrieve
+     * @return If a custom sound is present for the default key associated with the supplied sound type, it will be
+     * returned. Otherwise, the default sound will instead be returned. If no sound is currently mapped to the given
+     * EntitySound type, an empty string will instead be returned.
+     */
     String getSound(EntitySound type);
 
+    /**
+     * Retrieves the sound tied to the given {@link org.entityapi.api.entity.EntitySound} type with the provided {@code
+     * key}.
+     * <p/>
+     * Please refer to the documentation attached to {@link #getSounds(EntitySound)} for more information on how sounds
+     * are stored.
+     *
+     * @param type Type of sound to retrieve
+     * @param key  The key to request a sound for. Refer to the documentation provided with the underlying entity type
+     *             for a list of applicable keys.
+     * @return If a custom sound is present for the given key when associated with the supplied sound type, it will be
+     * returned. Otherwise, the default sound attached to that key will instead be returned. If no sound is currently
+     * mapped to the given EntitySound type, an empty string will instead be returned.
+     */
     String getSound(EntitySound type, String key);
 
+    /**
+     * Retrieves the custom sound tied to the given {@link org.entityapi.api.entity.EntitySound} type with the provided
+     * {@code key}.
+     * <p/>
+     * Please refer to the documentation attached to {@link #getSounds(EntitySound)} for more information on how sounds
+     * are stored.
+     *
+     * @param type Type of sound to retrieve
+     * @param key  The key to request a sound for. Refer to the documentation provided with the underlying entity type
+     *             for a list of applicable keys.
+     * @return The custom sound tied to the given key, or an empty String if no custom sound has been added
+     */
     String getCustomSound(EntitySound type, String key);
 
+    /**
+     * Replaces an existing entity sound with a custom one for a specified {@link org.entityapi.api.entity.EntitySound}
+     * type.
+     * <p/>
+     * Please refer to the documentation attached to {@link #getSounds(EntitySound)} for more information on how sounds
+     * are stored.
+     *
+     * @param type        Type of sound to replace
+     * @param toReplace   Sound to replace
+     * @param replaceWith New sound to be applied
+     * @param addOnFail   If set to true and {@code toReplace} is not found in this entity's sound map, {@code
+     *                    replaceWith} will be added to this entity anyway (via {@link #setSound(EntitySound,
+     *                    org.bukkit.Sound)})
+     */
     void setSound(EntitySound type, Sound toReplace, Sound replaceWith, boolean addOnFail);
 
+    /**
+     * Applies a new custom sound to a specified {@link org.entityapi.api.entity.EntitySound} type.
+     * <p/>
+     * Custom sounds are always used for an entity in preference to any default sounds that may already exist.
+     * <p/>
+     * Please refer to the documentation attached to {@link #getSounds(EntitySound)} for more information on how sounds
+     * are stored.
+     *
+     * @param type  Type of sound to apply
+     * @param sound Custom sound to apply to this entity
+     */
     void setSound(EntitySound type, Sound sound);
 
+    /**
+     * Applies a new custom sound to a specified {@link org.entityapi.api.entity.EntitySound} type and key.
+     * <p/>
+     * Custom sounds are always used for an entity in preference to any default sounds that may already exist.
+     * <p/>
+     * Please refer to the documentation attached to {@link #getSounds(EntitySound)} for more information on how sounds
+     * are stored.
+     *
+     * @param type  Type of sound to apply
+     * @param sound Custom sound to apply to this entity
+     * @param key   The key to apply the sound to. Refer to the documentation provided with the underlying entity type
+     *              for a list of applicable keys.
+     */
     void setSound(EntitySound type, Sound sound, String key);
 
+    /**
+     * Applies a new custom sound to a specified {@link org.entityapi.api.entity.EntitySound} type. Note that
+     * {@link #setSound(EntitySound, org.bukkit.Sound)} should be use in preference to this method.
+     * <p/>
+     * Custom sounds are always used for an entity in preference to any default sounds that may already exist.
+     * <p/>
+     * Please refer to the documentation attached to {@link #getSounds(EntitySound)} for more information on how sounds
+     * are stored.
+     *
+     * @param type  Type of sound to apply
+     * @param sound Custom sound to apply to this entity
+     */
     void setSound(EntitySound type, String sound);
 
-    void setSound(EntitySound type, String key, String sound);
+    /**
+     * Applies a new custom sound to a specified {@link org.entityapi.api.entity.EntitySound} type and key. Note that
+     * {@link #setSound(EntitySound, org.bukkit.Sound, String)} should be use in preference to this method.
+     * <p/>
+     * Custom sounds are always used for an entity in preference to any default sounds that may already exist.
+     * <p/>
+     * Please refer to the documentation attached to {@link #getSounds(EntitySound)} for more information on how sounds
+     * are stored.
+     *
+     * @param type  Type of sound to apply
+     * @param sound   The key to apply the sound to. Refer to the documentation provided with the underlying entity type
+     *              for a list of applicable keys.
+     * @param key Custom sound to apply to this entity
+     */
+    void setSound(EntitySound type, String sound, String key);
 
-    void setSound(EntitySound type, HashMap<String, String> soundMap);
+    /**
+     * Applies a map of key-value sound pairings to this entity for the specified {@link
+     * org.entityapi.api.entity.EntitySound} type.
+     * <p/>
+     * This method essentially a bulk-handler for {@link #setSound(EntitySound, org.bukkit.Sound, String)}
+     *
+     * @param type     Type of sound to apply
+     * @param soundMap A key to Sound map to be applied to this entity
+     */
+    void setSound(EntitySound type, HashMap<String, Sound> soundMap);
 
     Material getLoot();
 
@@ -228,7 +367,7 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
 
     /**
      * Resets the behavioural features of this entity back to default
-     * <p>
+     * <p/>
      * Any existing behaviours will be cleared from this entity's mind, with the default behaviours being applied. The
      * default behaviours for an entity can be accessed using {@link #getDefaultMovementBehaviours()} and {@link
      * #getDefaultTargetingBehaviours()}
@@ -251,7 +390,7 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
 
     /**
      * Gets whether this entity is currently in a stationary state
-     * <p>
+     * <p/>
      * All movement for a stationary entity will be prevented. Any pitch and yaw rotations will remain fixed while an
      * entity is stationary.
      *
@@ -261,10 +400,10 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
 
     /**
      * Sets the whether or not this entity is stationary (not moving)
-     * <p>
+     * <p/>
      * All movement for a stationary entity will be prevented. Any pitch and yaw rotations will remain fixed while an
      * entity is stationary.
-     * <p>
+     * <p/>
      * Current pitch and yaw rotations will be applied upon being set to a stationary status
      *
      * @param flag true if this entity is to be stationary
@@ -272,15 +411,10 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
     void setStationary(boolean flag);
 
     /**
-     * Sets the yaw of this entity's location as a fixed value, measured in degrees.
-     * <ul>
-     * <li>A yaw of 0 or 360 represents the positive z direction.
-     * <li>A yaw of 180 represents the negative z direction.
-     * <li>A yaw of 90 represents the negative x direction.
-     * <li>A yaw of 270 represents the positive x direction.
-     * </ul>
-     * Increasing yaw values are the equivalent of turning to your
-     * right-facing, increasing the scale of the next respective axis, and
+     * Sets the yaw of this entity's location as a fixed value, measured in degrees. <ul> <li>A yaw of 0 or 360
+     * represents the positive z direction. <li>A yaw of 180 represents the negative z direction. <li>A yaw of 90
+     * represents the negative x direction. <li>A yaw of 270 represents the positive x direction. </ul> Increasing yaw
+     * values are the equivalent of turning to your right-facing, increasing the scale of the next respective axis, and
      * decreasing the scale of the previous axis.
      *
      * @param value the new yaw rotation
@@ -289,15 +423,10 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
     void setFixedYaw(float value);
 
     /**
-     * Sets the head yaw of this entity's location as a fixed value, measured in degrees.
-     * <ul>
-     * <li>A yaw of 0 or 360 represents the positive z direction.
-     * <li>A yaw of 180 represents the negative z direction.
-     * <li>A yaw of 90 represents the negative x direction.
-     * <li>A yaw of 270 represents the positive x direction.
-     * </ul>
-     * Increasing yaw values are the equivalent of turning to your
-     * right-facing, increasing the scale of the next respective axis, and
+     * Sets the head yaw of this entity's location as a fixed value, measured in degrees. <ul> <li>A yaw of 0 or 360
+     * represents the positive z direction. <li>A yaw of 180 represents the negative z direction. <li>A yaw of 90
+     * represents the negative x direction. <li>A yaw of 270 represents the positive x direction. </ul> Increasing yaw
+     * values are the equivalent of turning to your right-facing, increasing the scale of the next respective axis, and
      * decreasing the scale of the previous axis.
      *
      * @param value the new head yaw rotation
@@ -306,14 +435,9 @@ public interface ControllableEntity<T extends LivingEntity, S extends Controllab
     void setFixedHeadYaw(float value);
 
     /**
-     * Sets the pitch of this entity's location as a fixed value, measured in degrees.
-     * <ul>
-     * <li>A pitch of 0 represents level forward facing.
-     * <li>A pitch of 90 represents downward facing, or negative y
-     * direction.
-     * <li>A pitch of -90 represents upward facing, or positive y direction.
-     * </ul>
-     * Increasing pitch values the equivalent of looking down.
+     * Sets the pitch of this entity's location as a fixed value, measured in degrees. <ul> <li>A pitch of 0 represents
+     * level forward facing. <li>A pitch of 90 represents downward facing, or negative y direction. <li>A pitch of -90
+     * represents upward facing, or positive y direction. </ul> Increasing pitch values the equivalent of looking down.
      * <strong>Note: A fixed pitch value will only apply to a stationary entity</strong>
      *
      * @param value the new pitch rotation

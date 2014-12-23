@@ -39,6 +39,7 @@ import org.entityapi.api.plugin.EntityAPI;
 import org.entityapi.game.GameRegistry;
 import org.entityapi.game.IEntitySpawnHandler;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -180,15 +181,11 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
 
     @Override
     public Map<String, String> getSounds(EntitySound type) {
-        return this.sounds.get(type);
+        return Collections.unmodifiableMap(this.sounds.get(type));
     }
 
     @Override
     public String getSound(EntitySound type) {
-        String custom = this.getCustomSound(type, "");
-        if (custom != null && !custom.equals("")) {
-            return custom;
-        }
         return this.getSound(type, "default");
     }
 
@@ -212,13 +209,10 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
 
     @Override
     public String getCustomSound(EntitySound type, String key) {
-        if (!key.equals("")) {
-            String customWithKey = this.requestSound(type, "custom." + key);
-            if (customWithKey != null) {
-                return customWithKey;
-            }
+        if (key.equals("")) {
+            key = "default";
         }
-        String custom = this.requestSound(type, "custom");
+        String custom = this.requestSound(type, "custom." + key);
         if (custom != null) {
             return custom;
         }
@@ -231,7 +225,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
             throw new IllegalArgumentException("Sound to replace cannot be null");
         }
         boolean removed = false;
-        String newKey = "custom";
+        String newKey = "custom.default";
         Iterator<Map.Entry<String, String>> i = this.sounds.get(type).entrySet().iterator();
         while (i.hasNext()) {
             Map.Entry<String, String> entry = i.next();
@@ -254,7 +248,7 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
         // Allows sounds to be set without the use of the NMS String
         // We can also allow people to add/replace/remove sounds
         // Entities automatically use the "custom" sound if one exists
-        this.setSound(type, "custom", accessor.getSoundName(sound));
+        this.setSound(type, "custom.default", accessor.getSoundName(sound));
     }
 
     @Override
@@ -268,21 +262,20 @@ public abstract class ControllableBaseEntity<T extends LivingEntity, S extends C
     }
 
     @Override
-    public void setSound(EntitySound type, String key, String sound) {
-        if (this.sounds.containsKey(type)) {
-            Map<String, String> map = this.sounds.get(type);
-            map.put(key, sound);
-            this.sounds.put(type, map);
-        } else {
-            HashMap<String, String> map = new HashMap<>();
-            map.put(key, sound);
-            this.sounds.put(type, map);
+    public void setSound(EntitySound type, String sound, String key) {
+        Map<String, String> map = this.sounds.get(type);
+        if (map == null) {
+            map = new HashMap<>();
         }
+        map.put(key, sound);
+        this.sounds.put(type, map);
     }
 
     @Override
-    public void setSound(EntitySound type, HashMap<String, String> soundMap) {
-        this.sounds.put(type, soundMap);
+    public void setSound(EntitySound type, HashMap<String, Sound> soundMap) {
+        for (Map.Entry<String, Sound> entry : soundMap.entrySet()) {
+            this.setSound(type, entry.getValue(), entry.getKey());
+        }
     }
 
     @Override

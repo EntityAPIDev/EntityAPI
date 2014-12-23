@@ -29,7 +29,7 @@ public interface Nameable {
     /**
      * Gets the name currently applied to this entity
      *
-     * @return the name applied to this entity
+     * @return The name applied to this entity
      */
     public abstract String getName();
 
@@ -40,8 +40,8 @@ public interface Nameable {
      * <p>
      * Note that {@link org.bukkit.entity.LivingEntity#setCustomName(String)} can also be used on a ControllableEntity
      *
-     * @param name the new name to apply to this entity
-     * @return true if the name was successfully applied, false if not
+     * @param name The new name to apply to this entity
+     * @return True if the name was successfully applied, false if not
      */
     public abstract boolean setName(String name);
 }
