@@ -37,6 +37,32 @@
         <module>modules/EntityAPI</module>
     </modules>
 
+    <repositories>
+        <!-- DSH Repo -->
+        <repository>
+            <id>dsh-repo</id>
+            <url>http://repo.dsh105.com/</url>
+        </repository>
+
+        <!-- Hawk Repo -->
+        <repository>
+            <id>hawk-repo</id>
+            <url>http://ci.hawkfalcon.com/plugin/repository/everything</url>
+        </repository>
+
+        <!-- Bukkit -->
+        <repository>
+            <id>bukkit-repo</id>
+            <url>http://repo.bukkit.org/content/groups/public/</url>
+        </repository>
+
+        <!-- Spigot Hub -->
+        <repository>
+            <id>spigot-bukkit-repo</id>
+            <url>http://hub.spigotmc.org/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <!-- Bukkit -->
         <dependency>
@@ -66,26 +92,6 @@
             <version>4.11</version>
         </dependency>
     </dependencies>
-
-    <repositories>
-        <!-- DSH Repo -->
-        <repository>
-            <id>dsh-repo</id>
-            <url>http://repo.dsh105.com/</url>
-        </repository>
-
-        <!-- Hawk Repo -->
-        <repository>
-            <id>hawk-repo</id>
-            <url>http://ci.hawkfalcon.com/plugin/repository/everything</url>
-        </repository>
-
-        <!-- Bukkit -->
-        <repository>
-            <id>bukkit-repo</id>
-            <url>http://repo.bukkit.org/content/groups/public/</url>
-        </repository>
-    </repositories>
 
     <build>
         <defaultGoal>clean package install</defaultGoal>

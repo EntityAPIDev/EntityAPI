@@ -1,0 +1,95 @@
+<!--
+  ~ Copyright (C) EntityAPI Team
+  ~
+  ~ This file is part of EntityAPI.
+  ~
+  ~ EntityAPI is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ EntityAPI is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with EntityAPI.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>EntityAPI-v1_8_R1</artifactId>
+    <name>EntityAPI for v1_8_R1</name>
+    <version>v1_8_R1</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <parent>
+        <groupId>org.entityapi</groupId>
+        <artifactId>EntityAPI-Parent</artifactId>
+        <version>parent</version>
+        <relativePath>../../</relativePath>
+    </parent>
+
+    <dependencies>
+        <!-- API Module -->
+        <dependency>
+            <groupId>org.entityapi</groupId>
+            <artifactId>EntityAPI-API</artifactId>
+            <version>API</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.bukkit</groupId>
+                    <artifactId>bukkit</artifactId>
+                </exclusion>
+            </exclusions>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Spigot-Bukkit 1.8 -->
+        <dependency>
+            <groupId>org.bukkit</groupId>
+            <artifactId>bukkit</artifactId>
+            <version>1.8-R0.1-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+
+        <!-- Spigot-CraftBukkit 1.8 -->
+        <dependency>
+            <groupId>org.bukkit</groupId>
+            <artifactId>craftbukkit</artifactId>
+            <version>1.8-R0.1</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <directory>../../target</directory>
+        <sourceDirectory>src/main/java/</sourceDirectory>
+        <finalName>${project.name}</finalName>
+
+        <plugins>
+            <!-- Clean up -->
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <configuration>
+                    <excludeDefaultDirectories>true</excludeDefaultDirectories>
+                    <filesets>
+                        <fileset>
+                            <directory>target</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
+                </configuration>
+                <version>2.5</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>
