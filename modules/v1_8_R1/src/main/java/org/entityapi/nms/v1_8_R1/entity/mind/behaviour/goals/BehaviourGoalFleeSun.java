@@ -81,7 +81,7 @@ public class BehaviourGoalFleeSun extends BehaviourGoalBase {
 
     @Override
     public void start() {
-        this.getControllableEntity().navigateTo(new Vector(this.fleeX, this.fleeY, this.fleeZ), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
+        this.getControllableEntity().navigateTo(this.fleeX, this.fleeY, this.fleeZ, this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
     }
 
     @Override

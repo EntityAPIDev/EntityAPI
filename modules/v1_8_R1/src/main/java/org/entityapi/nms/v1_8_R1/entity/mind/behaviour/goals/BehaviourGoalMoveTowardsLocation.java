@@ -65,7 +65,7 @@ public class BehaviourGoalMoveTowardsLocation extends OneTimeBehaviourGoalBase {
 
     @Override
     public void start() {
-        this.getControllableEntity().navigateTo(this.targetLocation.toVector(), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
+        this.getControllableEntity().navigateTo(this.targetLocation, this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
     }
 
     @Override

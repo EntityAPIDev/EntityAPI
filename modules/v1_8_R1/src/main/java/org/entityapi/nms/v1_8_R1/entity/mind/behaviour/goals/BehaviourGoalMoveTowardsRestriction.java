@@ -76,7 +76,7 @@ public class BehaviourGoalMoveTowardsRestriction extends BehaviourGoalBase {
 
     @Override
     public void start() {
-        this.getControllableEntity().navigateTo(new Vector(this.targetX, this.targetY, this.targetZ), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
+        this.getControllableEntity().navigateTo(this.targetX, this.targetY, this.targetZ, this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
     }
 
     @Override

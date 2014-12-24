@@ -62,7 +62,7 @@ public class BehaviourGoalSitOnBlock<T extends ControllableOcelot> extends Behav
 
     @Override
     public void start() {
-        this.getControllableEntity().navigateTo(new Vector((double) ((float) this.targetX) + 0.5D, (double) (this.targetY + 1), (double) ((float) this.targetZ) + 0.5D), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
+        this.getControllableEntity().navigateTo((double) ((float) this.targetX) + 0.5D, (double) (this.targetY + 1), (double) ((float) this.targetZ) + 0.5D, this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
         this.sitTicks = 0;
         this.actionTicks = 0;
         this.maxSitTicks = this.getHandle().aI().nextInt(this.getHandle().aI().nextInt(1200) + 1200) + 1200;
@@ -80,7 +80,7 @@ public class BehaviourGoalSitOnBlock<T extends ControllableOcelot> extends Behav
         this.getHandle().getGoalSit().setSitting(false);
         if (this.getHandle().e((double) this.targetX, (double) (this.targetY + 1), (double) this.targetZ) > 1.0D) {
             this.getHandle().setSitting(false);
-            this.getControllableEntity().navigateTo(new Vector((double) ((float) this.targetX) + 0.5D, (double) (this.targetY + 1), (double) ((float) this.targetZ) + 0.5D), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
+            this.getControllableEntity().navigateTo((double) ((float) this.targetX) + 0.5D, (double) (this.targetY + 1), (double) ((float) this.targetZ) + 0.5D, this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
             ++this.actionTicks;
         } else if (!this.getHandle().isSitting()) {
             this.getHandle().setSitting(true);

@@ -90,10 +90,10 @@ public class BehaviourGoalMoveIndoors extends BehaviourGoalBase {
             Vec3D vec3d = RandomPositionGenerator.a(this.getHandle(), 14, 3, this.getHandle().world.getVec3DPool().create((double) this.villageDoor.getIndoorsX() + 0.5D, (double) this.villageDoor.getIndoorsY(), (double) this.villageDoor.getIndoorsZ() + 0.5D));
 
             if (vec3d != null) {
-                this.getControllableEntity().navigateTo(new Vector(vec3d.c, vec3d.d, vec3d.e), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
+                this.getControllableEntity().navigateTo(vec3d.c, vec3d.d, vec3d.e, this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
             }
         } else {
-            this.getControllableEntity().navigateTo(new Vector((double) this.villageDoor.getIndoorsX() + 0.5D, (double) this.villageDoor.getIndoorsY(), (double) this.villageDoor.getIndoorsZ() + 0.5D), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
+            this.getControllableEntity().navigateTo((double) this.villageDoor.getIndoorsX() + 0.5D, (double) this.villageDoor.getIndoorsY(), (double) this.villageDoor.getIndoorsZ() + 0.5D, this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
         }
     }
 

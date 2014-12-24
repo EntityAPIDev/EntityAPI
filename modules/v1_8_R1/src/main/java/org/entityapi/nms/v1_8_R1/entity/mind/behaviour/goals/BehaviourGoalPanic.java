@@ -81,7 +81,7 @@ public class BehaviourGoalPanic extends BehaviourGoalBase {
 
     @Override
     public void start() {
-        this.getControllableEntity().navigateTo(new Vector(this.panicX, this.panicY, this.panicZ), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
+        this.getControllableEntity().navigateTo(this.panicX, this.panicY, this.panicZ, this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
     }
 
     @Override

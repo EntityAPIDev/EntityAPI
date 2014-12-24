@@ -124,7 +124,7 @@ public class BehaviourGoalVillagerPlay<T extends ControllableVillager> extends B
                 return;
             }
 
-            this.getControllableEntity().navigateTo(new Vector(vec3d.c, vec3d.d, vec3d.e), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
+            this.getControllableEntity().navigateTo(vec3d.c, vec3d.d, vec3d.e, this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
         }
     }
 }

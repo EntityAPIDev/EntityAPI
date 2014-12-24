@@ -82,7 +82,7 @@ public class EntitySpawnHandler implements IEntitySpawnHandler {
         SafeConstructor<ControllableEntityHandle> entityTypeSafeConstructor = typeToConstructor.get(type);
 
         if (entityTypeSafeConstructor == null) {
-            entityTypeSafeConstructor = new Reflection().reflect(type.getHandleClass()).getSafeConstructor(World.class, type.getControllableInterface());
+            entityTypeSafeConstructor = (SafeConstructor<ControllableEntityHandle>) new Reflection().reflect(type.getHandleClass()).getSafeConstructor(World.class, type.getControllableInterface());
             typeToConstructor.put(type, entityTypeSafeConstructor);
         }
 

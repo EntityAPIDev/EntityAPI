@@ -76,7 +76,7 @@ public class BehaviourGoalRandomStroll extends BehaviourGoalBase {
 
     @Override
     public void start() {
-        this.getControllableEntity().navigateTo(new Vector(this.randX, this.randY, this.randZ), this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
+        this.getControllableEntity().navigateTo(this.randX, this.randY, this.randZ, this.navigationSpeed > 0 ? this.navigationSpeed : this.getControllableEntity().getSpeed());
     }
 
     @Override

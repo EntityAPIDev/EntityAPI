@@ -116,7 +116,7 @@ public class BehaviourGoalTameByRiding extends BehaviourGoalBase {
 
     @Override
     public void start() {
-        this.getControllableEntity().navigateTo(new Vector(this.walkX, this.walkY, this.walkZ), this.walkSpeed > 0 ? this.walkSpeed : this.getControllableEntity().getSpeed());
+        this.getControllableEntity().navigateTo(this.walkX, this.walkY, this.walkZ, this.walkSpeed > 0 ? this.walkSpeed : this.getControllableEntity().getSpeed());
     }
 
     @Override
